@@ -5,10 +5,8 @@
 
 package battleforhonor;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
 
-import view.MainMenu;
+import controller.StageManager;
 
 
 /** Main application entry-point. */
@@ -17,7 +15,7 @@ public final class BattleForHonorApp {
 
 
     public static void main(final String[] args) {
-        Application.launch(MainMenu.class, args);
+       StageManager.main(args);
     }
 }
 
