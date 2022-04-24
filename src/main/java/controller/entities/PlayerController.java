@@ -6,25 +6,47 @@ package controller.entities;
  */
 public interface PlayerController {
 	
-	 int getX();
+	int getX();
 	
-	 int getY();
+	int getY();
 	
 	void setX(int newx);
+	
 	void setY(int newy);
 	
-	int getPuntiAzione();
-	int getpuntiVita();
-	int getLivello();
+	int SetLifePoints(int newlifePoints);
 	
-	int getPuntiEsp();
+	int getLifePoints();
 	
-	void geszionePuntiEsp();
-	void geszionePuntiVita();
+	void setMAXLifePoints();
+	
+	int getMAXLifePoints();
+	
+	int getLevel();
+	
+	void checkAddLevel();
+	
+	//int getAttackPoints();
+	
+	//void setAttackPoints(int attackPoints);
+	
+	int getExpPoints();
+	
+	//int getMAXExpPoints(int newExpPoints);
+
+	int GetGold();
+	
+	void GainGold(int gold);
+	
+	void GainExp(int exp);
+	
+	void GetHit();
+
 	
 
 	
-	void aumentaLivello();
+
+	
 	
 
 

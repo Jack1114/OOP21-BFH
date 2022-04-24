@@ -10,13 +10,16 @@ package controller.entities;
 public class PlayerControllerImpl implements PlayerController {
 
 	
-	private static int puntiAzione = 5; //numero di azioni che un personaggio può fare in un turno
-	private static int puntiVita = 70; //punti che il personaggio ha dalla partenza del gioco
-	private static int puntiEsp=0; //punti che l’eroe guadagna quando uccide un nemico
-	private static int livello=1;
+	private final int attackPoints = 5; //punti da togliere al giocatore dopo ogni hit o che può guadagnare se crea il dano al nemico
+	private  int MAXLifePoints= 70; //punti che il personaggio ha dalla partenza del gioco
+	private final int MAXExpPoints=50;
+	private int expPoints=MAXExpPoints; //punti che l’eroe guadagna quando uccide un nemico
+	private int level=1;
+	private int lifePoints=MAXLifePoints; //si decrementa ogni volta cheil giocatore subisce un hit dal nemico
+	private int gold=0; // oro che guardagna l'ero dopo ogni turno di gioco
 	
-	private static int x; 
-	private static int y; 
+	private  int x; 
+	private  int y; 
 	
 	public PlayerControllerImpl() {
 		// TODO Auto-generated constructor stub
@@ -25,11 +28,9 @@ public class PlayerControllerImpl implements PlayerController {
 	public int getX(){
 		return x;
 	}
-	
 	public int getY(){
 		return y;
 	}
-	
 	public void setX(int newx) {
 		x=newx;
 	}
@@ -37,52 +38,73 @@ public class PlayerControllerImpl implements PlayerController {
 		y=newy;
 	}
 	
-	public int getPuntiAzione() {
-		return puntiAzione;
+	public int getLifePoints() {
+		return lifePoints;
 	}
-	public int getpuntiVita() {
-		return puntiVita;
+	public int SetLifePoints(int newlifePoints) {
+		return lifePoints=newlifePoints;
 	}
-	public int getLivello() {
-		return livello;
+	public int getMAXLifePoints() {
+		return MAXLifePoints;
 	}
-	public int getPuntiEsp() {
-		return puntiEsp;
+	public void setMAXLifePoints() {
+		
+		MAXLifePoints=MAXLifePoints+attackPoints;
 	}
 	
-	public void geszionePuntiEsp() {
-		if(nemici.punti==0) //nemico morte
+	public int getLevel() {
+		return level;
+	}
+	public  void checkAddLevel() {
+		if(expPoints>=100*level)
 		{
-			if(livello==1)
-				puntiEsp+=20;
-			else
-				puntiEsp+=10;
-					
-		}
+			expPoints-=100*level;
 			
-	}
+			level++; //level up
+		}
 	
-	public void geszionePuntiVita() {
-		if(PlayerImpl2.playerAttak==true) //nemico morte
-		{
-			puntiVita=-5;
-		}
-			
 	}
+	/*ho impostato attack point come una variabile finale
+	 * public int getAttackPoints() {
+		return attackPoints;
+	}
+	public void setAttackPoints(int attackPoints) {
+		//DA IMPL
+		this.attackPoints = attackPoints;
+	}*/
+
+	public int getExpPoints() {
+		return expPoints;
+	}
+	/*
+	 * ho modificato maxExpPoint come un final
+	 * public int getMAXExpPoints(int newExpPoints) {
+		return MAXExpPoints;
+	}*/
+	public int GetGold() {
+		return gold;
+	}
+	public void GainGold(int newGold) {
+		gold+=newGold;
+		
+	}
+	public void GainExp(int exp) { // quando muore il nemico
+		expPoints+=exp;
+		
+		
+	}
+	public void GetHit() { 
+		SetLifePoints(getLifePoints()-attackPoints); //considero che ennemy_attack e hero_attack valgono la stessa cosa= attackPoints
+		if(getLifePoints()<=0) {
+			System.out.println("L' eroe è morto !! ");
+			System.exit(0);
+			// il gioco si chiude e il turno è finito
+		}
+		
+	}
+
 	
-	public boolean playerAttak() {
-		if(nemico.getX()==PlayerImpl2.getX() && nemico.getY()==PlayerImpl2.getY()) {
-			return true;
-		}
-			
-	}
-	
-	public  void aumentaLivello() {
-		if(puntiEsp>=100) //nemico morte
-		{
-			livello++;
-		}
-			
-	}
+	// spaw e counter not done
+
 
 }
