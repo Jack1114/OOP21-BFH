@@ -49,7 +49,7 @@ public class PlayerControllerImpl implements PlayerController {
 	}
 	public void setMAXLifePoints() {
 		
-		MAXLifePoints=MAXLifePoints+attackPoints;
+		MAXLifePoints=MAXLifePoints+getAttackPoints();
 	}
 	
 	public int getLevel() {
@@ -93,14 +93,9 @@ public class PlayerControllerImpl implements PlayerController {
 		
 		
 	}
-	public void GetHit() { 
-		SetLifePoints(getLifePoints()-attackPoints); //considero che ennemy_attack e hero_attack valgono la stessa cosa= attackPoints
-		if(getLifePoints()<=0) {
-			System.out.println("L' eroe è morto !! ");
-			System.exit(0);
-			// il gioco si chiude e il turno è finito
-		}
-		
+
+	public int getAttackPoints() {
+		return attackPoints;
 	}
 
 	

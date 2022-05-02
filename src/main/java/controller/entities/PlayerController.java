@@ -40,7 +40,9 @@ public interface PlayerController {
 	
 	void GainExp(int exp);
 	
-	void GetHit();
+	int getAttackPoints();
+	
+	
 
 	
 
