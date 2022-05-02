@@ -10,4 +10,6 @@ import javafx.util.Pair;
 public interface PlayerAttackController {
 
 	 void Attack(Pair<Integer, Integer> new_heropos2);
+	 
+	 void GetHit(int enemy_atk, int enemyID);
 }
