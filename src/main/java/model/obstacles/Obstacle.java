@@ -1,19 +1,14 @@
 package model.obstacles;
 
+import javafx.util.Pair;
+
 public interface Obstacle {
 
     /**
      *
      * @return obstacle's position in the world.
      */
-    Pair<X, Y> getPosition();
-
-    /**
-     * Used to set obstacle's position.
-     *
-     * @param position new obstacle's position
-     */
-    void setPosition(Pair<X, Y> position);
+    Pair<Integer, Integer> getPosition();
 
     /**
      *
@@ -21,5 +16,9 @@ public interface Obstacle {
      */
     ObstacleType getObstacleType();
 
+    void generateObstacle();
+
+    void setPosition();
+    void setType();
 
 }
