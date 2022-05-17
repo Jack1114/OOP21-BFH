@@ -1,6 +1,6 @@
 import java.util.Random;
 
-// Tutto molto basilare solo perchè mi serviva vedere se prendeva la x e y dell' eroe 
+// Tutto molto basilare solo perchï¿½ mi serviva vedere se prendeva la x e y dell' eroe 
 
 public class Hero {
 	
@@ -10,6 +10,7 @@ public class Hero {
 	static int HP = MAX_HP;
 	static int ATK= 15;
 	static int Gold=0;
+	private static final int MAX_ACTIONS = 3
 	
 	static int x; // 5
 	static int y; // 8
@@ -17,6 +18,23 @@ public class Hero {
 	static int EXP=0;
 	static int MAX_EXP=0;
 	static int LV=1;
+
+	public final int actions = MAX_ACTIONS;
+
+	public int getActions(){
+		return this.actions;
+	}
+
+	public void removeAction(){
+		if(actions > 0){
+			this.actions--;
+		}
+	}
+
+	public void resetActions(){
+		this.actions = MAX_ACTIONS;
+	}
+
 	
 	static int getX(){
 		return x;
@@ -40,7 +58,7 @@ public class Hero {
 		counter(enemyID,GetATK());
 		
 		if(GetHP()<=0) {
-			System.out.println("L' eroe è morto !! ");
+			System.out.println("L' eroe ï¿½ morto !! ");
 			System.exit(0);
 		}
 	}

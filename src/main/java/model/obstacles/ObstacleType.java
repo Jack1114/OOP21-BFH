@@ -4,12 +4,13 @@ import java.util.Random;
 
 public enum ObstacleType {
 
-    MUD(""),
+    MUD,
 
-    FENCE(""),
+    FENCE,
 
-    ROCK("");
+    ROCK;
 
+    /*
     private final String descr;
 
     ObstacleType(final String descr){
@@ -26,4 +27,5 @@ public enum ObstacleType {
         Random random = new Random();
         return values()[random.nextInt(values().length)];
     }
+    */
 }

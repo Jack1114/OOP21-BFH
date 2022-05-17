@@ -4,8 +4,8 @@ public class HeroMovement {
 	
 	static Pair<Integer, Integer> new_heropos;
 	private static boolean success;
-	
-	
+	private finale ObstacleType obsType;
+
 	public static void left(Pair<Integer, Integer> heropos) {
 		// TODO Auto-generated method stub
 		//System.out.println("left");
@@ -55,6 +55,11 @@ public class HeroMovement {
 		// controllo se sbatto contro un ostacolo 
 		if(Global_Generator.obstacles_pos.contains(new_heropos)){
 			//System.out.println("discarded action 1");
+			//controllo la posizione di quell'ostacolo e prendo il tipo
+			if(obstacle.type == obsType.MUD){
+
+				success = true;
+			}
 			success=false;
 		}
 		// controllo se va fuori dai bordi schermo
@@ -79,6 +84,7 @@ public class HeroMovement {
 		Global_Generator.enemyposwithID.forEach(item->{
 			if(item.getY().getX()==new_heropos2.getX() && item.getY().getY()==new_heropos2.getY()) {
 				Global_Generator.enemies.get(item.getX()).GetHit(Hero.ATK);
+				//Global_Generator.enemies.get(item.getX()).GetHit(Hero.ATK);
 			}
 		});
 	}

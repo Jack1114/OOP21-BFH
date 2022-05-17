@@ -1,21 +1,27 @@
 import java.util.Random;
 
-public class Obstacles {
+public class Obstacle {
 
-	Random r=new Random();
-	int x;
-	int y;
-	boolean success=false;
+	private final Pair<Integer, Integer> obstaclePos;
+	private final int x;
+	private final int y;
+	enum Type{
+		ROCK,
+		MUD;
+	}
+
+	private final Type obstacleType;
 	
-	public Obstacles(int sizeArena){
-		success=false;
-		while(!success) {
-			generate_obst(sizeArena);
-		}
+	public Obstacle(final Pair<Integer, Integer> pos, Type type){
+		this.obstaclePos = pos;
+		this.obstacleType = type;
+	}
+
+	public Pair<Integer, Integer> getObstaclePos(final Pair<Integer, Integer> pos){
 
 	}
 
-	private void generate_obst(int sizeArena) {
+/*	private void generate_obst(int sizeArena) {
 		// TODO Auto-generated method stub
 		x=r.nextInt(sizeArena);
 		y=r.nextInt(sizeArena);
@@ -26,7 +32,7 @@ public class Obstacles {
 			System.out.println("generated obstacle in pos X = "+obst_pos.getX()+" Y = "+obst_pos.getY());
 		}
 	}
-
+*/
 	
 
 
