@@ -184,6 +184,16 @@ public class Global_Generator {
 	            		HeroMovement.right(heropos);
 	            		g.update();
 	            	break;
+					case("e"):
+						HeroMovement.attack();
+						//g.update();
+						break;
+					case("1"):
+						HeroMovement.attackWithAbility("1");
+						break;
+					case("2"):
+						HeroMovement.attackWithAbility("2");
+						break;
 	            	default:
 	            		HeroMovement.stop(heropos);
 	            		g.update();

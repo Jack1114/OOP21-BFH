@@ -26,7 +26,7 @@ public class Enemy {
 		// IMPORTANTE !!
 		this.ID = id;
 		
-		// elemento di random per dare diversità ai nemici
+		// elemento di random per dare diversitï¿½ ai nemici
 		int value = rand.nextInt(10)+1; 
 		
 		// i valori sono arbitrari
@@ -35,9 +35,7 @@ public class Enemy {
 		atk=( 1+value/3 + ( HeroEXP/(10*10) ));
 		exp=( 20+value*2 + ( HeroEXP/(15*6) ));
 		Gold=rand.nextInt(15)+10;
-				
 		generate_pos();
-		
 	}
 	
 	
@@ -55,9 +53,7 @@ public class Enemy {
 			}
 		}
 	}
-	
-	
-	
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
@@ -74,7 +70,6 @@ public class Enemy {
 	}
 
 	private void SetHP(int damage) {
-
 		this.HP = HP-damage;
 		System.out.println("Enemy ID : "+this.ID+" HP Remaining = "+GetHP());
 		if(GetHP()<=0) {
@@ -108,7 +103,6 @@ public class Enemy {
 		if(!Global_Generator.skipenemy.contains(this.ID)) {
 			Global_Generator.skipenemy.add(this.ID);
 		}
-		
 	}
 
 	private void setGold(int i) {

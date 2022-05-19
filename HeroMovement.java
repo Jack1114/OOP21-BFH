@@ -78,16 +78,60 @@ public class HeroMovement {
 		System.out.println(success);
 		return success;
 	}
+
+	/*
 	private static void Attack(Pair<Integer, Integer> new_heropos2) {
 		// TODO Auto-generated method stub
 		System.out.println("Attacking the ENEMY !!");
 		Global_Generator.enemyposwithID.forEach(item->{
 			if(item.getY().getX()==new_heropos2.getX() && item.getY().getY()==new_heropos2.getY()) {
 				Global_Generator.enemies.get(item.getX()).GetHit(Hero.ATK);
-				//Global_Generator.enemies.get(item.getX()).GetHit(Hero.ATK);
 			}
 		});
 	}
-	
+	*/
+
+	/**
+	 * Simple attack, generated with input e
+	 */
+	public void attack(){
+		System.out.println("Attacking the enemy!");
+		//c'è sta cosa non ha senso, mi scannerizzo tutti i nemici per trovare quello che sto
+		//attaccando, seriously?
+		Global_Generator.enemyposwithID.forEach(item->{
+			if(item.getY().getX()==new_heropos2.getX() && item.getY().getY()==new_heropos2.getY()) {
+				Global_Generator.enemies.get(item.getX()).GetHit(Hero.ATK);
+			}
+		});
+	}
+
+	public void attackWithAbility(final String ability){
+		switch(ability){
+			case("1"):
+				int doubleAttack = Hero.ATK * 2;
+				System.out.println("Attacking the enemy!");
+				System.out.println("Special attack: double effect");
+				//c'è sta cosa non ha senso, mi scannerizzo tutti i nemici per trovare quello che sto
+				//attaccando, seriously?
+				Global_Generator.enemyposwithID.forEach(item->{
+					if(item.getY().getX()==new_heropos2.getX() && item.getY().getY()==new_heropos2.getY()) {
+						Global_Generator.enemies.get(item.getX()).GetHit(doubleAttack);
+					}
+				});
+				break;
+			case("2"):
+				int doubleAttack = Hero.ATK * 3;
+				System.out.println("Attacking the enemy!");
+				System.out.println("Special attack: triple effect");
+				//c'è sta cosa non ha senso, mi scannerizzo tutti i nemici per trovare quello che sto
+				//attaccando, seriously?
+				Global_Generator.enemyposwithID.forEach(item->{
+					if(item.getY().getX()==new_heropos2.getX() && item.getY().getY()==new_heropos2.getY()) {
+						Global_Generator.enemies.get(item.getX()).GetHit(doubleAttack);
+					}
+				});
+				break;
+		}
+	}
 
 }
