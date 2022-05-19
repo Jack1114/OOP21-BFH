@@ -4,7 +4,7 @@ public class HeroMovement {
 	
 	static Pair<Integer, Integer> new_heropos;
 	private static boolean success;
-	private finale ObstacleType obsType;
+	private final ObstacleType obsType;
 
 	public static void left(Pair<Integer, Integer> heropos) {
 		// TODO Auto-generated method stub
