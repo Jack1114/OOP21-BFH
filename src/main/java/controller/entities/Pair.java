@@ -8,8 +8,8 @@ package controller.entities;
 import java.util.Objects;
 
 public class Pair<X,Y> {
-	private final X x;
-	private final Y y;
+	private  X x;
+	private  Y y;
 	
 	//tutto generato automaticamente
 
@@ -24,12 +24,19 @@ public class Pair<X,Y> {
 	public X getX() {
 		return x;
 	}
+	public void setX(X newX) {
+		x=newX;
+	}
+
 
 
 	public Y getY() {
 		return y;
 	}
 
+	public void setY(Y newY) {
+		y=newY;
+	}
 
 	@Override
 	public int hashCode() {

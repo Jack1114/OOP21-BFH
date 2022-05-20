@@ -8,13 +8,13 @@ package controller.entities;
  *
  */
 public interface PlayerMouvementsController {
-	void left(Pair<Integer, Integer> player_pos);
+	void left();
 	
-	void right(Pair<Integer, Integer> player_pos);
+	void right();
 	
-	void down(Pair<Integer, Integer> player_pos);
+	void down();
 	
-	void up(Pair<Integer, Integer> player_pos);
+	void up();
 	
 	boolean check_advancement(Pair<Integer, Integer> player_pos);
 }

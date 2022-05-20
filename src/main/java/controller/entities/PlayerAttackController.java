@@ -8,6 +8,7 @@ import javafx.util.Pair;
 */
 
 public interface PlayerAttackController {
+	 int getAttackPoints();
 
 	 void Attack(Pair<Integer, Integer> new_heropos2);
 	 

@@ -9,24 +9,21 @@ package controller.entities;
  */
 public class PlayerMouvementsControllerImpl implements PlayerMouvementsController {
 
-	private static boolean success;
-	static Pair<Integer,Integer> new_player_pos;
+	private boolean success;
+	private Pair<Integer,Integer> new_player_pos;
+	PlayerControllerImpl player;
 	
-	public PlayerMouvementsControllerImpl() {
-	
+	public PlayerMouvementsControllerImpl(PlayerControllerImpl newPlayer) {
+	this.player=newPlayer;
 	}
 
-	public void left(Pair<Integer, Integer> player_pos) {
-		new_player_pos=new Pair<>(player_pos.getX()-1,player_pos.getY());
-		if(check_advancement(new_player_pos)) {
-			player_pos=new_player_pos;
-			PlayerControllerImpl playerControllerImpl = new PlayerControllerImpl();
-			playerControllerImpl.setX(player_pos.getX());
-			
-		}
+	public void left() {
+		new_player_pos=new Pair<>(player.getPlayerPosition().getX()-1,player.getPlayerPosition().getY());
+		if(check_advancement(new_player_pos))
+		player.setPlayerPosition(new_player_pos);
 
 	}
-	
+
 	/*final JButton left= new JButton("left");
 	 left.addActionListener(e -> {
 	 public void left(Pair<Integer, Integer> player_pos);
@@ -34,45 +31,36 @@ public class PlayerMouvementsControllerImpl implements PlayerMouvementsControlle
 	*/
 
 	
-	public void right(Pair<Integer, Integer> player_pos) {
-		new_player_pos=new Pair<>(player_pos.getX()+1,player_pos.getY());
+	public void right() {
+		new_player_pos=new Pair<>(player.getPlayerPosition().getX()+1,player.getPlayerPosition().getY());
 		if(check_advancement(new_player_pos)) {
-			player_pos=new_player_pos;
-			PlayerControllerImpl playerControllerImpl = new PlayerControllerImpl();
-			playerControllerImpl.setX(player_pos.getX());
-			
+			player.setPlayerPosition(new_player_pos);
 		}
 		
 	}
-	/*final JButton right= new JButton("left");
+	/*final JButton right= new JButton("right");
 	 right.addActionListener(e -> {
 	 public void right(Pair<Integer, Integer> player_pos);
 	}
 	*/
 	
-	public void down(Pair<Integer, Integer> player_pos) {
-		new_player_pos=new Pair<>(player_pos.getX(),player_pos.getY()-1);
+	public void down() {
+		new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY()-1);
 		if(check_advancement(new_player_pos)) {
-			player_pos=new_player_pos;
-			PlayerControllerImpl playerControllerImpl = new PlayerControllerImpl();
-			playerControllerImpl.setY(player_pos.getY());
-			
+			player.setPlayerPosition(new_player_pos);
 		}
 		
 	}
-	/*final JButton down= new JButton("left");
+	/*final JButton down= new JButton("down");
 	 down.addActionListener(e -> {
 	 public void down(Pair<Integer, Integer> player_pos);
 	}
 	*/
 	
-	public void up(Pair<Integer, Integer> player_pos) {
-		new_player_pos=new Pair<>(player_pos.getX(),player_pos.getY()+1);
+	public void up() {
+		new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY()+1);
 		if(check_advancement(new_player_pos)) {
-			player_pos=new_player_pos;
-			PlayerControllerImpl playerControllerImpl = new PlayerControllerImpl();
-			playerControllerImpl.setY(player_pos.getY());
-			
+			player.setPlayerPosition(new_player_pos);
 		}
 		
 	}
@@ -82,17 +70,17 @@ public class PlayerMouvementsControllerImpl implements PlayerMouvementsControlle
 	}
 	*/
 	
-	public boolean check_advancement(Pair<Integer, Integer> player_pos) {
+	public boolean check_advancement(Pair<Integer, Integer> new_player_pos) {
 		success=true;
-		/*if(Global_Generator.obstacles_pos.contains(player_pos)) // verifico se tra la lista degli ostacoli, c'è un ostacolo dove il player vuole spostarsi
+		/*if(Global_Generator.obstacles_pos.contains(new_player_pos)) // verifico se tra la lista degli ostacoli, c'è un ostacolo dove il player vuole spostarsi
 			succes=false ;
 		  if() //per verificare se il palyer va fuori dal'atrena di gioco
 		  succes =false;
 		  Global_Generator.enemyposwithID.forEach(item->{
-			  if(item.getX==player_pos.getX && item.getY==player_pos.getY)
+			  if(item.getX==new_player_pos.getX && item.getY==new_player_pos.getY)
 		  	{
 		  PlayerAttackControllerImpl playerAttackControllerImpl =new PlayerAttackControllerImpl();
-		  playerAttackControllerImpl.attack(palyer_pos)
+		  playerAttackControllerImpl.attack(new_player_pos)
 		  success=false;
 		  	}
 		  })
@@ -100,5 +88,6 @@ public class PlayerMouvementsControllerImpl implements PlayerMouvementsControlle
 		
 		return success;
 	}
+
 
 }
