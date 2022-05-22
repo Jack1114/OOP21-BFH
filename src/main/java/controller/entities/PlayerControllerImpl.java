@@ -11,7 +11,7 @@ public class PlayerControllerImpl implements PlayerController {
 
 	//punti da togliere al giocatore dopo ogni hit o che può guadagnare se crea il dano al nemico
 	private int gold=0; // oro che guardagna l'ero dopo ogni turno di gioco
-	Life life ;
+	Life life;
 	Experience experience;
 	Pair<Integer,Integer> playerPosition;
 	
