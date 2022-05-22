@@ -1,3 +1,4 @@
+package battleforhonor;
 import java.util.Random;
 
 // Tutto molto basilare solo perch� mi serviva vedere se prendeva la x e y dell' eroe 
@@ -10,7 +11,7 @@ public class Hero {
 	static int HP = MAX_HP;
 	static int ATK= 15;
 	static int Gold=0;
-	private static final int MAX_ACTIONS = 3
+	private static final int MAX_ACTIONS = 3;
 	
 	static int x; // 5
 	static int y; // 8

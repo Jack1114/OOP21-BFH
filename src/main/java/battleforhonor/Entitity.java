@@ -1,4 +1,4 @@
-
+package battleforhonor;
 public abstract class Entitity {
 	
 	static int MAX_HP;

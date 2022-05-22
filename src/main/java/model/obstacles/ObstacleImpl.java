@@ -1,42 +1,40 @@
 package model.obstacles;
-
-import javafx.util.Pair;
-
 import java.util.Random;
 
-public class ObstacleImpl implements Obstacle{
+import controller.entities.Pair;
 
-    private Pair<Integer, Integer> obstPosition;
-    private int x;
-    private int y;
-    private ObstacleType randObstType;
-    private Random randomPos = new Random();
-    private ObstacleType obstType;
+public class ObstacleImpl implements Obstacle {
 
-    public ObstacleImpl(){
+	private final Pair<Integer, Integer> obstaclePos;
+	enum Type{
+		ROCK,
+		MUD;
+	}
 
-    }
+	private final Type obstacleType;
+	
+	public ObstacleImpl(final Pair<Integer, Integer> pos, Type type){
+		this.obstaclePos = pos;
+		this.obstacleType = type;
+	}
 
-    @Override
-    public Pair<Integer, Integer> getPosition() {
-        return this.obstPosition;
-    }
+	public Pair<Integer, Integer> getObstaclePos(){
+		return this.obstaclePos;
+	}
 
-    //TODO: controllare le posizioni!
-    public void setPosition() {
-        this.x = randomPos.nextInt(getSizeArena);
-        this.y = randomPos.nextInt(getSizeArena);
-        obstPosition = new Pair<>(x, y);
-    }
+/*	private void generate_obst(int sizeArena) {
+		// TODO Auto-generated method stub
+		x=r.nextInt(sizeArena);
+		y=r.nextInt(sizeArena);
+		Pair<Integer,Integer> obst_pos = new Pair<>(x,y);
+		if(!Global_Generator.obstacles_pos.contains(obst_pos) && ( obst_pos.getX()!=Hero.getX() && obst_pos.getY()!=Hero.getY()) ) {
+			Global_Generator.obstacles_pos.add(obst_pos);
+			success=true;
+			System.out.println("generated obstacle in pos X = "+obst_pos.getX()+" Y = "+obst_pos.getY());
+		}
+	}
+*/
+	
 
-    public void setType() {
-        obstType = ObstacleType.getRandomType();
-    }
-
-
-    @Override
-    public ObstacleType getObstacleType() {
-        return this.obstType;
-    }
 
 }

@@ -1,4 +1,7 @@
+package battleforhonor;
 import java.util.*;
+
+import controller.entities.Pair;
 
 public class Enemy {
 

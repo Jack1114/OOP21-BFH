@@ -1,5 +1,8 @@
-
+package battleforhonor;
 import javax.swing.*;
+
+import controller.entities.Pair;
+
 import java.util.*;
 import java.util.List;
 import java.awt.*;

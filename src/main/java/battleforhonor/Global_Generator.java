@@ -1,12 +1,16 @@
+package battleforhonor;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.*;
 
+import controller.entities.*;
+import model.obstacles.*;
+
 // si occupa tutto lui di generare i nemici e le loro statistiche, L' eroe � statico per ora con una sola posizione fissa 
 
 public class Global_Generator {
-	private static final int NUM_FENCE_OBST = 10;
-	private static final int NUM_ROCK_OBST = 10;
+	
+
 	public static final int GRID_SIZE=15;
 	//public static List<Pair<Integer,Integer>> enemypos = new ArrayList<>();
 						      // ID           POS
@@ -15,7 +19,11 @@ public class Global_Generator {
 	//public static List<Pair<Integer,Pair<Integer,Integer>>> NEWenemyposwithID = new ArrayList<>(); // alla fine ho risolto con solo quella principale 
 	
 	public static List<Pair<Integer,Integer>> obstacles_pos = new ArrayList<>(); 
-	public static List<Obstacle> obstacles = new ArrrayList<>()
+	
+	//Lista degli ostacoli
+	public List<Obstacle> obstacles = new ArrayList<>();
+	private final ObstacleGenerator obstacleGenerator = new ObstacleGenerator(obstacles);
+
 	
 	public static List<Enemy> enemies= new ArrayList<Enemy>();
 
@@ -25,14 +33,15 @@ public class Global_Generator {
 
 	private int totactions=0;
 	GUI g = new GUI(15);
-
 	//private int hero_actions=0;
 	
 	void generation() {
 		
+		//TODO: da sostituire
 		Hero.spawn(15);
 		
-		generateObstacles();
+		//PlayerController player = new PlayerControllerImpl();
+		obstacleGenerator.generateObstacles();
 		generate_enemies();
 
 		g.update();
@@ -57,8 +66,8 @@ public class Global_Generator {
 			
 			if(skipenemy.size()==NUM_ENEMIES) {
 				reset();
+				//TODO: da sostituire
 				recover_HERO();
-				generateObstacles();
 				generate_enemies();
 			} 
 			
@@ -81,6 +90,7 @@ public class Global_Generator {
 	}
 
 
+	//TODO: da sostituire
 	private void recover_HERO() {
 		// TODO Auto-generated method stub
 		System.out.println("Ti senti pi� forte di prima e le tue ferite sono state curate !!");
@@ -97,70 +107,14 @@ public class Global_Generator {
 		}
 	}
 
-/*
-	private void genrate_obstacles() {
-		// TODO Auto-generated method stub
-		for (int i=0; i<NUM_OBST;i++) {
-			Obstacles obst = new Obstacles(15);
-		}
-}*/
 
-	/**
-	 * Generate n Obstacles in random position
-	 */
-	private void generateObstacles(){
-		for (int i = 0; i < NUM_ROCK_OBST; i++){
-			ObstacleType type = ObstacleType.ROCK;
-			addObstacle(createObstacle(randPosition(GRID_SIZE), type));
-		}
-		for (int i = 0; i < NUM_FENCE_OBST; i++){
-			ObstacleType type = ObstacleType.MUD;
-			addObstacle(createObstacle(randPosition(GRID_SIZE), type));
-		}
-	}
-
-	private void Pair<X, Y> randPosition(final int sizeArena){
-		Random r = new Random();
-		boolean success = false;
-		while(!success){
-			int x = nextInt(sizeArena);
-			int y = nextInt(sizeArena);
-			Pair<Integer,Integer> pos = new Pair<>(x,y);
-			if(checkObsPos(pos) && checkHeroPos(pos) && checkEnemyPos(pos)){
-				success = true;
-				return pos;
-			}
-		}
-	}
-
-	private void addObstacle(Obstacle obstacle){
-		obstacles.add(obstacle);
-	}
-
-	//funzione per controllare la posizione degli ostacoli
-	private boolean checkObsPos(Pair<Integer, Integer> pos){
-		//contains o equals?
-		return obstacles.obstaclePos.contains(pos);
-	}
-
-	private boolean checkHeroPos(Pair<Integer, Integer> pos){
-		return enemyposwithID.contains(pos);
-	}
-
-	private boolean checkEnemyPos(Pair<Integer, Integer> pos){
-		return pos.getX() != Enemy.get
-	}
-
-	private Obstacle createObstacle(final Pair<Integer, Integer> pos, final ObstacleType type){
-		return new Obstacle(pos, type);
-	}
 
 
 	private void playerTurn() {
 		// TODO Auto-generated method stub
 		//va bene qualsiasi cosa � solo per creare dello stacco tra player e nemico 
 		//hero_actions = 0;
-		while(Hero.getActions > 0) {
+		while(Hero.getActions() > 0) {
 			Hero.removeAction();
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	        System.out.println("Enter Input : w=UP // s=DOWN // a=LEFT // d=RIGHT ");

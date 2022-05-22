@@ -1,3 +1,6 @@
+package battleforhonor;
+
+import controller.entities.Pair;
 
 public class Enemy_move_control {
 

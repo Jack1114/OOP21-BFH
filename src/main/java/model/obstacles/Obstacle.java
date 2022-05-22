@@ -1,24 +1,14 @@
 package model.obstacles;
 
-import javafx.util.Pair;
+import controller.entities.Pair;
 
 public interface Obstacle {
 
-    /**
-     *
-     * @return obstacle's position in the world.
-     */
-    Pair<Integer, Integer> getPosition();
 
     /**
      *
-     * @return obstacle's type
+     * @return obstacle's position
      */
-    ObstacleType getObstacleType();
-
-    void generateObstacle();
-
-    void setPosition();
-    void setType();
+    public Pair<Integer, Integer> getObstaclePos();
 
 }
