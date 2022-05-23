@@ -3,6 +3,7 @@
  */
 package controller.entities;
 
+import battleforhonor.Global_Generator;
 import javafx.util.Pair;
 
 /**
@@ -12,39 +13,40 @@ import javafx.util.Pair;
 
 public class PlayerAttackControlerImpl implements PlayerAttackController {
 	private final int attackPoints = 5; 
+	PlayerControllerImpl player;
 	/**
 	 * 
 	 */
-	public PlayerAttackControlerImpl() {
-		
+	public PlayerAttackControlerImpl( PlayerControllerImpl new_player) {
+		this.player=new_player;
 	}
 
 	public int getAttackPoints() {
 		return attackPoints;
 	}
 
-	public void Attack(Pair<Integer, Integer> new_heropos2) {
-		/*
+	public void attack(controller.entities.Pair<Integer, Integer> new_heropos2) {
 		Global_Generator.enemyposwithID.forEach(item->{
-			  if(item.getX==player_pos2.getX && item.getY==player_pos2.getY)
+		if(item.getY().getX()==player.getPlayerPosition().getX() && item.getY().getY()==player.getPlayerPosition().getY());
 		  	{
-		  	PlayerControllerImpl playerControllerImpl =new PlayerControllerImpl();
-		  	Globa_Generator.ennemies.get(item.getX()).GetHit(getAttackPoints())
+		  	Global_Generator.enemies.get(item.getX()).GetHit(getAttackPoints());
 		  	}
-		 })*/
-		
+		});
 	}
 
-	public void GetHit(int enemy_atk, int enemyID) { 
-		PlayerControllerImpl playerControllerImpl=new PlayerControllerImpl();
-		playerControllerImpl.life.setLifePoints(playerControllerImpl.life.getLifePoints()-getAttackPoints()); //considero che ennemy_attack e hero_attack valgono la stessa cosa= attackPoints
-		if(playerControllerImpl.life.getLifePoints()<=0) {
+	public void getHit(int enemy_atk, int enemyID) { 
+		player.life.setLifePoints(player.life.getLifePoints()-getAttackPoints()); //considero che ennemy_attack e hero_attack valgono la stessa cosa= attackPoints
+		if(player.life.getLifePoints()<=0) {
 			System.out.println("L' eroe è morto !! ");
 			System.exit(0);
 			// il gioco si chiude e il turno è finito
 		}
 		
 	}
+
+
+
+
 
 
 

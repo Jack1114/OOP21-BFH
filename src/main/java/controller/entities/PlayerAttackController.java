@@ -1,7 +1,5 @@
 package controller.entities;
 
-import javafx.util.Pair;
-
 /**
 * @author Olivia
 *
@@ -10,7 +8,7 @@ import javafx.util.Pair;
 public interface PlayerAttackController {
 	 int getAttackPoints();
 
-	 void Attack(Pair<Integer, Integer> new_heropos2);
+	 void attack(Pair<Integer, Integer> new_heropos2);
 	 
-	 void GetHit(int enemy_atk, int enemyID);
+	 void getHit(int enemy_atk, int enemyID);
 }

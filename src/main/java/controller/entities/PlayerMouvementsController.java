@@ -16,5 +16,7 @@ public interface PlayerMouvementsController {
 	
 	void up();
 	
+	void stop();
+	
 	boolean check_advancement(Pair<Integer, Integer> player_pos);
 }
