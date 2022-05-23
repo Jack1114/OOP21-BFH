@@ -1,6 +1,11 @@
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
+
+import javax.swing.plaf.basic.BasicSplitPaneUI.KeyboardEndHandler;
 
 // si occupa tutto lui di generare i nemici e le loro statistiche, L' eroe è statico per ora con una sola posizione fissa 
 
@@ -118,7 +123,7 @@ public class Global_Generator {
 			hero_actions++;
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	        System.out.println("Enter Input : w=UP // s=DOWN // a=LEFT // d=RIGHT ");
-	        try {
+	        try {	
 	            String s = br.readLine();
 	            Pair<Integer,Integer> heropos= new Pair<>(Hero.getX(),Hero.getY());
 	            switch(s) {
