@@ -3,7 +3,7 @@ package model.obstacles;
 import java.util.List;
 import java.util.Random;
 
-
+import battleforhonor.Global_Generator;
 import controller.entities.Pair;
 
 public class ObstacleGenerator {
@@ -45,7 +45,7 @@ public class ObstacleGenerator {
 			int x = r.nextInt(sizeArena);
 			int y = r.nextInt(sizeArena);
 			Pair<Integer,Integer> pos = new Pair<>(x,y);
-			if(checkObsPos(pos) && checkHeroPos(pos) && checkEnemyPos(pos)){
+			if(Global_Generator.checkObstaclesPos(pos) && Global_Generator.checkPlayerPos(pos) && Global_GeneratorcheckEnemyPos(pos)){
 				success = true;
 				return pos;
 			}
