@@ -6,10 +6,6 @@ import controller.entities.Pair;
 public class ObstacleImpl implements Obstacle {
 
 	private final Pair<Integer, Integer> obstaclePos;
-	enum Type{
-		ROCK,
-		MUD;
-	}
 
 	private final Type obstacleType;
 	
@@ -20,6 +16,13 @@ public class ObstacleImpl implements Obstacle {
 
 	public Pair<Integer, Integer> getObstaclePos(){
 		return this.obstaclePos;
+	}
+	
+
+	@Override
+	public Obstacle.Type getObstacleTyep() {
+		// TODO Auto-generated method stub
+		return this.obstacleType;
 	}
 
 /*	private void generate_obst(int sizeArena) {

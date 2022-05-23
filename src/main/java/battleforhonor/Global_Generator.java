@@ -184,7 +184,35 @@ public class Global_Generator {
 		}
 	}
 
-
+	/**
+	 * 
+	 * @param position to check
+	 * @return 
+	 * @return true: if position is empty
+	 * false: if position has and obstacle
+	 */
+	public boolean checkObstaclesPos(Pair<Integer, Integer> position) {
+		obstacles.forEach(item -> {
+			if(item.getObstaclePos().equals(position)) {
+				return false;
+			}
+		});
+		return true;
+	}
+	
+	/**
+	 * 
+	 * @param position to check
+	 * @return true: if position is empty
+	 * false: if position is occupied by the player
+	 */
+	public boolean checkPlayerPos(Pair<Integer, Integer> position) {
+		if(player.getPlayerPosition().equals(position)) {
+			return false;
+		}
+		return true;
+	}
+	
 	@SuppressWarnings("deprecation")
 	private void advance(Pair<Integer, Pair<Integer, Integer>> item, int actionpt) {
 		Enemy_move_control.nextMove(item,actionpt);
