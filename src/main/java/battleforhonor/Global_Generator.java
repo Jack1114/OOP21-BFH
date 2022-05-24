@@ -24,8 +24,8 @@ public class Global_Generator {
 	 // il player
 	PlayerControllerImpl player=new PlayerControllerImpl() ;
 	private final ObstacleGenerator obstacleGenerator = new ObstacleGenerator(obstacles);
+	PlayerAttackController playerAttack= new PlayerAttackControlerImpl(player);
 	PlayerMouvementsController playerMouvement= new PlayerMouvementsControllerImpl(player);
-	
 	public static List<Enemy> enemies= new ArrayList<Enemy>();
 
 	public static List<Integer> skipenemy= new ArrayList<>(); //contiene gli ID dei vari nemici morti 
@@ -131,14 +131,14 @@ public class Global_Generator {
 	            		g.update();
 	            	break;
 					case("e"):
-						HeroMovement.attack();
+						playerAttack.attack(player.getPlayerPosition());
 						//g.update();
 						break;
 					case("1"):
-						HeroMovement.attackWithAbility("1");
+						playerAttack.attackWithAbility("1");
 						break;
 					case("2"):
-						HeroMovement.attackWithAbility("2");
+						playerAttack.attackWithAbility("2");
 						break;
 	            	default:
 	            		playerMouvement.stop();
