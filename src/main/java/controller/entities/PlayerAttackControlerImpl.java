@@ -11,7 +11,8 @@ import battleforhonor.Global_Generator;
  */
 
 public class PlayerAttackControlerImpl implements PlayerAttackController {
-	private static final int ATTACK_POINTS = 5; 
+	private static final int DEFAULT_ATTACK_POINTS = 5; 
+	private int attackPoints = DEFAULT_ATTACK_POINTS;
 	PlayerControllerImpl player;
 
 	public PlayerAttackControlerImpl( PlayerControllerImpl new_player) {
@@ -22,7 +23,7 @@ public class PlayerAttackControlerImpl implements PlayerAttackController {
 	 * 
 	 */
 	public int getAttackPoints() {
-		return ATTACK_POINTS;
+		return attackPoints;
 	}
 	/**
 	 * attack beetwen the player and the enemie
@@ -33,13 +34,23 @@ public class PlayerAttackControlerImpl implements PlayerAttackController {
 		if(item.getY().getX()==player.getPlayerPosition().getX() && item.getY().getY()==player.getPlayerPosition().getY());
 		  	{
 		  	Global_Generator.enemies.get(item.getX()).GetHit(getAttackPoints());
+		  	//mi serve nel caso un'abilita' abbia cambiato il valore di attackPoints
+		  	resetAttackPoints();
 		  	//responseHit = (int)(Global_Generator.enemies.get(item.getX()).GetATK()) / 4;
 		  	//getHit(responseHit);
 		  	}
 		});
-		
 	}
-   
+
+	public void setAttackPoints(int newAttackPoints) {
+		// TODO Auto-generated method stub
+		this.attackPoints = newAttackPoints;
+	}
+	
+	public void resetAttackPoints() {
+		this.attackPoints = DEFAULT_ATTACK_POINTS;
+	}
+  
 	
 	/**
 	 * 
@@ -53,12 +64,5 @@ public class PlayerAttackControlerImpl implements PlayerAttackController {
 			System.exit(0);
 		}
 		*/
-	}
-
-
-
-
-
-
 
 }
