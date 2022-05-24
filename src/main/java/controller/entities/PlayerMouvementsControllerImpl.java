@@ -70,35 +70,34 @@ public class PlayerMouvementsControllerImpl implements PlayerMouvementsControlle
 	}
 	
 	/**
+	 * @return 
 	 * @return true or false
 	 * before moving, the player check if there is an ennemie and if the is an obstacle 
 	 * if there is an obstacle, he check if the obstacle's type is the one that can be cross
 	 */
 	
 	public boolean check_advancement(Pair<Integer, Integer> new_player_pos) {
-		success=true;
-		//global generator da sistemare col conflitto di obstacles e obstacles_ps
 		if(Global_Generator.obstacles.contains(new_player_pos)) {// verifico se tra la lista degli ostacoli, c'è un ostacolo dove il player vuole spostarsi
+			//questa funzione non va bene, devo prendere il tipo di ostacolo che e' in quella posizione
 			ObstacleImpl.Type type = Global_Generator.obstacles.getObstaclesType();
 			switch(type) {
-				case type.POOL:
+				case POOL:
 					player.player_action.removeAction();
-					success=true;
-				case type.ROCK:
-					success=false; 
+					return true;
+				case ROCK:
+					return false; 
 			}
 		}
-			success=false ;
-		 Global_Generator.enemyposwithID.forEach(item->{
+		//controllo se nella newPos ho un nemico e nel caso lo attacco
+		Global_Generator.enemyposwithID.forEach(item->{
 		     if(item.getY().getX()==player.getPlayerPosition().getX() && item.getY().getX()==player.getPlayerPosition().getY())
 			 {
-			     PlayerAttackControlerImpl playerAttackControlerImpl=new PlayerAttackControlerImpl(player);
-			     playerAttackControlerImpl.attack(new_player_pos);
-			     success=false;
+			     PlayerAttackControlerImpl playerAttackControlerImpl = new PlayerAttackControlerImpl(player);
+			     playerAttackControlerImpl.attack();
+			     return false;
 			 }
 		  });
-
-		return success;
+		return true;
 	}
 
 

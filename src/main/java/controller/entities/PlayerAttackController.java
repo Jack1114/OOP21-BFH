@@ -10,5 +10,5 @@ public interface PlayerAttackController {
 
 	 void attack(Pair<Integer, Integer> new_heropos2);
 	 
-	 void getHit(int enemy_atk, int enemyID);
+	 //void getHit(int enemyResponseHit);
 }
