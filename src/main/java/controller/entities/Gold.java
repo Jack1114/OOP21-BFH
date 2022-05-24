@@ -10,14 +10,14 @@ public class Gold {
 	/**
 	 * @return gold
 	 */
-	public int getGold() {
+	public int getGold_points() {
 		return gold;
 	}
 	
 	/**
 	 *when the palyer kill an enemie, he win gold
 	 */
-	public void gainGold(int newGold) {
+	public void gainGold_points(int newGold) {
 		gold+=newGold;
 		
 	}

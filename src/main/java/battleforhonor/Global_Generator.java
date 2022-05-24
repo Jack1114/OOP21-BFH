@@ -24,8 +24,8 @@ public class Global_Generator {
 	 // il player
 	PlayerControllerImpl player=new PlayerControllerImpl() ;
 	private final ObstacleGenerator obstacleGenerator = new ObstacleGenerator(obstacles);
+	PlayerAttackController playerAttack= new PlayerAttackControlerImpl(player);
 	PlayerMouvementsController playerMouvement= new PlayerMouvementsControllerImpl(player);
-	
 	public static List<Enemy> enemies= new ArrayList<Enemy>();
 
 	public static List<Integer> skipenemy= new ArrayList<>(); //contiene gli ID dei vari nemici morti 
@@ -127,14 +127,14 @@ public class Global_Generator {
 	            		g.update();
 	            	break;
 					case("e"):
-						HeroMovement.attack();
+						playerAttack.attack();
 						//g.update();
 						break;
 					case("1"):
-						HeroMovement.attackWithAbility("1");
+						playerAttack.attackWithAbility("1");
 						break;
 					case("2"):
-						HeroMovement.attackWithAbility("2");
+						playerAttack.attackWithAbility("2");
 						break;
 	            	default:
 	            		playerMouvement.stop();
@@ -188,6 +188,14 @@ public class Global_Generator {
 		});
 		return success;
 	}
+	public boolean checkEnemyPos(Pair<Integer, Integer> position) {
+		enemies.forEach(item -> {
+			if(item.getEnemyPos().equals(position)) {
+				boolean success = false;
+			}
+		});
+		return true;
+	}
 
 	
 	/**
@@ -222,18 +230,20 @@ public class Global_Generator {
 
 	}
 	
-	public Pair<Integer, Integer> randPosition(final int sizeArena){
+	public Pair<Integer, Integer> randPosition(final int GRID_SIZE){
 		Random r = new Random();
 		Pair<Integer,Integer> pos = new Pair<>(0, 0);
 		boolean success = false;
 		while(!success){
-			int x = r.nextInt(sizeArena);
-			int y = r.nextInt(sizeArena);
+
+			int x = r.nextInt(GRID_SIZE);
+			int y = r.nextInt(GRID_SIZE);
 			pos = new Pair<>(x,y);
+
 			if(checkObstaclesPos(pos) && checkPlayerPos(pos) && checkEnemyPos(pos)){
 				success = true;	
 			}
-		}
+
 		return pos;
 	}
 
@@ -252,6 +262,9 @@ public class Global_Generator {
 			     }	
 			});
 		return success;
+=======
+		return null;
+>>>>>>> olivia_develop
 	}
 
 }

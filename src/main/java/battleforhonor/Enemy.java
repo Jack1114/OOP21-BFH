@@ -2,12 +2,13 @@ package battleforhonor;
 import java.util.*;
 
 import controller.entities.Pair;
+import controller.entities.PlayerControllerImpl;
 
 public class Enemy {
 
 	// supponendo che lo schermo sia una griglia di 15 X 15
 	int GRID_SIZE = 15;
-	
+	PlayerControllerImpl player;
 	Pair<Integer,Integer> pos;
 	
 	int ID;
@@ -19,7 +20,7 @@ public class Enemy {
 	int def;
 	int atk;
 	int exp;
-	int HeroEXP = Hero.getCurrentMAX_EXP();
+	int HeroEXP =player.getExperience().getMaxExpPoints();
 	int Gold;
 	
 	Random rand = new Random();
@@ -43,6 +44,7 @@ public class Enemy {
 	
 	
 	
+	@SuppressWarnings("unlikely-arg-type")
 	private void generate_pos() {
 		// TODO Auto-generated method stub
 		boolean ok=false;
@@ -50,11 +52,17 @@ public class Enemy {
 			x= rand.nextInt(GRID_SIZE);
 			y= rand.nextInt(GRID_SIZE);
 			pos=new Pair<>(x,y);
-			if( (!Global_Generator.enemyposwithID.contains(pos) ) && (!Global_Generator.obstacles_pos.contains(pos))  ) {
-				Global_Generator.enemyposwithID.add(new Pair(this.ID,pos));
+			if( (!Global_Generator.enemyposwithID.contains(pos) ) && (!Global_Generator.obstacles.contains(pos))  ) {
+				Global_Generator.enemyposwithID.add(new Pair<Integer, Pair<Integer, Integer>>(this.ID,pos));
 				ok=true;
 			}
 		}
+	}
+	
+	//posizione del nemico
+	public Pair<Integer,Integer>getEnemyPos(){	
+		return this.pos;
+		
 	}
 
 	@Override
@@ -80,8 +88,8 @@ public class Enemy {
 		this.HP = HP-damage;
 		System.out.println("Enemy ID : "+this.ID+" HP Remaining = "+GetHP());
 		if(GetHP()<=0) {
-			Hero.GainExp(this.getEXP());
-			Hero.GainGold(this.Gold);
+			player.getExperience().gainExp(this.getEXP());
+			player.getGold().gainGold_points(this.Gold);
 			Death();
 		}
 	}

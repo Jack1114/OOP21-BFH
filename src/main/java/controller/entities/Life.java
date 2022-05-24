@@ -18,6 +18,9 @@ public class Life {
 	 * update the player's healt points
 	 * @param newlifePoints
 	 */
+	public int getMaxLifePoints() {
+		return MAX_LIFE_POINTS;
+	}
 
 	public void setLifePoints(int newlifePoints) {
 	 lifePoints=newlifePoints;

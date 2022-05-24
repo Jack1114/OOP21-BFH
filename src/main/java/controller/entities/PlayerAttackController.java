@@ -6,7 +6,6 @@ package controller.entities;
 */
 
 public interface PlayerAttackController {
-	 int getAttackPoints();
 
 	 void attack();
 	 

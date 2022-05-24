@@ -13,12 +13,12 @@ import model.obstacles.Obstacle.Type;
 public class PlayerControllerImpl implements PlayerController {
 
 	//punti da togliere al giocatore dopo ogni hit o che può guadagnare se crea il dano al nemico
-	public Life life;
-	Experience experience;
+	private Life life;
+	private Experience experience;
 	Pair<Integer,Integer> playerPosition;
 	public ActionImpl player_action;
-	Gold gold;
-	Type type;
+	private Gold gold;
+	private static final int ATTACK_POINTS = 5; 
 	
 	public PlayerControllerImpl() {
 		this.life=new Life();
@@ -27,7 +27,18 @@ public class PlayerControllerImpl implements PlayerController {
 		this.gold=new Gold();
 		
 	}
-	
+	public Gold getGold() {
+		return this.gold;
+	}
+	public Life getLife() {
+		return  this.life;
+	}
+	public Experience getExperience() {
+		return  this.experience;
+	}
+	public int getAttackPoints() {
+		return ATTACK_POINTS;
+	}
 	/**
 	 * when the player move, this function update the new position
 	 */
