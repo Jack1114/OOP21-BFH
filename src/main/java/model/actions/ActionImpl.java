@@ -1,4 +1,4 @@
-package model.actions;
+ package model.actions;
 
 public class ActionImpl implements Action{
 
