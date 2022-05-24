@@ -22,6 +22,10 @@ public class Life {
 	public void setLifePoints(int newlifePoints) {
 	 lifePoints=newlifePoints;
 	}
+	
+	public void resetLife() {
+		lifePoints=MAX_LIFE_POINTS;
+	}
 	/**
 	 * check if the player is alive
 	 * @return true if the player is alife or false if not

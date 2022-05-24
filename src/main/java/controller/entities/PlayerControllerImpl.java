@@ -16,14 +16,14 @@ public class PlayerControllerImpl implements PlayerController {
 	public Life life;
 	Experience experience;
 	Pair<Integer,Integer> playerPosition;
-	public ActionImpl palyer_action;
+	public ActionImpl player_action;
 	Gold gold;
 	Type type;
 	
 	public PlayerControllerImpl() {
 		this.life=new Life();
 		this.experience=new Experience();
-		this.palyer_action=new ActionImpl();
+		this.player_action=new ActionImpl();
 		this.gold=new Gold();
 		
 	}
@@ -40,6 +40,12 @@ public class PlayerControllerImpl implements PlayerController {
 	 */
 	public Pair<Integer,Integer> getPlayerPosition() { // invece di usare x e y separatamente
 		return playerPosition;
+	}
+	
+	// resetta i punti vita del palyer
+	public void recoverPlayer() {
+		System.out.println("Ti senti piu forte di prima e le tue ferite sono state curate !!");
+		life.resetLife();
 	}
 
 }

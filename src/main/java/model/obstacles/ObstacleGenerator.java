@@ -38,17 +38,5 @@ public class ObstacleGenerator {
 		return new ObstacleImpl(pos, type);
 	}
 	
-	private Pair<Integer, Integer> randPosition(final int sizeArena){
-		Random r = new Random();
-		boolean success = false;
-		while(!success){
-			int x = r.nextInt(sizeArena);
-			int y = r.nextInt(sizeArena);
-			Pair<Integer,Integer> pos = new Pair<>(x,y);
-			if(Global_Generator.checkObstaclesPos(pos) && Global_Generator.checkPlayerPos(pos) && Global_GeneratorcheckEnemyPos(pos)){
-				success = true;
-				return pos;
-			}
-		}
-	}
+	
 }
