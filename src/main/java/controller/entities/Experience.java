@@ -1,9 +1,9 @@
 package controller.entities;
 
 public class Experience {
-	private static int MAX_EXP_POINTS=50;
+	private static int MAX_EXP_POINTS=0;
 	private int level=1;
-	private int expPoints; //punti che l’eroe guadagna quando uccide un nemico
+	private int expPoints=0; //punti che l’eroe guadagna quando uccide un nemico
 
 	public Experience() {
 		this.expPoints=MAX_EXP_POINTS;

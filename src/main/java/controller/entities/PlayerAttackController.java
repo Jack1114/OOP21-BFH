@@ -6,9 +6,8 @@ package controller.entities;
 */
 
 public interface PlayerAttackController {
-	 int getAttackPoints();
 
-	 void attack(Pair<Integer, Integer> new_heropos2);
+	 void attack();
 	 
 	 //void getHit(int enemyResponseHit);
 }

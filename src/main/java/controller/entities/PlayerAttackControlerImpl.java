@@ -11,7 +11,6 @@ import battleforhonor.Global_Generator;
  */
 
 public class PlayerAttackControlerImpl implements PlayerAttackController {
-	private static final int ATTACK_POINTS = 5; 
 	PlayerControllerImpl player;
 
 	public PlayerAttackControlerImpl( PlayerControllerImpl new_player) {
@@ -21,9 +20,7 @@ public class PlayerAttackControlerImpl implements PlayerAttackController {
 	/** @return player's attack_points
 	 * 
 	 */
-	public int getAttackPoints() {
-		return ATTACK_POINTS;
-	}
+	
 	/**
 	 * attack beetwen the player and the enemie
 	 */
@@ -32,14 +29,14 @@ public class PlayerAttackControlerImpl implements PlayerAttackController {
 		Global_Generator.enemyposwithID.forEach(item->{
 		if(item.getY().getX()==player.getPlayerPosition().getX() && item.getY().getY()==player.getPlayerPosition().getY());
 		  	{
-		  	Global_Generator.enemies.get(item.getX()).GetHit(getAttackPoints());
+		  	Global_Generator.enemies.get(item.getX()).GetHit(player.getAttackPoints());
 		  	//responseHit = (int)(Global_Generator.enemies.get(item.getX()).GetATK()) / 4;
 		  	//getHit(responseHit);
 		  	}
 		});
 		
 	}
-   
+
 	
 	/**
 	 * 
@@ -53,12 +50,5 @@ public class PlayerAttackControlerImpl implements PlayerAttackController {
 			System.exit(0);
 		}
 		*/
-	}
-
-
-
-
-
-
 
 }

@@ -17,7 +17,8 @@ public class PlayerControllerImpl implements PlayerController {
 	private Experience experience;
 	Pair<Integer,Integer> playerPosition;
 	public ActionImpl player_action;
-	Gold gold;
+	private Gold gold;
+	private static final int ATTACK_POINTS = 5; 
 	
 	public PlayerControllerImpl() {
 		this.life=new Life();
@@ -26,11 +27,17 @@ public class PlayerControllerImpl implements PlayerController {
 		this.gold=new Gold();
 		
 	}
+	public Gold getGold() {
+		return this.gold;
+	}
 	public Life getLife() {
 		return  this.life;
 	}
 	public Experience getExperience() {
 		return  this.experience;
+	}
+	public int getAttackPoints() {
+		return ATTACK_POINTS;
 	}
 	/**
 	 * when the player move, this function update the new position
