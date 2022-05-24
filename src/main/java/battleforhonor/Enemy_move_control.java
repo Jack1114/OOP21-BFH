@@ -93,6 +93,7 @@ public class Enemy_move_control {
 	
 	// new version // but wit some problems 
 	
+		@SuppressWarnings("unlikely-arg-type")
 		private static void checkwait(Pair<Integer, Integer> old_pos, Pair<Integer, Integer> newPos, boolean horizontal_movement) {
 			
 			if (checkenemypos(newPos)) {
@@ -101,7 +102,7 @@ public class Enemy_move_control {
 			} else if(newPos.getX()==Hero.getX() && newPos.getY()==Hero.getY()) {
 				attckHero();
 				newenemyPos = new Pair<>(old_pos.getX(),old_pos.getY());
-			} else if (Global_Generator.obstacles_pos.contains(newPos)) {
+			} else if (Global_Generator.obstacles.contains(newPos)) {
 				
 				if(!moved_diagonally && act_pt==0) {
 					    diagonalmovement(old_pos,newPos,horizontal_movement);
@@ -122,6 +123,7 @@ public class Enemy_move_control {
 			
 		}
 	
+	@SuppressWarnings("unlikely-arg-type")
 	private static void diagonalmovement(Pair<Integer, Integer> old_pos, Pair<Integer, Integer> newPos, boolean horizontal_movement) {
 	
 		Pair<Integer,Integer> p1 = new Pair<Integer,Integer>(old_pos.getX()-1,old_pos.getY()-1);
@@ -138,14 +140,14 @@ public class Enemy_move_control {
 				if(old_pos.getX()>newPos.getX()) {
 					//caso 1 e 3
 					System.out.println("caso 1 e 3 orizzontale ");
-					if(upfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()-1)) &&  !Global_Generator.obstacles_pos.contains(p1)){ //1
+					if(upfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()-1)) &&  !Global_Generator.obstacles.contains(p1)){ //1
 						System.out.println("caso 1");
 						newenemyPos = new Pair<>(old_pos.getX()-1,old_pos.getY()-1);
 						moved_diagonally=true;
 						wait=true;
 						//stop=true;
 						
-					} else if(downfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()+1))  && !Global_Generator.obstacles_pos.contains(p3)){ //3
+					} else if(downfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()+1))  && !Global_Generator.obstacles.contains(p3)){ //3
 						System.out.println("caso 3");
 						newenemyPos = new Pair<>(old_pos.getX()-1,old_pos.getY()+1);
 						moved_diagonally=true;
@@ -159,14 +161,14 @@ public class Enemy_move_control {
 				} else {
 					// caso 2 e 4
 					System.out.println("caso 2 e 4 orizzontale ");
-					if(upfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()-1))  && !Global_Generator.obstacles_pos.contains(p2)){ //2
+					if(upfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()-1))  && !Global_Generator.obstacles.contains(p2)){ //2
 						System.out.println("caso 2");
 						newenemyPos = new Pair<>(old_pos.getX()+1,old_pos.getY()-1);
 						moved_diagonally=true;
 						wait=true;
 						//stop=true;
 						
-					} else if(downfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()+1)) && !Global_Generator.obstacles_pos.contains(p4)){ //4
+					} else if(downfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()+1)) && !Global_Generator.obstacles.contains(p4)){ //4
 						System.out.println("caso 4");
 						newenemyPos = new Pair<>(old_pos.getX()+1,old_pos.getY()+1);
 						moved_diagonally=true;
@@ -183,13 +185,13 @@ public class Enemy_move_control {
 			if(old_pos.getY()>newPos.getY()) {
 						//caso 1 e 2
 						System.out.println("caso 1 e 2 verticale ");
-						if(leftfree(new Pair<Integer,Integer>(old_pos.getX()-1,old_pos.getY()))  && !Global_Generator.obstacles_pos.contains(p1)){ //1
+						if(leftfree(new Pair<Integer,Integer>(old_pos.getX()-1,old_pos.getY()))  && !Global_Generator.obstacles.contains(p1)){ //1
 							System.out.println("caso 1");
 							newenemyPos = new Pair<>(old_pos.getX()-1,old_pos.getY()-1);
 							moved_diagonally=true;
 							wait=true;
 							//stop=true;
-						} else if(rightfree(new Pair<Integer,Integer>(old_pos.getX()+1,old_pos.getY()))  && !Global_Generator.obstacles_pos.contains(p2)){ //2
+						} else if(rightfree(new Pair<Integer,Integer>(old_pos.getX()+1,old_pos.getY()))  && !Global_Generator.obstacles.contains(p2)){ //2
 							System.out.println("caso 2");
 							newenemyPos = new Pair<>(old_pos.getX()+1,old_pos.getY()-1);
 							moved_diagonally=true;
@@ -202,13 +204,13 @@ public class Enemy_move_control {
 					} else {
 						// caso 3 e 4
 						System.out.println("caso 3 e 4 verticale ");
-						if(leftfree(new Pair<Integer,Integer>(old_pos.getX()-1,old_pos.getY()))  && !Global_Generator.obstacles_pos.contains(p3)){ //3
+						if(leftfree(new Pair<Integer,Integer>(old_pos.getX()-1,old_pos.getY()))  && !Global_Generator.obstacles.contains(p3)){ //3
 							System.out.println("caso 3");
 							newenemyPos = new Pair<>(old_pos.getX()-1,old_pos.getY()+1);
 							moved_diagonally=true;
 							wait=true;
 							//stop=true;
-						} else if(rightfree(new Pair<Integer,Integer>(old_pos.getX()+1,old_pos.getY()))  && !Global_Generator.obstacles_pos.contains(p4)){ //4
+						} else if(rightfree(new Pair<Integer,Integer>(old_pos.getX()+1,old_pos.getY()))  && !Global_Generator.obstacles.contains(p4)){ //4
 							System.out.println("caso 4");
 							newenemyPos = new Pair<>(old_pos.getX()+1,old_pos.getY()+1);
 							moved_diagonally=true;
@@ -227,34 +229,37 @@ public class Enemy_move_control {
 	
 	private static boolean upfree(Pair<Integer,Integer> up) {
 		// TODO Auto-generated method stub
-		if(!checkenemypos(up) && !Global_Generator.obstacles_pos.contains(up)) {
+		if(!checkenemypos(up) && !Global_Generator.obstacles.contains(up)) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 	
+	@SuppressWarnings("unlikely-arg-type")
 	private static boolean downfree(Pair<Integer,Integer> down) {
 		// TODO Auto-generated method stub
-		if(!checkenemypos(down) && !Global_Generator.obstacles_pos.contains(down)) {
+		if(!checkenemypos(down) && !Global_Generator.obstacles.contains(down)) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 	
+	@SuppressWarnings("unlikely-arg-type")
 	private static boolean leftfree(Pair<Integer,Integer> left) {
 		// TODO Auto-generated method stub
-		if(!checkenemypos(left) && !Global_Generator.obstacles_pos.contains(left)) {
+		if(!checkenemypos(left) && !Global_Generator.obstacles.contains(left)) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 	
+	@SuppressWarnings("unlikely-arg-type")
 	private static boolean rightfree(Pair<Integer,Integer> right) {
 		// TODO Auto-generated method stub
-		if(!checkenemypos(right) && !Global_Generator.obstacles_pos.contains(right)) {
+		if(!checkenemypos(right) && !Global_Generator.obstacles.contains(right)) {
 			return true;
 		} else {
 			return false;

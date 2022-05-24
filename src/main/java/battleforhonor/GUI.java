@@ -2,6 +2,8 @@ package battleforhonor;
 import javax.swing.*;
 
 import controller.entities.Pair;
+import controller.entities.PlayerControllerImpl;
+import model.obstacles.Obstacle;
 
 import java.util.*;
 import java.util.List;
@@ -13,18 +15,19 @@ public class GUI extends JFrame {
 	
 	Map<JButton,Pair<Integer,Integer>> mapjbtopos = new HashMap<>();
 	Map<Pair<Integer,Integer>,JButton> mappostojb = new HashMap<>();
+	PlayerControllerImpl player;
 
 	
 	List<Pair<Integer, Pair<Integer, Integer>>> En_With_ID;
-	List<Pair<Integer, Integer>> Obs_Pos;
-	int HeroX = Hero.getX();
-	int HeroY = Hero.getY();
+	List<Obstacle> Obs_Pos;
+	int HeroX = player.getPlayerPosition().getX();
+	int HeroY = player.getPlayerPosition().getY();
 	
-	JButton score=new JButton("EXP = "+Hero.getCurrentEXP());
-	JButton gold=new JButton("Gold = "+Hero.GetGold());
-	JButton HP=new JButton("HP = "+Hero.GetHP()+" / "+Hero.GetMaxHP());
-	JButton ATK=new JButton("ATK = "+Hero.GetATK());
-	JButton LV=new JButton("LV = "+Hero.GetLV());
+	JButton score=new JButton("EXP = "+player.getExperience().getExpPoints());
+	JButton gold=new JButton("Gold = "+player.getGold().getGold_points() );
+	JButton HP=new JButton("HP = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
+	JButton ATK=new JButton("ATK = "+player.getAttackPoints());
+	JButton LV=new JButton("LV = "+player.getExperience().getLevel() );
 
 	
 	private static final long serialVersionUID = -6218820567019985015L;
@@ -83,11 +86,11 @@ public class GUI extends JFrame {
 		
 		//score.setText("EXP = "+Hero.getCurrentEXP());
 		
-		int HeroX = Hero.getX();
-		int HeroY = Hero.getY();
+		int HeroX = player.getPlayerPosition().getX();
+		int HeroY = player.getPlayerPosition().getY();
 		int ID=0;
 		En_With_ID = Global_Generator.enemyposwithID;
-		Obs_Pos = Global_Generator.obstacles_pos;	
+		Obs_Pos = Global_Generator.obstacles;	
 		mappostojb.forEach((pos,jb)->{
 	
 				jb.setText("X"+pos.getX()+"Y"+pos.getY());
@@ -101,7 +104,7 @@ public class GUI extends JFrame {
 				});
 				
 				Obs_Pos.forEach(obst->{
-					if(obst.getX()==pos.getX() && obst.getY()==pos.getY()){
+					if(obst.getObstaclePos().getX()==pos.getX() && obst.getObstaclePos().getY()==pos.getY()){
 						jb.setText("X");
 					}
 				});
@@ -119,11 +122,11 @@ public class GUI extends JFrame {
 
 	private void updateHeroStats() {
 		// TODO Auto-generated method stub
-		score.setText("EXP = "+Hero.getCurrentEXP());
-		gold.setText("Gold = "+Hero.GetGold());
-		HP.setText("HP = "+Hero.GetHP()+" / "+Hero.GetMaxHP());
-		ATK.setText("ATK = "+Hero.GetATK());
-		LV.setText("LV = "+Hero.GetLV());
+		score.setText("EXP = "+player.getExperience().getExpPoints());
+		gold.setText("Gold = "+player.getGold().getGold_points());
+		HP.setText("HP = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
+		ATK.setText("ATK = "+player.getAttackPoints());
+		LV.setText("LV = "+player.getExperience().getLevel());
 	}
 	
 }

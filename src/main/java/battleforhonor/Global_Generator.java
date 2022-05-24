@@ -186,6 +186,14 @@ public class Global_Generator {
 		});
 		return true;
 	}
+	public boolean checkEnemyPos(Pair<Integer, Integer> position) {
+		enemies.forEach(item -> {
+			if(item.getEnemyPos().equals(position)) {
+				boolean success = false;
+			}
+		});
+		return true;
+	}
 
 	
 	/**
@@ -220,18 +228,19 @@ public class Global_Generator {
 
 	}
 	
-	public Pair<Integer, Integer> randPosition(final int sizeArena){
+	public Pair<Integer, Integer> randPosition(final int GRID_SIZE){
 		Random r = new Random();
 		boolean success = false;
 		while(!success){
-			int x = r.nextInt(sizeArena);
-			int y = r.nextInt(sizeArena);
+			int x = r.nextInt(GRID_SIZE);
+			int y = r.nextInt(GRID_SIZE);
 			Pair<Integer,Integer> pos = new Pair<>(x,y);
 			if(checkObstaclesPos(pos) && checkPlayerPos(pos) && checkEnemyPos(pos)){
 				success = true;
 				return pos;
 			}
 		}
+		return null;
 	}
 
 }
