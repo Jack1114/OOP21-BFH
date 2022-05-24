@@ -69,6 +69,10 @@ public class Enemy {
 		return HP;
 	}
 	
+	public int GetATK() {
+		return atk;
+	}
+	
 	public int GetDEF() {
 		return def;
 	}
