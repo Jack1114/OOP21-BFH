@@ -16,6 +16,10 @@ public class Experience {
 	public void setExpPoints(int newExpPoints) {
 		this.expPoints += newExpPoints;
 	}
+	
+	public int getMaxExpPoints() {
+		return MAX_EXP_POINTS;
+	}
 
 	/**
 	 * @return player'S experience points

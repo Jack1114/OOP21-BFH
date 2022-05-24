@@ -2,12 +2,13 @@ package battleforhonor;
 import java.util.*;
 
 import controller.entities.Pair;
+import controller.entities.PlayerControllerImpl;
 
 public class Enemy {
 
 	// supponendo che lo schermo sia una griglia di 15 X 15
 	int GRID_SIZE = 15;
-	
+	PlayerControllerImpl player;
 	Pair<Integer,Integer> pos;
 	
 	int ID;
@@ -19,7 +20,7 @@ public class Enemy {
 	int def;
 	int atk;
 	int exp;
-	int HeroEXP = Hero.getCurrentMAX_EXP();
+	int HeroEXP =player.getExperience().getMaxExpPoints();
 	int Gold;
 	
 	Random rand = new Random();

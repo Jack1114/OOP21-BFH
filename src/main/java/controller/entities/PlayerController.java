@@ -10,6 +10,8 @@ public interface PlayerController {
 	
 	void setPlayerPosition(Pair<Integer,Integer> newPos);
 	
+	public Life getLife();
+	public Experience getExperience() ;
 	
 	
 	

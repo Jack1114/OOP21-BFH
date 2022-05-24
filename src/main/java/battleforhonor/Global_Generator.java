@@ -127,7 +127,7 @@ public class Global_Generator {
 	            		g.update();
 	            	break;
 					case("e"):
-						playerAttack.attack(player.getPlayerPosition());
+						playerAttack.attack();
 						//g.update();
 						break;
 					case("1"):
