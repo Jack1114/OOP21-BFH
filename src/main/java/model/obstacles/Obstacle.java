@@ -7,7 +7,7 @@ public interface Obstacle {
 
 	enum Type{
 		ROCK,
-		MUD;
+		POOL;
 	}
     /**
      *
@@ -19,5 +19,5 @@ public interface Obstacle {
      * 
      * @return obstacle's type
      */
-    public Type getObstacleTyep();
+    public Type getObstacleType();
 }

@@ -30,14 +30,13 @@ public class Global_Generator {
 
 	public static List<Integer> skipenemy= new ArrayList<>(); //contiene gli ID dei vari nemici morti 
 	
-	int NUM_ENEMIES=3;
+	int NUM_ENEMIES = 3;
 
-	private int totactions=0;
+	private int totactions = 0;
 	GUI g = new GUI(15);
 	//private int hero_actions=0;
 	
 	void generation() {
-		
 		
 		//posizione iniziale del player
 		player.setPlayerPosition(randPosition(GRID_SIZE));
@@ -69,7 +68,6 @@ public class Global_Generator {
 			
 			if(skipenemy.size()==NUM_ENEMIES) {
 				reset();
-				//TODO: da sostituire
 				player.recoverPlayer();
 				generate_enemies();
 			} 
@@ -91,8 +89,6 @@ public class Global_Generator {
 		skipenemy=new ArrayList<Integer>();
 		obstacles = new ArrayList<>(); 
 	}
-
-
 
 	private void generate_enemies() {
 		// TODO Auto-generated method stub
@@ -179,13 +175,9 @@ public class Global_Generator {
 	/**
 	 * 
 	 * @param position to check
-	 * @return 
-	 * @return 
 	 * @return true: if position is empty
 	 * false: if position has and obstacle
-	 */ 
-	 
-	 
+	 */  
 	public boolean checkObstaclesPos(Pair<Integer, Integer> position) {
 		obstacles.forEach(item -> {
 			if(item.getObstaclePos().equals(position)) {
@@ -201,7 +193,6 @@ public class Global_Generator {
 	 * @return true: if position is empty
 	 * false: if position is occupied by the player
 	 */  
-	 
 	 
 	public boolean checkPlayerPos(Pair<Integer, Integer> position) {
 		if(player.getPlayerPosition().equals(position)) {

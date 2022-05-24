@@ -20,7 +20,7 @@ public class ObstacleImpl implements Obstacle {
 	
 
 	@Override
-	public Obstacle.Type getObstacleTyep() {
+	public Obstacle.Type getObstacleType() {
 		// TODO Auto-generated method stub
 		return this.obstacleType;
 	}

@@ -18,7 +18,7 @@ public class PlayerMouvementsControllerImpl implements PlayerMouvementsControlle
 	PlayerControllerImpl player;
 	
 	public PlayerMouvementsControllerImpl(PlayerControllerImpl newPlayer) {
-	this.player=newPlayer;
+		this.player = newPlayer;
 	}
 	
 	
@@ -27,69 +27,46 @@ public class PlayerMouvementsControllerImpl implements PlayerMouvementsControlle
 	 */
 	public void left() {
 		new_player_pos=new Pair<>(player.getPlayerPosition().getX()-1,player.getPlayerPosition().getY());
-		if(check_advancement(new_player_pos))
-		player.setPlayerPosition(new_player_pos);
-
+		move(new_player_pos);
 	}
-
-	/*final JButton left= new JButton("left");
-	 left.addActionListener(e -> {
-	 public void left(Pair<Integer, Integer> player_pos);
-	}
-	*/
 
 	/**
 	 * the player move to the right
 	 */
 	public void right() {
 		new_player_pos=new Pair<>(player.getPlayerPosition().getX()+1,player.getPlayerPosition().getY());
-		if(check_advancement(new_player_pos)) {
-			player.setPlayerPosition(new_player_pos);
-		}
-		
+		move(new_player_pos);
 	}
-	/*final JButton right= new JButton("right");
-	 right.addActionListener(e -> {
-	 public void right(Pair<Integer, Integer> player_pos);
-	}
-	*/
+
 	/**
 	 * the player move to down
 	 */
 	public void down() {
 		new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY()-1);
-		if(check_advancement(new_player_pos)) {
-			player.setPlayerPosition(new_player_pos);
-		}
-		
+		move(new_player_pos);
 	}
-	/*final JButton down= new JButton("down");
-	 down.addActionListener(e -> {
-	 public void down(Pair<Integer, Integer> player_pos);
-	}
-	*/
-	
+
 	/**
 	 * the player move to up
 	 */
 	public void up() {
 		new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY()+1);
-		if(check_advancement(new_player_pos)) {
-			player.setPlayerPosition(new_player_pos);
-		}
-		
+		move(new_player_pos);
 	}
-	/*final JButton up= new JButton("left");
-	 uo.addActionListener(e -> {
-	 public void up(Pair<Integer, Integer> player_pos);
-	}
-	*/
+
 	
 	/**
 	 * the player can not mot because of an obstacle or something else
 	 */
 	public void stop() {
 		new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY());	
+	}
+	
+	
+	private void move(Pair<Integer, Integer> newPos) {
+		if(check_advancement(newPos)) {
+			player.setPlayerPosition(newPos);
+		}
 	}
 	
 	/**
@@ -102,10 +79,10 @@ public class PlayerMouvementsControllerImpl implements PlayerMouvementsControlle
 		success=true;
 		//global generator da sistemare col conflitto di obstacles e obstacles_ps
 		if(Global_Generator.obstacles.contains(new_player_pos)) {// verifico se tra la lista degli ostacoli, c'è un ostacolo dove il player vuole spostarsi
-			ObstacleImpl.Type type=Global_Generator.obstacles.getObstaclesType();
+			ObstacleImpl.Type type = Global_Generator.obstacles.getObstaclesType();
 			switch(type) {
-				case type.MUD:
-					player.palyer_action.removeAction();
+				case type.POOL:
+					player.player_action.removeAction();
 					success=true;
 				case type.ROCK:
 					success=false; 
