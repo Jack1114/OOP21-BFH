@@ -25,11 +25,10 @@ public class ObstacleGenerator {
 			addObstacle(createObstacle(randPosition(GRID_SIZE), ObstacleImpl.Type.ROCK));
 		}
 		for (int i = 0; i < NUM_FENCE_OBST; i++){
-			addObstacle(createObstacle(randPosition(GRID_SIZE), ObstacleImpl.Type.MUD));
+			addObstacle(createObstacle(randPosition(GRID_SIZE), ObstacleImpl.Type.POOL));
 		}
 	}
 	
-
 	private void addObstacle(Obstacle obstacle){
 		obstacles.add(obstacle);
 	}
@@ -37,6 +36,5 @@ public class ObstacleGenerator {
 	private Obstacle createObstacle(final Pair<Integer, Integer> pos, final ObstacleImpl.Type type){
 		return new ObstacleImpl(pos, type);
 	}
-	
 	
 }

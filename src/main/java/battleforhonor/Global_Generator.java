@@ -179,12 +179,14 @@ public class Global_Generator {
 	 * false: if position has and obstacle
 	 */  
 	public boolean checkObstaclesPos(Pair<Integer, Integer> position) {
+		boolean success = true;
 		obstacles.forEach(item -> {
 			if(item.getObstaclePos().equals(position)) {
-				boolean success = false;
+				success = false;
+				return;
 			}
 		});
-		return true;
+		return success;
 	}
 	public boolean checkEnemyPos(Pair<Integer, Integer> position) {
 		enemies.forEach(item -> {
@@ -230,17 +232,36 @@ public class Global_Generator {
 	
 	public Pair<Integer, Integer> randPosition(final int GRID_SIZE){
 		Random r = new Random();
+		Pair<Integer,Integer> pos = new Pair<>(0, 0);
 		boolean success = false;
 		while(!success){
+
 			int x = r.nextInt(GRID_SIZE);
 			int y = r.nextInt(GRID_SIZE);
-			Pair<Integer,Integer> pos = new Pair<>(x,y);
+			pos = new Pair<>(x,y);
 			if(checkObstaclesPos(pos) && checkPlayerPos(pos) && checkEnemyPos(pos)){
-				success = true;
-				return pos;
+				success = true;	
 			}
 		}
-		return null;
+		return pos;
+	}
+
+	/**
+	 * 
+	 * @param position to check
+	 * @return true: if position is empty
+	 * false: if position is occupied by the player
+	 */  
+	private boolean checkEnemyPos(Pair<Integer, Integer> pos) {
+		boolean success = true;
+		enemyposwithID.forEach(item->{
+			     if(item.getY().getX() == pos.getX() && item.getY().getX() == pos.getY()) {
+			    	 success = false;
+			    	 return;
+			     }	
+			});
+		return success;
+
 	}
 
 }
