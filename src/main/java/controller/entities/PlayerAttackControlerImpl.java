@@ -58,13 +58,14 @@ public class PlayerAttackControlerImpl implements PlayerAttackController {
 	 * 
 	 * after an attack from the enemie, the playerlost some health points
 	 */
-	/*
+	
 	public void getHit(int enemyResponseHit) { 
-		player.life.setLifePoints(player.life.getLifePoints() - enemyResponseHit); //considero che ennemy_attack e hero_attack valgono la stessa cosa= attackPoints
-		if(player.life.getLifePoints()<=0) {   //se il player non ha più vita,il gplayer muore e il turno è finito
+		player.getLife().setLifePoints(player.getLife().getLifePoints() - enemyResponseHit); //considero che ennemy_attack e hero_attack valgono la stessa cosa= attackPoints
+		if(player.getLife().getLifePoints()<=0) {   //se il player non ha più vita,il gplayer muore e il turno è finito
 			System.out.println("L'eroe è morto!");
 			System.exit(0);
 		}
-		*/
+	}
+		
 
 }

@@ -1,6 +1,8 @@
 package battleforhonor;
 
 import controller.entities.Pair;
+import controller.entities.PlayerAttackControlerImpl;
+import controller.entities.PlayerControllerImpl;
 
 public class Enemy_move_control {
 
@@ -24,7 +26,8 @@ public class Enemy_move_control {
 	private static boolean moved_diagonally=false;
 	private static boolean wait= false;
 	private static boolean previously_acted=false;
-	
+	private static  PlayerAttackControlerImpl playerAtt;
+	private static  PlayerControllerImpl player;
 	
 	public static void nextMove(Pair<Integer, Pair<Integer, Integer>> elem, int actionpt) {
 
@@ -67,7 +70,8 @@ public class Enemy_move_control {
 		var correct_enemy=Global_Generator.enemies.get(enemyID);
 		System.out.println("Dealing "+correct_enemy.atk+" Damage to HERO");
 		//System.out.println("THAT'S A LOT OF DAMAGE !!");
-		Hero.GetHit(correct_enemy.atk, enemyID);
+		playerAtt.getHit(correct_enemy.atk);
+		
 	}
 	
 	// movimento in verticale la X rimane la stessa ma la Y cambia 
@@ -75,7 +79,7 @@ public class Enemy_move_control {
 		
 		var old_pos=elem;
 		int y=elem.getY();
-		if(elem.getY()<Hero.getY()) {
+		if(elem.getY()<player.getPlayerPosition().getX()) {
 			y++;
 		}else {
 			y--;
@@ -99,7 +103,7 @@ public class Enemy_move_control {
 			if (checkenemypos(newPos)) {
 				System.out.println("NEMICO rimango fermo");
 				newenemyPos = new Pair<>(old_pos.getX(),old_pos.getY());
-			} else if(newPos.getX()==Hero.getX() && newPos.getY()==Hero.getY()) {
+			} else if(newPos.getX()==player.getPlayerPosition().getX() && newPos.getY()==player.getPlayerPosition().getY()) {
 				attckHero();
 				newenemyPos = new Pair<>(old_pos.getX(),old_pos.getY());
 			} else if (Global_Generator.obstacles.contains(newPos)) {
@@ -109,7 +113,7 @@ public class Enemy_move_control {
 					    
 					    // controllo finale per vedere se l'avanzamento in diagonale non coincide con giocatore e nemico 
 					    Global_Generator.enemyposwithID.forEach(elem->{
-					    	if( (elem.getY().getX() == newenemyPos.getX() && elem.getY().getY() == newenemyPos.getY()) || (newenemyPos.getX()==Hero.getX() && newenemyPos.getY()==Hero.getY()) ) {
+					    	if( (elem.getY().getX() == newenemyPos.getX() && elem.getY().getY() == newenemyPos.getY()) || (newenemyPos.getX()==player.getPlayerPosition().getX() && newenemyPos.getY()==player.getPlayerPosition().getY()) ) {
 					    		newenemyPos=old_pos;
 					    	}
 					    });
@@ -284,7 +288,7 @@ public class Enemy_move_control {
 	private static void move_vert(Pair<Integer, Integer> elem) {
 		var old_pos=elem;
 		int x=elem.getX();
-		if(elem.getX()<Hero.getX()) {
+		if(elem.getX()<player.getPlayerPosition().getX()) {
 			x++;
 		}else {
 			x--;
@@ -297,7 +301,7 @@ public class Enemy_move_control {
 	// calcolo delle differenze !! 
 	
 	private static void diffX(Integer enX) {
-		int diff = Math.abs(enX-Hero.getX());
+		int diff = Math.abs(enX-player.getPlayerPosition().getX());
 		setdx(diff);
 	}
 
@@ -306,7 +310,7 @@ public class Enemy_move_control {
 	}
 
 	private static void diffY(Integer enY) {
-		int diff = Math.abs(enY-Hero.getY());
+		int diff = Math.abs(enY-player.getPlayerPosition().getY());
 		setdy(diff);
 	}
 	

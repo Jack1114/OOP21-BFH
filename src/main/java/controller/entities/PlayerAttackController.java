@@ -20,5 +20,5 @@ public interface PlayerAttackController {
 	 void setAttackPoints(int newAttackPoints);
 	 
 	 void resetAttackPoints();
-	 //void getHit(int enemyResponseHit);
+	 void getHit(int enemyResponseHit);
 }
