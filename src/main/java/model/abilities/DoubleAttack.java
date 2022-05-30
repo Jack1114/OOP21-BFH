@@ -1,14 +1,14 @@
 package model.abilities;
 
-import controller.entities.PlayerAttackControlerImpl;
+import controller.entities.*;
 
 public class DoubleAttack extends Ability{
 
-	private final PlayerAttackControlerImpl playerAttack;
+	private final PlayerAttackController playerAttack;
 	private final String descr;
 
 	
-	public DoubleAttack(PlayerAttackControlerImpl playerAttack) {
+	public DoubleAttack(PlayerAttackController playerAttack) {
 		this.playerAttack = playerAttack;
 		this.descr = "Attack you enemies with double power";
 	}

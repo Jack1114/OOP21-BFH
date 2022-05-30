@@ -43,6 +43,11 @@ public class PlayerControllerImpl implements PlayerController {
 		return this.abilities;
 	}
 	
+	public Ability getAbility(final int index) {
+		//TODO: fare un check che la lista non sia vuota
+		return this.abilities.get(index);
+	}
+	
 	public Gold getGold() {
 		return this.gold;
 	}

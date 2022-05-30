@@ -21,16 +21,12 @@ public class PlayerAttackControlerImpl implements PlayerAttackController {
 		this.player=new_player;
 	}
 	
-	/** @return player's attack_points
-	 * 
-	 */
+	@Override
 	public int getAttackPoints() {
 		return attackPoints;
 	}
 
-	/**
-	 * attack beetwen the player and the enemie
-	 */
+
 	public void attack() {
 		//int responseHit;
 		Global_Generator.enemyposwithID.forEach(item->{

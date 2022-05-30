@@ -6,6 +6,7 @@ import java.util.*;
 
 import controller.entities.*;
 import model.obstacles.*;
+import model.abilities.*;
 
 // si occupa tutto lui di generare i nemici e le loro statistiche, L' eroe � statico per ora con una sola posizione fissa 
 
@@ -13,15 +14,12 @@ public class Global_Generator {
 	
 
 	public static final int GRID_SIZE=15;
-	//public static List<Pair<Integer,Integer>> enemypos = new ArrayList<>();
 						      // ID           POS
 	public static List<Pair<Integer,Pair<Integer,Integer>>> enemyposwithID = new ArrayList<>();
-	
-	//public static List<Pair<Integer,Pair<Integer,Integer>>> NEWenemyposwithID = new ArrayList<>(); // alla fine ho risolto con solo quella principale 
-	
-	//Lista degli ostacoli
+		
+	//ostacoli
 	public static List<Obstacle> obstacles = new ArrayList<>();
-	 // il player
+	 //player
 	PlayerControllerImpl player=new PlayerControllerImpl() ;
 	private final ObstacleGenerator obstacleGenerator = new ObstacleGenerator(obstacles);
 	PlayerAttackController playerAttack= new PlayerAttackControlerImpl(player);
@@ -34,12 +32,13 @@ public class Global_Generator {
 
 	private int totactions = 0;
 	GUI g = new GUI(15);
-	//private int hero_actions=0;
 	
 	void generation() {
 		
 		//posizione iniziale del player
 		player.setPlayerPosition(randPosition(GRID_SIZE));
+		player.addAbility(new ElixirOfLife(this.player));
+		player.addAbility(new DoubleAttack(this.playerAttack));
 		
 		obstacleGenerator.generateObstacles();
 		generate_enemies();
@@ -58,7 +57,6 @@ public class Global_Generator {
 		}
 		*/
 		
-
 		int turn = 0;
 		int totactions = 0;
 		
@@ -81,7 +79,6 @@ public class Global_Generator {
 		
 	}
 
-
 	private void reset() {
 		// TODO Auto-generated method stub
 		enemyposwithID = new ArrayList<>();
@@ -100,9 +97,6 @@ public class Global_Generator {
 	}
 
 	private void playerTurn() {
-		// TODO Auto-generated method stub
-		//va bene qualsiasi cosa � solo per creare dello stacco tra player e nemico 
-		//hero_actions = 0;
 		while(player.player_action.getAvailableActions() > 0) {
 			player.player_action.removeAction();
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -128,13 +122,14 @@ public class Global_Generator {
 	            	break;
 					case("e"):
 						playerAttack.attack();
-						//g.update();
+						g.update();
 						break;
 					case("1"):
-						playerAttack.attackWithAbility("1");
+						player.getAbility(0);
 						break;
 					case("2"):
-						playerAttack.attackWithAbility("2");
+						//TODO: da cambiare
+						player.getAbility(1);
 						break;
 	            	default:
 	            		playerMouvement.stop();
@@ -180,15 +175,17 @@ public class Global_Generator {
 	 */  
 	public boolean checkObstaclesPos(Pair<Integer, Integer> position) {
 		boolean success = true;
+		//sostituisci con un for
 		obstacles.forEach(item -> {
 			if(item.getObstaclePos().equals(position)) {
-				success = false;
+				if(success) {}
 				return;
 			}
 		});
 		return success;
 	}
 	public boolean checkEnemyPos(Pair<Integer, Integer> position) {
+		//sostituisci con un for
 		enemies.forEach(item -> {
 			if(item.getEnemyPos().equals(position)) {
 				boolean success = false;
@@ -243,7 +240,7 @@ public class Global_Generator {
 			if(checkObstaclesPos(pos) && checkPlayerPos(pos) && checkEnemyPos(pos)){
 				success = true;	
 			}
-
+		}
 		return pos;
 	}
 
