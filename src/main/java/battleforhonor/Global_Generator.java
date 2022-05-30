@@ -184,14 +184,28 @@ public class Global_Generator {
 		});
 		return success;
 	}
+	
+	
+	/**
+	 * 
+	 * @param position to check
+	 * @return true: if position is empty
+	 * false: if position has an enemy
+	 */  
 	public boolean checkEnemyPos(Pair<Integer, Integer> position) {
-		//sostituisci con un for
-		enemies.forEach(item -> {
-			if(item.getEnemyPos().equals(position)) {
-				boolean success = false;
-			}
-		});
-		return true;
+
+		//scorre la lista dei nemici e
+		//filtro i nemici i nemici che potrebbero essere in quella positiona
+		//ritorno un optional
+		Optional<Enemy> enemy = enemies
+				.stream()
+				.filter(e -> e.getEnemyPos().equals(position))
+				.findFirst();
+		if(enemy.isPresent()) {
+			return false;
+		}else {
+			return true;
+		}
 	}
 
 	
@@ -242,26 +256,6 @@ public class Global_Generator {
 			}
 		}
 		return pos;
-	}
-
-	/**
-	 * 
-	 * @param position to check
-	 * @return true: if position is empty
-	 * false: if position is occupied by the player
-	 */  
-	private boolean checkEnemyPos(Pair<Integer, Integer> pos) {
-		boolean success = true;
-		enemyposwithID.forEach(item->{
-			     if(item.getY().getX() == pos.getX() && item.getY().getX() == pos.getY()) {
-			    	 success = false;
-			    	 return;
-			     }	
-			});
-		return success;
-=======
-		return null;
->>>>>>> olivia_develop
 	}
 
 }

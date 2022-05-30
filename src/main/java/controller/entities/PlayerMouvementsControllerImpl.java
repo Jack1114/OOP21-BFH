@@ -3,6 +3,8 @@
  */
 package controller.entities;
 
+import java.util.Optional;
+
 import battleforhonor.Global_Generator;
 import model.obstacles.Obstacle;
 import model.obstacles.ObstacleImpl;
@@ -77,24 +79,32 @@ public class PlayerMouvementsControllerImpl implements PlayerMouvementsControlle
 	 */
 	
 	public boolean check_advancement(Pair<Integer, Integer> new_player_pos) {
+		//TODO: togliere l'if
 		if(Global_Generator.obstacles.contains(new_player_pos)) {// verifico se tra la lista degli ostacoli, c'è un ostacolo dove il player vuole spostarsi
 			//questa funzione non va bene, devo prendere il tipo di ostacolo che e' in quella posizione
-			ObstacleImpl.Type type = Global_Generator.obstacles.getObstaclesType();
-			switch(type) {
-				case POOL:
-					player.player_action.removeAction();
-					return true;
-				case ROCK:
-					return false; 
+			//filtro la lista finche' non trovo l'ostacolo in quella pos e poi gaccio getType di quell'ostacolo
+			Optional<Obstacle> type = Global_Generator.obstacles
+					.stream()
+					.filter(o -> o.getObstaclePos().equals(new_player_pos))
+					.findFirst();
+			if (type.isPresent()) {
+				switch(type.get().getObstacleType()) {
+					case POOL:
+						player.player_action.removeAction();
+						return true;
+					case ROCK:
+						return false; 
+				}
 			}
 		}
 		//controllo se nella newPos ho un nemico e nel caso lo attacco
+		//problema risolvibile con un for normale
 		Global_Generator.enemyposwithID.forEach(item->{
+			//TODO: cambiare la pos e mettere new_player
 		     if(item.getY().getX()==player.getPlayerPosition().getX() && item.getY().getX()==player.getPlayerPosition().getY())
 			 {
 			     PlayerAttackControlerImpl playerAttackControlerImpl = new PlayerAttackControlerImpl(player);
 			     playerAttackControlerImpl.attack();
-			     return false;
 			 }
 		  });
 		return true;
