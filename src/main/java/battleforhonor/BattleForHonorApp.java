@@ -5,9 +5,8 @@
 
 package battleforhonor;
 
-
-import controller.StageManager;
-
+import controller.CoreLauncher;
+import javafx.application.Application;
 
 /** Main application entry-point. */
 
@@ -15,7 +14,7 @@ public final class BattleForHonorApp {
 
 
     public static void main(final String[] args) {
-       StageManager.main(args);
+       Application.launch(CoreLauncher.class);
     }
 }
 
