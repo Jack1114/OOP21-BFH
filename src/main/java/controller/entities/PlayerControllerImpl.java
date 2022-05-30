@@ -18,11 +18,11 @@ import model.abilities.*;
 public class PlayerControllerImpl implements PlayerController {
 
 	//punti da togliere al giocatore dopo ogni hit o che può guadagnare se crea il dano al nemico
-	private Life life;
-	private Experience experience;
-	Pair<Integer,Integer> playerPosition;
-	public ActionImpl player_action;
-	private Gold gold;
+	private final Life life;
+	private final Experience experience;
+	private Pair<Integer,Integer> playerPosition;
+	private final  ActionImpl player_action;
+	private final Gold gold;
 	private final List<Ability> abilities;
 	private static final int ATTACK_POINTS = 5; 
 	
@@ -78,6 +78,10 @@ public class PlayerControllerImpl implements PlayerController {
 	public void recoverPlayer() {
 		System.out.println("Ti senti piu forte di prima e le tue ferite sono state curate !!");
 		life.resetLife();
+	}
+
+	public ActionImpl getPlayer_action() {
+		return player_action;
 	}
 
 }

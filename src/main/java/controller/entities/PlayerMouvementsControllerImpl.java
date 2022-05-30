@@ -15,9 +15,8 @@ import model.obstacles.ObstacleImpl;
  */
 public class PlayerMouvementsControllerImpl implements PlayerMouvementsController {
 
-	private boolean success;
 	private Pair<Integer,Integer> new_player_pos;
-	PlayerControllerImpl player;
+	private final PlayerControllerImpl player;
 	
 	public PlayerMouvementsControllerImpl(PlayerControllerImpl newPlayer) {
 		this.player = newPlayer;
@@ -78,6 +77,7 @@ public class PlayerMouvementsControllerImpl implements PlayerMouvementsControlle
 	 * if there is an obstacle, he check if the obstacle's type is the one that can be cross
 	 */
 	
+	@SuppressWarnings("unlikely-arg-type")
 	public boolean check_advancement(Pair<Integer, Integer> new_player_pos) {
 		//TODO: togliere l'if
 		if(Global_Generator.obstacles.contains(new_player_pos)) {// verifico se tra la lista degli ostacoli, c'è un ostacolo dove il player vuole spostarsi
@@ -90,7 +90,7 @@ public class PlayerMouvementsControllerImpl implements PlayerMouvementsControlle
 			if (type.isPresent()) {
 				switch(type.get().getObstacleType()) {
 					case POOL:
-						player.player_action.removeAction();
+						player.getPlayer_action().removeAction();
 						return true;
 					case ROCK:
 						return false; 

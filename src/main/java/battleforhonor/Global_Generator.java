@@ -264,7 +264,7 @@ public class Global_Generator {
 	 * @return true: if position is empty
 	 * false: if position is occupied by the player
 	 */  
-	private boolean checkEnemyPos(Pair<Integer, Integer> pos) {
+	/*private boolean checkEnemyPos(Pair<Integer, Integer> pos) {
 		boolean success = true;
 		enemyposwithID.forEach(item->{
 			     if(item.getY().getX() == pos.getX() && item.getY().getX() == pos.getY()) {
@@ -274,7 +274,7 @@ public class Global_Generator {
 			});
 		return success;
 
-	}
+	}*/
 
 
 }
