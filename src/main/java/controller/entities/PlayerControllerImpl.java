@@ -6,6 +6,11 @@ package controller.entities;
 import model.actions.ActionImpl;
 import model.obstacles.Obstacle.Type;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import model.abilities.*;
+
 /**
  * @author Olivia
  *
@@ -18,6 +23,7 @@ public class PlayerControllerImpl implements PlayerController {
 	Pair<Integer,Integer> playerPosition;
 	public ActionImpl player_action;
 	private Gold gold;
+	private final List<Ability> abilities;
 	private static final int ATTACK_POINTS = 5; 
 	
 	public PlayerControllerImpl() {
@@ -25,8 +31,23 @@ public class PlayerControllerImpl implements PlayerController {
 		this.experience=new Experience();
 		this.player_action=new ActionImpl();
 		this.gold=new Gold();
+		this.abilities = new ArrayList<>();
 		
 	}
+	
+	public void addAbility(final Ability newAbility) {
+		this.abilities.add(newAbility);
+	}
+	
+	public List<Ability> getAbilities(){
+		return this.abilities;
+	}
+	
+	public Ability getAbility(final int index) {
+		//TODO: fare un check che la lista non sia vuota
+		return this.abilities.get(index);
+	}
+	
 	public Gold getGold() {
 		return this.gold;
 	}
@@ -47,9 +68,9 @@ public class PlayerControllerImpl implements PlayerController {
 	}
 	
 	/**
-	 * @return playerPosition 
+	 * @return player current position
 	 */
-	public Pair<Integer,Integer> getPlayerPosition() { // invece di usare x e y separatamente
+	public Pair<Integer,Integer> getPlayerPosition() {
 		return playerPosition;
 	}
 	

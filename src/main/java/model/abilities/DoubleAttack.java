@@ -1,19 +1,27 @@
 package model.abilities;
 
-import battleforhonor.Enemy;
-import controller.entities.PlayerAttackControlerImpl;
+import controller.entities.*;
 
-public class DoubleAttack implements Ability{
+public class DoubleAttack extends Ability{
 
-	private final PlayerAttackControlerImpl playerAttack;
+	private final PlayerAttackController playerAttack;
+	private final String descr;
+
 	
-	public DoubleAttack(PlayerAttackControlerImpl playerAttack) {
+	public DoubleAttack(PlayerAttackController playerAttack) {
 		this.playerAttack = playerAttack;
+		this.descr = "Attack you enemies with double power";
 	}
-	@Override
+
+	public String getDescription() {
+		return this.descr;
+	}
+
+
 	public void apply() {
 		// TODO Auto-generated method stub
 		playerAttack.setAttackPoints(playerAttack.getAttackPoints() * 2);
 	}
 
 }
+

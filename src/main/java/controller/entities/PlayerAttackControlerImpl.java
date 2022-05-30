@@ -11,30 +11,29 @@ import battleforhonor.Global_Generator;
  */
 
 public class PlayerAttackControlerImpl implements PlayerAttackController {
+
 	private static final int DEFAULT_ATTACK_POINTS = 5; 
 	private int attackPoints = DEFAULT_ATTACK_POINTS;
+
 	PlayerControllerImpl player;
 
 	public PlayerAttackControlerImpl( PlayerControllerImpl new_player) {
 		this.player=new_player;
 	}
 	
-	/** @return player's attack_points
-	 * 
-	 */
 
 	public int getAttackPoints() {
 		return attackPoints;
 	}
 
-	/**
-	 * attack beetwen the player and the enemie
-	 */
+
+
 	public void attack() {
 		//int responseHit;
 		Global_Generator.enemyposwithID.forEach(item->{
 		if(item.getY().getX()==player.getPlayerPosition().getX() && item.getY().getY()==player.getPlayerPosition().getY());
 		  	{
+
 		  	Global_Generator.enemies.get(item.getX()).GetHit(getAttackPoints());
 		  	//mi serve nel caso un'abilita' abbia cambiato il valore di attackPoints
 		  	resetAttackPoints();

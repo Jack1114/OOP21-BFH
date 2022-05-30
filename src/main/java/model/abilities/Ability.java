@@ -1,6 +1,9 @@
 package model.abilities;
 
-public interface Ability {
+public abstract class Ability {
+	
+	
+	abstract void apply();
+	
 
-	void apply();
 }
