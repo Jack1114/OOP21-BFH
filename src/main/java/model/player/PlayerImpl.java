@@ -26,8 +26,9 @@ public class PlayerImpl implements Player {
 	private final List<Ability> abilities;
 	private static final int ATTACK_POINTS = 5; 
 	
-	public PlayerImpl() {
+	public PlayerImpl(Pair<Integer, Integer> pair) {
 		this.life=new Life();
+		this.playerPosition=pair;
 		this.experience=new Experience();
 		this.player_action=new ActionImpl();
 		this.gold=new Gold();
@@ -57,6 +58,7 @@ public class PlayerImpl implements Player {
 	public Experience getExperience() {
 		return  this.experience;
 	}
+	
 	public int getAttackPoints() {
 		return ATTACK_POINTS;
 	}
@@ -83,5 +85,6 @@ public class PlayerImpl implements Player {
 	public ActionImpl getPlayer_action() {
 		return player_action;
 	}
+	
 
 }

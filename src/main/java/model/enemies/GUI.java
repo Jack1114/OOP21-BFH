@@ -20,20 +20,25 @@ public class GUI extends JFrame {
 	
 	List<Pair<Integer, Pair<Integer, Integer>>> En_With_ID;
 	List<Obstacle> Obs_Pos;
-	int HeroX = player.getPlayerPosition().getX();
-	int HeroY = player.getPlayerPosition().getY();
-	
-	JButton score=new JButton("EXP = "+player.getExperience().getExpPoints());
-	JButton gold=new JButton("Gold = "+player.getGold().getGold_points() );
-	JButton HP=new JButton("HP = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
-	JButton ATK=new JButton("ATK = "+player.getAttackPoints());
-	JButton LV=new JButton("LV = "+player.getExperience().getLevel() );
+	JButton score=new JButton();
+	JButton gold=new JButton();
+	JButton HP=new JButton();
+	JButton ATK=new JButton();
+	JButton LV=new JButton();
 
 	
 	private static final long serialVersionUID = -6218820567019985015L;
     //private final List<JButton> cells = new ArrayList<>();
     
-    public GUI(int size) {
+    public GUI(int size, PlayerImpl player) {
+    	player.toString();	
+    	int HeroX = player.getPlayerPosition().getX();
+    	int HeroY = player.getPlayerPosition().getY();
+    	//score.setText("EXP = "+player.getExperience().getExpPoints());
+    	//gold.setText("Gold = "+player.getGold().getGold_points() );
+    	//HP.setText("HP = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
+    	ATK.setText("ATK = "+Integer.toString(player.getAttackPoints()));
+    	//LV.setText("LV = "+player.getExperience().getLevel() );
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(50*size, 50*size);
@@ -122,11 +127,11 @@ public class GUI extends JFrame {
 
 	private void updateHeroStats() {
 		// TODO Auto-generated method stub
-		score.setText("EXP = "+player.getExperience().getExpPoints());
-		gold.setText("Gold = "+player.getGold().getGold_points());
-		HP.setText("HP = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
-		ATK.setText("ATK = "+player.getAttackPoints());
-		LV.setText("LV = "+player.getExperience().getLevel());
+		//score.setText("EXP = "+player.getExperience().getExpPoints());
+		//gold.setText("Gold = "+player.getGold().getGold_points());
+		//HP.setText("HP = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
+		//ATK.setText("ATK = "+player.getAttackPoints());
+		//LV.setText("LV = "+player.getExperience().getLevel());
 	}
 	
 }

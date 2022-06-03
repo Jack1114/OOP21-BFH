@@ -20,7 +20,8 @@ public class Global_Generator {
 	//ostacoli
 	public static List<Obstacle> obstacles = new ArrayList<>();
 	 //player
-	PlayerImpl player=new PlayerImpl() ;
+	
+	PlayerImpl player=new PlayerImpl(new Pair<Integer, Integer>(0,0));
 	private final ObstacleGenerator obstacleGenerator = new ObstacleGenerator(obstacles);
 	PlayerAttack playerAttack= new PlayerAttackImpl(player);
 	PlayerMouvement playerMouvement= new PlayerMouvementsImpl(player);
@@ -31,12 +32,13 @@ public class Global_Generator {
 	int NUM_ENEMIES = 3;
 
 	private int totactions = 0;
-	GUI g = new GUI(15);
+	GUI g = new GUI(15,player);	
+	
 	
 	void generation() {
-		
+
 		//posizione iniziale del player
-		player.setPlayerPosition(randPosition(GRID_SIZE));
+	
 		player.addAbility(new ElixirOfLife(this.player));
 		player.addAbility(new DoubleAttack(this.playerAttack));
 		
