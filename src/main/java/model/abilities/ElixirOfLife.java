@@ -1,13 +1,13 @@
 package model.abilities;
 
-import controller.entities.PlayerControllerImpl;
+import model.player.PlayerImpl;
 
 public class ElixirOfLife extends Ability{
 
-	private final PlayerControllerImpl player;
+	private final PlayerImpl player;
 	private final String descr;
 	
-	public ElixirOfLife(PlayerControllerImpl player) {
+	public ElixirOfLife(PlayerImpl player) {
 		this.player = player;
 		this.descr = "Drink the Elixir of Life to get more life";
 	}

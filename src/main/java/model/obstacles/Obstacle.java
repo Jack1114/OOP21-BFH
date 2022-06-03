@@ -1,6 +1,6 @@
 package model.obstacles;
 
-import controller.entities.Pair;
+import model.player.Pair;
 
 public interface Obstacle {
 
