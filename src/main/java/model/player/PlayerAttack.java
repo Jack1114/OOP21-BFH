@@ -1,11 +1,11 @@
-package controller.entities;
+package model.player;
 
 /**
 * @author Olivia
 *
 */
 
-public interface PlayerAttackController {
+public interface PlayerAttack {
 
 	/**
 	 * attack beetwen the player and the enemie

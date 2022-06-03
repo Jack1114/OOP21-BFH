@@ -1,23 +1,23 @@
 /**
  * 
  */
-package controller.entities;
+package model.player;
 
-import battleforhonor.Global_Generator;
+import model.enemies.Global_Generator;
 
 /**
  * @author Olivia
  *
  */
 
-public class PlayerAttackControlerImpl implements PlayerAttackController {
+public class PlayerAttackImpl implements PlayerAttack {
 
 	private static final int DEFAULT_ATTACK_POINTS = 5; 
 	private int attackPoints = DEFAULT_ATTACK_POINTS;
 
-	PlayerControllerImpl player;
+	PlayerImpl player;
 
-	public PlayerAttackControlerImpl( PlayerControllerImpl new_player) {
+	public PlayerAttackImpl( PlayerImpl new_player) {
 		this.player=new_player;
 	}
 	

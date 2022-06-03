@@ -1,4 +1,4 @@
-package controller.entities;
+package model.player;
 
 public class Life {
 	private static final int MAX_LIFE_POINTS=70; //punti che il personaggio ha dalla partenza del gioco

@@ -1,4 +1,4 @@
-package controller.entities;
+package model.player;
 
 public class Gold {
 

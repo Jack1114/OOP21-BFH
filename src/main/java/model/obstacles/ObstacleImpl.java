@@ -1,7 +1,7 @@
 package model.obstacles;
 import java.util.Random;
 
-import controller.entities.Pair;
+import model.player.Pair;
 
 public class ObstacleImpl implements Obstacle {
 

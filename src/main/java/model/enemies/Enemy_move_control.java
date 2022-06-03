@@ -1,8 +1,8 @@
-package battleforhonor;
+package model.enemies;
 
-import controller.entities.Pair;
-import controller.entities.PlayerAttackControlerImpl;
-import controller.entities.PlayerControllerImpl;
+import model.player.Pair;
+import model.player.PlayerAttackImpl;
+import model.player.PlayerImpl;
 
 public class Enemy_move_control {
 
@@ -26,8 +26,8 @@ public class Enemy_move_control {
 	private static boolean moved_diagonally=false;
 	private static boolean wait= false;
 	private static boolean previously_acted=false;
-	private static  PlayerAttackControlerImpl playerAtt;
-	private static  PlayerControllerImpl player;
+	private static  PlayerAttackImpl playerAtt;
+	private static  PlayerImpl player;
 	
 	public static void nextMove(Pair<Integer, Pair<Integer, Integer>> elem, int actionpt) {
 

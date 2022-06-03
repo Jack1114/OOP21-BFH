@@ -1,9 +1,9 @@
-package battleforhonor;
+package model.enemies;
 import javax.swing.*;
 
-import controller.entities.Pair;
-import controller.entities.PlayerControllerImpl;
 import model.obstacles.Obstacle;
+import model.player.Pair;
+import model.player.PlayerImpl;
 
 import java.util.*;
 import java.util.List;
@@ -15,7 +15,7 @@ public class GUI extends JFrame {
 	
 	Map<JButton,Pair<Integer,Integer>> mapjbtopos = new HashMap<>();
 	Map<Pair<Integer,Integer>,JButton> mappostojb = new HashMap<>();
-	PlayerControllerImpl player;
+	PlayerImpl player;
 
 	
 	List<Pair<Integer, Pair<Integer, Integer>>> En_With_ID;

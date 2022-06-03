@@ -3,8 +3,8 @@ package model.obstacles;
 import java.util.List;
 import java.util.Random;
 
-import battleforhonor.Global_Generator;
-import controller.entities.Pair;
+import model.enemies.Global_Generator;
+import model.player.Pair;
 
 public class ObstacleGenerator {
 

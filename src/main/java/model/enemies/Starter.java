@@ -1,4 +1,4 @@
-package battleforhonor;
+package model.enemies;
 public class Starter {
 
 	

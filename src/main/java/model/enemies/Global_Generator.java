@@ -1,11 +1,11 @@
-package battleforhonor;
+package model.enemies;
 import java.io.BufferedReader;
 
 import java.io.InputStreamReader;
 import java.util.*;
 
-import controller.entities.*;
 import model.obstacles.*;
+import model.player.*;
 import model.abilities.*;
 
 // si occupa tutto lui di generare i nemici e le loro statistiche, L' eroe � statico per ora con una sola posizione fissa 
@@ -20,10 +20,10 @@ public class Global_Generator {
 	//ostacoli
 	public static List<Obstacle> obstacles = new ArrayList<>();
 	 //player
-	PlayerControllerImpl player=new PlayerControllerImpl() ;
+	PlayerImpl player=new PlayerImpl() ;
 	private final ObstacleGenerator obstacleGenerator = new ObstacleGenerator(obstacles);
-	PlayerAttackController playerAttack= new PlayerAttackControlerImpl(player);
-	PlayerMouvementsController playerMouvement= new PlayerMouvementsControllerImpl(player);
+	PlayerAttack playerAttack= new PlayerAttackImpl(player);
+	PlayerMouvement playerMouvement= new PlayerMouvementsImpl(player);
 	public static List<Enemy> enemies= new ArrayList<Enemy>();
 
 	public static List<Integer> skipenemy= new ArrayList<>(); //contiene gli ID dei vari nemici morti 

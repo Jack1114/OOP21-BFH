@@ -1,7 +1,7 @@
 /**
  * 
  */
-package controller.entities;
+package model.player;
 
 import model.actions.ActionImpl;
 import model.obstacles.Obstacle.Type;
@@ -15,7 +15,7 @@ import model.abilities.*;
  * @author Olivia
  *
  */
-public class PlayerControllerImpl implements PlayerController {
+public class PlayerImpl implements Player {
 
 	//punti da togliere al giocatore dopo ogni hit o che può guadagnare se crea il dano al nemico
 	private final Life life;
@@ -26,7 +26,7 @@ public class PlayerControllerImpl implements PlayerController {
 	private final List<Ability> abilities;
 	private static final int ATTACK_POINTS = 5; 
 	
-	public PlayerControllerImpl() {
+	public PlayerImpl() {
 		this.life=new Life();
 		this.experience=new Experience();
 		this.player_action=new ActionImpl();

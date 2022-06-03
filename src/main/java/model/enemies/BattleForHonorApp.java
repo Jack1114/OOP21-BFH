@@ -3,7 +3,7 @@
  */
 
 
-package battleforhonor;
+package model.enemies;
 
 import controller.CoreLauncher;
 import javafx.application.Application;

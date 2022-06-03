@@ -1,4 +1,4 @@
-package battleforhonor;
+package model.enemies;
 public abstract class Entitity {
 	
 	static int MAX_HP;

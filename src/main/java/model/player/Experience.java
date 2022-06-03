@@ -1,4 +1,4 @@
-package controller.entities;
+package model.player;
 
 public class Experience {
 	private static int MAX_EXP_POINTS=0;

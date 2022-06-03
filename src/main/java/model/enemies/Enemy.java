@@ -1,14 +1,14 @@
-package battleforhonor;
+package model.enemies;
 import java.util.*;
 
-import controller.entities.Pair;
-import controller.entities.PlayerControllerImpl;
+import model.player.Pair;
+import model.player.PlayerImpl;
 
 public class Enemy {
 
 	// supponendo che lo schermo sia una griglia di 15 X 15
 	int GRID_SIZE = 15;
-	PlayerControllerImpl player;
+	PlayerImpl player;
 	Pair<Integer,Integer> pos;
 	
 	int ID;

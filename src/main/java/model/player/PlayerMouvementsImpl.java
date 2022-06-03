@@ -1,11 +1,11 @@
 /**
  * 
  */
-package controller.entities;
+package model.player;
 
 import java.util.Optional;
 
-import battleforhonor.Global_Generator;
+import model.enemies.Global_Generator;
 import model.obstacles.Obstacle;
 import model.obstacles.ObstacleImpl;
 
@@ -13,12 +13,12 @@ import model.obstacles.ObstacleImpl;
  * @author Olivia
  *
  */
-public class PlayerMouvementsControllerImpl implements PlayerMouvementsController {
+public class PlayerMouvementsImpl implements PlayerMouvement {
 
 	private Pair<Integer,Integer> new_player_pos;
-	private final PlayerControllerImpl player;
+	private final PlayerImpl player;
 	
-	public PlayerMouvementsControllerImpl(PlayerControllerImpl newPlayer) {
+	public PlayerMouvementsImpl(PlayerImpl newPlayer) {
 		this.player = newPlayer;
 	}
 	
@@ -103,8 +103,8 @@ public class PlayerMouvementsControllerImpl implements PlayerMouvementsControlle
 			//TODO: cambiare la pos e mettere new_player
 		     if(item.getY().getX()==player.getPlayerPosition().getX() && item.getY().getX()==player.getPlayerPosition().getY())
 			 {
-			     PlayerAttackControlerImpl playerAttackControlerImpl = new PlayerAttackControlerImpl(player);
-			     playerAttackControlerImpl.attack();
+			     PlayerAttackImpl playerAttackImpl = new PlayerAttackImpl(player);
+			     playerAttackImpl.attack();
 			 }
 		  });
 		return true;

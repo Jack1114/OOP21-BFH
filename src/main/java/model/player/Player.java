@@ -1,4 +1,4 @@
-package controller.entities;
+package model.player;
 
 import model.actions.ActionImpl;
 
@@ -6,7 +6,7 @@ import model.actions.ActionImpl;
  * @author Olivia
  *
  */
-public interface PlayerController {
+public interface Player {
 	
 	public Pair<Integer,Integer> getPlayerPosition();
 	public int getAttackPoints();

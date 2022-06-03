@@ -1,13 +1,13 @@
 /**
  * 
  */
-package controller.entities;
+package model.player;
 
 /**
  * @author Olivia
  *
  */
-public interface PlayerMouvementsController {
+public interface PlayerMouvement {
 	void left();
 	
 	void right();
