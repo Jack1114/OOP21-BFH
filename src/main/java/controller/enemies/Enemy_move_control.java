@@ -1,6 +1,7 @@
 package controller.enemies;
 
 import controller.globalGenerator.Global_Generator;
+import controller.player.PlayerAttack;
 import controller.player.PlayerAttackImpl;
 import model.enemies.Enemy;
 import model.player.Pair;
@@ -28,9 +29,11 @@ public class Enemy_move_control {
 	private static boolean moved_diagonally=false;
 	private static boolean wait= false;
 	private static boolean previously_acted=false;
-	private static  PlayerAttackImpl playerAtt;
-	private static  PlayerImpl player;
+
+
 	private static Global_Generator gg = Global_Generator.getInstance();
+	private static PlayerImpl player = gg.player;
+	private static PlayerAttack playerAtt = gg.playerAttack;
 	
 	public static void nextMove(Pair<Integer, Pair<Integer, Integer>> elem, int actionpt) {
 

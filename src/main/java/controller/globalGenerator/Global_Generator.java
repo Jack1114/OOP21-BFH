@@ -28,8 +28,8 @@ public class Global_Generator {
 	public List<Obstacle> obstacles = new ArrayList<>();
 	//player
 	public PlayerImpl player;
-	PlayerAttack playerAttack;
-	PlayerMouvement playerMouvement;
+	public PlayerAttack playerAttack;
+	public PlayerMouvement playerMouvement;
 	//nemici
 	public List<Enemy> enemies;
 	//id dei nemici morti
@@ -69,17 +69,6 @@ public class Global_Generator {
 
 		g.update();
 		System.out.println("Genarated obstacles, enemies and player");
-		/*   //stampa per vedere le statistiche pseudo-randomiche [ ok ]
-		
-		for(int i=0;i<NUM_ENEMIES;i++) {
-			var elem=enemyposwithID.get(i);
-			System.out.println("----------[ "+i+" ]-----------");
-			System.out.println("pos x = "+elem.getX()+" pos y = "+elem.getY());
-			
-			var elem2=enemies.get(i);
-			System.out.println(elem2.toString());
-		}
-		*/
 		
 		int turn = 0;
 		int totactions = 0;
@@ -133,33 +122,39 @@ public class Global_Generator {
 	            	case("w"):
 	            		playerMouvement.up();
 	            		g.update();
-	            		System.out.println("Enter Input : w=UP");
+	            		System.out.println("Move UP");
 	            	break;
 	            	case("s"):
 	            		playerMouvement.down();
 	            		g.update();
-	            		System.out.println("Enter Input : s=DOWN");
+	            		System.out.println("Move DOWN");
 	            	break;
 	            	case("a"):
 	            		playerMouvement.left();
 	            		g.update();
-	            		System.out.println("Enter Input : a=LEFT");
+	            		System.out.println("Move LEFT");
 	            	break;
 	            	case("d"):
 	            		playerMouvement.right();
 	            		g.update();
-	            		System.out.println("Enter Input : d=RIGHT");
+	            		System.out.println("Move RIGHT");
 	            	break;
 					case("e"):
 						playerAttack.attack();
+            			System.out.println("Attack...");
+
 						g.update();
 						break;
 					case("1"):
 						player.getAbility(0);
+        				System.out.println("Use ability");
+
 						break;
 					case("2"):
 						//TODO: da cambiare
 						player.getAbility(1);
+    					System.out.println("Use ability");
+
 						break;
 	            	default:
 	            		playerMouvement.stop();
@@ -169,13 +164,9 @@ public class Global_Generator {
 	            	
 	            //System.out.println(s);
 			}catch(Exception e) {
-        		System.out.println("dentro exception");
-
 	            System.out.println(e);
 	        }
 		}
-		System.out.println("alla fine");
-
 		player.getPlayer_action().resetActions();
 	}
 

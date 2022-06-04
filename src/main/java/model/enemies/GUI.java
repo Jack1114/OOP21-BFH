@@ -37,11 +37,11 @@ public class GUI extends JFrame {
     	player.toString();	
     	int HeroX = player.getPlayerPosition().getX();
     	int HeroY = player.getPlayerPosition().getY();
-    	score.setText("EXP = "+player.getExperience().getExpPoints());
+    	score.setText("Experience = "+player.getExperience().getExpPoints());
     	gold.setText("Gold = "+player.getGold().getGold_points() );
-    	HP.setText("HP = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
-    	ATK.setText("ATK = "+Integer.toString(player.getAttackPoints()));
-    	LV.setText("LV = "+player.getExperience().getLevel() );
+    	HP.setText("Life = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
+    	ATK.setText("Attack Points = "+Integer.toString(player.getAttackPoints()));
+    	LV.setText("Level = "+player.getExperience().getLevel() );
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(50*size, 50*size);
@@ -91,9 +91,7 @@ public class GUI extends JFrame {
 		//System.out.println("entro dentro update");
 
 		updateHeroStats();
-		
-		score.setText("EXP = "+ player.getExperience().getExpPoints());
-		
+				
 		int HeroX = player.getPlayerPosition().getX();
 		int HeroY = player.getPlayerPosition().getY();
 		int ID=0;
@@ -114,7 +112,14 @@ public class GUI extends JFrame {
 				//non ho capito cosa fa qui
 				obstacles.forEach(obst->{
 					if(obst.getObstaclePos().getX()==pos.getX() && obst.getObstaclePos().getY()==pos.getY()){
-						jb.setText("X");
+						if(obst.getObstacleType().equals(Obstacle.Type.POOL)) {
+							jb.setText("O");
+
+						}
+						if(obst.getObstacleType().equals(Obstacle.Type.ROCK)) {
+							jb.setText("R");
+
+						}
 					}
 				});
 				
@@ -130,12 +135,11 @@ public class GUI extends JFrame {
 
 
 	private void updateHeroStats() {
-		// TODO Auto-generated method stub
-		score.setText("EXP = "+player.getExperience().getExpPoints());
-		gold.setText("Gold = "+player.getGold().getGold_points());
-		HP.setText("HP = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
-		ATK.setText("ATK = "+player.getAttackPoints());
-		LV.setText("LV = "+player.getExperience().getLevel());
+    	score.setText("Experience = " + player.getExperience().getExpPoints());
+    	gold.setText("Gold = " + player.getGold().getGold_points() );
+    	HP.setText("Life = " + player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
+    	ATK.setText("Attack Points = " + Integer.toString(player.getAttackPoints()));
+    	LV.setText("Level = " + player.getExperience().getLevel() );
 	}
 	
 }
