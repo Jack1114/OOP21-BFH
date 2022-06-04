@@ -37,11 +37,11 @@ public class GUI extends JFrame {
     	player.toString();	
     	int HeroX = player.getPlayerPosition().getX();
     	int HeroY = player.getPlayerPosition().getY();
-    	//score.setText("EXP = "+player.getExperience().getExpPoints());
-    	//gold.setText("Gold = "+player.getGold().getGold_points() );
-    	//HP.setText("HP = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
+    	score.setText("EXP = "+player.getExperience().getExpPoints());
+    	gold.setText("Gold = "+player.getGold().getGold_points() );
+    	HP.setText("HP = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
     	ATK.setText("ATK = "+Integer.toString(player.getAttackPoints()));
-    	//LV.setText("LV = "+player.getExperience().getLevel() );
+    	LV.setText("LV = "+player.getExperience().getLevel() );
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(50*size, 50*size);
@@ -132,11 +132,11 @@ public class GUI extends JFrame {
 
 	private void updateHeroStats() {
 		// TODO Auto-generated method stub
-		//score.setText("EXP = "+player.getExperience().getExpPoints());
-		//gold.setText("Gold = "+player.getGold().getGold_points());
-		//HP.setText("HP = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
-		//ATK.setText("ATK = "+player.getAttackPoints());
-		//LV.setText("LV = "+player.getExperience().getLevel());
+		score.setText("EXP = "+player.getExperience().getExpPoints());
+		gold.setText("Gold = "+player.getGold().getGold_points());
+		HP.setText("HP = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
+		ATK.setText("ATK = "+player.getAttackPoints());
+		LV.setText("LV = "+player.getExperience().getLevel());
 	}
 	
 }
