@@ -5,7 +5,6 @@ import controller.globalGenerator.Global_Generator;
 import controller.obstacles.Obstacle;
 import model.player.Pair;
 import model.player.Player;
-import model.player.PlayerImpl;
 
 import java.util.*;
 import java.util.List;
@@ -40,11 +39,7 @@ public class GUI extends JFrame {
     	int HeroY = player.getPlayerPosition().getY();
     	score.setText("Experience = "+player.getExperience().getExpPoints());
     	gold.setText("Gold = "+player.getGold().getGold_points() );
-    	HP.setText("HP = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
-    	ATK.setText("ATK = "+Integer.toString(player.getAttackPoints()));
-    	LV.setText("LV = "+player.getExperience().getLevel() );
-    	Action.setText("Action = "+player.getPlayer_action().getMaxActions());
-
+    	Action.setText("Actions = "+player.getPlayer_action().getAvailableActions());
     	HP.setText("Life = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
     	ATK.setText("Attack Points = "+Integer.toString(player.getAttackPoints()));
     	LV.setText("Level = "+player.getExperience().getLevel() );
@@ -143,20 +138,13 @@ public class GUI extends JFrame {
 
 
 	private void updateHeroStats() {
-
-		// TODO Auto-generated method stub
-		score.setText("EXP = "+player.getExperience().getExpPoints());
-		gold.setText("Gold = "+player.getGold().getGold_points());
-		HP.setText("HP = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
-		ATK.setText("ATK = "+player.getAttackPoints());
-		LV.setText("LV = "+player.getExperience().getLevel());
-		Action.setText("Action = "+player.getPlayer_action().getMaxActions());
-
     	score.setText("Experience = " + player.getExperience().getExpPoints());
     	gold.setText("Gold = " + player.getGold().getGold_points() );
     	HP.setText("Life = " + player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
     	ATK.setText("Attack Points = " + Integer.toString(player.getAttackPoints()));
     	LV.setText("Level = " + player.getExperience().getLevel() );
+    	Action.setText("Actions = "+player.getPlayer_action().getAvailableActions());
+
 
 	}
 	
