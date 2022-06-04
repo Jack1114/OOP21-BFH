@@ -38,12 +38,18 @@ public class GUI extends JFrame {
     	player.toString();	
     	int HeroX = player.getPlayerPosition().getX();
     	int HeroY = player.getPlayerPosition().getY();
-    	score.setText("EXP = "+player.getExperience().getExpPoints());
+    	score.setText("Experience = "+player.getExperience().getExpPoints());
     	gold.setText("Gold = "+player.getGold().getGold_points() );
     	HP.setText("HP = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
     	ATK.setText("ATK = "+Integer.toString(player.getAttackPoints()));
     	LV.setText("LV = "+player.getExperience().getLevel() );
     	Action.setText("Action = "+player.getPlayer_action().getMaxActions());
+
+    	HP.setText("Life = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
+    	ATK.setText("Attack Points = "+Integer.toString(player.getAttackPoints()));
+    	LV.setText("Level = "+player.getExperience().getLevel() );
+
+
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(50*size, 50*size);
         
@@ -93,14 +99,11 @@ public class GUI extends JFrame {
 		//System.out.println("entro dentro update");
 
 		updateHeroStats();
-		
-		//score.setText("EXP = "+Hero.getCurrentEXP());
-		
+				
 		int HeroX = player.getPlayerPosition().getX();
 		int HeroY = player.getPlayerPosition().getY();
 		int ID=0;
 		En_With_ID = gg.getInstance().enemyposwithID;
-		//TODO: da correggere
 		obstacles = gg.getInstance().obstacles;	
 		mappostojb.forEach((pos,jb)->{
 	
@@ -117,7 +120,14 @@ public class GUI extends JFrame {
 				//non ho capito cosa fa qui
 				obstacles.forEach(obst->{
 					if(obst.getObstaclePos().getX()==pos.getX() && obst.getObstaclePos().getY()==pos.getY()){
-						jb.setText("X");
+						if(obst.getObstacleType().equals(Obstacle.Type.POOL)) {
+							jb.setText("O");
+
+						}
+						if(obst.getObstacleType().equals(Obstacle.Type.ROCK)) {
+							jb.setText("R");
+
+						}
 					}
 				});
 				
@@ -133,6 +143,7 @@ public class GUI extends JFrame {
 
 
 	private void updateHeroStats() {
+
 		// TODO Auto-generated method stub
 		score.setText("EXP = "+player.getExperience().getExpPoints());
 		gold.setText("Gold = "+player.getGold().getGold_points());
@@ -140,6 +151,13 @@ public class GUI extends JFrame {
 		ATK.setText("ATK = "+player.getAttackPoints());
 		LV.setText("LV = "+player.getExperience().getLevel());
 		Action.setText("Action = "+player.getPlayer_action().getMaxActions());
+
+    	score.setText("Experience = " + player.getExperience().getExpPoints());
+    	gold.setText("Gold = " + player.getGold().getGold_points() );
+    	HP.setText("Life = " + player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
+    	ATK.setText("Attack Points = " + Integer.toString(player.getAttackPoints()));
+    	LV.setText("Level = " + player.getExperience().getLevel() );
+
 	}
 	
 }

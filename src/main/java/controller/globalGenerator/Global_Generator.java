@@ -1,6 +1,6 @@
 package controller.globalGenerator;
 import java.io.BufferedReader;
-
+import java.util.Scanner;
 import java.io.InputStreamReader;
 import java.util.*;
 
@@ -28,8 +28,8 @@ public class Global_Generator {
 	public List<Obstacle> obstacles = new ArrayList<>();
 	//player
 	public PlayerImpl player;
-	PlayerAttack playerAttack;
-	PlayerMouvement playerMouvement;
+	public PlayerAttack playerAttack;
+	public PlayerMouvement playerMouvement;
 	//nemici
 	public List<Enemy> enemies;
 	//id dei nemici morti
@@ -53,9 +53,10 @@ public class Global_Generator {
 	public void generation() {
 
 		final ObstacleGenerator obstacleGenerator = new ObstacleGenerator(obstacles);
+
 		
 		this.player=new PlayerImpl(rand_pos_player(GRID_SIZE));
-		
+
 		this.playerAttack= new PlayerAttackImpl(player);
 		this.playerMouvement= new PlayerMouvementsImpl(player);
 		this.enemies= new ArrayList<Enemy>();
@@ -70,17 +71,6 @@ public class Global_Generator {
 
 		g.update();
 		System.out.println("Genarated obstacles, enemies and player");
-		/*   //stampa per vedere le statistiche pseudo-randomiche [ ok ]
-		
-		for(int i=0;i<NUM_ENEMIES;i++) {
-			var elem=enemyposwithID.get(i);
-			System.out.println("----------[ "+i+" ]-----------");
-			System.out.println("pos x = "+elem.getX()+" pos y = "+elem.getY());
-			
-			var elem2=enemies.get(i);
-			System.out.println(elem2.toString());
-		}
-		*/
 		
 		int turn = 0;
 		int totactions = 0;
@@ -103,6 +93,7 @@ public class Global_Generator {
 		}
 		
 	}
+	
 
 	private void reset() {
 		// TODO Auto-generated method stub
@@ -124,37 +115,48 @@ public class Global_Generator {
 	private void playerTurn() {
 		while(player.getPlayer_action().getAvailableActions() > 0) {
 			player.getPlayer_action().removeAction();
-			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	        System.out.println("Enter Input : w=UP // s=DOWN // a=LEFT // d=RIGHT ");
+        	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	        try {
 	            String s = br.readLine();
+
 	            switch(s) {
 	            	case("w"):
 	            		playerMouvement.up();
 	            		g.update();
+	            		System.out.println("Move UP");
 	            	break;
 	            	case("s"):
 	            		playerMouvement.down();
 	            		g.update();
+	            		System.out.println("Move DOWN");
 	            	break;
 	            	case("a"):
 	            		playerMouvement.left();
 	            		g.update();
+	            		System.out.println("Move LEFT");
 	            	break;
 	            	case("d"):
 	            		playerMouvement.right();
 	            		g.update();
+	            		System.out.println("Move RIGHT");
 	            	break;
 					case("e"):
 						playerAttack.attack();
+            			System.out.println("Attack...");
+
 						g.update();
 						break;
 					case("1"):
 						player.getAbility(0);
+        				System.out.println("Use ability");
+
 						break;
 					case("2"):
 						//TODO: da cambiare
 						player.getAbility(1);
+    					System.out.println("Use ability");
+
 						break;
 	            	default:
 	            		playerMouvement.stop();

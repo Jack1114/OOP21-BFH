@@ -11,7 +11,7 @@ public class DoubleAttack extends Ability{
 	
 	public DoubleAttack(PlayerAttack playerAttack) {
 		this.playerAttack = playerAttack;
-		this.descr = "Attack you enemies with double power";
+		this.descr = "Attack your enemies with double power";
 	}
 
 	public String getDescription() {
