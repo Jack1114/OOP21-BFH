@@ -25,7 +25,6 @@ public class GUI extends JFrame {
 	JButton score=new JButton();
 	JButton gold=new JButton();
 	JButton HP=new JButton();
-	JButton ATK=new JButton();
 	JButton LV=new JButton();
 	JButton Action=new JButton();
 
@@ -41,12 +40,10 @@ public class GUI extends JFrame {
     	score.setText("Experience = "+player.getExperience().getExpPoints());
     	gold.setText("Gold = "+player.getGold().getGold_points() );
     	HP.setText("HP = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
-    	ATK.setText("ATK = "+Integer.toString(player.getAttackPoints()));
     	LV.setText("LV = "+player.getExperience().getLevel() );
     	Action.setText("Action = "+player.getPlayer_action().getMaxActions());
 
     	HP.setText("Life = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
-    	ATK.setText("Attack Points = "+Integer.toString(player.getAttackPoints()));
     	LV.setText("Level = "+player.getExperience().getLevel() );
 
 
@@ -61,7 +58,6 @@ public class GUI extends JFrame {
 		JPanel Hero_Stats = new JPanel(new GridLayout(6,1));
 		
 		Hero_Stats.add(HP);
-		Hero_Stats.add(ATK);
 		Hero_Stats.add(LV);
 		Hero_Stats.add(gold);
 		Hero_Stats.add(score);
@@ -117,11 +113,11 @@ public class GUI extends JFrame {
 					}
 				});
 				
-				//non ho capito cosa fa qui
+				
 				obstacles.forEach(obst->{
 					if(obst.getObstaclePos().getX()==pos.getX() && obst.getObstaclePos().getY()==pos.getY()){
 						if(obst.getObstacleType().equals(Obstacle.Type.POOL)) {
-							jb.setText("O");
+							jb.setText("P");
 
 						}
 						if(obst.getObstacleType().equals(Obstacle.Type.ROCK)) {
@@ -148,14 +144,12 @@ public class GUI extends JFrame {
 		score.setText("EXP = "+player.getExperience().getExpPoints());
 		gold.setText("Gold = "+player.getGold().getGold_points());
 		HP.setText("HP = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
-		ATK.setText("ATK = "+player.getAttackPoints());
 		LV.setText("LV = "+player.getExperience().getLevel());
 		Action.setText("Action = "+player.getPlayer_action().getMaxActions());
 
     	score.setText("Experience = " + player.getExperience().getExpPoints());
     	gold.setText("Gold = " + player.getGold().getGold_points() );
     	HP.setText("Life = " + player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
-    	ATK.setText("Attack Points = " + Integer.toString(player.getAttackPoints()));
     	LV.setText("Level = " + player.getExperience().getLevel() );
 
 	}
