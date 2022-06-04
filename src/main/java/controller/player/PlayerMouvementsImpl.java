@@ -46,7 +46,7 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 	 * the player move to down
 	 */
 	public void down() {
-		new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY()-1);
+		new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY()+1);
 		move(new_player_pos);
 	}
 
@@ -54,7 +54,7 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 	 * the player move to up
 	 */
 	public void up() {
-		new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY()+1);
+		new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY()-1);
 		move(new_player_pos);
 	}
 
