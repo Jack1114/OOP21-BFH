@@ -119,22 +119,28 @@ public class Global_Generator {
 	        System.out.println("Enter Input : w=UP // s=DOWN // a=LEFT // d=RIGHT ");
 	        try {
 	            String s = br.readLine();
+        		System.out.println("Prova");
+
 	            switch(s) {
 	            	case("w"):
 	            		playerMouvement.up();
 	            		g.update();
+	            		System.out.println("Enter Input : w=UP");
 	            	break;
 	            	case("s"):
 	            		playerMouvement.down();
 	            		g.update();
+	            		System.out.println("Enter Input : s=DOWN");
 	            	break;
 	            	case("a"):
 	            		playerMouvement.left();
 	            		g.update();
+	            		System.out.println("Enter Input : a=LEFT");
 	            	break;
 	            	case("d"):
 	            		playerMouvement.right();
 	            		g.update();
+	            		System.out.println("Enter Input : d=RIGHT");
 	            	break;
 					case("e"):
 						playerAttack.attack();

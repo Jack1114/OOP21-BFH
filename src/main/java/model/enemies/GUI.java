@@ -36,11 +36,11 @@ public class GUI extends JFrame {
     	player.toString();	
     	int HeroX = player.getPlayerPosition().getX();
     	int HeroY = player.getPlayerPosition().getY();
-    	//score.setText("EXP = "+player.getExperience().getExpPoints());
+    	score.setText("EXP = "+player.getExperience().getExpPoints());
     	//gold.setText("Gold = "+player.getGold().getGold_points() );
-    	//HP.setText("HP = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
+    	HP.setText("HP = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
     	ATK.setText("ATK = "+Integer.toString(player.getAttackPoints()));
-    	//LV.setText("LV = "+player.getExperience().getLevel() );
+    	LV.setText("LV = "+player.getExperience().getLevel() );
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(50*size, 50*size);
@@ -91,13 +91,12 @@ public class GUI extends JFrame {
 
 		updateHeroStats();
 		
-		//score.setText("EXP = "+Hero.getCurrentEXP());
+		score.setText("EXP = "+ player.getExperience().getExpPoints());
 		
 		int HeroX = player.getPlayerPosition().getX();
 		int HeroY = player.getPlayerPosition().getY();
 		int ID=0;
 		En_With_ID = gg.getInstance().enemyposwithID;
-		//TODO: da correggere
 		obstacles = gg.getInstance().obstacles;	
 		mappostojb.forEach((pos,jb)->{
 	
