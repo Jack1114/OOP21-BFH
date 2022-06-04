@@ -14,6 +14,9 @@ public class ActionImpl implements Action{
 	public void setActions(int actions) {
 		this.actions = actions;
 	}
+	public int getMaxActions() {
+		return DEFAULT_N_OF_ACTIONS;
+	}
 
 	@Override
 	public int getAvailableActions() {

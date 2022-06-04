@@ -27,6 +27,7 @@ public class GUI extends JFrame {
 	JButton HP=new JButton();
 	JButton ATK=new JButton();
 	JButton LV=new JButton();
+	JButton Action=new JButton();
 
 	
 	private static final long serialVersionUID = -6218820567019985015L;
@@ -42,7 +43,7 @@ public class GUI extends JFrame {
     	HP.setText("HP = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
     	ATK.setText("ATK = "+Integer.toString(player.getAttackPoints()));
     	LV.setText("LV = "+player.getExperience().getLevel() );
-
+    	Action.setText("Action = "+player.getPlayer_action().getMaxActions());
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(50*size, 50*size);
         
@@ -51,13 +52,14 @@ public class GUI extends JFrame {
         
 		this.getContentPane().add(panel, BorderLayout.CENTER);
 		
-		JPanel Hero_Stats = new JPanel(new GridLayout(5,1));
+		JPanel Hero_Stats = new JPanel(new GridLayout(6,1));
 		
 		Hero_Stats.add(HP);
 		Hero_Stats.add(ATK);
 		Hero_Stats.add(LV);
 		Hero_Stats.add(gold);
 		Hero_Stats.add(score);
+		Hero_Stats.add(Action);
 		
 		
 		this.getContentPane().add(Hero_Stats, BorderLayout.NORTH);
@@ -137,6 +139,7 @@ public class GUI extends JFrame {
 		HP.setText("HP = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
 		ATK.setText("ATK = "+player.getAttackPoints());
 		LV.setText("LV = "+player.getExperience().getLevel());
+		Action.setText("Action = "+player.getPlayer_action().getMaxActions());
 	}
 	
 }

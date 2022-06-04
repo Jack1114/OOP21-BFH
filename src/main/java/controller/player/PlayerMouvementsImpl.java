@@ -100,6 +100,11 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 				}
 			}
 		}
+		// controllo se va fuori dai bordi schermo
+		if( (player.getPlayerPosition().getX()<0 || player.getPlayerPosition().getX()>gg.GRID_SIZE-1) || (player.getPlayerPosition().getY()<0 || player.getPlayerPosition().getY()>gg.GRID_SIZE-1) ){
+			System.out.println("vado fuori dai bordi !!!!!!!");
+			return false;
+		}
 		//controllo se nella newPos ho un nemico e nel caso lo attacco
 		//problema risolvibile con un for normale
 		gg.enemyposwithID.forEach(item->{
