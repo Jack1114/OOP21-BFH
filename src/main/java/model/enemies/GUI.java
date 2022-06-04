@@ -130,11 +130,11 @@ public class GUI extends JFrame {
 
 	private void updateHeroStats() {
 		// TODO Auto-generated method stub
-		//score.setText("EXP = "+player.getExperience().getExpPoints());
+		score.setText("EXP = "+player.getExperience().getExpPoints());
 		//gold.setText("Gold = "+player.getGold().getGold_points());
-		//HP.setText("HP = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
-		//ATK.setText("ATK = "+player.getAttackPoints());
-		//LV.setText("LV = "+player.getExperience().getLevel());
+		HP.setText("HP = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
+		ATK.setText("ATK = "+player.getAttackPoints());
+		LV.setText("LV = "+player.getExperience().getLevel());
 	}
 	
 }

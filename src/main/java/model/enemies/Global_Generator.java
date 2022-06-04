@@ -1,6 +1,6 @@
 package model.enemies;
 import java.io.BufferedReader;
-
+import java.util.Scanner;
 import java.io.InputStreamReader;
 import java.util.*;
 
@@ -44,7 +44,7 @@ public class Global_Generator {
 	void generation() {
 
 		final ObstacleGenerator obstacleGenerator = new ObstacleGenerator(obstacles);
-		
+
 		this.player=new PlayerImpl(new Pair<Integer, Integer>(0,0));
 		this.playerAttack= new PlayerAttackImpl(player);
 		this.playerMouvement= new PlayerMouvementsImpl(player);
@@ -94,6 +94,7 @@ public class Global_Generator {
 		}
 		
 	}
+	
 
 	private void reset() {
 		// TODO Auto-generated method stub
@@ -115,11 +116,10 @@ public class Global_Generator {
 	private void playerTurn() {
 		while(player.getPlayer_action().getAvailableActions() > 0) {
 			player.getPlayer_action().removeAction();
-			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	        System.out.println("Enter Input : w=UP // s=DOWN // a=LEFT // d=RIGHT ");
+        	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	        try {
 	            String s = br.readLine();
-        		System.out.println("Prova");
 
 	            switch(s) {
 	            	case("w"):
@@ -161,9 +161,13 @@ public class Global_Generator {
 	            	
 	            //System.out.println(s);
 			}catch(Exception e) {
+        		System.out.println("dentro exception");
+
 	            System.out.println(e);
 	        }
 		}
+		System.out.println("alla fine");
+
 		player.getPlayer_action().resetActions();
 	}
 
