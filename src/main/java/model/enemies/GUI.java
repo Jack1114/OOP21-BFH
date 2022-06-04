@@ -139,7 +139,6 @@ public class GUI extends JFrame {
 
 
 	private void updateHeroStats() {
-<<<<<<< HEAD
 
 		// TODO Auto-generated method stub
 		score.setText("EXP = "+player.getExperience().getExpPoints());
@@ -148,8 +147,6 @@ public class GUI extends JFrame {
 		LV.setText("LV = "+player.getExperience().getLevel());
 		Action.setText("Action = "+player.getPlayer_action().getMaxActions());
 
-=======
->>>>>>> Alicesbranch
     	score.setText("Experience = " + player.getExperience().getExpPoints());
     	gold.setText("Gold = " + player.getGold().getGold_points() );
     	HP.setText("Life = " + player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
