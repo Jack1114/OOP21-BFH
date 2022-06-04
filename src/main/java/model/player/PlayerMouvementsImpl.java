@@ -17,6 +17,7 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 
 	private Pair<Integer,Integer> new_player_pos;
 	private final PlayerImpl player;
+	private Global_Generator gg = Global_Generator.getInstance();
 	
 	public PlayerMouvementsImpl(PlayerImpl newPlayer) {
 		this.player = newPlayer;
@@ -80,10 +81,10 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 	@SuppressWarnings("unlikely-arg-type")
 	public boolean check_advancement(Pair<Integer, Integer> new_player_pos) {
 		//TODO: togliere l'if
-		if(Global_Generator.obstacles.contains(new_player_pos)) {// verifico se tra la lista degli ostacoli, c'è un ostacolo dove il player vuole spostarsi
+		if(gg.obstacles.contains(new_player_pos)) {// verifico se tra la lista degli ostacoli, c'è un ostacolo dove il player vuole spostarsi
 			//questa funzione non va bene, devo prendere il tipo di ostacolo che e' in quella posizione
 			//filtro la lista finche' non trovo l'ostacolo in quella pos e poi gaccio getType di quell'ostacolo
-			Optional<Obstacle> type = Global_Generator.obstacles
+			Optional<Obstacle> type = gg.obstacles
 					.stream()
 					.filter(o -> o.getObstaclePos().equals(new_player_pos))
 					.findFirst();
@@ -99,7 +100,7 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 		}
 		//controllo se nella newPos ho un nemico e nel caso lo attacco
 		//problema risolvibile con un for normale
-		Global_Generator.enemyposwithID.forEach(item->{
+		gg.enemyposwithID.forEach(item->{
 			//TODO: cambiare la pos e mettere new_player
 		     if(item.getY().getX()==player.getPlayerPosition().getX() && item.getY().getX()==player.getPlayerPosition().getY())
 			 {

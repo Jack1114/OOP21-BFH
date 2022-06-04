@@ -12,32 +12,46 @@ import model.abilities.*;
 
 public class Global_Generator {
 	
-
 	public static final int GRID_SIZE=15;
-						      // ID           POS
-	public static List<Pair<Integer,Pair<Integer,Integer>>> enemyposwithID = new ArrayList<>();
-		
+	public int NUM_ENEMIES = 3;
+    				// ID           POS
+	public List<Pair<Integer,Pair<Integer,Integer>>> enemyposwithID = new ArrayList<>();
 	//ostacoli
-	public static List<Obstacle> obstacles = new ArrayList<>();
-	 //player
-	
-	PlayerImpl player=new PlayerImpl(new Pair<Integer, Integer>(0,0));
-	private final ObstacleGenerator obstacleGenerator = new ObstacleGenerator(obstacles);
-	PlayerAttack playerAttack= new PlayerAttackImpl(player);
-	PlayerMouvement playerMouvement= new PlayerMouvementsImpl(player);
-	public static List<Enemy> enemies= new ArrayList<Enemy>();
+	public List<Obstacle> obstacles = new ArrayList<>();
+	//player
+	PlayerImpl player;
+	PlayerAttack playerAttack;
+	PlayerMouvement playerMouvement;
+	//nemici
+	public List<Enemy> enemies;
+	//id dei nemici morti
+	public List<Integer> skipenemy; 
+	//gui
+	GUI g;	
 
-	public static List<Integer> skipenemy= new ArrayList<>(); //contiene gli ID dei vari nemici morti 
+	private static Global_Generator instance = null;
 	
-	int NUM_ENEMIES = 3;
+	private Global_Generator() {}
+	
+	public static synchronized Global_Generator getInstance() {
+		if(instance == null) {
+			instance = new Global_Generator();
+		}
+		return instance;
+	}
 
-	private int totactions = 0;
-	GUI g = new GUI(15,player);	
-	
 	
 	void generation() {
 
-		//posizione iniziale del player
+		final ObstacleGenerator obstacleGenerator = new ObstacleGenerator(obstacles);
+		
+		this.player=new PlayerImpl(new Pair<Integer, Integer>(0,0));
+		this.playerAttack= new PlayerAttackImpl(player);
+		this.playerMouvement= new PlayerMouvementsImpl(player);
+		this.enemies= new ArrayList<Enemy>();
+
+		this.skipenemy= new ArrayList<>(); 
+		g = new GUI(15);
 	
 		player.addAbility(new ElixirOfLife(this.player));
 		player.addAbility(new DoubleAttack(this.playerAttack));
@@ -168,7 +182,7 @@ public class Global_Generator {
 			}	
 		}
 	}
-
+	
 	/**
 	 * 
 	 * @param position to check
@@ -203,6 +217,7 @@ public class Global_Generator {
 				.stream()
 				.filter(e -> e.getEnemyPos().equals(position))
 				.findFirst();
+		//correggi lo stile
 		if(enemy.isPresent()) {
 			return false;
 		}else {
@@ -224,6 +239,7 @@ public class Global_Generator {
 		}
 		return true;
 	}
+	
 	
 	@SuppressWarnings("deprecation")
 	private void advance(Pair<Integer, Pair<Integer, Integer>> item, int actionpt) {

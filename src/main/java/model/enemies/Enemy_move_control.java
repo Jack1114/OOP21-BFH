@@ -28,6 +28,7 @@ public class Enemy_move_control {
 	private static boolean previously_acted=false;
 	private static  PlayerAttackImpl playerAtt;
 	private static  PlayerImpl player;
+	private static Global_Generator gg = Global_Generator.getInstance();
 	
 	public static void nextMove(Pair<Integer, Pair<Integer, Integer>> elem, int actionpt) {
 
@@ -49,15 +50,15 @@ public class Enemy_move_control {
 			wait=false;
 			moved_diagonally=false;
 			previously_acted=false;
-			Global_Generator.enemyposwithID.set(elem.getX(), new Pair<>(elem.getX(),elem.getY()));
+			gg.enemyposwithID.set(elem.getX(), new Pair<>(elem.getX(),elem.getY()));
 		}else {
 			if(dx<dy) {
 				move_orizz(elem.getY());
-				Global_Generator.enemyposwithID.set(elem.getX(), new Pair<>(elem.getX(),newenemyPos));
+				gg.enemyposwithID.set(elem.getX(), new Pair<>(elem.getX(),newenemyPos));
 				previously_acted=true;
 			}else {
 				move_vert(elem.getY());	
-				Global_Generator.enemyposwithID.set(elem.getX(), new Pair<>(elem.getX(),newenemyPos));
+				gg.enemyposwithID.set(elem.getX(), new Pair<>(elem.getX(),newenemyPos));
 				previously_acted=true;
 			}
 		}
@@ -67,7 +68,7 @@ public class Enemy_move_control {
 
 	
 	private static void attckHero() {
-		var correct_enemy=Global_Generator.enemies.get(enemyID);
+		var correct_enemy=gg.enemies.get(enemyID);
 		System.out.println("Dealing "+correct_enemy.atk+" Damage to HERO");
 		//System.out.println("THAT'S A LOT OF DAMAGE !!");
 		playerAtt.getHit(correct_enemy.atk);
@@ -106,13 +107,13 @@ public class Enemy_move_control {
 			} else if(newPos.getX()==player.getPlayerPosition().getX() && newPos.getY()==player.getPlayerPosition().getY()) {
 				attckHero();
 				newenemyPos = new Pair<>(old_pos.getX(),old_pos.getY());
-			} else if (Global_Generator.obstacles.contains(newPos)) {
+			} else if (gg.obstacles.contains(newPos)) {
 				
 				if(!moved_diagonally && act_pt==0) {
 					    diagonalmovement(old_pos,newPos,horizontal_movement);
 					    
 					    // controllo finale per vedere se l'avanzamento in diagonale non coincide con giocatore e nemico 
-					    Global_Generator.enemyposwithID.forEach(elem->{
+					    gg.enemyposwithID.forEach(elem->{
 					    	if( (elem.getY().getX() == newenemyPos.getX() && elem.getY().getY() == newenemyPos.getY()) || (newenemyPos.getX()==player.getPlayerPosition().getX() && newenemyPos.getY()==player.getPlayerPosition().getY()) ) {
 					    		newenemyPos=old_pos;
 					    	}
@@ -144,14 +145,14 @@ public class Enemy_move_control {
 				if(old_pos.getX()>newPos.getX()) {
 					//caso 1 e 3
 					System.out.println("caso 1 e 3 orizzontale ");
-					if(upfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()-1)) &&  !Global_Generator.obstacles.contains(p1)){ //1
+					if(upfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()-1)) &&  !gg.obstacles.contains(p1)){ //1
 						System.out.println("caso 1");
 						newenemyPos = new Pair<>(old_pos.getX()-1,old_pos.getY()-1);
 						moved_diagonally=true;
 						wait=true;
 						//stop=true;
 						
-					} else if(downfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()+1))  && !Global_Generator.obstacles.contains(p3)){ //3
+					} else if(downfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()+1))  && !gg.obstacles.contains(p3)){ //3
 						System.out.println("caso 3");
 						newenemyPos = new Pair<>(old_pos.getX()-1,old_pos.getY()+1);
 						moved_diagonally=true;
@@ -165,14 +166,14 @@ public class Enemy_move_control {
 				} else {
 					// caso 2 e 4
 					System.out.println("caso 2 e 4 orizzontale ");
-					if(upfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()-1))  && !Global_Generator.obstacles.contains(p2)){ //2
+					if(upfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()-1))  && !gg.obstacles.contains(p2)){ //2
 						System.out.println("caso 2");
 						newenemyPos = new Pair<>(old_pos.getX()+1,old_pos.getY()-1);
 						moved_diagonally=true;
 						wait=true;
 						//stop=true;
 						
-					} else if(downfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()+1)) && !Global_Generator.obstacles.contains(p4)){ //4
+					} else if(downfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()+1)) && !gg.obstacles.contains(p4)){ //4
 						System.out.println("caso 4");
 						newenemyPos = new Pair<>(old_pos.getX()+1,old_pos.getY()+1);
 						moved_diagonally=true;
@@ -189,13 +190,13 @@ public class Enemy_move_control {
 			if(old_pos.getY()>newPos.getY()) {
 						//caso 1 e 2
 						System.out.println("caso 1 e 2 verticale ");
-						if(leftfree(new Pair<Integer,Integer>(old_pos.getX()-1,old_pos.getY()))  && !Global_Generator.obstacles.contains(p1)){ //1
+						if(leftfree(new Pair<Integer,Integer>(old_pos.getX()-1,old_pos.getY()))  && !gg.obstacles.contains(p1)){ //1
 							System.out.println("caso 1");
 							newenemyPos = new Pair<>(old_pos.getX()-1,old_pos.getY()-1);
 							moved_diagonally=true;
 							wait=true;
 							//stop=true;
-						} else if(rightfree(new Pair<Integer,Integer>(old_pos.getX()+1,old_pos.getY()))  && !Global_Generator.obstacles.contains(p2)){ //2
+						} else if(rightfree(new Pair<Integer,Integer>(old_pos.getX()+1,old_pos.getY()))  && !gg.obstacles.contains(p2)){ //2
 							System.out.println("caso 2");
 							newenemyPos = new Pair<>(old_pos.getX()+1,old_pos.getY()-1);
 							moved_diagonally=true;
@@ -208,13 +209,13 @@ public class Enemy_move_control {
 					} else {
 						// caso 3 e 4
 						System.out.println("caso 3 e 4 verticale ");
-						if(leftfree(new Pair<Integer,Integer>(old_pos.getX()-1,old_pos.getY()))  && !Global_Generator.obstacles.contains(p3)){ //3
+						if(leftfree(new Pair<Integer,Integer>(old_pos.getX()-1,old_pos.getY()))  && !gg.obstacles.contains(p3)){ //3
 							System.out.println("caso 3");
 							newenemyPos = new Pair<>(old_pos.getX()-1,old_pos.getY()+1);
 							moved_diagonally=true;
 							wait=true;
 							//stop=true;
-						} else if(rightfree(new Pair<Integer,Integer>(old_pos.getX()+1,old_pos.getY()))  && !Global_Generator.obstacles.contains(p4)){ //4
+						} else if(rightfree(new Pair<Integer,Integer>(old_pos.getX()+1,old_pos.getY()))  && !gg.obstacles.contains(p4)){ //4
 							System.out.println("caso 4");
 							newenemyPos = new Pair<>(old_pos.getX()+1,old_pos.getY()+1);
 							moved_diagonally=true;
@@ -233,7 +234,7 @@ public class Enemy_move_control {
 	
 	private static boolean upfree(Pair<Integer,Integer> up) {
 		// TODO Auto-generated method stub
-		if(!checkenemypos(up) && !Global_Generator.obstacles.contains(up)) {
+		if(!checkenemypos(up) && !gg.obstacles.contains(up)) {
 			return true;
 		} else {
 			return false;
@@ -243,7 +244,7 @@ public class Enemy_move_control {
 	@SuppressWarnings("unlikely-arg-type")
 	private static boolean downfree(Pair<Integer,Integer> down) {
 		// TODO Auto-generated method stub
-		if(!checkenemypos(down) && !Global_Generator.obstacles.contains(down)) {
+		if(!checkenemypos(down) && !gg.obstacles.contains(down)) {
 			return true;
 		} else {
 			return false;
@@ -253,7 +254,7 @@ public class Enemy_move_control {
 	@SuppressWarnings("unlikely-arg-type")
 	private static boolean leftfree(Pair<Integer,Integer> left) {
 		// TODO Auto-generated method stub
-		if(!checkenemypos(left) && !Global_Generator.obstacles.contains(left)) {
+		if(!checkenemypos(left) && !gg.obstacles.contains(left)) {
 			return true;
 		} else {
 			return false;
@@ -263,7 +264,7 @@ public class Enemy_move_control {
 	@SuppressWarnings("unlikely-arg-type")
 	private static boolean rightfree(Pair<Integer,Integer> right) {
 		// TODO Auto-generated method stub
-		if(!checkenemypos(right) && !Global_Generator.obstacles.contains(right)) {
+		if(!checkenemypos(right) && !gg.obstacles.contains(right)) {
 			return true;
 		} else {
 			return false;
@@ -276,7 +277,7 @@ public class Enemy_move_control {
 	private static boolean checkenemypos(Pair<Integer, Integer> newPos) {
 		// TODO Auto-generated method stub
 		collide = false;
-		Global_Generator.enemyposwithID.forEach(item->{
+		gg.enemyposwithID.forEach(item->{
 			if(item.getY().getX()==newPos.getX() && item.getY().getY()==newPos.getY()) {
 				collide=true;
 			}

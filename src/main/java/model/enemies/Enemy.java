@@ -10,6 +10,7 @@ public class Enemy {
 	int GRID_SIZE = 15;
 	PlayerImpl player;
 	Pair<Integer,Integer> pos;
+	Global_Generator gg = Global_Generator.getInstance();
 	
 	int ID;
 	
@@ -20,7 +21,7 @@ public class Enemy {
 	int def;
 	int atk;
 	int exp;
-	int HeroEXP =player.getExperience().getMaxExpPoints();
+	int HeroEXP =gg.player.getExperience().getMaxExpPoints();
 	int Gold;
 	
 	Random rand = new Random();
@@ -52,8 +53,8 @@ public class Enemy {
 			x= rand.nextInt(GRID_SIZE);
 			y= rand.nextInt(GRID_SIZE);
 			pos=new Pair<>(x,y);
-			if( (!Global_Generator.enemyposwithID.contains(pos) ) && (!Global_Generator.obstacles.contains(pos))  ) {
-				Global_Generator.enemyposwithID.add(new Pair<Integer, Pair<Integer, Integer>>(this.ID,pos));
+			if( (!gg.enemyposwithID.contains(pos) ) && (!gg.obstacles.contains(pos))  ) {
+				gg.enemyposwithID.add(new Pair<Integer, Pair<Integer, Integer>>(this.ID,pos));
 				ok=true;
 			}
 		}
@@ -115,8 +116,8 @@ public class Enemy {
 		System.out.println("ENEMY "+this.ID+" has died");
 		setEXP(0);
 		setGold(0);
-		if(!Global_Generator.skipenemy.contains(this.ID)) {
-			Global_Generator.skipenemy.add(this.ID);
+		if(!gg.skipenemy.contains(this.ID)) {
+			gg.skipenemy.add(this.ID);
 		}
 	}
 

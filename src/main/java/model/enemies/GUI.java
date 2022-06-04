@@ -3,6 +3,7 @@ import javax.swing.*;
 
 import model.obstacles.Obstacle;
 import model.player.Pair;
+import model.player.Player;
 import model.player.PlayerImpl;
 
 import java.util.*;
@@ -15,11 +16,11 @@ public class GUI extends JFrame {
 	
 	Map<JButton,Pair<Integer,Integer>> mapjbtopos = new HashMap<>();
 	Map<Pair<Integer,Integer>,JButton> mappostojb = new HashMap<>();
-	PlayerImpl player;
-
-	
+	Player player;
+	Global_Generator gg = Global_Generator.getInstance();
 	List<Pair<Integer, Pair<Integer, Integer>>> En_With_ID;
-	List<Obstacle> Obs_Pos;
+	List<Obstacle> obstacles;
+
 	JButton score=new JButton();
 	JButton gold=new JButton();
 	JButton HP=new JButton();
@@ -30,7 +31,8 @@ public class GUI extends JFrame {
 	private static final long serialVersionUID = -6218820567019985015L;
     //private final List<JButton> cells = new ArrayList<>();
     
-    public GUI(int size, PlayerImpl player) {
+    public GUI(int size) {
+    	this.player = gg.player;
     	player.toString();	
     	int HeroX = player.getPlayerPosition().getX();
     	int HeroY = player.getPlayerPosition().getY();
@@ -94,8 +96,9 @@ public class GUI extends JFrame {
 		int HeroX = player.getPlayerPosition().getX();
 		int HeroY = player.getPlayerPosition().getY();
 		int ID=0;
-		En_With_ID = Global_Generator.enemyposwithID;
-		Obs_Pos = Global_Generator.obstacles;	
+		En_With_ID = gg.getInstance().enemyposwithID;
+		//TODO: da correggere
+		obstacles = gg.getInstance().obstacles;	
 		mappostojb.forEach((pos,jb)->{
 	
 				jb.setText("X"+pos.getX()+"Y"+pos.getY());
@@ -108,7 +111,8 @@ public class GUI extends JFrame {
 					}
 				});
 				
-				Obs_Pos.forEach(obst->{
+				//non ho capito cosa fa qui
+				obstacles.forEach(obst->{
 					if(obst.getObstaclePos().getX()==pos.getX() && obst.getObstaclePos().getY()==pos.getY()){
 						jb.setText("X");
 					}

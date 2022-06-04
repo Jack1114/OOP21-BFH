@@ -16,6 +16,7 @@ public class PlayerAttackImpl implements PlayerAttack {
 	private static final int DEFAULT_ATTACK_POINTS = 5; 
 	private int attackPoints = DEFAULT_ATTACK_POINTS;
 
+	private Global_Generator gg = Global_Generator.getInstance();
 	PlayerImpl player;
 
 	public PlayerAttackImpl( PlayerImpl new_player) {
@@ -28,10 +29,10 @@ public class PlayerAttackImpl implements PlayerAttack {
 
 	public void attack() {
 		//int responseHit;
-		Global_Generator.enemyposwithID.forEach(item->{
+		gg.enemyposwithID.forEach(item->{
 		if(item.getY().getX()==player.getPlayerPosition().getX() && item.getY().getY()==player.getPlayerPosition().getY());
 		  	{
-		  	Global_Generator.enemies.get(item.getX()).GetHit(getAttackPoints());
+		  	gg.enemies.get(item.getX()).GetHit(getAttackPoints());
 		  	//mi serve nel caso un'abilita' abbia cambiato il valore di attackPoints
 		  	resetAttackPoints();
 
