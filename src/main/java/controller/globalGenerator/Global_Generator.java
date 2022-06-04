@@ -54,7 +54,6 @@ public class Global_Generator {
 
 		final ObstacleGenerator obstacleGenerator = new ObstacleGenerator(obstacles);
 
-		
 		this.player=new PlayerImpl(rand_pos_player(GRID_SIZE));
 
 		this.playerAttack= new PlayerAttackImpl(player);

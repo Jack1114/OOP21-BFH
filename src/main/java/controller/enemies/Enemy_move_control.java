@@ -68,7 +68,7 @@ public class Enemy_move_control {
 			}
 		}
 
-		System.out.println("enenmy ID = "+enemyID+" enemy Pos X = "+newenemyPos.getX()+" enemy Pos Y = "+newenemyPos.getY());
+		System.out.println("enemy: ID["+enemyID+"], Pos["+newenemyPos.getX()+", "+newenemyPos.getY()+"]");
 	}
 
 	
