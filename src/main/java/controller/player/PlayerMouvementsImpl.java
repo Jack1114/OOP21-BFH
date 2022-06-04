@@ -80,31 +80,29 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 	 * if there is an obstacle, he check if the obstacle's type is the one that can be cross
 	 */
 	
-	@SuppressWarnings("unlikely-arg-type")
 	public boolean check_advancement(Pair<Integer, Integer> new_player_pos) {
-		//TODO: togliere l'if
-		if(gg.obstacles.contains(new_player_pos)) {// verifico se tra la lista degli ostacoli, c'è un ostacolo dove il player vuole spostarsi
-			//questa funzione non va bene, devo prendere il tipo di ostacolo che e' in quella posizione
-			//filtro la lista finche' non trovo l'ostacolo in quella pos e poi gaccio getType di quell'ostacolo
-			Optional<Obstacle> type = gg.obstacles
-					.stream()
-					.filter(o -> o.getObstaclePos().equals(new_player_pos))
-					.findFirst();
-			if (type.isPresent()) {
-				switch(type.get().getObstacleType()) {
-					case POOL:
-						player.getPlayer_action().removeAction();
-						return true;
-					case ROCK:
-						return false; 
-				}
+		// verifico se tra la lista degli ostacoli, c'è un ostacolo dove il player vuole spostarsi
+		//questa funzione non va bene, devo prendere il tipo di ostacolo che e' in quella posizione
+		//filtro la lista finche' non trovo l'ostacolo in quella pos e poi gaccio getType di quell'ostacolo
+		Optional<Obstacle> type = gg.obstacles
+				.stream()
+				.filter(o -> o.getObstaclePos().equals(new_player_pos))
+				.findFirst();
+		if (type.isPresent()) {
+			switch(type.get().getObstacleType()) {
+				case POOL:
+					player.getPlayer_action().removeAction();
+					return true;
+				case ROCK:
+					return false; 
 			}
 		}
+		
 		//controllo se nella newPos ho un nemico e nel caso lo attacco
 		//problema risolvibile con un for normale
 		gg.enemyposwithID.forEach(item->{
 			//TODO: cambiare la pos e mettere new_player
-		     if(item.getY().getX()==player.getPlayerPosition().getX() && item.getY().getX()==player.getPlayerPosition().getY())
+		     if(item.getY().getX()== new_player_pos.getX() && item.getY().getX() == new_player_pos.getY())
 			 {
 			     PlayerAttackImpl playerAttackImpl = new PlayerAttackImpl(player);
 			     playerAttackImpl.attack();

@@ -53,7 +53,7 @@ public class Global_Generator {
 
 		final ObstacleGenerator obstacleGenerator = new ObstacleGenerator(obstacles);
 
-		this.player=new PlayerImpl(new Pair<Integer, Integer>(0,0));
+		this.player=new PlayerImpl(new Pair<Integer, Integer>(5,5));
 		this.playerAttack= new PlayerAttackImpl(player);
 		this.playerMouvement= new PlayerMouvementsImpl(player);
 		this.enemies= new ArrayList<Enemy>();
