@@ -4,6 +4,7 @@
 package controller.player;
 
 import controller.globalGenerator.Global_Generator;
+import model.player.Pair;
 import model.player.PlayerImpl;
 
 /**

@@ -34,6 +34,7 @@ public class Global_Generator {
 	public List<Enemy> enemies;
 	//id dei nemici morti
 	public List<Integer> skipenemy; 
+
 	//gui
 	GUI g;	
 
@@ -53,11 +54,11 @@ public class Global_Generator {
 
 		final ObstacleGenerator obstacleGenerator = new ObstacleGenerator(obstacles);
 
-		this.player=new PlayerImpl(new Pair<Integer, Integer>(5,5));
+		this.player=new PlayerImpl(rand_pos_player(GRID_SIZE));
+
 		this.playerAttack= new PlayerAttackImpl(player);
 		this.playerMouvement= new PlayerMouvementsImpl(player);
 		this.enemies= new ArrayList<Enemy>();
-
 		this.skipenemy= new ArrayList<>(); 
 		g = new GUI(15);
 	
@@ -269,8 +270,8 @@ public class Global_Generator {
 	}
 	
 	public Pair<Integer, Integer> randPosition(final int GRID_SIZE){
-		Random r = new Random();
 		Pair<Integer,Integer> pos = new Pair<>(0, 0);
+		Random r = new Random();
 		boolean success = false;
 		while(!success){
 
@@ -284,5 +285,17 @@ public class Global_Generator {
 		}
 		return pos;
 	}
+	
+	public Pair<Integer, Integer> rand_pos_player(int GRID_SIZE) {
+		// TODO Auto-generated method stub
+		Pair<Integer,Integer> pos2 = new Pair<>(0, 0);
+		Random r = new Random();
+		int x = r.nextInt(GRID_SIZE);
+		int y = r.nextInt(GRID_SIZE);
+		pos2 = new Pair<>(x,y);
+		return pos2;
+
+	}
+
 
 }
