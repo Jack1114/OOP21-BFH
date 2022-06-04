@@ -1,4 +1,4 @@
- package model.actions;
+ package controller.actions;
 
 public class ActionImpl implements Action{
 

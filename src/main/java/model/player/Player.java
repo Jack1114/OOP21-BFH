@@ -1,6 +1,6 @@
 package model.player;
 
-import model.actions.ActionImpl;
+import controller.actions.ActionImpl;
 
 /**
  * @author Olivia
@@ -14,6 +14,7 @@ public interface Player {
 	void setPlayerPosition(Pair<Integer,Integer> newPos);
 	
 	public Life getLife();
+	public Gold getGold();
 	public Experience getExperience() ;
 	public ActionImpl getPlayer_action();
 	

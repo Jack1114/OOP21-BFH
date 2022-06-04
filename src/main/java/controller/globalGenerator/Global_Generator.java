@@ -1,12 +1,20 @@
-package model.enemies;
+package controller.globalGenerator;
 import java.io.BufferedReader;
 import java.util.Scanner;
 import java.io.InputStreamReader;
 import java.util.*;
 
+import controller.enemies.Enemy_move_control;
+import controller.obstacles.Obstacle;
+import controller.player.PlayerAttack;
+import controller.player.PlayerAttackImpl;
+import controller.player.PlayerMouvement;
+import controller.player.PlayerMouvementsImpl;
 import model.obstacles.*;
 import model.player.*;
 import model.abilities.*;
+import model.enemies.Enemy;
+import model.enemies.GUI;
 
 // si occupa tutto lui di generare i nemici e le loro statistiche, L' eroe � statico per ora con una sola posizione fissa 
 
@@ -19,7 +27,7 @@ public class Global_Generator {
 	//ostacoli
 	public List<Obstacle> obstacles = new ArrayList<>();
 	//player
-	PlayerImpl player;
+	public PlayerImpl player;
 	PlayerAttack playerAttack;
 	PlayerMouvement playerMouvement;
 	//nemici
@@ -41,7 +49,7 @@ public class Global_Generator {
 	}
 
 	
-	void generation() {
+	public void generation() {
 
 		final ObstacleGenerator obstacleGenerator = new ObstacleGenerator(obstacles);
 

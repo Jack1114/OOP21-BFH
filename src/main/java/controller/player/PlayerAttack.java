@@ -1,4 +1,4 @@
-package model.player;
+package controller.player;
 
 /**
 * @author Olivia

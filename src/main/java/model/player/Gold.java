@@ -2,9 +2,10 @@ package model.player;
 
 public class Gold {
 
-	private int gold=0; // oro che guardagna l'ero dopo ogni turno di gioco
+	private int gold=0;// oro che guardagna l'ero dopo ogni turno di gioco
+
 	public Gold() {
-		
+
 	}
 	
 	/**
@@ -13,6 +14,7 @@ public class Gold {
 	public int getGold_points() {
 		return gold;
 	}
+
 	
 	/**
 	 *when the palyer kill an enemie, he win gold

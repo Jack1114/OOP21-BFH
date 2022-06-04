@@ -3,12 +3,11 @@
  */
 package model.player;
 
-import model.actions.ActionImpl;
-import model.obstacles.Obstacle.Type;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import controller.actions.ActionImpl;
+import controller.obstacles.Obstacle.Type;
 import model.abilities.*;
 
 /**

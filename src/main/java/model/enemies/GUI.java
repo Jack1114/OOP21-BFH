@@ -1,7 +1,8 @@
 package model.enemies;
 import javax.swing.*;
 
-import model.obstacles.Obstacle;
+import controller.globalGenerator.Global_Generator;
+import controller.obstacles.Obstacle;
 import model.player.Pair;
 import model.player.Player;
 import model.player.PlayerImpl;
@@ -37,7 +38,7 @@ public class GUI extends JFrame {
     	int HeroX = player.getPlayerPosition().getX();
     	int HeroY = player.getPlayerPosition().getY();
     	score.setText("EXP = "+player.getExperience().getExpPoints());
-    	//gold.setText("Gold = "+player.getGold().getGold_points() );
+    	gold.setText("Gold = "+player.getGold().getGold_points() );
     	HP.setText("HP = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
     	ATK.setText("ATK = "+Integer.toString(player.getAttackPoints()));
     	LV.setText("LV = "+player.getExperience().getLevel() );
@@ -131,7 +132,7 @@ public class GUI extends JFrame {
 	private void updateHeroStats() {
 		// TODO Auto-generated method stub
 		score.setText("EXP = "+player.getExperience().getExpPoints());
-		//gold.setText("Gold = "+player.getGold().getGold_points());
+		gold.setText("Gold = "+player.getGold().getGold_points());
 		HP.setText("HP = "+player.getLife().getLifePoints() +" / "+player.getLife().getMaxLifePoints() );
 		ATK.setText("ATK = "+player.getAttackPoints());
 		LV.setText("LV = "+player.getExperience().getLevel());
