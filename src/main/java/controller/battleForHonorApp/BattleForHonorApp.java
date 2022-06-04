@@ -3,9 +3,9 @@
  */
 
 
-package model.enemies;
+package controller.battleForHonorApp;
 
-import controller.CoreLauncher;
+import controller.corelaucher.CoreLauncher;
 import javafx.application.Application;
 
 /** Main application entry-point. */

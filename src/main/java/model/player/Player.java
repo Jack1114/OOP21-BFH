@@ -1,6 +1,6 @@
 package model.player;
 
-import model.actions.ActionImpl;
+import controller.actions.ActionImpl;
 
 /**
  * @author Olivia

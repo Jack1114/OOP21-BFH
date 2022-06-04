@@ -1,7 +1,8 @@
 package model.enemies;
 import javax.swing.*;
 
-import model.obstacles.Obstacle;
+import controller.globalGenerator.Global_Generator;
+import controller.obstacles.Obstacle;
 import model.player.Pair;
 import model.player.Player;
 import model.player.PlayerImpl;

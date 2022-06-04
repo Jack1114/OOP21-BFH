@@ -1,9 +1,9 @@
-package enums;
+package view.enums;
 
 
 /**
  * 
- * Using enums to regroup all fxml files in path strings.
+ * Using view.enums to regroup all fxml files in path strings.
  *
  */
 public enum LayoutEnums{

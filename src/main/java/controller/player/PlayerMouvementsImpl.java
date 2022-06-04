@@ -1,13 +1,15 @@
 /**
  * 
  */
-package model.player;
+package controller.player;
 
 import java.util.Optional;
 
-import model.enemies.Global_Generator;
-import model.obstacles.Obstacle;
-import model.obstacles.ObstacleImpl;
+import controller.globalGenerator.Global_Generator;
+import controller.obstacles.Obstacle;
+import controller.obstacles.ObstacleImpl;
+import model.player.Pair;
+import model.player.PlayerImpl;
 
 /**
  * @author Olivia

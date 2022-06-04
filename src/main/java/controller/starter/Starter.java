@@ -1,4 +1,7 @@
-package model.enemies;
+package controller.starter;
+
+import controller.globalGenerator.Global_Generator;
+
 public class Starter {
 
 	

@@ -1,7 +1,9 @@
-package model.enemies;
+package controller.enemies;
 
+import controller.globalGenerator.Global_Generator;
+import controller.player.PlayerAttackImpl;
+import model.enemies.Enemy;
 import model.player.Pair;
-import model.player.PlayerAttackImpl;
 import model.player.PlayerImpl;
 
 public class Enemy_move_control {
@@ -69,10 +71,9 @@ public class Enemy_move_control {
 	
 	private static void attckHero() {
 		var correct_enemy=gg.enemies.get(enemyID);
-		System.out.println("Dealing "+correct_enemy.atk+" Damage to HERO");
+		System.out.println("Dealing "+correct_enemy.GetATK()+" Damage to HERO");
 		//System.out.println("THAT'S A LOT OF DAMAGE !!");
-		playerAtt.getHit(correct_enemy.atk);
-		
+		playerAtt.getHit(correct_enemy.GetATK());   //changed atk con getATK()		
 	}
 	
 	// movimento in verticale la X rimane la stessa ma la Y cambia 

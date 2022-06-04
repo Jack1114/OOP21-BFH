@@ -1,9 +1,10 @@
 /**
  * 
  */
-package model.player;
+package controller.player;
 
-import model.enemies.Global_Generator;
+import controller.globalGenerator.Global_Generator;
+import model.player.PlayerImpl;
 
 /**
  * @author Olivia

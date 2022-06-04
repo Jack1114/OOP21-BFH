@@ -3,7 +3,9 @@ package model.obstacles;
 import java.util.List;
 import java.util.Random;
 
-import model.enemies.Global_Generator;
+import controller.globalGenerator.Global_Generator;
+import controller.obstacles.Obstacle;
+import controller.obstacles.ObstacleImpl;
 import model.player.Pair;
 
 public class ObstacleGenerator {

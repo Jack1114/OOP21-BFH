@@ -1,7 +1,9 @@
 /**
  * 
  */
-package model.player;
+package controller.player;
+
+import model.player.Pair;
 
 /**
  * @author Olivia
