@@ -49,7 +49,6 @@ public class PlayerImpl implements Player {
 	
 	//ritorna l'abilita' dato il nome
 	public Ability getAbility(String nameAbility) {
-		//TODO: fare un check che la lista non sia vuota
 		return this.abilities
 				.stream()
 				.filter(a -> a.getName()

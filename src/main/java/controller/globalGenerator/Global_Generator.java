@@ -20,7 +20,8 @@ import model.enemies.GUI;
 
 public class Global_Generator {
 	
-	public static final int GRID_SIZE=15;
+	public static final int GRID_SIZE = 15;
+	private static final int N_MAX_ABILITIES = 2;
 	public int NUM_ENEMIES = 3;
     				// ID           POS
 	public List<Pair<Integer,Pair<Integer,Integer>>> enemyposwithID = new ArrayList<>();
@@ -70,12 +71,14 @@ public class Global_Generator {
 
 		g.update();
 		System.out.println("Genarated obstacles, enemies and player");
+		System.out.println("You can now move using: w=UP | s=DOWN | a=LEFT | d=RIGHT");
+		System.out.println("You can use a maximum of " + N_MAX_ABILITIES + " ability for each type");
 		
 		int turn = 0;
 		int totactions = 0;
 		
 		while(true && totactions<80) {
-			System.out.println("---- turn "+turn+" ----");	
+			System.out.println("---- turn "+ turn + " ----");	
 			System.out.println("skipped enemy size = "+skipenemy.size());
 			
 			if(skipenemy.size()==NUM_ENEMIES) {
@@ -143,14 +146,12 @@ public class Global_Generator {
 					case("e"):
 						playerAttack.attack();
             			System.out.println("Attack...");
-
 						g.update();
 						break;
 					case("1"):
 						player.getAbility("Elixir Of Life").apply();
         				System.out.println("Use ability " + player.getAbility("Elixir Of Life").getName());
 						g.update();
-
 						break;
 					case("2"):
 						player.getAbility("Double Attack").apply();

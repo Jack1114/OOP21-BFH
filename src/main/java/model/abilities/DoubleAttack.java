@@ -9,7 +9,6 @@ public class DoubleAttack implements Ability{
 	private final String descr;
 	private final String name;
 
-	
 	public DoubleAttack(PlayerAttack playerAttack) {
 		this.playerAttack = playerAttack;
 		this.descr = "Attack your enemies with double power";
@@ -24,9 +23,7 @@ public class DoubleAttack implements Ability{
 		return this.name;
 	}
 
-
 	public void apply() {
-		// TODO Auto-generated method stub
 		playerAttack.setAttackPoints(playerAttack.getAttackPoints() * 2);
 	}
 
