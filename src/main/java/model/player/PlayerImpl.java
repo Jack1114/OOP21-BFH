@@ -4,7 +4,10 @@
 package model.player;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import controller.actions.ActionImpl;
 import controller.obstacles.Obstacle.Type;
@@ -22,7 +25,7 @@ public class PlayerImpl implements Player {
 	private Pair<Integer,Integer> playerPosition;
 	private final  ActionImpl player_action;
 	private final Gold gold;
-	private final List<Ability> abilities;
+	private final Set<Ability> abilities;
 	private static final int ATTACK_POINTS = 5; 
 	
 	public PlayerImpl(Pair<Integer, Integer> pair) {
@@ -31,7 +34,7 @@ public class PlayerImpl implements Player {
 		this.experience=new Experience();
 		this.player_action=new ActionImpl();
 		this.gold=new Gold();
-		this.abilities = new ArrayList<>();
+		this.abilities = new HashSet<>();
 		
 	}
 	
@@ -39,13 +42,19 @@ public class PlayerImpl implements Player {
 		this.abilities.add(newAbility);
 	}
 	
-	public List<Ability> getAbilities(){
+	public Set<Ability> getAbilities(){
 		return this.abilities;
 	}
 	
-	public Ability getAbility(final int index) {
+	
+	//ritorna l'abilita' dato il nome
+	public Ability getAbility(String nameAbility) {
 		//TODO: fare un check che la lista non sia vuota
-		return this.abilities.get(index);
+		return this.abilities
+				.stream()
+				.filter(a -> a.getName()
+						.equalsIgnoreCase(nameAbility))
+				.findFirst().get();
 	}
 	
 	public Gold getGold() {

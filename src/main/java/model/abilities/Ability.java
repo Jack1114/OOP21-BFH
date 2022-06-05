@@ -1,9 +1,9 @@
 package model.abilities;
 
-public abstract class Ability {
+public interface Ability {
 	
 	
-	abstract void apply();
+	void apply();
 	
-
+	String getName();
 }

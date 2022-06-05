@@ -147,15 +147,15 @@ public class Global_Generator {
 						g.update();
 						break;
 					case("1"):
-						player.getAbility(0);
-        				System.out.println("Use ability");
+						player.getAbility("Elixir Of Life").apply();
+        				System.out.println("Use ability " + player.getAbility("Elixir Of Life").getName());
+						g.update();
 
 						break;
 					case("2"):
-						//TODO: da cambiare
-						player.getAbility(1);
-    					System.out.println("Use ability");
-
+						player.getAbility("Double Attack").apply();
+    					System.out.println("Use ability " + player.getAbility("Double Attack").getName());
+						g.update();
 						break;
 	            	default:
 	            		playerMouvement.stop();
