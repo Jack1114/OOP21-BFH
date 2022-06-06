@@ -69,7 +69,6 @@ public class Global_Generator {
 		abilities.put(Ability.Type.ELIXIR_OF_LIFE, 2);
 		abilities.put(Ability.Type.DOUBLE_ATTACK, 3);
 		this.abilityManager = new AbilityManager(abilities);
-		//dare il controllo all'ability manager
 		abilityManager.generateAbilities();
 		obstacleGenerator.generateObstacles();
 		generate_enemies();
