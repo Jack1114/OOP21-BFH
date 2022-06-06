@@ -3,14 +3,12 @@
  */
 package model.player;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 import java.util.Set;
 
 import controller.actions.ActionImpl;
-import controller.obstacles.Obstacle.Type;
 import model.abilities.*;
 
 /**
@@ -25,7 +23,8 @@ public class PlayerImpl implements Player {
 	private Pair<Integer,Integer> playerPosition;
 	private final  ActionImpl player_action;
 	private final Gold gold;
-	private final Set<Ability> abilities;
+	private final Map<Ability, Integer> abilities;
+	//private final Set<Ability> abilities;
 	private static final int ATTACK_POINTS = 5; 
 	
 	public PlayerImpl(Pair<Integer, Integer> pair) {
@@ -34,22 +33,21 @@ public class PlayerImpl implements Player {
 		this.experience=new Experience();
 		this.player_action=new ActionImpl();
 		this.gold=new Gold();
-		this.abilities = new HashSet<>();
+		this.abilities = new HashMap<>();
 		
 	}
 	
-	public void addAbility(final Ability newAbility) {
-		this.abilities.add(newAbility);
+	public void addAbility(final Ability newAbility, final Integer maxAbilities) {
+		this.abilities.put(newAbility, maxAbilities);
 	}
 	
 	public Set<Ability> getAbilities(){
-		return this.abilities;
+		return this.abilities.keySet();
 	}
-	
 	
 	//ritorna l'abilita' dato il nome
 	public Ability getAbility(String nameAbility) {
-		return this.abilities
+		return this.abilities.keySet()
 				.stream()
 				.filter(a -> a.getName()
 						.equalsIgnoreCase(nameAbility))

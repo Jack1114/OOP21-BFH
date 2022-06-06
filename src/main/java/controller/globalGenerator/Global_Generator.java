@@ -21,12 +21,16 @@ import model.enemies.GUI;
 public class Global_Generator {
 	
 	public static final int GRID_SIZE = 15;
-	private static final int N_MAX_ABILITIES = 2;
+	private static final int MAX_ROUNDS = 50;
 	public int NUM_ENEMIES = 3;
     				// ID           POS
 	public List<Pair<Integer,Pair<Integer,Integer>>> enemyposwithID = new ArrayList<>();
 	//ostacoli
 	public List<Obstacle> obstacles = new ArrayList<>();
+	//mappa di ostacoli
+	public Map<Ability.Type, Integer> abilities = new HashMap<>();
+	//ability manager
+	public AbilityManager abilityManager;
 	//player
 	public PlayerImpl player;
 	public PlayerAttack playerAttack;
@@ -54,31 +58,31 @@ public class Global_Generator {
 	public void generation() {
 
 		final ObstacleGenerator obstacleGenerator = new ObstacleGenerator(obstacles);
+		this.player = new PlayerImpl(rand_pos_player(GRID_SIZE));
 
-		this.player=new PlayerImpl(rand_pos_player(GRID_SIZE));
-
-		this.playerAttack= new PlayerAttackImpl(player);
-		this.playerMouvement= new PlayerMouvementsImpl(player);
-		this.enemies= new ArrayList<Enemy>();
-		this.skipenemy= new ArrayList<>(); 
+		this.playerAttack = new PlayerAttackImpl(player);
+		this.playerMouvement = new PlayerMouvementsImpl(player);
+		this.enemies = new ArrayList<Enemy>();
+		this.skipenemy = new ArrayList<>(); 
 		g = new GUI(15);
 	
-		player.addAbility(new ElixirOfLife(this.player));
-		player.addAbility(new DoubleAttack(this.playerAttack));
-		
+		abilities.put(Ability.Type.ELIXIR_OF_LIFE, 2);
+		abilities.put(Ability.Type.DOUBLE_ATTACK, 3);
+		this.abilityManager = new AbilityManager(abilities);
+		//dare il controllo all'ability manager
+		abilityManager.generateAbilities();
 		obstacleGenerator.generateObstacles();
 		generate_enemies();
 
 		g.update();
 		System.out.println("Genarated obstacles, enemies and player");
 		System.out.println("You can now move using: w=UP | s=DOWN | a=LEFT | d=RIGHT");
-		System.out.println("You can use a maximum of " + N_MAX_ABILITIES + " ability for each type");
+		System.out.println("You can use abilities with 1 and 2");
 		
-		int turn = 0;
-		int totactions = 0;
+		int round = 0;
 		
-		while(true && totactions<80) {
-			System.out.println("---- turn "+ turn + " ----");	
+		while(true && round < MAX_ROUNDS) {
+			System.out.println("---- Round "+ round + " ----");	
 			System.out.println("skipped enemy size = "+skipenemy.size());
 			
 			if(skipenemy.size()==NUM_ENEMIES) {
@@ -90,15 +94,12 @@ public class Global_Generator {
 			playerTurn();
 			enemyTurn();
 			
-			turn++;
-			totactions++;	
+			round++;
 		}
 		
 	}
 	
-
 	private void reset() {
-		// TODO Auto-generated method stub
 		enemyposwithID = new ArrayList<>();
 		enemies= new ArrayList<Enemy>();
 		skipenemy=new ArrayList<Integer>();
@@ -106,9 +107,7 @@ public class Global_Generator {
 	}
 
 	private void generate_enemies() {
-		// TODO Auto-generated method stub
 		for(int i=0; i<NUM_ENEMIES;i++) {
-			//System.out.println("gen enemies n "+i);   //stampa per vedere se genera i nemici [ ok ]
 			Enemy e = new Enemy(i);
 			enemies.add(e);
 		}
@@ -117,7 +116,6 @@ public class Global_Generator {
 	private void playerTurn() {
 		while(player.getPlayer_action().getAvailableActions() > 0) {
 			player.getPlayer_action().removeAction();
-	        System.out.println("Enter Input : w=UP // s=DOWN // a=LEFT // d=RIGHT ");
         	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	        try {
 	            String s = br.readLine();
@@ -148,15 +146,30 @@ public class Global_Generator {
             			System.out.println("Attack...");
 						g.update();
 						break;
+					//al posto dei tasti ci saranno i bottoni
+					//nel caso non si possano usare più abilitò perchè finite non si deve fare la removeAction 
 					case("1"):
-						player.getAbility("Elixir Of Life").apply();
-        				System.out.println("Use ability " + player.getAbility("Elixir Of Life").getName());
+						if (abilityManager.isAvailable(Ability.Type.ELIXIR_OF_LIFE)) {
+							abilityManager.getAbilityOfType(Ability.Type.ELIXIR_OF_LIFE).apply();
+	        				System.out.println("Using " + abilityManager.getAbilityOfType(Ability.Type.ELIXIR_OF_LIFE).getName());
+							abilityManager.remove(Ability.Type.ELIXIR_OF_LIFE);
+	        				System.out.println("Now you have " + abilityManager.getSize(Ability.Type.ELIXIR_OF_LIFE) + " left");   			
+						}else {
+							System.out.println("You don't have any Elixir Of Life left");
+						}
 						g.update();
 						break;
 					case("2"):
-						player.getAbility("Double Attack").apply();
-    					System.out.println("Use ability " + player.getAbility("Double Attack").getName());
-						g.update();
+						if (abilityManager.isAvailable(Ability.Type.DOUBLE_ATTACK)) {
+							abilityManager.getAbilityOfType(Ability.Type.DOUBLE_ATTACK).apply();
+	        				System.out.println("Using " + abilityManager.getAbilityOfType(Ability.Type.DOUBLE_ATTACK).getName());
+							abilityManager.remove(Ability.Type.DOUBLE_ATTACK);
+	        				System.out.println("Now you have " + abilityManager.getSize(Ability.Type.DOUBLE_ATTACK) + " left"); 
+						}else {
+							System.out.println("You don't have any Double Attack left");
+
+						}
+        				g.update();
 						break;
 	            	default:
 	            		playerMouvement.stop();
@@ -221,9 +234,6 @@ public class Global_Generator {
 	 */  
 	public boolean checkEnemyPos(Pair<Integer, Integer> position) {
 
-		//scorre la lista dei nemici e
-		//filtro i nemici i nemici che potrebbero essere in quella positiona
-		//ritorno un optional
 		Optional<Enemy> enemy = enemies
 				.stream()
 				.filter(e -> e.getEnemyPos().equals(position))
@@ -288,14 +298,10 @@ public class Global_Generator {
 	}
 	
 	public Pair<Integer, Integer> rand_pos_player(int GRID_SIZE) {
-		// TODO Auto-generated method stub
-		Pair<Integer,Integer> pos2 = new Pair<>(0, 0);
 		Random r = new Random();
 		int x = r.nextInt(GRID_SIZE);
 		int y = r.nextInt(GRID_SIZE);
-		pos2 = new Pair<>(x,y);
-		return pos2;
-
+		return new Pair<>(x,y);
 	}
 
 

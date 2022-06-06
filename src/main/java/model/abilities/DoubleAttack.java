@@ -7,12 +7,12 @@ public class DoubleAttack implements Ability{
 
 	private final PlayerAttack playerAttack;
 	private final String descr;
-	private final String name;
+	private final Type type;
 
 	public DoubleAttack(PlayerAttack playerAttack) {
 		this.playerAttack = playerAttack;
 		this.descr = "Attack your enemies with double power";
-		this.name = "Double Attack";
+		this.type = Ability.Type.DOUBLE_ATTACK;
 	}
 
 	public String getDescription() {
@@ -20,7 +20,7 @@ public class DoubleAttack implements Ability{
 	}
 	
 	public String getName() {
-		return this.name;
+		return this.type.toString();
 	}
 
 	public void apply() {

@@ -6,12 +6,12 @@ public class ElixirOfLife implements Ability{
 
 	private final PlayerImpl player;
 	private final String descr;
-	private final String name;
+	private final Type type;
 	
 	public ElixirOfLife(PlayerImpl player) {
 		this.player = player;
 		this.descr = "Drink the Elixir of Life to get more life";
-		this.name = "Elixir of Life";
+		this.type = Ability.Type.ELIXIR_OF_LIFE;
 	}
 	
 	public String getDescription() {
@@ -26,7 +26,7 @@ public class ElixirOfLife implements Ability{
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return this.name;
+		return this.type.toString();
 	}
 
 }
