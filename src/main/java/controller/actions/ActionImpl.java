@@ -2,7 +2,7 @@
 
 public class ActionImpl implements Action{
 
-	private final static int DEFAULT_N_OF_ACTIONS =6;
+	private final static int DEFAULT_N_OF_ACTIONS =3;
 	private int actions;
 	
 	public ActionImpl() {
@@ -44,5 +44,12 @@ public class ActionImpl implements Action{
 	public void addAction() {
 		// TODO Auto-generated method stub
 		this.actions++;
+	}
+
+
+	public void resetActions() {
+		this.actions=DEFAULT_N_OF_ACTIONS;
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -115,7 +115,8 @@ public class Global_Generator {
 	}
 
 	private void playerTurn() {
-
+		while(player.getPlayer_action().getAvailableActions() > 0) {
+			player.getPlayer_action().removeAction();
 	        System.out.println("Enter Input : w=UP // s=DOWN // a=LEFT // d=RIGHT ");
         	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	        try {
@@ -182,7 +183,8 @@ public class Global_Generator {
 			}catch(Exception e) {
 	            System.out.println(e);
 	        }
-
+		}
+		player.getPlayer_action().resetActions();
 	}
 
 
