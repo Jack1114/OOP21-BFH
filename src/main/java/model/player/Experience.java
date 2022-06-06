@@ -38,9 +38,9 @@ public class Experience {
 	 * check if the player has enough experience points to add level
 	 */
 	public  void checkAddLevel() {
-		if(expPoints>=100*level)
+		if(this.expPoints>=100*level)
 		{
-			expPoints-=100*level;
+			this.expPoints-=100*level;
 			
 			level++; //level up
 		}

@@ -1,5 +1,7 @@
 package controller.player;
 
+import model.player.Pair;
+
 /**
 * @author Olivia
 *
@@ -10,15 +12,15 @@ public interface PlayerAttack {
 	/**
 	 * attack beetwen the player and the enemie
 	 */
-	 void attack();
+	 public void attack(Pair<Integer, Integer> new_heropos2);
 	 
 	/** @return player's attack_points
 	 * 
 	 */
-	 int getAttackPoints();
+	 public int getAttackPoints();
 	 
-	 void setAttackPoints(int newAttackPoints);
+	 public void setAttackPoints(int newAttackPoints);
 	 
-	 void resetAttackPoints();
-	 void getHit(int enemyResponseHit);
+	 public void resetAttackPoints();
+	 public void getHit(int enemyID,int enemyResponseHit);
 }

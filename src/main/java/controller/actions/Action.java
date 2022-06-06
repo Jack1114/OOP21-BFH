@@ -25,9 +25,5 @@ public interface Action {
 	 * add one action from the available actions
 	 */
 	void addAction();
-	
-	/**
-	 * reset to the default set
-	 */
-	void resetActions();
+
 }
