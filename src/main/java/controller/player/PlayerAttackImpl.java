@@ -4,6 +4,7 @@
 package controller.player;
 
 import controller.globalGenerator.Global_Generator;
+import model.enemies.Enemy;
 import model.player.Pair;
 import model.player.PlayerImpl;
 
@@ -29,19 +30,12 @@ public class PlayerAttackImpl implements PlayerAttack {
 		return attackPoints;
 	}
 
-	public void attack(Pair<Integer, Integer> new_heropos2) {
-		//int responseHit;
-		gg.enemyposwithID.forEach(item->{
-		if(item.getY().getX()==new_heropos2.getX() && item.getY().getY()==new_heropos2.getY());
-		  	{
-		  	gg.enemies.get(item.getX()).GetHit(getAttackPoints());
-		  	//mi serve nel caso un'abilita' abbia cambiato il valore di attackPoints
-		  	resetAttackPoints();
+	public void attack(Enemy enemy) {
+		System.out.println("Hero is attacking");
+		enemy.GetHit(getAttackPoints());
+		//mi serve nel caso un'abilita' abbia cambiato il valore di attackPoints
+		resetAttackPoints();
 
-		  	//responseHit = (int)(Global_Generator.enemies.get(item.getX()).GetATK()) / 4;
-		  	//getHit(responseHit);
-		  	}
-		});
 	}
 
 	public void setAttackPoints(int newAttackPoints) {

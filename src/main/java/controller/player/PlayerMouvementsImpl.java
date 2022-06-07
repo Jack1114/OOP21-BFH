@@ -8,6 +8,7 @@ import java.util.Optional;
 import controller.globalGenerator.Global_Generator;
 import controller.obstacles.Obstacle;
 import controller.obstacles.ObstacleImpl;
+import model.enemies.Enemy;
 import model.player.Pair;
 import model.player.PlayerImpl;
 
@@ -18,7 +19,6 @@ import model.player.PlayerImpl;
 public class PlayerMouvementsImpl implements PlayerMouvement {
 
 	private Pair<Integer,Integer> new_player_pos;
-	private Pair<Integer,Integer> new_player_pos2;
 	private final PlayerImpl player;
 	private Global_Generator gg = Global_Generator.getInstance();
 	
@@ -30,109 +30,46 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 	/**
 	 * the player move to the left
 	 */
-	@SuppressWarnings("unlikely-arg-type")
 	public void left() {
-		//dopo aver saltato un ostacolo di tipo POOL, il player dovrebbe andare alla colona successiva a quella con l'ostacolo POOl
-			new_player_pos=new Pair<>(player.getPlayerPosition().getX()-1,player.getPlayerPosition().getY());
-			new_player_pos2 = new Pair<>(player.getPlayerPosition().getX()-2,player.getPlayerPosition().getY());
-			if(check_advancement(new_player_pos)) {
-				if(gg.obstacles.contains(new_player_pos)) {
-					gg.obstacles.forEach(item -> {
-						if(item.getObstaclePos().equals(new_player_pos) && item.getObstacleType()==Obstacle.Type.POOL) {
-							if(player.getPlayer_action().getAvailableActions()>0)
-								move(new_player_pos2);
-							else
-								stop();
-						}
-					});
-				 }
-				move(new_player_pos);
-			}
-			else
-				stop();
-			
+		new_player_pos=new Pair<>(player.getPlayerPosition().getX()-1,player.getPlayerPosition().getY());
+		if(check_advancement(new_player_pos)) {
+			move(new_player_pos);
+		}		
 	}
 
 	/**
 	 * the player move to the right
 	 */
-	@SuppressWarnings("unlikely-arg-type")
 	public void right() {
 		new_player_pos=new Pair<>(player.getPlayerPosition().getX()+1,player.getPlayerPosition().getY());
-		new_player_pos2 = new Pair<>(player.getPlayerPosition().getX()-2,player.getPlayerPosition().getY());
 		if(check_advancement(new_player_pos)) {
-			if(gg.obstacles.contains(new_player_pos)) {
-				gg.obstacles.forEach(item -> {
-					if(item.getObstaclePos().equals(new_player_pos) && item.getObstacleType()==Obstacle.Type.POOL) {
-						if(player.getPlayer_action().getAvailableActions()>0)
-							move(new_player_pos2);
-						else
-							stop();
-					}
-				});
-			}
 			move(new_player_pos);
 		}
-		else
-			stop();
-	
 	}
 
 	/**
 	 * the player move to down
 	 */
-	@SuppressWarnings("unlikely-arg-type")
 	public void down() {
 		new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY()+1);
-		new_player_pos2 = new Pair<>(player.getPlayerPosition().getX()-2,player.getPlayerPosition().getY());
 		if(check_advancement(new_player_pos)) {
-			
-			if(gg.obstacles.contains(new_player_pos)) {
-				gg.obstacles.forEach(item -> {
-					if(item.getObstaclePos().equals(new_player_pos) && item.getObstacleType()==Obstacle.Type.POOL) {
-						if(player.getPlayer_action().getAvailableActions()>0)
-							move(new_player_pos2);
-						else
-							stop();
-					}
-				});
-			}
-			move(new_player_pos);
-			
+			move(new_player_pos);		
 		}
-		else
-			stop();
-		
 	}
 
 	/**
 	 * the player move to up
 	 */
-	@SuppressWarnings("unlikely-arg-type")
 	public void up() {
 		new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY()-1);
-		new_player_pos2 = new Pair<>(player.getPlayerPosition().getX()-2,player.getPlayerPosition().getY());
 		if(check_advancement(new_player_pos)) {
-			if(gg.obstacles.contains(new_player_pos)) {
-				gg.obstacles.forEach(item -> {
-					if(item.getObstaclePos().equals(new_player_pos) && item.getObstacleType()==Obstacle.Type.POOL) {
-						if(player.getPlayer_action().getAvailableActions()>0)
-							move(new_player_pos2);
-						else
-							stop();
-					}
-				});
-			}
 			move(new_player_pos);
 		}
-		else
-			stop();
-		
 	}
 
 	
 	/**
-	 * the player can not mot because of an obstacle or something else
+	 * the player can not move because of an obstacle or something else
 	 */
 	public void stop() {
 		new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY());	
@@ -140,7 +77,6 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 	
 	
 	private void move(Pair<Integer, Integer> newPos) {
-		
 			player.setPlayerPosition(newPos);
 	}
 
@@ -150,12 +86,9 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 	 * @return true or false
 	 * before moving, the player check if there is an ennemie and if the is an obstacle 
 	 * if there is an obstacle, he check if the obstacle's type is the one that can be cross
-	 */
-	
+	 */	
 	public boolean check_advancement(Pair<Integer, Integer> new_player_pos) {
-		// verifico se tra la lista degli ostacoli, c'è un ostacolo dove il player vuole spostarsi
-		//questa funzione non va bene, devo prendere il tipo di ostacolo che e' in quella posizione
-		//filtro la lista finche' non trovo l'ostacolo in quella pos e poi gaccio getType di quell'ostacolo
+		//check sugli ostacoli	
 		Optional<Obstacle> type = gg.obstacles
 				.stream()
 				.filter(o -> o.getObstaclePos().equals(new_player_pos))
@@ -171,22 +104,23 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 			}
 		}
 
-		// controllo se va fuori dai bordi schermo
+		//check sui bordi dello schermo
 		if( (new_player_pos.getX()<0 || new_player_pos.getX()>gg.GRID_SIZE-1) || new_player_pos.getY()<0 || new_player_pos.getY()>gg.GRID_SIZE-1 ){
 			System.out.println("vado fuori dai bordi !!!!!!!");
 			return false;
 		}
 
-		//controllo se nella newPos ho un nemico e nel caso lo attacco
-		//problema risolvibile con un for normale
-		gg.enemyposwithID.forEach(item->{
-			//TODO: cambiare la pos e mettere new_player
-		     if(item.getY().getX()== new_player_pos.getX() && item.getY().getX() == new_player_pos.getY())
-			 {
-			     PlayerAttackImpl playerAttackImpl = new PlayerAttackImpl(player);
-			     playerAttackImpl.attack(new_player_pos);
+		//check sui nemici
+		for(var item : gg.enemyposwithID) {
+		     if(item.getY().getX()== new_player_pos.getX() && item.getY().getY() == new_player_pos.getY()){
+		    	//non entra qui
+		    	//fin qui tutto bene
+		    	int enemyID = item.getX();
+		    	Enemy enemy = gg.enemies.stream().filter(e -> e.getID() == enemyID).findFirst().get();
+				gg.playerAttack.attack(enemy);
+			    return false;
 			 }
-		  });
+		}
 		return true;
 	}
 

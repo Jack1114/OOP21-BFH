@@ -23,7 +23,7 @@ public class Enemy {
 	int def;
 	int atk;
 	int exp;
-	int HeroEXP =gg.player.getExperience().getMaxExpPoints();
+	int HeroEXP =gg.player.getExperience().getExpPoints();
 	int Gold;
 	
 	Random rand = new Random();
@@ -47,6 +47,7 @@ public class Enemy {
 	
 	
 	
+	
 	@SuppressWarnings("unlikely-arg-type")
 	private void generate_pos() {
 		// TODO Auto-generated method stub
@@ -61,12 +62,7 @@ public class Enemy {
 			}
 		}
 	}
-	
-	//posizione del nemico
-	public Pair<Integer,Integer>getEnemyPos(){	
-		return this.pos;
-		
-	}
+
 
 	@Override
 	public String toString() {
@@ -75,6 +71,9 @@ public class Enemy {
 		return s;
 	}
 
+	public int getID() {
+		return this.ID;
+	}
 	public int GetHP() {
 		return HP;
 	}
@@ -89,7 +88,7 @@ public class Enemy {
 
 	public void SetHP(int damage) {
 		this.HP = HP-damage;
-		System.out.println("Enemy ID : "+this.ID+" HP Remaining = "+GetHP());
+		System.out.println("Enemy "+this.ID+" - Life = " + GetHP());
 		if(GetHP()<=0) {
 			gg.player.getExperience().gainExp(this.getEXP());
 			gg.player.getGold().gainGold_points(this.Gold);
@@ -110,8 +109,9 @@ public class Enemy {
 
 	public void GetHit(int hero_ATK) {
 		// TODO Auto-generated method stub
-		System.out.println("getting hit by counter BY "+ (hero_ATK-GetDEF())+" Damage");
-		SetHP(hero_ATK-GetDEF());
+		//al posto di damage hero_ATK-GetDEF ci mettiamo il valore dell'attacco del player
+		System.out.println("Enemy "+this.ID + " hit by hero - Damage of " +(hero_ATK));
+		SetHP(hero_ATK);
 		
 	}
 
@@ -119,7 +119,7 @@ public class Enemy {
 
 	private void Death() {
 		// TODO Auto-generated method stub
-		System.out.println("ENEMY "+this.ID+" has died");
+		System.out.println("Enemy "+this.ID+" has died");
 		setEXP(0);
 		setGold(0);
 		if(!gg.skipenemy.contains(this.ID)) {

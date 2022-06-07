@@ -31,6 +31,7 @@ public class Global_Generator {
 	public Map<Ability.Type, Integer> abilities = new HashMap<>();
 	//ability manager
 	public AbilityManager abilityManager;
+	public ObstacleGenerator obstacleGenerator;
 	//player
 	public PlayerImpl player;
 	public PlayerAttack playerAttack;
@@ -40,7 +41,7 @@ public class Global_Generator {
 	public List<Enemy> enemies;
 	//id dei nemici morti
 	public List<Integer> skipenemy; 
-
+	private int round;
 	//gui
 	GUI g;	
 
@@ -55,18 +56,48 @@ public class Global_Generator {
 		return instance;
 	}
 
+	public void play() {
+
+		generation();
+		
+		while(true && round < MAX_ROUNDS) {
+			System.out.println("---- Round "+ round + " ----");	
+			System.out.println("Killed enemies: "+skipenemy.size());
+			
+			if(skipenemy.size() == NUM_ENEMIES) {
+				//carico una nuova mappa
+				//rigenero nuovi nemici
+				//rigenero nuovi ostacoli
+				//controllo i punti esperienza e nel caso aumento di livello --> sono piu forte e guadagno oro
+				reset();
+				
+
+				obstacleGenerator.generateObstacles();
+
+			} 
+			
+			playerTurn();
+			enemyTurn();
+			
+			round++;
+		}
+		
+	}
 	
-	public void generation() {
+	
+	private void generation() {
 
-		final ObstacleGenerator obstacleGenerator = new ObstacleGenerator(obstacles);
+		//LIVELLO 0
+		//genero per la prima volta tutti i controller
+		this.obstacleGenerator = new ObstacleGenerator(obstacles);
 		this.player = new PlayerImpl(rand_pos_player(GRID_SIZE));
-
 		this.playerAttack = new PlayerAttackImpl(player);
 		this.playerMouvement = new PlayerMouvementsImpl(player);
 		this.enemies = new ArrayList<Enemy>();
 		this.skipenemy = new ArrayList<>(); 
 		g = new GUI(15);
 	
+		//creo le abilita
 		abilities.put(Ability.Type.ELIXIR_OF_LIFE, 2);
 		abilities.put(Ability.Type.DOUBLE_ATTACK, 3);
 		this.abilityManager = new AbilityManager(abilities);
@@ -79,31 +110,21 @@ public class Global_Generator {
 		System.out.println("You can now move using: w=UP | s=DOWN | a=LEFT | d=RIGHT");
 		System.out.println("You can use abilities with 1 and 2");
 		
-		int round = 0;
-		
-		while(true && round < MAX_ROUNDS) {
-			System.out.println("---- Round "+ round + " ----");	
-			System.out.println("skipped enemy size = "+skipenemy.size());
-			
-			if(skipenemy.size()==NUM_ENEMIES) {
-				reset();
-				player.recoverPlayer();
-				generate_enemies();
-			} 
-			
-			playerTurn();
-			enemyTurn();
-			
-			round++;
-		}
+		round = 0;
 		
 	}
 	
+	
+	
+	
 	private void reset() {
+		player.recoverPlayer();
 		enemyposwithID = new ArrayList<>();
 		enemies= new ArrayList<Enemy>();
+		generate_enemies();
 		skipenemy=new ArrayList<Integer>();
 		obstacles = new ArrayList<>(); 
+		round = 0;
 	}
 
 	private void generate_enemies() {
@@ -116,7 +137,6 @@ public class Global_Generator {
 	private void playerTurn() {
 		while(player.getPlayer_action().getAvailableActions() > 0) {
 			player.getPlayer_action().removeAction();
-	        System.out.println("Enter Input : w=UP // s=DOWN // a=LEFT // d=RIGHT ");
         	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	        try {
 	            String s = br.readLine();
@@ -142,11 +162,6 @@ public class Global_Generator {
 	            		g.update();
 	            		System.out.println("Move RIGHT");
 	            	break;
-					case("e"):
-						playerAttack.attack(player.getPlayerPosition());
-            			System.out.println("Attack...");
-						g.update();
-						break;
 					//al posto dei tasti ci saranno i bottoni
 					//nel caso non si possano usare più abilitò perchè finite non si deve fare la removeAction 
 					case("1"):
@@ -188,8 +203,7 @@ public class Global_Generator {
 
 
 	private void enemyTurn() {
-		// TODO Auto-generated method stub
-		for(var item:enemyposwithID) {
+			for(var item:enemyposwithID) {
 			if(skipenemy.contains(item.getX())) {
 				// ï¿½ bruttissimo ma quando muoiono vengono teletrasportati ad una posizione fuore schermo a (99,99)
 				// e vengono pure disattivati quindi non agiranno MAI PIU' !! 
@@ -234,7 +248,8 @@ public class Global_Generator {
 	 * false: if position has an enemy
 	 */  
 	public boolean checkEnemyPos(Pair<Integer, Integer> position) {
-
+		//TODO: da cambiare e non usare gli enemies
+		/*
 		Optional<Enemy> enemy = enemies
 				.stream()
 				.filter(e -> e.getEnemyPos().equals(position))
@@ -245,6 +260,8 @@ public class Global_Generator {
 		}else {
 			return true;
 		}
+		*/
+		return true;
 	}
 
 	

@@ -9,7 +9,7 @@ public class Starter {
 	
 	public static void main(final String[] args) {
 		Global_Generator gg = Global_Generator.getInstance();
-		gg.generation();
+		gg.play();
 	}
 }
 

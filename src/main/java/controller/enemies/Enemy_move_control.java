@@ -74,7 +74,7 @@ public class Enemy_move_control {
 	
 	private static void attckHero() {
 		var correct_enemy=gg.enemies.get(enemyID);
-		System.out.println("Dealing "+correct_enemy.GetATK()+" Damage to HERO");
+		System.out.println("Enemy " + enemyID + " attacking hero - damage on hero of "+correct_enemy.GetATK());
 		//System.out.println("THAT'S A LOT OF DAMAGE !!");
 		playerAtt.getHit(enemyID,correct_enemy.GetATK());   //changed atk con getATK()		
 	}
