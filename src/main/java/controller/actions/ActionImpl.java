@@ -42,13 +42,11 @@ public class ActionImpl implements Action{
 
 	@Override
 	public void addAction() {
-		// TODO Auto-generated method stub
 		this.actions++;
 	}
 
 	@Override
 	public void resetActions() {
-		// TODO Auto-generated method stub
 		this.actions = DEFAULT_N_OF_ACTIONS;
 	}
 
