@@ -94,7 +94,7 @@ public class Enemy {
 			gg.player.getExperience().gainExp(this.getEXP());
 			gg.player.getGold().gainGold_points(this.Gold);
 			if(gg.player.getGold().getGold_points()>=20) {
-				gg.player.getLife().setLifePoints(gg.player.getLife().getLifePoints()+10); // pago i punti cità con l'oro
+				gg.player.getLife().setLifePoints(gg.player.getLife().getLifePoints()+5); // pago i punti cità con l'oro
 				gg.player.getGold().setGold_points(gg.player.getGold().getGold_points()-20); 
 			}
 			Death();
