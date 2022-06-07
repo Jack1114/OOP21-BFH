@@ -35,6 +35,7 @@ public class Global_Generator {
 	public PlayerImpl player;
 	public PlayerAttack playerAttack;
 	public PlayerMouvement playerMouvement;
+	public Enemy ennemi;
 	//nemici
 	public List<Enemy> enemies;
 	//id dei nemici morti
@@ -115,6 +116,7 @@ public class Global_Generator {
 	private void playerTurn() {
 		while(player.getPlayer_action().getAvailableActions() > 0) {
 			player.getPlayer_action().removeAction();
+	        System.out.println("Enter Input : w=UP // s=DOWN // a=LEFT // d=RIGHT ");
         	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	        try {
 	            String s = br.readLine();
@@ -141,7 +143,7 @@ public class Global_Generator {
 	            		System.out.println("Move RIGHT");
 	            	break;
 					case("e"):
-						playerAttack.attack();
+						playerAttack.attack(player.getPlayerPosition());
             			System.out.println("Attack...");
 						g.update();
 						break;

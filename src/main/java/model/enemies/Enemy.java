@@ -3,13 +3,14 @@ import java.util.*;
 
 import controller.globalGenerator.Global_Generator;
 import model.player.Pair;
+import model.player.Player;
 import model.player.PlayerImpl;
 
 public class Enemy {
 
 	// supponendo che lo schermo sia una griglia di 15 X 15
 	int GRID_SIZE = 15;
-	PlayerImpl player;
+	Player player;
 	Pair<Integer,Integer> pos;
 	Global_Generator gg = Global_Generator.getInstance();
 	
@@ -86,12 +87,16 @@ public class Enemy {
 		return def;
 	}
 
-	private void SetHP(int damage) {
+	public void SetHP(int damage) {
 		this.HP = HP-damage;
 		System.out.println("Enemy ID : "+this.ID+" HP Remaining = "+GetHP());
 		if(GetHP()<=0) {
-			player.getExperience().gainExp(this.getEXP());
-			player.getGold().gainGold_points(this.Gold);
+			gg.player.getExperience().gainExp(this.getEXP());
+			gg.player.getGold().gainGold_points(this.Gold);
+			if(gg.player.getGold().getGold_points()>=20) {
+				gg.player.getLife().setLifePoints(gg.player.getLife().getLifePoints()+10); // pago i punti cità con l'oro
+				gg.player.getGold().setGold_points(gg.player.getGold().getGold_points()-20); 
+			}
 			Death();
 		}
 	}

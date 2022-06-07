@@ -76,7 +76,7 @@ public class Enemy_move_control {
 		var correct_enemy=gg.enemies.get(enemyID);
 		System.out.println("Dealing "+correct_enemy.GetATK()+" Damage to HERO");
 		//System.out.println("THAT'S A LOT OF DAMAGE !!");
-		playerAtt.getHit(correct_enemy.GetATK());   //changed atk con getATK()		
+		playerAtt.getHit(enemyID,correct_enemy.GetATK());   //changed atk con getATK()		
 	}
 	
 	// movimento in verticale la X rimane la stessa ma la Y cambia 

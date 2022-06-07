@@ -14,13 +14,16 @@ public class Gold {
 	public int getGold_points() {
 		return gold;
 	}
+	public void setGold_points(int g) {
+		this.gold=g;
+	}
 
 	
 	/**
 	 *when the palyer kill an enemie, he win gold
 	 */
 	public void gainGold_points(int newGold) {
-		gold+=newGold;
+		this.gold+=newGold;
 		
 	}
 
