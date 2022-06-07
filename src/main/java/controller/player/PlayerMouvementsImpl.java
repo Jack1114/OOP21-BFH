@@ -29,75 +29,59 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 	/**
 	 * the player move to the left
 	 */
-	@SuppressWarnings("unlikely-arg-type")
+
 	public void left() {
 		//dopo aver saltato un ostacolo di tipo POOL, il player dovrebbe andare alla colona successiva a quella con l'ostacolo POOl
 			new_player_pos=new Pair<>(player.getPlayerPosition().getX()-1,player.getPlayerPosition().getY());
+
 			if(check_advancement(new_player_pos)) {
-				if(gg.obstacles.contains(new_player_pos)) {
-					gg.obstacles.forEach(item -> {
-						if(item.getObstaclePos().equals(new_player_pos) && item.getObstacleType()==Obstacle.Type.POOL) {
-							new_player_pos=new Pair<>(player.getPlayerPosition().getX()-2,player.getPlayerPosition().getY());
-						}
-					});
-				}
 				move(new_player_pos);
 			}
+			else
+				stop();
+			
 	}
 
 	/**
 	 * the player move to the right
 	 */
-	@SuppressWarnings("unlikely-arg-type")
+
 	public void right() {
 		new_player_pos=new Pair<>(player.getPlayerPosition().getX()+1,player.getPlayerPosition().getY());
 		if(check_advancement(new_player_pos)) {
-			if(gg.obstacles.contains(new_player_pos)) {
-				gg.obstacles.forEach(item -> {
-					if(item.getObstaclePos().equals(new_player_pos) && item.getObstacleType()==Obstacle.Type.POOL) {
-						new_player_pos=new Pair<>(player.getPlayerPosition().getX()+2,player.getPlayerPosition().getY());
-					}
-				});
-			}
 			move(new_player_pos);
 		}
+		else
+			stop();
+	
 	}
 
 	/**
 	 * the player move to down
 	 */
-	@SuppressWarnings("unlikely-arg-type")
 	public void down() {
 		new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY()+1);
+	
 		if(check_advancement(new_player_pos)) {
-			
-			if(gg.obstacles.contains(new_player_pos)) {
-				gg.obstacles.forEach(item -> {
-					if(item.getObstaclePos().equals(new_player_pos) && item.getObstacleType()==Obstacle.Type.POOL) {
-						new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY()+2);
-					}
-				});
-			}
 			move(new_player_pos);
+			
 		}
+		else
+			stop();
+		
 	}
 
 	/**
 	 * the player move to up
 	 */
-	@SuppressWarnings("unlikely-arg-type")
+
 	public void up() {
 		new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY()-1);
 		if(check_advancement(new_player_pos)) {
-			if(gg.obstacles.contains(new_player_pos)) {
-				gg.obstacles.forEach(item -> {
-					if(item.getObstaclePos().equals(new_player_pos) && item.getObstacleType()==Obstacle.Type.POOL) {
-						new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY()-2);
-					}
-				});
-			}
-			move(new_player_pos);
 		}
+		else
+			stop();
+		
 	}
 
 	
@@ -113,6 +97,7 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 		
 			player.setPlayerPosition(newPos);
 	}
+
 	
 	/**
 	 * @return 
@@ -133,15 +118,15 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 			switch(type.get().getObstacleType()) {
 				case POOL:
 					player.getPlayer_action().removeAction();
-					player.getLife().setLifePoints(player.getLife().getLifePoints()-2);
 					return true;
 				case ROCK:
-					return false; 
+					player.getLife().setLifePoints(player.getLife().getLifePoints()-2);
+					return false;
 			}
 		}
 
 		// controllo se va fuori dai bordi schermo
-		if( (player.getPlayerPosition().getX()<0 || player.getPlayerPosition().getX()>gg.GRID_SIZE-1) || (player.getPlayerPosition().getY()<0 || player.getPlayerPosition().getY()>gg.GRID_SIZE-1) ){
+		if( (new_player_pos.getX()<0 || new_player_pos.getX()>gg.GRID_SIZE-1) || new_player_pos.getY()<0 || new_player_pos.getY()>gg.GRID_SIZE-1 ){
 			System.out.println("vado fuori dai bordi !!!!!!!");
 			return false;
 		}
@@ -153,10 +138,10 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 		     if(item.getY().getX()== new_player_pos.getX() && item.getY().getX() == new_player_pos.getY())
 			 {
 			     PlayerAttackImpl playerAttackImpl = new PlayerAttackImpl(player);
-			     playerAttackImpl.attack(); 
+			     playerAttackImpl.attack(new_player_pos);
 			 }
 		  });
-		return true;
+		return false;
 	}
 
 

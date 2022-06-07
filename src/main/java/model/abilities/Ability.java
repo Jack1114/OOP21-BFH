@@ -1,9 +1,13 @@
 package model.abilities;
 
-public abstract class Ability {
+public interface Ability {
 	
+	enum Type{
+		DOUBLE_ATTACK,
+		ELIXIR_OF_LIFE;
+	}
 	
-	abstract void apply();
+	void apply();
 	
-
+	String getName();
 }

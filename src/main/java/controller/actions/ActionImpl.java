@@ -2,7 +2,7 @@
 
 public class ActionImpl implements Action{
 
-	private final static int DEFAULT_N_OF_ACTIONS = 3;
+	private final static int DEFAULT_N_OF_ACTIONS =3;
 	private int actions;
 	
 	public ActionImpl() {

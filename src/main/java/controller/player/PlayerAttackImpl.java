@@ -29,10 +29,10 @@ public class PlayerAttackImpl implements PlayerAttack {
 		return attackPoints;
 	}
 
-	public void attack() {
+	public void attack(Pair<Integer, Integer> new_heropos2) {
 		//int responseHit;
 		gg.enemyposwithID.forEach(item->{
-		if(item.getY().getX()==player.getPlayerPosition().getX() && item.getY().getY()==player.getPlayerPosition().getY());
+		if(item.getY().getX()==new_heropos2.getX() && item.getY().getY()==new_heropos2.getY());
 		  	{
 		  	gg.enemies.get(item.getX()).GetHit(getAttackPoints());
 		  	//mi serve nel caso un'abilita' abbia cambiato il valore di attackPoints
@@ -59,13 +59,18 @@ public class PlayerAttackImpl implements PlayerAttack {
 	 * after an attack from the enemie, the playerlost some health points
 	 */
 	
-	public void getHit(int enemyResponseHit) { 
-		player.getLife().setLifePoints(player.getLife().getLifePoints() - enemyResponseHit); //considero che ennemy_attack e hero_attack valgono la stessa cosa= attackPoints
+	public void getHit(int enemyID,int enemyResponseHit) {
+		gg.player.getLife().setLifePoints(gg.player.getLife().getLifePoints()-enemyResponseHit);
+		counter(enemyID, player.getAttackPoints());
 		if(player.getLife().getLifePoints()<=0) {   //se il player non ha più vita,il gplayer muore e il turno è finito
 			System.out.println("L'eroe è morto!");
 			System.exit(0);
 		}
 	}
 		
+	public void counter(int enemyID, int Hero_ATK) {
+		gg.enemies.get(enemyID).GetHit(Hero_ATK);
+		
+	}
 
 }
