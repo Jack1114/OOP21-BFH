@@ -18,6 +18,7 @@ import model.player.PlayerImpl;
 public class PlayerMouvementsImpl implements PlayerMouvement {
 
 	private Pair<Integer,Integer> new_player_pos;
+	private Pair<Integer,Integer> new_player_pos2;
 	private final PlayerImpl player;
 	private Global_Generator gg = Global_Generator.getInstance();
 	
@@ -29,12 +30,22 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 	/**
 	 * the player move to the left
 	 */
-
+	@SuppressWarnings("unlikely-arg-type")
 	public void left() {
 		//dopo aver saltato un ostacolo di tipo POOL, il player dovrebbe andare alla colona successiva a quella con l'ostacolo POOl
 			new_player_pos=new Pair<>(player.getPlayerPosition().getX()-1,player.getPlayerPosition().getY());
-
+			new_player_pos2 = new Pair<>(player.getPlayerPosition().getX()-2,player.getPlayerPosition().getY());
 			if(check_advancement(new_player_pos)) {
+				if(gg.obstacles.contains(new_player_pos)) {
+					gg.obstacles.forEach(item -> {
+						if(item.getObstaclePos().equals(new_player_pos) && item.getObstacleType()==Obstacle.Type.POOL) {
+							if(player.getPlayer_action().getAvailableActions()>0)
+								move(new_player_pos2);
+							else
+								stop();
+						}
+					});
+				 }
 				move(new_player_pos);
 			}
 			else
@@ -45,10 +56,21 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 	/**
 	 * the player move to the right
 	 */
-
+	@SuppressWarnings("unlikely-arg-type")
 	public void right() {
 		new_player_pos=new Pair<>(player.getPlayerPosition().getX()+1,player.getPlayerPosition().getY());
+		new_player_pos2 = new Pair<>(player.getPlayerPosition().getX()-2,player.getPlayerPosition().getY());
 		if(check_advancement(new_player_pos)) {
+			if(gg.obstacles.contains(new_player_pos)) {
+				gg.obstacles.forEach(item -> {
+					if(item.getObstaclePos().equals(new_player_pos) && item.getObstacleType()==Obstacle.Type.POOL) {
+						if(player.getPlayer_action().getAvailableActions()>0)
+							move(new_player_pos2);
+						else
+							stop();
+					}
+				});
+			}
 			move(new_player_pos);
 		}
 		else
@@ -59,10 +81,22 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 	/**
 	 * the player move to down
 	 */
+	@SuppressWarnings("unlikely-arg-type")
 	public void down() {
 		new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY()+1);
-	
+		new_player_pos2 = new Pair<>(player.getPlayerPosition().getX()-2,player.getPlayerPosition().getY());
 		if(check_advancement(new_player_pos)) {
+			
+			if(gg.obstacles.contains(new_player_pos)) {
+				gg.obstacles.forEach(item -> {
+					if(item.getObstaclePos().equals(new_player_pos) && item.getObstacleType()==Obstacle.Type.POOL) {
+						if(player.getPlayer_action().getAvailableActions()>0)
+							move(new_player_pos2);
+						else
+							stop();
+					}
+				});
+			}
 			move(new_player_pos);
 			
 		}
@@ -74,10 +108,22 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 	/**
 	 * the player move to up
 	 */
-
+	@SuppressWarnings("unlikely-arg-type")
 	public void up() {
 		new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY()-1);
+		new_player_pos2 = new Pair<>(player.getPlayerPosition().getX()-2,player.getPlayerPosition().getY());
 		if(check_advancement(new_player_pos)) {
+			if(gg.obstacles.contains(new_player_pos)) {
+				gg.obstacles.forEach(item -> {
+					if(item.getObstaclePos().equals(new_player_pos) && item.getObstacleType()==Obstacle.Type.POOL) {
+						if(player.getPlayer_action().getAvailableActions()>0)
+							move(new_player_pos2);
+						else
+							stop();
+					}
+				});
+			}
+			move(new_player_pos);
 		}
 		else
 			stop();
@@ -141,7 +187,7 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 			     playerAttackImpl.attack(new_player_pos);
 			 }
 		  });
-		return false;
+		return true;
 	}
 
 
