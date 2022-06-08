@@ -22,6 +22,7 @@ public class Global_Generator {
 	
 	public static final int GRID_SIZE = 15;
 	private static final int MAX_ROUNDS = 50;
+	//NUM ENEMIES dovrebbe incrementare con il livello
 	public int NUM_ENEMIES = 3;
     				// ID           POS
 	public List<Pair<Integer,Pair<Integer,Integer>>> enemyposwithID = new ArrayList<>();
@@ -36,7 +37,6 @@ public class Global_Generator {
 	public PlayerImpl player;
 	public PlayerAttack playerAttack;
 	public PlayerMouvement playerMouvement;
-	public Enemy ennemi;
 	//nemici
 	public List<Enemy> enemies;
 	//id dei nemici morti
@@ -60,20 +60,18 @@ public class Global_Generator {
 
 		generation();
 		
-		while(true && round < MAX_ROUNDS) {
+		//game core
+		while(true && round <= MAX_ROUNDS) {
 			System.out.println("---- Round "+ round + " ----");	
 			System.out.println("Killed enemies: "+skipenemy.size());
 			
 			if(skipenemy.size() == NUM_ENEMIES) {
 				//carico una nuova mappa
-				//rigenero nuovi nemici
-				//rigenero nuovi ostacoli
-				//controllo i punti esperienza e nel caso aumento di livello --> sono piu forte e guadagno oro
 				reset();
-				
-
-				obstacleGenerator.generateObstacles();
-
+				//controllo i punti esperienza e nel caso aumento di livello --> sono piu forte e guadagno oro
+				if(player.getExperience().addLevel()) {
+					player.recoverPlayer();
+				}			
 			} 
 			
 			playerTurn();
@@ -87,7 +85,7 @@ public class Global_Generator {
 	
 	private void generation() {
 
-		//LIVELLO 0
+		//LIVELLO 1
 		//genero per la prima volta tutti i controller
 		this.obstacleGenerator = new ObstacleGenerator(obstacles);
 		this.player = new PlayerImpl(rand_pos_player(GRID_SIZE));
@@ -102,8 +100,9 @@ public class Global_Generator {
 		abilities.put(Ability.Type.DOUBLE_ATTACK, 3);
 		this.abilityManager = new AbilityManager(abilities);
 		abilityManager.generateAbilities();
-		obstacleGenerator.generateObstacles();
-		generate_enemies();
+		
+		//map generation
+		generateArena();
 
 		g.update();
 		System.out.println("Genarated obstacles, enemies and player");
@@ -115,14 +114,18 @@ public class Global_Generator {
 	}
 	
 	
-	
+	private void generateArena() {
+		obstacleGenerator.generateObstacles();
+		generate_enemies();
+		//g.update();
+	}
 	
 	private void reset() {
-		player.recoverPlayer();
+		//obstacles.removeAll(obstacles);
+		generateArena();
 		enemyposwithID = new ArrayList<>();
 		enemies= new ArrayList<Enemy>();
-		generate_enemies();
-		skipenemy=new ArrayList<Integer>();
+		skipenemy =new ArrayList<Integer>();
 		obstacles = new ArrayList<>(); 
 		round = 0;
 	}
@@ -140,7 +143,6 @@ public class Global_Generator {
         	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	        try {
 	            String s = br.readLine();
-
 	            switch(s) {
 	            	case("w"):
 	            		playerMouvement.up();
@@ -191,10 +193,8 @@ public class Global_Generator {
 	            		playerMouvement.stop();
 	            		g.update();
 	            	break;
-	            }
-	            	
-	            //System.out.println(s);
-			}catch(Exception e) {
+	            	}
+	         }catch(Exception e) {
 	            System.out.println(e);
 	        }
 		}
@@ -249,6 +249,9 @@ public class Global_Generator {
 	 */  
 	public boolean checkEnemyPos(Pair<Integer, Integer> position) {
 		//TODO: da cambiare e non usare gli enemies
+		if(enemyposwithID.stream().map(e -> e.getY()).equals(position)) {
+			return false;
+		}
 		/*
 		Optional<Enemy> enemy = enemies
 				.stream()

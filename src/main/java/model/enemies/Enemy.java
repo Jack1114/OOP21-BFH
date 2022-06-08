@@ -56,6 +56,7 @@ public class Enemy {
 			x= rand.nextInt(GRID_SIZE);
 			y= rand.nextInt(GRID_SIZE);
 			pos=new Pair<>(x,y);
+			//TODO: da controllare le condizioni dell'if
 			if( (!gg.enemyposwithID.contains(pos) ) && (!gg.obstacles.contains(pos))  ) {
 				gg.enemyposwithID.add(new Pair<Integer, Pair<Integer, Integer>>(this.ID,pos));
 				ok=true;
@@ -92,8 +93,8 @@ public class Enemy {
 		if(GetHP()<=0) {
 			gg.player.getExperience().gainExp(this.getEXP());
 			gg.player.getGold().gainGold_points(this.Gold);
-			if(gg.player.getGold().getGold_points()>=20) {
-				gg.player.getLife().setLifePoints(gg.player.getLife().getLifePoints()+5); // pago i punti cità con l'oro
+			if(gg.player.getGold().getGold_points()>=20 && gg.player.getLife().getLifePoints() < gg.player.getLife().getMaxLifePoints() - 10 ) {
+				gg.player.getLife().setLifePoints(gg.player.getLife().getLifePoints() + 10); // pago i punti cità con l'oro
 				gg.player.getGold().setGold_points(gg.player.getGold().getGold_points()-20); 
 			}
 			Death();

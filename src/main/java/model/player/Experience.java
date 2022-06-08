@@ -1,12 +1,13 @@
 package model.player;
 
 public class Experience {
-	private static int MAX_EXP_POINTS=0;
+	private static final int MAX_EXP_POINTS = 100;
+	private static int DEFAULT_EXP_POINTS=0;
 	private int level=1;
-	private int expPoints=0; //punti che l’eroe guadagna quando uccide un nemico
+	private int expPoints; //punti che l’eroe guadagna quando uccide un nemico
 
 	public Experience() {
-		this.expPoints=MAX_EXP_POINTS;
+		this.expPoints=DEFAULT_EXP_POINTS;
 	}
 	/**
 	 * 
@@ -17,45 +18,40 @@ public class Experience {
 		this.expPoints += newExpPoints;
 	}
 	
-	public int getMaxExpPoints() {
-		return MAX_EXP_POINTS;
+	public int getExpPoints() {
+		return this.expPoints;
 	}
 
-	/**
-	 * @return player'S experience points
-	 */
-	public int getExpPoints() {
-		return expPoints;
-	}
 	/**
 	 * @return player's level
 	 */
 	public int getLevel() {
-		return level;
-		
+		return level;	
 	}
 	/**
 	 * check if the player has enough experience points to add level
 	 */
-	public  void checkAddLevel() {
-		if(this.expPoints>=100*level)
-		{
-			this.expPoints-=100*level;
-			
+	public boolean addLevel() {
+		if(checkLevel()) {
 			level++; //level up
+			return true;
 		}
-	
+		return false;
 	}
+	
+	
+	private boolean checkLevel() {
+		return this.expPoints >= MAX_EXP_POINTS * level;
+	}
+	
 
 	/**
 	 * @param exp
-	 * add the player's experience points
+	 * add the player's experience points when the enemy dies
 	 */
-	public void gainExp(int exp) { // quando muore il nemico
+	public void gainExp(int exp) { 
 		expPoints+=exp;
-		MAX_EXP_POINTS=expPoints;
-		checkAddLevel();
-		
+		addLevel();		
 	}
 
 }
