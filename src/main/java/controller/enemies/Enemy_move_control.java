@@ -19,8 +19,8 @@ public class Enemy_move_control {
 	// aggiungere il modo per infliggere danno (fatto)
 	// controllare il movmiento in diagonale con 2 nemici che si sovrappongono e anche col giocatore ( fatto )
 	
-	static int dx;
-	static int dy;
+	private static int dx;
+	private static int dy;
 	
 	static Pair<Integer,Integer> newenemyPos;
 	private static int enemyID;

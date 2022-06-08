@@ -42,6 +42,7 @@ public class Global_Generator {
 	//id dei nemici morti
 	public List<Integer> skipenemy; 
 	private int round;
+	final int ADD_HP=7;
 	//gui
 	GUI g;	
 
@@ -59,7 +60,8 @@ public class Global_Generator {
 	public void play() {
 
 		generation();
-		
+
+
 		//game core
 		while(true && round <= MAX_ROUNDS) {
 			System.out.println("---- Round "+ round + " ----");	
@@ -71,6 +73,7 @@ public class Global_Generator {
 				//controllo i punti esperienza e nel caso aumento di livello --> sono piu forte e guadagno oro
 				if(player.getExperience().addLevel()) {
 					player.recoverPlayer();
+					strongEnemies();
 				}			
 			} 
 			
@@ -81,7 +84,12 @@ public class Global_Generator {
 		}
 		
 	}
-	
+
+	public void strongEnemies() {
+		for(var item:enemies) {
+			item.setHPennemi(item.GetHP()+ADD_HP);
+		}
+	}
 	
 	private void generation() {
 

@@ -14,17 +14,17 @@ public class Enemy {
 	Pair<Integer,Integer> pos;
 	Global_Generator gg = Global_Generator.getInstance();
 	
-	int ID;
+	private int ID;
 	
-	int x;
-	int y;
+	private int x;
+	private int y;
 	
-	int HP;
-	int def;
-	int atk;
-	int exp;
-	int HeroEXP =gg.player.getExperience().getExpPoints();
-	int Gold;
+	private int HP ;
+	private int def;
+	private int atk;
+	private int exp;
+	private int HeroEXP =gg.player.getExperience().getExpPoints();
+	private int Gold;
 	
 	Random rand = new Random();
 	
@@ -40,7 +40,7 @@ public class Enemy {
 		HP =( 5+value + ( HeroEXP/(15*5) ));
 		def=( 1+value/2 + ( HeroEXP/(20*8) ));
 		atk=( 1+value/3 + ( HeroEXP/(10*10) ));
-		exp=( 20+value*2 + ( HeroEXP/(15*6) ));
+		exp=( 10+value*2 + ( HeroEXP/(15*6) ));
 		Gold=rand.nextInt(15)+10;
 		generate_pos();
 	}
@@ -68,7 +68,7 @@ public class Enemy {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		String s = "HP = "+this.HP+" atk = "+this.atk+" def = "+this.def+" exp = "+this.exp ;
+		String s = "HP = "+GetHP()+" atk = "+this.atk+" def = "+this.def+" exp = "+this.exp ;
 		return s;
 	}
 
@@ -88,7 +88,7 @@ public class Enemy {
 	}
 
 	public void SetHP(int damage) {
-		this.HP = HP-damage;
+		setHPennemi(GetHP()-damage);
 		System.out.println("Enemy "+this.ID+" - Life = " + GetHP());
 		if(GetHP()<=0) {
 			gg.player.getExperience().gainExp(this.getEXP());
@@ -101,6 +101,14 @@ public class Enemy {
 		}
 	}
 	
+	public void setHPennemi(int i) {
+		HP=i;
+		
+	}
+
+
+
+
 	private int getEXP() {
 		// TODO Auto-generated method stub
 		return this.exp;
