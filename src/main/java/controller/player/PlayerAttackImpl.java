@@ -55,7 +55,7 @@ public class PlayerAttackImpl implements PlayerAttack {
 	
 	public void getHit(int enemyID,int enemyResponseHit) {
 		gg.player.getLife().setLifePoints(gg.player.getLife().getLifePoints()-enemyResponseHit);
-		counter(enemyID, player.getAttackPoints());
+		//counter(enemyID, player.getAttackPoints());
 		if(player.getLife().getLifePoints()<=0) {   //se il player non ha più vita,il gplayer muore e il turno è finito
 			System.out.println("L'eroe è morto!");
 			System.exit(0);
