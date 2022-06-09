@@ -9,7 +9,7 @@ public class Life {
 	}
 	 /**
 	  *
-	  * @return player's health points
+	  * @return player's life points
 	  */
 	public int getLifePoints() {
 		return lifePoints;
@@ -23,7 +23,13 @@ public class Life {
 	}
 
 	public void setLifePoints(int newlifePoints) {
-	 lifePoints=newlifePoints;
+		if(checkLifePoints(newlifePoints)) {
+			 lifePoints = newlifePoints;
+		}
+	}
+	
+	private boolean checkLifePoints(final int lifePoints) {
+		return lifePoints < MAX_LIFE_POINTS;
 	}
 	
 	public void resetLife() {

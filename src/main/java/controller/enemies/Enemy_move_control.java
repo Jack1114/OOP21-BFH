@@ -108,17 +108,17 @@ public class Enemy_move_control {
 			if (checkenemypos(newPos)) {
 				System.out.println("NEMICO rimango fermo");
 				newenemyPos = new Pair<>(old_pos.getX(),old_pos.getY());
-			} else if(newPos.getX()==player.getPlayerPosition().getX() && newPos.getY()==player.getPlayerPosition().getY()) {
+			} else if(newPos.equals(player.getPlayerPosition())) {
 				attckHero();
 				newenemyPos = new Pair<>(old_pos.getX(),old_pos.getY());
-			} else if (gg.obstacles.contains(newPos)) {
+			} else if (gg.obstacles.stream().anyMatch(o -> o.getObstaclePos().equals(newPos))){
 				
 				if(!moved_diagonally && act_pt==0) {
 					    diagonalmovement(old_pos,newPos,horizontal_movement);
 					    
 					    // controllo finale per vedere se l'avanzamento in diagonale non coincide con giocatore e nemico 
 					    gg.enemyposwithID.forEach(elem->{
-					    	if( (elem.getY().getX() == newenemyPos.getX() && elem.getY().getY() == newenemyPos.getY()) || (newenemyPos.getX()==player.getPlayerPosition().getX() && newenemyPos.getY()==player.getPlayerPosition().getY()) ) {
+					    	if( elem.getY().equals(newenemyPos) || newenemyPos.equals(player.getPlayerPosition())) {
 					    		newenemyPos=old_pos;
 					    	}
 					    });
@@ -149,14 +149,20 @@ public class Enemy_move_control {
 				if(old_pos.getX()>newPos.getX()) {
 					//caso 1 e 3
 					System.out.println("caso 1 e 3 orizzontale ");
-					if(upfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()-1)) &&  !gg.obstacles.contains(p1)){ //1
+					if(upfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()-1)) 
+							&&  !gg.obstacles
+							.stream()
+							.anyMatch(o -> o.getObstaclePos().equals(p1))){ //1
 						System.out.println("caso 1");
 						newenemyPos = new Pair<>(old_pos.getX()-1,old_pos.getY()-1);
 						moved_diagonally=true;
 						wait=true;
 						//stop=true;
 						
-					} else if(downfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()+1))  && !gg.obstacles.contains(p3)){ //3
+					} else if(downfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()+1))  
+							&& !gg.obstacles
+							.stream()
+							.anyMatch(o -> o.getObstaclePos().equals(p3))){ //3
 						System.out.println("caso 3");
 						newenemyPos = new Pair<>(old_pos.getX()-1,old_pos.getY()+1);
 						moved_diagonally=true;
@@ -170,14 +176,20 @@ public class Enemy_move_control {
 				} else {
 					// caso 2 e 4
 					System.out.println("caso 2 e 4 orizzontale ");
-					if(upfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()-1))  && !gg.obstacles.contains(p2)){ //2
+					if(upfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()-1))  
+							&& !gg.obstacles
+							.stream()
+							.anyMatch(o -> o.getObstaclePos().equals(p2))){ //2
 						System.out.println("caso 2");
 						newenemyPos = new Pair<>(old_pos.getX()+1,old_pos.getY()-1);
 						moved_diagonally=true;
 						wait=true;
 						//stop=true;
 						
-					} else if(downfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()+1)) && !gg.obstacles.contains(p4)){ //4
+					} else if(downfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()+1)) 
+							&& !gg.obstacles
+							.stream()
+							.anyMatch(o -> o.getObstaclePos().equals(p4))){ //4
 						System.out.println("caso 4");
 						newenemyPos = new Pair<>(old_pos.getX()+1,old_pos.getY()+1);
 						moved_diagonally=true;
