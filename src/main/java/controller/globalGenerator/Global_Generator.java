@@ -28,7 +28,7 @@ public class Global_Generator {
 	public List<Pair<Integer,Pair<Integer,Integer>>> enemyposwithID = new ArrayList<>();
 	//ostacoli
 	public List<Obstacle> obstacles = new ArrayList<>();
-	//mappa di ostacoli
+	//mappa di abilita: tipo -> numero di abilità che voglio
 	public Map<Ability.Type, Integer> abilities = new HashMap<>();
 	//ability manager
 	public AbilityManager abilityManager;
@@ -63,10 +63,10 @@ public class Global_Generator {
 		//game core
 		while(true && round <= MAX_ROUNDS) {
 			System.out.println("---- Round "+ round + " ----");	
-			System.out.println("Killed enemies: "+skipenemy.size());
+			System.out.println("Killed enemies: " + skipenemy.size());
 			
 			if(skipenemy.size() == NUM_ENEMIES) {
-				//carico una nuova mappa
+				//carico una nuova arena
 				reset();
 				//controllo i punti esperienza e nel caso aumento di livello --> sono piu forte e guadagno oro
 				if(player.getExperience().addLevel()) {
@@ -101,7 +101,6 @@ public class Global_Generator {
 		this.abilityManager = new AbilityManager(abilities);
 		abilityManager.generateAbilities();
 		
-		//map generation
 		generateArena();
 
 		g.update();
@@ -117,16 +116,15 @@ public class Global_Generator {
 	private void generateArena() {
 		obstacleGenerator.generateObstacles();
 		generate_enemies();
-		//g.update();
+		g.update();
 	}
 	
 	private void reset() {
-		//obstacles.removeAll(obstacles);
+		obstacles.removeAll(obstacles);
 		generateArena();
 		enemyposwithID = new ArrayList<>();
 		enemies= new ArrayList<Enemy>();
 		skipenemy =new ArrayList<Integer>();
-		obstacles = new ArrayList<>(); 
 		round = 0;
 	}
 
@@ -229,15 +227,12 @@ public class Global_Generator {
 	 * false: if position has and obstacle
 	 */  
 	public boolean checkObstaclesPos(Pair<Integer, Integer> position) {
-		boolean success = true;
-		//sostituisci con un for
-		obstacles.forEach(item -> {
+		for (var item: this.obstacles) {
 			if(item.getObstaclePos().equals(position)) {
-				if(success) {}
-				return;
+				return true;
 			}
-		});
-		return success;
+		}
+		return false;
 	}
 	
 	
@@ -248,22 +243,12 @@ public class Global_Generator {
 	 * false: if position has an enemy
 	 */  
 	public boolean checkEnemyPos(Pair<Integer, Integer> position) {
-		//TODO: da cambiare e non usare gli enemies
-		if(enemyposwithID.stream().map(e -> e.getY()).equals(position)) {
-			return false;
-		}
-		/*
-		Optional<Enemy> enemy = enemies
+		if(enemyposwithID
 				.stream()
-				.filter(e -> e.getEnemyPos().equals(position))
-				.findFirst();
-		//correggi lo stile
-		if(enemy.isPresent()) {
-			return false;
-		}else {
-			return true;
+				.map(e -> e.getY())
+				.anyMatch(p -> p.equals(position))) {
+				return false;
 		}
-		*/
 		return true;
 	}
 
@@ -273,8 +258,7 @@ public class Global_Generator {
 	 * @param position to check
 	 * @return true: if position is empty
 	 * false: if position is occupied by the player
-	 */  
-	 
+	 */  	 
 	public boolean checkPlayerPos(Pair<Integer, Integer> position) {
 		if(player.getPlayerPosition().equals(position)) {
 			return false;
@@ -301,6 +285,11 @@ public class Global_Generator {
 
 	}
 	
+	/**
+	 * 
+	 * @param the grid size
+	 * @return a new random position in an empty cell in the grid
+	 */
 	public Pair<Integer, Integer> randPosition(final int GRID_SIZE){
 		Pair<Integer,Integer> pos = new Pair<>(0, 0);
 		Random r = new Random();
