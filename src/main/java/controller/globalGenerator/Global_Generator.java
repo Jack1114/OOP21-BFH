@@ -116,7 +116,10 @@ public class Global_Generator {
 		System.out.println("Genarated obstacles, enemies and player");
 		System.out.println("You can now move using: w=UP | s=DOWN | a=LEFT | d=RIGHT");
 		System.out.println("You can use abilities with 1 and 2");
-		
+		//per vedere se al livello successivo gli nemici sono più forti cioè con punti vità in più
+		for(var item:enemies) {
+			System.out.println("Enemy "+item.getID()  + " has " +item.GetHP()+ "  life points");
+		}
 		round = 0;
 		
 	}
@@ -135,6 +138,12 @@ public class Global_Generator {
 		enemies= new ArrayList<Enemy>();
 		skipenemy =new ArrayList<Integer>();
 		round = 0;
+		for(var item:enemies) {
+			System.out.println("Enemy "+item.getID()  + " has " +item.GetHP() + "  life points");
+		}
+		
+
+		
 	}
 
 	private void generate_enemies() {

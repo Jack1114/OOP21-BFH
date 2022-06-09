@@ -12,10 +12,6 @@ import model.enemies.Enemy;
 import model.player.Pair;
 import model.player.PlayerImpl;
 
-/**
- * @author Olivia
- *
- */
 public class PlayerMouvementsImpl implements PlayerMouvement {
 
 	private Pair<Integer,Integer> new_player_pos;
@@ -26,10 +22,7 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 		this.player = newPlayer;
 	}
 	
-	
-	/**
-	 * the player move to the left
-	 */
+
 	public void left() {
 		new_player_pos=new Pair<>(player.getPlayerPosition().getX()-1,player.getPlayerPosition().getY());
 		if(check_advancement(new_player_pos)) {
@@ -37,9 +30,7 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 		}		
 	}
 
-	/**
-	 * the player move to the right
-	 */
+	
 	public void right() {
 		new_player_pos=new Pair<>(player.getPlayerPosition().getX()+1,player.getPlayerPosition().getY());
 		if(check_advancement(new_player_pos)) {
@@ -47,9 +38,7 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 		}
 	}
 
-	/**
-	 * the player move to down
-	 */
+	
 	public void down() {
 		new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY()+1);
 		if(check_advancement(new_player_pos)) {
@@ -57,9 +46,7 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 		}
 	}
 
-	/**
-	 * the player move to up
-	 */
+	
 	public void up() {
 		new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY()-1);
 		if(check_advancement(new_player_pos)) {
@@ -68,9 +55,7 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 	}
 
 	
-	/**
-	 * the player can not move because of an obstacle or something else
-	 */
+	
 	public void stop() {
 		new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY());	
 	}
@@ -81,12 +66,7 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 	}
 
 	
-	/**
-	 * 
-	 * @return true or false
-	 * before moving, the player check if there is an enemy and if there is an obstacle 
-	 * if there is an obstacle, he check if the obstacle's type is the one that can be cross
-	 */	
+	
 	public boolean check_advancement(Pair<Integer, Integer> new_player_pos) {
 		//check sugli ostacoli	
 		Optional<Obstacle> type = gg.obstacles

@@ -1,7 +1,7 @@
 package model.player;
 
 public class Experience {
-	private static final int MAX_EXP_POINTS = 100;
+	private static final int MAX_EXP_POINTS = 70;
 	private static int DEFAULT_EXP_POINTS=0;
 	private int level=1;
 	private int expPoints; //punti che l’eroe guadagna quando uccide un nemico
@@ -17,6 +17,9 @@ public class Experience {
 	public void setExpPoints(int newExpPoints) {
 		this.expPoints += newExpPoints;
 	}
+	/**
+	 * @return expPoits
+	 */
 	
 	public int getExpPoints() {
 		return this.expPoints;
@@ -29,7 +32,7 @@ public class Experience {
 		return level;	
 	}
 	/**
-	 * check if the player has enough experience points to add level
+	 *  add player's level
 	 */
 	public boolean addLevel() {
 		if(checkLevel()) {
@@ -38,7 +41,10 @@ public class Experience {
 		}
 		return false;
 	}
-	
+	/**
+	 * check if the player has enough experience points to add level
+	 * @return boolean
+	 */
 	
 	private boolean checkLevel() {
 		return this.expPoints >= MAX_EXP_POINTS * level;

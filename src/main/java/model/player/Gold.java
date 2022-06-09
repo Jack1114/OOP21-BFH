@@ -14,6 +14,10 @@ public class Gold {
 	public int getGold_points() {
 		return gold;
 	}
+
+	/**
+	 * update player's gold
+	 */
 	public void setGold_points(int g) {
 		this.gold=g;
 	}

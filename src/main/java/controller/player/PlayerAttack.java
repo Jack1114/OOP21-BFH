@@ -3,11 +3,6 @@ package controller.player;
 import model.enemies.Enemy;
 import model.player.Pair;
 
-/**
-* @author Olivia
-*
-*/
-
 public interface PlayerAttack {
 
 	/**
@@ -19,9 +14,13 @@ public interface PlayerAttack {
 	 * 
 	 */
 	 public int getAttackPoints();
-	 
+
+	 /** 
+	 * update player's attack_points
+	 */
 	 public void setAttackPoints(int newAttackPoints);
-	 
-	 public void resetAttackPoints();
+	 /** 
+	 *the player create a dammage to an anemy
+	 */
 	 public void getHit(int enemyID,int enemyResponseHit);
 }

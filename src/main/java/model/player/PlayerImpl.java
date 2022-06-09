@@ -3,18 +3,8 @@
  */
 package model.player;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 import controller.actions.ActionImpl;
-import model.abilities.*;
 
-/**
- * @author Olivia
- *
- */
 public class PlayerImpl implements Player {
 
 	//punti da togliere al giocatore dopo ogni hit o che può guadagnare se crea il dano al nemico
@@ -47,16 +37,12 @@ public class PlayerImpl implements Player {
 	public int getAttackPoints() {
 		return ATTACK_POINTS;
 	}
-	/**
-	 * when the player move, this function update the new position
-	 */
+	
 	public void setPlayerPosition(Pair<Integer,Integer> newPos) {
 		playerPosition=newPos;
 	}
 	
-	/**
-	 * @return player current position
-	 */
+	
 	public Pair<Integer,Integer> getPlayerPosition() {
 		return playerPosition;
 	}
