@@ -103,7 +103,6 @@ public class Global_Generator {
 		
 		generateArena();
 
-		g.update();
 		System.out.println("Genarated obstacles, enemies and player");
 		System.out.println("You can now move using: w=UP | s=DOWN | a=LEFT | d=RIGHT");
 		System.out.println("You can use abilities with 1 and 2");
@@ -115,6 +114,7 @@ public class Global_Generator {
 	
 	private void generateArena() {
 		obstacleGenerator.generateObstacles();
+		System.out.println("generated Obstacles");
 		generate_enemies();
 		g.update();
 	}
@@ -227,13 +227,19 @@ public class Global_Generator {
 	 * false: if position has and obstacle
 	 */  
 	public boolean checkObstaclesPos(Pair<Integer, Integer> position) {
-		for (var item: this.obstacles) {
-			if(item.getObstaclePos().equals(position)) {
-				return true;
-			}
+		boolean success = true;
+		if(this.obstacles.isEmpty()) {
+			return success;
 		}
-		return false;
-	}
+		for (var item: this.obstacles) {
+				if(item.getObstaclePos().equals(position)) {
+					success = false;		
+				}
+				success = success && true;
+		}
+		return success;
+		
+	}	
 	
 	
 	/**
@@ -299,7 +305,6 @@ public class Global_Generator {
 			int x = r.nextInt(GRID_SIZE);
 			int y = r.nextInt(GRID_SIZE);
 			pos = new Pair<>(x,y);
-
 			if(checkObstaclesPos(pos) && checkPlayerPos(pos) && checkEnemyPos(pos)){
 				success = true;	
 			}
