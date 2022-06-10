@@ -5,18 +5,11 @@ package controller.player;
 
 import controller.globalGenerator.Global_Generator;
 import model.enemies.Enemy;
-import model.player.Pair;
 import model.player.PlayerImpl;
-
-/**
- * @author Olivia
- *
- */
-
 
 public class PlayerAttackImpl implements PlayerAttack {
 
-	private static final int DEFAULT_ATTACK_POINTS = 5; 
+	private static final int DEFAULT_ATTACK_POINTS = 3; 
 	private int attackPoints = DEFAULT_ATTACK_POINTS;
 
 	private Global_Generator gg = Global_Generator.getInstance();
@@ -34,7 +27,6 @@ public class PlayerAttackImpl implements PlayerAttack {
 		System.out.println("Hero is attacking");
 		enemy.GetHit(getAttackPoints());
 		//mi serve nel caso un'abilita' abbia cambiato il valore di attackPoints
-		resetAttackPoints();
 
 	}
 
@@ -42,12 +34,7 @@ public class PlayerAttackImpl implements PlayerAttack {
 		// TODO Auto-generated method stub
 		this.attackPoints = newAttackPoints;
 	}
-	
-	public void resetAttackPoints() {
-		this.attackPoints = DEFAULT_ATTACK_POINTS;
-	}
 
-	
 	/**
 	 * 
 	 * after an attack from the enemie, the playerlost some health points
@@ -61,8 +48,8 @@ public class PlayerAttackImpl implements PlayerAttack {
 			System.exit(0);
 		}
 	}
-		
-	public void counter(int enemyID, int Hero_ATK) {
+		 //manteniamo counter se quando il nemico attaca il player(getHit) il player fa un contro attacko(GetHit)
+	private void counter(int enemyID, int Hero_ATK) {
 		gg.enemies.get(enemyID).GetHit(Hero_ATK);
 		
 	}
