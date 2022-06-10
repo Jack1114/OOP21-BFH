@@ -89,7 +89,7 @@ public class GUI extends JFrame {
         
         this.setVisible(true);
     }
-    
+   
     
 	public void update() {
 		//System.out.println("entro dentro update");

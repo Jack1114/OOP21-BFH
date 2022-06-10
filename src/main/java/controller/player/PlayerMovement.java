@@ -9,7 +9,7 @@ import model.player.Pair;
  * @author Olivia
  *
  */
-public interface PlayerMouvement {
+public interface PlayerMovement {
 	void left();
 	
 	void right();

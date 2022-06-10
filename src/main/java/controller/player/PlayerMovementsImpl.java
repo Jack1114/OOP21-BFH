@@ -16,13 +16,13 @@ import model.player.PlayerImpl;
  * @author Olivia
  *
  */
-public class PlayerMouvementsImpl implements PlayerMouvement {
+public class PlayerMovementsImpl implements PlayerMovement {
 
 	private Pair<Integer,Integer> new_player_pos;
 	private final PlayerImpl player;
 	private Global_Generator gg = Global_Generator.getInstance();
 	
-	public PlayerMouvementsImpl(PlayerImpl newPlayer) {
+	public PlayerMovementsImpl(PlayerImpl newPlayer) {
 		this.player = newPlayer;
 	}
 	

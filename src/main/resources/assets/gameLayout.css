@@ -6,7 +6,11 @@
    	-fx-background-color: transparent;
    	-fx-background-position: center center;
 }
+#moneyHolder{
+	-fx-padding: 5px;
 
+
+}
 #charImage, #skillA, #skillB, #inventory{
 	-fx-background-image: url("/images/panel_beige.png");
   	-fx-background-repeat: no-repeat;

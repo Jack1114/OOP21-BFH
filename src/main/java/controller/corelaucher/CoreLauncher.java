@@ -1,4 +1,5 @@
 package controller.corelaucher;
+import controller.globalGenerator.Global_Generator;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -22,12 +23,11 @@ public class CoreLauncher extends Application {
     	
     	Font.loadFont(getClass().getResourceAsStream("/assets/munro.ttf"), 10);
 
-    	
+
     	Parent root = FXMLLoader.load(getClass().getResource("/layout/mainMenu.fxml"));
         Scene scene = new Scene(root, 900, 650 );       
         
-        Image image = new Image("images/cursorHand_grey.png");  //pass in the image path
-        scene.setCursor(new ImageCursor(image));
+
         
         scene.getStylesheets().add(getClass().getResource("/assets/general_graphic.css").toExternalForm());
         stage.setTitle("Battle For Honor");
@@ -44,14 +44,5 @@ public class CoreLauncher extends Application {
             });
         });
     }
-
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(final String... args) {
-        Application.launch();
-    }
-
 
 }

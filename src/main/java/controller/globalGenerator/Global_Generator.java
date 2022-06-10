@@ -8,13 +8,15 @@ import controller.enemies.Enemy_move_control;
 import controller.obstacles.Obstacle;
 import controller.player.PlayerAttack;
 import controller.player.PlayerAttackImpl;
-import controller.player.PlayerMouvement;
-import controller.player.PlayerMouvementsImpl;
+import controller.player.PlayerMovement;
+import controller.player.PlayerMovementsImpl;
 import model.obstacles.*;
 import model.player.*;
 import model.abilities.*;
 import model.enemies.Enemy;
 import model.enemies.GUI;
+import view.GameLayoutController;
+
 
 // si occupa tutto lui di generare i nemici e le loro statistiche, L' eroe � statico per ora con una sola posizione fissa 
 
@@ -36,7 +38,7 @@ public class Global_Generator {
 	//player
 	public PlayerImpl player;
 	public PlayerAttack playerAttack;
-	public PlayerMouvement playerMouvement;
+	public PlayerMovement playerMovement;
 	//nemici
 	public List<Enemy> enemies;
 	//id dei nemici morti
@@ -98,7 +100,7 @@ public class Global_Generator {
 		this.obstacleGenerator = new ObstacleGenerator(obstacles);
 		this.player = new PlayerImpl(rand_pos_player(GRID_SIZE));
 		this.playerAttack = new PlayerAttackImpl(player);
-		this.playerMouvement = new PlayerMouvementsImpl(player);
+		this.playerMovement = new PlayerMovementsImpl(player);
 		this.enemies = new ArrayList<Enemy>();
 		this.skipenemy = new ArrayList<>(); 
 		g = new GUI(15);
@@ -153,22 +155,22 @@ public class Global_Generator {
 	            String s = br.readLine();
 	            switch(s) {
 	            	case("w"):
-	            		playerMouvement.up();
+	            		playerMovement.up();
 	            		g.update();
 	            		System.out.println("Move UP");
 	            	break;
 	            	case("s"):
-	            		playerMouvement.down();
+	            		playerMovement.down();
 	            		g.update();
 	            		System.out.println("Move DOWN");
 	            	break;
 	            	case("a"):
-	            		playerMouvement.left();
+	            		playerMovement.left();
 	            		g.update();
 	            		System.out.println("Move LEFT");
 	            	break;
 	            	case("d"):
-	            		playerMouvement.right();
+	            		playerMovement.right();
 	            		g.update();
 	            		System.out.println("Move RIGHT");
 	            	break;
@@ -198,7 +200,7 @@ public class Global_Generator {
         				g.update();
 						break;
 	            	default:
-	            		playerMouvement.stop();
+	            		playerMovement.stop();
 	            		g.update();
 	            	break;
 	            	}

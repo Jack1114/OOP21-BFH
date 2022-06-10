@@ -2,6 +2,7 @@ package view;
 
 import java.io.IOException;
 
+import controller.globalGenerator.Global_Generator;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,7 +16,10 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 
-public class MainMenuController {
+public class MainMenuController extends SharedMethodsImpl{
+	
+	
+	
 
     @FXML
     private AnchorPane mainMenuPane;
@@ -29,9 +33,10 @@ public class MainMenuController {
     @FXML
     private Button exitBtn;
 
-   
+
     @FXML
     private void initialize() {
+
         final Image backgroundImage = new Image(getClass().getResourceAsStream("/images/background.png"));
         final BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, null);
@@ -51,51 +56,36 @@ public class MainMenuController {
         		System.exit(0);
         	}
         });
-        
-   
-
-        
-    
     	
     }
 	@FXML
 	public void move(ActionEvent event) {       
 
-    	final Parent root;
+    	final Parent root;   
+    	Global_Generator gg = Global_Generator.getInstance();
 
-       	
- 
-	try {
-		 root = FXMLLoader.load(getClass().getClassLoader().getResource("layout/gameLayout.fxml"));
+    	try {
+			root = FXMLLoader.load(getClass().getClassLoader().getResource("layout/gameLayout.fxml"));
 	
 			Scene gameLayout = new Scene(root, 900, 650);
 			Stage secondaryStage = (Stage) mainMenuPane.getScene().getWindow();
 			
-			 Image image = new Image("images/cursorHand_grey.png");  //pass in the image path
-			 gameLayout.setCursor(new ImageCursor(image));
-			 gameLayout.getStylesheets().add(getClass().getResource("/assets/gameLayout.css").toExternalForm());
+			setCursor(gameLayout);
 			secondaryStage.setScene(gameLayout);
 			secondaryStage.show();
-		       	
-		    root.setOnMousePressed(pressEvent -> {
-		        root.setOnMouseDragged(dragEvent -> {
-		        	secondaryStage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
-		        	secondaryStage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
-		        });
-		    });
+			dragScene(root, secondaryStage);
+
+	    	
+
 	
-	
-	
-	
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			 System.out.println("Errore");
+		}
+    	gg.play();
+
 	}
 	
-
-
-
-		
-		}
 }
 
