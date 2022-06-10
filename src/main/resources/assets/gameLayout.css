@@ -1,0 +1,150 @@
+#gameLayout{
+	-fx-background-image: url("/images/panel_brown.png");
+  	-fx-background-repeat: no-repeat;
+  	-fx-background-size: auto;
+   	-fx-border-color: transparent;
+   	-fx-background-color: transparent;
+   	-fx-background-position: center center;
+}
+#moneyHolder{
+	-fx-padding: 5px;
+
+
+}
+#charImage, #skillA, #skillB, #inventory{
+	-fx-background-image: url("/images/panel_beige.png");
+  	-fx-background-repeat: no-repeat;
+  	-fx-background-size: cover;
+   	-fx-border-color: transparent;
+   	-fx-background-color: transparent;
+   	-fx-background-position: center center;
+
+
+}
+
+
+#btnHolder{
+	-fx-background-image: url("/images/panel_beige_btnHolder.png");
+  	-fx-background-repeat: no-repeat;
+  	-fx-background-size: cover;
+   	-fx-border-color: transparent;
+   	-fx-background-color: transparent;
+   	-fx-background-position: center center;
+}
+
+#combatHistory, #statsArea, #moneyHolder{
+
+	-fx-background-image: url("/images/panelInset_beige.png");
+  	-fx-background-repeat: no-repeat;
+  	-fx-background-size: cover;
+   	-fx-border-color: transparent;
+   	-fx-background-color: transparent;
+   	-fx-background-position: center center;
+
+
+}
+
+#mapHolder{
+	-fx-background-image: url("/images/panelInset_beige_mapHolder.png");
+  	-fx-background-repeat: no-repeat;
+  	-fx-background-size: cover;
+   	-fx-border-color: transparent;
+   	-fx-background-color: transparent;
+   	-fx-background-position: center center;
+
+
+}
+
+
+#up, #left, #right, #down, #stop{
+   -fx-background-image: url("/images/buttonSquare_brown_pressed.png");
+   -fx-background-repeat: no-repeat;
+   -fx-background-size: contain;
+   -fx-border-color: transparent;
+   -fx-border-width: 0;
+   -fx-background-radius: 0;
+   -fx-background-color: transparent;
+   -fx-background-position: center center;
+
+
+}
+
+#up:hover, #left:hover, #right:hover, #down:hover, #stop:hover{
+   -fx-background-image: url("/images/buttonSquare_brown.png");
+   -fx-background-repeat: no-repeat;
+   -fx-background-size: cover;
+   -fx-border-color: transparent;
+   -fx-border-width: 0;
+   -fx-background-radius: 0;
+   -fx-background-color: transparent;
+   -fx-background-position: center center;
+
+
+}
+
+#up{
+    -fx-graphic: url("/images/arrowBeige_up.png");
+    -fx-content-display: graphic-only;
+}
+
+#left{
+    -fx-graphic: url("/images/arrowBeige_left.png");
+    -fx-content-display: graphic-only;
+}
+
+#right{
+    -fx-graphic: url("/images/arrowBeige_right.png");
+    -fx-content-display: graphic-only;
+}
+
+#down{
+    -fx-graphic: url("/images/arrowBeige_down.png");
+    -fx-content-display: graphic-only;
+}
+
+#stop{
+    -fx-graphic: url("/images/buttonRound_beige.png");
+    -fx-content-display: graphic-only;
+}
+
+#skillABtn, #skillBBtn{
+   -fx-background-image: url("/images/buttonSquare_beige_pressed.png");
+   -fx-background-repeat: no-repeat;
+   -fx-background-size: cover;
+   -fx-border-color: transparent;
+   -fx-border-width: 0;
+   -fx-background-radius: 0;
+   -fx-background-color: transparent;
+   -fx-background-position: center center;
+
+}
+
+#skillABtn:hover, #skillBBtn:hover{
+   -fx-background-image: url("/images/buttonSquare_beige.png");
+   -fx-background-repeat: no-repeat;
+   -fx-background-size: cover;
+   -fx-border-color: transparent;
+   -fx-border-width: 0;
+   -fx-background-radius: 0;
+   -fx-background-color: transparent;
+   -fx-background-position: center center;
+
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+
+
+.text-area .scroll-pane .content{
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-bar:vertical {
+    -fx-pref-width: 1;
+    -fx-opacity: 0;
+}

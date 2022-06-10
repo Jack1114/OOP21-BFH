@@ -1,0 +1,42 @@
+.button{
+   -fx-background-image: url("/images/buttonLong_brown_Pressed.png");
+   -fx-background-repeat: no-repeat;
+   -fx-background-size: contain;
+   -fx-border-color: transparent;
+   -fx-border-width: 0;
+   -fx-background-radius: 0;
+   -fx-background-color: transparent;
+   -fx-background-position: center center;
+   -fx-font-family: munro;
+   -fx-font-size: 35px;
+   -fx-text-alignment: left;
+}
+
+.button:hover {
+   -fx-background-image: url("/images/buttonLong_brown.png");
+   -fx-background-repeat: no-repeat;
+   -fx-background-size: contain;
+   -fx-background-position: center center;
+   -fx-border-color: transparent;
+   -fx-border-width: 0;
+   -fx-background-radius: 0;
+   -fx-background-color: transparent;
+}
+
+.button:pressed {
+   -fx-background-image: url("/images/buttonLong_brown.png"); 
+   -fx-background-repeat: no-repeat;
+   -fx-background-size: contain;
+   -fx-background-position: center center;
+   -fx-border-color: transparent;
+   -fx-border-width: 0;
+   -fx-background-radius: 0;
+   -fx-background-color: transparent;  
+}
+
+#title{
+   -fx-background-image: url("/images/Title.png"); 
+   -fx-background-size: contain;
+   -fx-background-repeat: no-repeat;
+   -fx-background-position: center center;
+}
