@@ -131,10 +131,12 @@ public class Global_Generator {
 		this.playerMovement = new PlayerMovementsImpl(player);
 		this.enemies = new ArrayList<Enemy>();
 		this.skipenemy = new ArrayList<>(); 
+
 		//g = new GUI(15);
 		
 		
 		//        System.out.println("--- blocco 1 ---");
+
 	
 		//creo le abilita
 		abilities.put(Ability.Type.ELIXIR_OF_LIFE, 2);
