@@ -1,6 +1,5 @@
 package controller.globalGenerator;
 import java.io.BufferedReader;
-import java.util.Scanner;
 import java.io.InputStreamReader;
 import java.util.*;
 
@@ -22,7 +21,6 @@ import view.GameLayoutController;
 
 public class Global_Generator {
 	
-	public static final int GRID_SIZE = 15;
 	private static final int MAX_ROUNDS = 50;
 	//NUM ENEMIES dovrebbe incrementare con il livello
 	public int NUM_ENEMIES = 3;
@@ -44,28 +42,53 @@ public class Global_Generator {
 	//id dei nemici morti
 	public List<Integer> skipenemy; 
 	private int round;
-	final int ADD_HP=7;
-	//gui
-	GUI g;	
+	private static final int ADD_HP=7;
+	private static final int GRID_SIZE_X = 10;
+	private static final int GRID_SIZE_Y= 12;
+	GameLayoutController g;
 
 	private static Global_Generator instance = null;
 	
-	private Global_Generator() {}
+	private Global_Generator(GameLayoutController gameL) {this.g=gameL;}
+	
 	
 	public static synchronized Global_Generator getInstance() {
-		if(instance == null) {
-			instance = new Global_Generator();
-		}
 		return instance;
 	}
+	
+	public static synchronized void setInstance(GameLayoutController gameL) {
+		
+		instance = new Global_Generator(gameL);
+		
+	}
+	
+	/**
+	 * @return the gRID_SIZE_X
+	 */
+	public int getGRID_SIZE_X() {
+		return GRID_SIZE_X;
+	}
+	
+	/**
+	 * @return the gRID_SIZE_Y
+	 */
+	public int getGRID_SIZE_Y() {
+		return GRID_SIZE_Y;
+	}
+
+	
+	
 
 	public void play() {
 
-		generation();
+		//generation();
 
 
 		//game core
-		while(true && round <= MAX_ROUNDS) {
+		//while(true && round <= MAX_ROUNDS) {
+		
+		
+		
 			System.out.println("---- Round "+ round + " ----");	
 			System.out.println("Killed enemies: " + skipenemy.size());
 			
@@ -82,10 +105,13 @@ public class Global_Generator {
 			} 
 			
 			playerTurn();
-			enemyTurn();
+			//enemyTurn();
 			
 			round++;
-		}
+			
+		
+			
+		//}
 		
 	}
 
@@ -95,17 +121,20 @@ public class Global_Generator {
 		}
 	}
 	
-	private void generation() {
+	public void generation() {
 
 		//LIVELLO 1
 		//genero per la prima volta tutti i controller
 		this.obstacleGenerator = new ObstacleGenerator(obstacles);
-		this.player = new PlayerImpl(rand_pos_player(GRID_SIZE));
+		this.player = new PlayerImpl(rand_pos_player(GRID_SIZE_X,GRID_SIZE_Y));
 		this.playerAttack = new PlayerAttackImpl(player);
 		this.playerMovement = new PlayerMovementsImpl(player);
 		this.enemies = new ArrayList<Enemy>();
 		this.skipenemy = new ArrayList<>(); 
+		//g = new GUI(15);
 		
+		
+		//        System.out.println("--- blocco 1 ---");
 	
 		//creo le abilita
 		abilities.put(Ability.Type.ELIXIR_OF_LIFE, 2);
@@ -113,8 +142,12 @@ public class Global_Generator {
 		this.abilityManager = new AbilityManager(abilities);
 		abilityManager.generateAbilities();
 		
+		//          System.out.println("--- blocco 2 ---");
+		
 		generateArena();
 
+		//          System.out.println("--- blocco 3 ---");
+		
 		System.out.println("Genarated obstacles, enemies and player");
 		System.out.println("You can now move using: w=UP | s=DOWN | a=LEFT | d=RIGHT");
 		System.out.println("You can use abilities with 1 and 2");
@@ -124,21 +157,30 @@ public class Global_Generator {
 		}
 		round = 0;
 		
+		//             System.out.println("--- blocco 4 ---");
 	}
 	
 	
 	private void generateArena() {
 		obstacleGenerator.generateObstacles();
+		//		System.out.println("--- blocco 2.1 ---");
 		generate_enemies();
+		//		System.out.println("--- blocco 2.2 ---");
+		//		System.out.println(g);
 		g.update();
+		//		System.out.println("--- blocco 2.3 ---");
+		//da quì non avanza più 
+		//		System.out.println("ho finito generare arena");
+		
 	}
 	
 	private void reset() {
 		obstacles.removeAll(obstacles);
-		generateArena();
+		
 		enemyposwithID = new ArrayList<>();
 		enemies= new ArrayList<Enemy>();
 		skipenemy =new ArrayList<Integer>();
+		generateArena();
 		round = 0;
 		for(var item:enemies) {
 			System.out.println("Enemy "+item.getID()  + " has " +item.GetHP() + "  life points");
@@ -155,7 +197,25 @@ public class Global_Generator {
 		}
 	}
 
-	private void playerTurn() {
+	public void playerTurn() {
+		System.out.println("è il mio turno ora -------------------------------- ");
+		
+		if(player.getPlayer_action().getAvailableActions() > 0) {
+		
+		}
+		else {
+		
+			player.getPlayer_action().resetActions();
+			enemyTurn();
+		
+			play();
+		}
+		
+		//if(actions == 0) { enemyTurn(); } else { playerTurn() }
+		
+		
+		
+		/*
 		while(player.getPlayer_action().getAvailableActions() > 0) {
 			player.getPlayer_action().removeAction();
         	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -217,11 +277,13 @@ public class Global_Generator {
 	        }
 		}
 		player.getPlayer_action().resetActions();
+		*/
 	}
 
 
 	private void enemyTurn() {
 			for(var item:enemyposwithID) {
+				
 			if(skipenemy.contains(item.getX())) {
 				// ï¿½ bruttissimo ma quando muoiono vengono teletrasportati ad una posizione fuore schermo a (99,99)
 				// e vengono pure disattivati quindi non agiranno MAI PIU' !! 
@@ -235,9 +297,11 @@ public class Global_Generator {
 					advance(item,actionpt);	
 					item=enemyposwithID.get(id);
 					actionpt++;
+					
 				}
 			}	
 		}
+
 	}
 	
 	/**
@@ -292,8 +356,7 @@ public class Global_Generator {
 		return true;
 	}
 	
-	
-	@SuppressWarnings("deprecation")
+
 	private void advance(Pair<Integer, Pair<Integer, Integer>> item, int actionpt) {
 		Enemy_move_control.nextMove(item,actionpt);
 		
@@ -302,6 +365,7 @@ public class Global_Generator {
 		while (end>System.currentTimeMillis()) {
 			//System.out.println("Waiting ...");
 			if(System.currentTimeMillis()>end) {
+				g.update();
 				break;
 			}
 		}
@@ -316,14 +380,14 @@ public class Global_Generator {
 	 * @param the grid size
 	 * @return a new random position in an empty cell in the grid
 	 */
-	public Pair<Integer, Integer> randPosition(final int GRID_SIZE){
+	public Pair<Integer, Integer> randPositionObstacles(final int size_X,final int size_Y){
 		Pair<Integer,Integer> pos = new Pair<>(0, 0);
 		Random r = new Random();
 		boolean success = false;
 		while(!success){
 
-			int x = r.nextInt(GRID_SIZE);
-			int y = r.nextInt(GRID_SIZE);
+			int x = r.nextInt(size_X);
+			int y = r.nextInt(size_X);
 			pos = new Pair<>(x,y);
 			if(checkObstaclesPos(pos) && checkPlayerPos(pos) && checkEnemyPos(pos)){
 				success = true;	
@@ -332,10 +396,10 @@ public class Global_Generator {
 		return pos;
 	}
 	
-	public Pair<Integer, Integer> rand_pos_player(int GRID_SIZE) {
+	public Pair<Integer, Integer> rand_pos_player(final int size_X,final int size_Y) {
 		Random r = new Random();
-		int x = r.nextInt(GRID_SIZE);
-		int y = r.nextInt(GRID_SIZE);
+		int x = r.nextInt(size_X);
+		int y = r.nextInt(size_Y);
 		return new Pair<>(x,y);
 	}
 

@@ -32,11 +32,11 @@
       <Pane id="skillB" fx:id="skillB" layoutX="97.0" layoutY="171.0" prefHeight="50.0" prefWidth="50.0" />
       <Pane id="btnHolder" fx:id="btnHolder" layoutX="680.0" layoutY="252.0" prefHeight="204.0" prefWidth="204.0" >
          <children>
-            <Button id="up" fx:id="up" layoutX="77.0" layoutY="14.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" />
-            <Button id="left" fx:id="left" layoutX="14.0" layoutY="77.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" snapToPixel="false" />
-            <Button id="right" fx:id="right" layoutX="140.0" layoutY="77.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" />
-            <Button id="down" fx:id="down" layoutX="77.0" layoutY="140.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" />
-            <Button id="stop" fx:id="stop" layoutX="77.0" layoutY="77.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" />
+            <Button id="up" fx:id="up" onAction="#moveUP" layoutX="77.0" layoutY="14.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" />
+            <Button id="left" fx:id="left" onAction="#moveLEFT" layoutX="14.0" layoutY="77.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" snapToPixel="false" />
+            <Button id="right" fx:id="right" onAction="#moveRIGHT" layoutX="140.0" layoutY="77.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" />
+            <Button id="down" fx:id="down" onAction="#moveDOWN" layoutX="77.0" layoutY="140.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" />
+            <Button id="stop" fx:id="stop" onAction="#moveSTOP" layoutX="77.0" layoutY="77.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" />
          </children>
       </Pane>
       <Button id="skillABtn" fx:id="skillABtn" layoutX="680.0" layoutY="478.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" />

@@ -3,6 +3,7 @@ package view;
 import java.io.IOException;
 
 import controller.globalGenerator.Global_Generator;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -19,7 +20,7 @@ import javafx.stage.Stage;
 public class MainMenuController extends SharedMethodsImpl{
 	
 	
-	
+	Global_Generator gg = Global_Generator.getInstance();
 
     @FXML
     private AnchorPane mainMenuPane;
@@ -49,7 +50,10 @@ public class MainMenuController extends SharedMethodsImpl{
         optionsBtn.setText("How to play");
         exitBtn.setText("Exit");
     
-    
+        
+        
+        
+        
         exitBtn.setOnAction(new EventHandler<ActionEvent>() {
         	@Override
         	public void handle(ActionEvent event) {
@@ -58,11 +62,15 @@ public class MainMenuController extends SharedMethodsImpl{
         });
     	
     }
+
+
+    
+    
 	@FXML
 	public void move(ActionEvent event) {       
 
     	final Parent root;   
-    	Global_Generator gg = Global_Generator.getInstance();
+    	
 
     	try {
 			root = FXMLLoader.load(getClass().getClassLoader().getResource("layout/gameLayout.fxml"));
@@ -83,7 +91,7 @@ public class MainMenuController extends SharedMethodsImpl{
 			e.printStackTrace();
 			 System.out.println("Errore");
 		}
-    	gg.play();
+    	
 
 	}
 	

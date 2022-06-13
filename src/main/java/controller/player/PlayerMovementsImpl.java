@@ -4,10 +4,10 @@
 package controller.player;
 
 import java.util.Optional;
+import java.util.Random;
 
 import controller.globalGenerator.Global_Generator;
 import controller.obstacles.Obstacle;
-import controller.obstacles.ObstacleImpl;
 import model.enemies.Enemy;
 import model.player.Pair;
 import model.player.PlayerImpl;
@@ -19,11 +19,10 @@ import model.player.PlayerImpl;
  */
 public class PlayerMovementsImpl implements PlayerMovement {
 
-
+	
 	private Pair<Integer,Integer> new_player_pos;
 	private final PlayerImpl player;
 	private Global_Generator gg = Global_Generator.getInstance();
-	
 	public PlayerMovementsImpl(PlayerImpl newPlayer) {
 		this.player = newPlayer;
 	}
@@ -97,7 +96,7 @@ public class PlayerMovementsImpl implements PlayerMovement {
 		}
 
 		//check sui bordi dello schermo
-		if( (new_player_pos.getX()<0 || new_player_pos.getX()>gg.GRID_SIZE-1) || new_player_pos.getY()<0 || new_player_pos.getY()>gg.GRID_SIZE-1 ){
+		if( (new_player_pos.getX()<0 || new_player_pos.getX()>gg.getGRID_SIZE_X()-1 ) || new_player_pos.getY()<0 || new_player_pos.getY()>gg.getGRID_SIZE_Y()-1 ){
 			System.out.println("vado fuori dai bordi!");
 			return false;
 		}
