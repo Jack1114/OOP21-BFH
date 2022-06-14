@@ -22,9 +22,6 @@ public class CoreLauncher extends Application {
     public void start(Stage stage) throws Exception {
     	
     	Font.loadFont(getClass().getResourceAsStream("/assets/munro.ttf"), 10);
-
-		Global_Generator gg = Global_Generator.getInstance();
-		gg.play();
     	Parent root = FXMLLoader.load(getClass().getResource("/layout/mainMenu.fxml"));
         Scene scene = new Scene(root, 900, 650 );       
         

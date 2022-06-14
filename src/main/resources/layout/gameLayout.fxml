@@ -39,7 +39,7 @@
             <Button id="stop" fx:id="stop" onAction="#moveSTOP" layoutX="77.0" layoutY="77.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" />
          </children>
       </Pane>
-      <Button id="skillABtn" fx:id="skillABtn" layoutX="680.0" layoutY="478.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" />
-      <Button id="skillBBtn" fx:id="skillBBtn" layoutX="833.0" layoutY="478.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0"  />
+      <Button id="skillABtn" fx:id="skillABtn" onAction="#skillA" layoutX="680.0" layoutY="478.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" />
+      <Button id="skillBBtn" fx:id="skillBBtn" onAction="#skillB" layoutX="833.0" layoutY="478.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0"  />
    </children>
 </AnchorPane>

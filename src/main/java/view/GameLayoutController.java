@@ -26,16 +26,19 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import model.player.Pair;
 import model.player.Player;
+import model.abilities.Ability;
 import model.enemies.GUI;
 
 public class GameLayoutController extends SharedMethodsImpl{
@@ -79,23 +82,16 @@ public class GameLayoutController extends SharedMethodsImpl{
 	  @FXML
 	    private void initialize() {
 		  
-		  //		System.out.println("Initialize");
-		  //Platform.runLater(()->myfunction());
-		  //		System.out.println("Initialize 2");
-		  	
-		  
 		  myfunction();
-	    
-	    
-		  combatHistory.setMouseTransparent(true);
-		  combatHistory.setFocusTraversable(false);
-	    	statsArea.setMouseTransparent(true);
-		  statsArea.setFocusTraversable(false);
-		  
-		  //		System.out.println("Initialize 3");
-	    	
 
-	        System.out.println("Ho printato");  
+
+		  
+		  
+		combatHistory.setMouseTransparent(true);
+		combatHistory.setFocusTraversable(false);
+	    statsArea.setMouseTransparent(true);
+		statsArea.setFocusTraversable(false);
+
 		    
 		  /**
 		   * Escape event to quit the game.
@@ -127,10 +123,37 @@ public class GameLayoutController extends SharedMethodsImpl{
 	    	
 	    }
 	  
+	    @FXML
+		public void skillA(ActionEvent event) {
+	
+			if (gg.abilityManager.isAvailable(Ability.Type.ELIXIR_OF_LIFE)) {
+				gg.abilityManager.getAbilityOfType(Ability.Type.ELIXIR_OF_LIFE).apply();
+				update();
+				System.out.println("Using " + gg.abilityManager.getAbilityOfType(Ability.Type.ELIXIR_OF_LIFE).getName());
+				gg.abilityManager.remove(Ability.Type.ELIXIR_OF_LIFE);
+				System.out.println("Now you have " + gg.abilityManager.getSize(Ability.Type.ELIXIR_OF_LIFE) + " left");   			
+			}else {
+				System.out.println("You don't have any Elixir Of Life left");
+			}
+			update();
+	    }
+	  
+	    @FXML
+		public void skillB(ActionEvent event) {
+			if (gg.abilityManager.isAvailable(Ability.Type.DOUBLE_ATTACK)) {
+				gg.abilityManager.getAbilityOfType(Ability.Type.DOUBLE_ATTACK).apply();
+				update();
+				System.out.println("Using " + gg.abilityManager.getAbilityOfType(Ability.Type.DOUBLE_ATTACK).getName());
+				gg.abilityManager.remove(Ability.Type.DOUBLE_ATTACK);
+				System.out.println("Now you have " + gg.abilityManager.getSize(Ability.Type.DOUBLE_ATTACK) + " left"); 
+			}else {
+				System.out.println("You don't have any Double Attack left");
+
+			}
+			update();}
 	  
 	    @FXML
 		public void moveUP(ActionEvent event) {
-	    	System.out.println("porca puttana SU !!");
 	    	gg.playerMovement.up();
 
     		gg.player.getPlayer_action().removeAction();
@@ -140,7 +163,6 @@ public class GameLayoutController extends SharedMethodsImpl{
 	  
 	    @FXML
 		public void moveLEFT(ActionEvent event) {
-	    	System.out.println("porca puttana SINISTRA !!");
 	    	gg.playerMovement.left();
 
     		gg.player.getPlayer_action().removeAction();
@@ -149,7 +171,6 @@ public class GameLayoutController extends SharedMethodsImpl{
 	    }
 	    @FXML
 		public void moveRIGHT(ActionEvent event) {
-	    	System.out.println("porca puttana  DESTRA !!");
 	    	gg.playerMovement.right();
 
     		gg.player.getPlayer_action().removeAction();
@@ -158,7 +179,6 @@ public class GameLayoutController extends SharedMethodsImpl{
 	    }
 	    @FXML
 		public void moveDOWN(ActionEvent event) {
-	    	System.out.println("porca puttana  GIU' !!");
 	    	gg.playerMovement.down();
 
     		gg.player.getPlayer_action().removeAction();
@@ -167,7 +187,6 @@ public class GameLayoutController extends SharedMethodsImpl{
 	    }
 	    @FXML
 		public void moveSTOP(ActionEvent event) {
-	    	System.out.println("porca puttana  fermati !!");
 	    	gg.playerMovement.stop();
     		
     		gg.player.getPlayer_action().removeAction();
@@ -183,11 +202,9 @@ public class GameLayoutController extends SharedMethodsImpl{
 		  
 		  gg.generation();
 		  
-		  //		System.out.println("ciao");
 		  
 		  this.player = gg.player;
-		  
-		  //		System.out.println(this.player);	  
+		   
 		  
 	    	player.toString();	
 	    	int HeroX = player.getPlayerPosition().getX();
@@ -213,7 +230,7 @@ public class GameLayoutController extends SharedMethodsImpl{
 	            	var pos = new Pair<>(col,row);
 	                Label jb = new Label();
 	                jb.setMinSize(50, 50);
-	                jb.setStyle("-fx-border-color: black;");
+	                jb.setStyle("-fx-background-image: url(/images/ground.png);");
 	                GridPane.setRowIndex(jb, row);
 	                GridPane.setColumnIndex(jb, col);
 	                mapjbtopos.put(jb, pos);
@@ -244,18 +261,41 @@ public class GameLayoutController extends SharedMethodsImpl{
 			En_With_ID = gg.getInstance().enemyposwithID;
 			obstacles = gg.getInstance().obstacles;	
 			
-			//		System.out.println("--- blocco alfa --- ");
 			
 			mappostojb.forEach((pos,jb)->{
 		
-				
-					jb.setText("");
+				jb.setStyle("-fx-background-image: url(/images/ground.png);-fx-background-size: 100% 100%;");
+				jb.setGraphic(null);
+				//Image ground = new Image(getClass().getResourceAsStream("/images/ground.png"));
+				//jb.setGraphic(new ImageView((ground)));
+
 					// calcolo rapido per avere l' ID solo per visualizzarlo a schermo 
 					En_With_ID.forEach(pair->{
 						//System.out.println("ho trovato un nemico da aggiungere");
 						if(pair.getY().getX()==pos.getX() && pair.getY().getY()==pos.getY()){
 							//System.out.println("setto il contenuto del pulsante");
-							jb.setText(""+pair.getX());
+							//jb.setText(""+pair.getX());
+							if (pair.getX() == 0) {
+								Image enemy0 = new Image(getClass().getResourceAsStream("/images/enemy0.png"));
+								   jb.setGraphic(new ImageView((enemy0)));
+								   jb.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+								   jb.setAlignment(Pos.CENTER);
+								
+							}
+							if (pair.getX() == 1) {
+								Image enemy1 = new Image(getClass().getResourceAsStream("/images/enemy1.png"));
+								   jb.setGraphic(new ImageView((enemy1)));
+								   jb.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+								   jb.setAlignment(Pos.CENTER);
+								
+							}
+							if (pair.getX() == 2) {
+								Image enemy2 = new Image(getClass().getResourceAsStream("/images/enemy2.png"));
+								   jb.setGraphic(new ImageView((enemy2)));
+								   jb.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+								   jb.setAlignment(Pos.CENTER);
+								
+							}
 						}
 					});
 					
@@ -263,11 +303,15 @@ public class GameLayoutController extends SharedMethodsImpl{
 					obstacles.forEach(obst->{
 						if(obst.getObstaclePos().getX()==pos.getX() && obst.getObstaclePos().getY()==pos.getY()){
 							if(obst.getObstacleType().equals(Obstacle.Type.POOL)) {
-								jb.setText("P");
+								jb.setStyle("-fx-background-image: url(/images/mud.png); -fx-background-size: 100% 100%;");
+								//Image pool = new Image(getClass().getResourceAsStream("/images/mud.png"));
+								//jb.setGraphic(new ImageView((pool)));
+								//jb.setStyle("-fx-background-image: url(/images/mud.png); -fx-background-size: 100% 100%; -fx-alignment: CENTER; ");
+
 
 							}
 							if(obst.getObstacleType().equals(Obstacle.Type.ROCK)) {
-								jb.setText("R");
+								jb.setStyle("-fx-background-image: url(/images/stone.png); -fx-background-size: 100% 100%;");
 
 							}
 						}
@@ -275,7 +319,12 @@ public class GameLayoutController extends SharedMethodsImpl{
 					
 					
 					if(HeroX==pos.getX() && HeroY==pos.getY()){
-						jb.setText("H");
+						
+						Image hero = new Image(getClass().getResourceAsStream("/images/hero.png"));
+					   jb.setGraphic(new ImageView((hero)));
+					   jb.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+					   jb.setAlignment(Pos.CENTER);
+						//jb.setStyle("-fx-background-image: url(/images/ground.png); -fx-alignment: CENTER; -fx-graphic: url(/images/hero.png); -fx-content-display: graphic-only;");
 					}
 					
 					

@@ -22,6 +22,11 @@
 
 }
 
+#charImage{
+
+    -fx-graphic: url("/images/heroprofile.png");
+    -fx-content-display: graphic-only;
+}
 
 #btnHolder{
 	-fx-background-image: url("/images/panel_beige_btnHolder.png");
@@ -130,6 +135,18 @@
    -fx-background-position: center center;
 
 }
+
+#skillABtn, #skillA {
+	
+    -fx-graphic: url("/images/health.png");
+    -fx-content-display: graphic-only;
+}
+#skillBBtn, #skillB{
+    -fx-graphic: url("/images/doubleAttack.png");
+    -fx-content-display: graphic-only;
+}
+
+
 
 .text-area .scroll-pane {
     -fx-background-color: transparent;
