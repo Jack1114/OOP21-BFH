@@ -46,7 +46,7 @@ public class GameLayoutController extends SharedMethodsImpl{
 	List<Pair<Integer, Pair<Integer, Integer>>> En_With_ID;
 	List<Obstacle> obstacles;
 	
-   
+	
 	
 	
 	  @FXML
@@ -120,9 +120,9 @@ public class GameLayoutController extends SharedMethodsImpl{
 	        }
 	        
 	        update();
-	       
 
-
+	        System.out.println("Ho printato");  
+		    
 		  /**
 		   * Escape event to quit the game.
 		   */

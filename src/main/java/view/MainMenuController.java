@@ -62,7 +62,6 @@ public class MainMenuController extends SharedMethodsImpl{
 	public void move(ActionEvent event) {       
 
     	final Parent root;   
-    	Global_Generator gg = Global_Generator.getInstance();
 
     	try {
 			root = FXMLLoader.load(getClass().getClassLoader().getResource("layout/gameLayout.fxml"));
@@ -83,7 +82,7 @@ public class MainMenuController extends SharedMethodsImpl{
 			e.printStackTrace();
 			 System.out.println("Errore");
 		}
-    	gg.play();
+
 
 	}
 	
