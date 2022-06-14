@@ -12,7 +12,6 @@ public class ObstacleGenerator {
 
 	private static final int NUM_FENCE_OBST = 10;
 	private static final int NUM_ROCK_OBST = 10;
-	private static final int GRID_SIZE = 15;
     private final List<Obstacle> obstacles;
     private Global_Generator gg = Global_Generator.getInstance(); 
 
@@ -25,10 +24,10 @@ public class ObstacleGenerator {
 	 */
 	public void generateObstacles(){
 		for (int i = 0; i < NUM_ROCK_OBST; i++){
-			addObstacle(createObstacle(gg.randPosition(GRID_SIZE), ObstacleImpl.Type.ROCK));
+			addObstacle(createObstacle(gg.randPositionObstacles(gg.getGRID_SIZE_X(),gg.getGRID_SIZE_Y()), ObstacleImpl.Type.ROCK));
 		}
 		for (int i = 0; i < NUM_FENCE_OBST; i++){
-			addObstacle(createObstacle(gg.randPosition(GRID_SIZE), ObstacleImpl.Type.POOL));
+			addObstacle(createObstacle(gg.randPositionObstacles(gg.getGRID_SIZE_X(),gg.getGRID_SIZE_Y()), ObstacleImpl.Type.POOL));
 		}
 	}
 	

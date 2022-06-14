@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import controller.globalGenerator.Global_Generator;
 import controller.obstacles.Obstacle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -42,7 +43,7 @@ public class GameLayoutController extends SharedMethodsImpl{
 	Map<Label,Pair<Integer,Integer>> mapjbtopos = new HashMap<>();
 	Map<Pair<Integer,Integer>,Label> mappostojb = new HashMap<>();
 	Player player;
-	Global_Generator gg = Global_Generator.getInstance();
+	Global_Generator gg;
 	List<Pair<Integer, Pair<Integer, Integer>>> En_With_ID;
 	List<Obstacle> obstacles;
 	
@@ -78,17 +79,12 @@ public class GameLayoutController extends SharedMethodsImpl{
 	  @FXML
 	    private void initialize() {
 		  
-		  	this.player = gg.player;
-	    	player.toString();	
-	    	int HeroX = player.getPlayerPosition().getX();
-	    	int HeroY = player.getPlayerPosition().getY();
-	    	
-	    	statsArea.setText("Experience = " + player.getExperience().getExpPoints()+ "\n"+
-	    						"HP = " + player.getLife().getLifePoints() +" / "+ player.getLife().getMaxLifePoints() + "\n" +
-	    						" LV =" + player.getExperience().getLevel() + "\n" +
-	    						"Action= " + player.getPlayer_action().getMaxActions());
-	    	
-	    	moneyHolder.setText("Gold = " + player.getGold().getGold_points()); 	
+		  //		System.out.println("Initialize");
+		  //Platform.runLater(()->myfunction());
+		  //		System.out.println("Initialize 2");
+		  	
+		  
+		  myfunction();
 	    
 	    
 		  combatHistory.setMouseTransparent(true);
@@ -96,30 +92,8 @@ public class GameLayoutController extends SharedMethodsImpl{
 	    	statsArea.setMouseTransparent(true);
 		  statsArea.setFocusTraversable(false);
 		  
-		  
-	    	GridPane panel = new GridPane();
+		  //		System.out.println("Initialize 3");
 	    	
-			mapHolder.getChildren().add(panel);
-			
-
-	        
-	        for (int row = 0; row < 12; row++) {
-	            for (int col = 0; col < 10; col++) {
-	            	var pos = new Pair<>(col,row);
-	                Label jb = new Label();
-	                jb.setMinSize(50, 50);
-	                jb.setStyle("-fx-border-color: black;");
-	                GridPane.setRowIndex(jb, row);
-	                GridPane.setColumnIndex(jb, col);
-	                mapjbtopos.put(jb, pos);
-	                mappostojb.put(pos,jb);
-	                panel.getChildren().addAll(jb);
-	                panel.setStyle("-fx-border-insets: 5px; -fx-padding: 10 3 5 3;");
-	                System.out.println("Ho stampato");
-	            }
-	        }
-	        
-	        update();
 
 	        System.out.println("Ho printato");  
 		    
@@ -149,27 +123,133 @@ public class GameLayoutController extends SharedMethodsImpl{
 				
 		      }
 		    });
-		  
-		
-		  
-	
-	    	    
+		 
 	    	
 	    }
+	  
+	  
+	    @FXML
+		public void moveUP(ActionEvent event) {
+	    	System.out.println("porca puttana SU !!");
+	    	gg.playerMovement.up();
 
-	  public void update() {
-			System.out.println("entro dentro update");
+    		gg.player.getPlayer_action().removeAction();
+    		update();
+    		gg.playerTurn();
+	    }
+	  
+	    @FXML
+		public void moveLEFT(ActionEvent event) {
+	    	System.out.println("porca puttana SINISTRA !!");
+	    	gg.playerMovement.left();
+
+    		gg.player.getPlayer_action().removeAction();
+    		update();
+    		gg.playerTurn();
+	    }
+	    @FXML
+		public void moveRIGHT(ActionEvent event) {
+	    	System.out.println("porca puttana  DESTRA !!");
+	    	gg.playerMovement.right();
+
+    		gg.player.getPlayer_action().removeAction();
+    		update();
+    		gg.playerTurn();
+	    }
+	    @FXML
+		public void moveDOWN(ActionEvent event) {
+	    	System.out.println("porca puttana  GIU' !!");
+	    	gg.playerMovement.down();
+
+    		gg.player.getPlayer_action().removeAction();
+    		update();
+    		gg.playerTurn();
+	    }
+	    @FXML
+		public void moveSTOP(ActionEvent event) {
+	    	System.out.println("porca puttana  fermati !!");
+	    	gg.playerMovement.stop();
+    		
+    		gg.player.getPlayer_action().removeAction();
+    		update();
+    		gg.playerTurn();
+	    }
+
+	  private void myfunction() {
+		  
+		  Global_Generator.setInstance(this);
+		  
+		  gg = Global_Generator.getInstance();
+		  
+		  gg.generation();
+		  
+		  //		System.out.println("ciao");
+		  
+		  this.player = gg.player;
+		  
+		  //		System.out.println(this.player);	  
+		  
+	    	player.toString();	
+	    	int HeroX = player.getPlayerPosition().getX();
+	    	int HeroY = player.getPlayerPosition().getY();
+	    	
+	    	statsArea.setText("Experience = " + player.getExperience().getExpPoints()+ "\n"+
+	    						"HP = " + player.getLife().getLifePoints() +" / "+ player.getLife().getMaxLifePoints() + "\n" +
+	    						" LV =" + player.getExperience().getLevel() + "\n" +
+	    						"Action= " + player.getPlayer_action().getMaxActions());
+	    	
+	    	moneyHolder.setText("Gold = " + player.getGold().getGold_points());
+		  
+		  
+		
+		  GridPane panel = new GridPane();
+	    	
+			mapHolder.getChildren().add(panel);
+			
+
+	        
+	        for (int row = 0; row < 12; row++) {
+	            for (int col = 0; col < 10; col++) {
+	            	var pos = new Pair<>(col,row);
+	                Label jb = new Label();
+	                jb.setMinSize(50, 50);
+	                jb.setStyle("-fx-border-color: black;");
+	                GridPane.setRowIndex(jb, row);
+	                GridPane.setColumnIndex(jb, col);
+	                mapjbtopos.put(jb, pos);
+	                mappostojb.put(pos,jb);
+	                panel.getChildren().addAll(jb);
+	                panel.setStyle("-fx-border-insets: 5px; -fx-padding: 10 3 5 3;");
+	                //System.out.println("Ho stampato");
+	            }
+	        }
+	        
+	        update();
+	        //------------------  noi siamo qui -------//
+	        gg.play();
+	}
+
+	public void update() {
+			//		System.out.println("entro dentro update");
 
 			updateHeroStats();
 					
-			int HeroX = player.getPlayerPosition().getX();
-			int HeroY = player.getPlayerPosition().getY();
+			int HeroX = gg.player.getPlayerPosition().getX();
+			int HeroY = gg.player.getPlayerPosition().getY();
+			
+			System.out.println(HeroX);
+			System.out.println(HeroY);
+			
 			int ID=0;
 			En_With_ID = gg.getInstance().enemyposwithID;
 			obstacles = gg.getInstance().obstacles;	
+			
+			//		System.out.println("--- blocco alfa --- ");
+			
 			mappostojb.forEach((pos,jb)->{
 		
-					//jb.setText("X"+pos.getX()+"Y"+pos.getY());
+				
+					jb.setText("");
 					// calcolo rapido per avere l' ID solo per visualizzarlo a schermo 
 					En_With_ID.forEach(pair->{
 						//System.out.println("ho trovato un nemico da aggiungere");
@@ -193,6 +273,7 @@ public class GameLayoutController extends SharedMethodsImpl{
 						}
 					});
 					
+					
 					if(HeroX==pos.getX() && HeroY==pos.getY()){
 						jb.setText("H");
 					}
@@ -201,17 +282,30 @@ public class GameLayoutController extends SharedMethodsImpl{
 					
 					
 			});
+			//		System.out.println("sono alla fine di update");
 		}
 
 	  private void updateHeroStats() {
 
-		  System.out.println("Ho uppato le stats");
-	    	statsArea.setText("Experience = " + player.getExperience().getExpPoints()+ "\n"+
-					"HP = " + player.getLife().getLifePoints() +" / "+ player.getLife().getMaxLifePoints() + "\n" +
-					" LV =" + player.getExperience().getLevel() + "\n" +
-					"Action= " + player.getPlayer_action().getMaxActions());
+		  //		System.out.println("Ho uppato le stats");
+		  
+		  //		System.out.println("--- blocco 7777 ---");
+		  
+		  //		System.out.println(gg.player);
+
+		  
+	    	statsArea.setText("Experience = " + gg.player.getExperience().getExpPoints()+ "\n"+
+					"HP = " + gg.player.getLife().getLifePoints() +" / "+ gg.player.getLife().getMaxLifePoints() + "\n" +
+					" LV =" + gg.player.getExperience().getLevel() + "\n" +
+					"Action= " + gg.player.getPlayer_action().getAvailableActions());
 	    	
-	    	moneyHolder.setText("Gold = " + player.getGold().getGold_points());
+	    	//		System.out.println("--- blocco 7788 ---");
+	    	
+	    	moneyHolder.setText("Gold = " + gg.player.getGold().getGold_points());
+	    	
+	    	//		System.out.println("--- blocco 8888 ---");
+	    	
+	    	
 
 
 		}

@@ -9,7 +9,10 @@ import model.player.PlayerImpl;
 public class Enemy {
 
 	// supponendo che lo schermo sia una griglia di 15 X 15
-	int GRID_SIZE = 15;
+	//int GRID_SIZE = 15;
+	
+	int GRID_SIZEX = 10;
+	int GRID_SIZEY = 12;
 	Player player;
 	Pair<Integer,Integer> pos;
 	Global_Generator gg = Global_Generator.getInstance();
@@ -37,10 +40,19 @@ public class Enemy {
 		int value = rand.nextInt(10)+1; 
 		
 		// i valori sono arbitrari
+		
 		HP =( 5+value + ( HeroEXP/(15*5) ));
 		def=( 1+value/2 + ( HeroEXP/(20*8) ));
 		atk=( 1+value/3 + ( HeroEXP/(10*10) ));
-		exp=( 10+value*2 + ( HeroEXP/(15*6) ));
+		exp=( 10+value - ( HeroEXP/(15*6) ));
+		
+		/*
+		HP =( 5+value + ( HeroEXP/(2) ));
+		def=( 1+value/2 + ( HeroEXP/(2) ));
+		atk=( 1+value/3 + ( HeroEXP/(2) ));
+		exp=( 10+value*2 + ( HeroEXP/(2) ));
+		*/
+		
 		Gold=rand.nextInt(15)+10;
 		generate_pos();
 	}
@@ -53,8 +65,8 @@ public class Enemy {
 		// TODO Auto-generated method stub
 		boolean ok=false;
 		while(!ok) {
-			x= rand.nextInt(GRID_SIZE);
-			y= rand.nextInt(GRID_SIZE);
+			x= rand.nextInt(GRID_SIZEX);
+			y= rand.nextInt(GRID_SIZEY);
 			pos=new Pair<>(x,y);
 			//TODO: da controllare le condizioni dell'if
 			if( (!gg.enemyposwithID.contains(pos) ) && (!gg.obstacles.contains(pos)) && (!gg.player.getPlayerPosition().equals(pos))) {

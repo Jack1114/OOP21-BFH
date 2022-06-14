@@ -1,7 +1,7 @@
 package model.player;
 
 public class Experience {
-	private static final int MAX_EXP_POINTS = 70;
+	private static final int MAX_EXP_POINTS = 100;
 	private static int DEFAULT_EXP_POINTS=0;
 	private int level=1;
 	private int expPoints; //punti che l’eroe guadagna quando uccide un nemico
