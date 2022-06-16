@@ -58,6 +58,8 @@ public class GameLayoutController extends SharedMethodsImpl{
 	  @FXML
 	  Pane charImage;
 	  @FXML
+	  Label charImageHolder, skillAHolder, skillBHolder;
+	  @FXML
 	  TextArea combatHistory;
 	  @FXML
 	  Pane skillA;
