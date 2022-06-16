@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,8 @@ import javax.swing.JPanel;
 import controller.globalGenerator.Global_Generator;
 import controller.obstacles.Obstacle;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -69,8 +72,6 @@ public class GameLayoutController extends SharedMethodsImpl{
 	  @FXML
 	  TextArea statsArea;
 	  @FXML
-	  GridPane inventory;
-	  @FXML
 	  Label moneyHolder;
 	  @FXML
 	  Pane mapHolder;
@@ -86,12 +87,12 @@ public class GameLayoutController extends SharedMethodsImpl{
 	  @FXML
 	    private void initialize() {
 		  
+		 
+
+		  
 		  myfunction();
 
-
-		  
-		  
-		combatHistory.setMouseTransparent(true);
+		combatHistory.setWrapText(true);
 		combatHistory.setFocusTraversable(false);
 	    statsArea.setMouseTransparent(true);
 		statsArea.setFocusTraversable(false);
@@ -140,6 +141,7 @@ public class GameLayoutController extends SharedMethodsImpl{
 	    	
 	    }
 	  
+
 	    @FXML
 		public void skillA(ActionEvent event) {
 	
@@ -169,6 +171,7 @@ public class GameLayoutController extends SharedMethodsImpl{
 			}
 			update();}
 	  
+	    
 	    @FXML
 		public void moveUP(ActionEvent event) {
 	    	gg.playerMovement.up();
@@ -219,7 +222,26 @@ public class GameLayoutController extends SharedMethodsImpl{
 		  
 		  gg.generation();
 		  
-		  
+	        System.setOut(new PrintStream(System.out) {
+	            @Override
+	            public void write(byte[] buf, int off, int len) {
+	                super.write(buf, off, len);
+
+	                String msg = new String(buf, off, len);
+
+	                combatHistory.setText(combatHistory.getText() + msg);
+
+			            	combatHistory.selectPositionCaret(combatHistory.getLength()); 
+			            	combatHistory.deselect(); 
+			        		combatHistory.setWrapText(true);
+			        		combatHistory.setFocusTraversable(false);
+			        		combatHistory.setEditable(false);
+					    	
+		
+	            }
+	        });
+	        
+	        
 		  this.player = gg.player;
 		   
 		  
@@ -270,9 +292,7 @@ public class GameLayoutController extends SharedMethodsImpl{
 					
 			int HeroX = gg.player.getPlayerPosition().getX();
 			int HeroY = gg.player.getPlayerPosition().getY();
-			
-			System.out.println(HeroX);
-			System.out.println(HeroY);
+
 			
 			int ID=0;
 			En_With_ID = gg.getInstance().enemyposwithID;

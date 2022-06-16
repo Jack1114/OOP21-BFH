@@ -51,6 +51,9 @@
 
 
 }
+#combatHistory{
+-fx-padding: 5px;
+}
 
 #mapHolder{
 	-fx-background-image: url("/images/panelInset_beige_mapHolder.png");

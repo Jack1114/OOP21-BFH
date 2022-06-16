@@ -85,19 +85,20 @@ public class PlayerMovementsImpl implements PlayerMovement {
 						player.getPlayer_action().removeAction();
 						return true;
 					}else {
-						System.out.println("You don't have enough actions to cross the pool");
+						System.out.println("You need at least 2 action points to cross this mud pool.");
 						return false;
 					}
 					
 				case ROCK:
 					player.getLife().setLifePoints(player.getLife().getLifePoints()-2);
+					System.out.println("This rocks are sharp, don't hit them, it's going to hurt you!");
 					return false;
 			}
 		}
 
 		//check sui bordi dello schermo
 		if( (new_player_pos.getX()<0 || new_player_pos.getX()>gg.getGRID_SIZE_X()-1 ) || new_player_pos.getY()<0 || new_player_pos.getY()>gg.getGRID_SIZE_Y()-1 ){
-			System.out.println("vado fuori dai bordi!");
+			System.out.println("You can't leave the arena, don't give up like that!");
 			return false;
 		}
 

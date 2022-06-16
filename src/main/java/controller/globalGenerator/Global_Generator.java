@@ -1,6 +1,7 @@
 package controller.globalGenerator;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.util.*;
 
 import controller.enemies.Enemy_move_control;
@@ -88,22 +89,22 @@ public class Global_Generator {
 		//game core
 		//while(true && round <= MAX_ROUNDS) {
 		
-		
+	
 		
 			System.out.println("---- Round "+ round + " ----");	
 			System.out.println("Killed enemies: " + skipenemy.size());
 			
 			if(skipenemy.size() == NUM_ENEMIES) {
-				System.out.println("Complimenti, hai ucciso tutti i nemici!");
+				System.out.println("Congrats, you killed all the enemies! New arena generated.");
 				//carico una nuova arena
 				reset();
 				//controllo i punti esperienza e nel caso aumento di livello --> sono piu forte e guadagno oro
 				if(player.getExperience().addLevel()) {
-					System.out.println("Complimenti! hai ucciso tutti i nemici e sei passato al livello successivo!");
-					for(var item:enemies) {
+					System.out.println("Congrats, your level has increased! Now enemies are stronger. ");
+					/*for(var item:enemies) {
 						System.out.println("Enemy "+item.getID()  + " has " +item.GetHP() + "  life points");
 					}
-					
+					*/
 					player.recoverPlayer();
 					strongEnemies();
 				}			
@@ -155,13 +156,22 @@ public class Global_Generator {
 
 		//          System.out.println("--- blocco 3 ---");
 		
-		System.out.println("Genarated obstacles, enemies and player");
-		System.out.println("You can now move using: w=UP | s=DOWN | a=LEFT | d=RIGHT");
-		System.out.println("You can use abilities with 1 and 2");
+		
+
+		
+		
+		
+		
+		
+		
+		//System.out.println("Genarated obstacles, enemies and player");
+		//System.out.println("You can now move using: w=UP | s=DOWN | a=LEFT | d=RIGHT");
+		//System.out.println("You can use abilities with 1 and 2");
 		//per vedere se al livello successivo gli nemici sono più forti cioè con punti vità in più
-		for(var item:enemies) {
+		/*for(var item:enemies) {
 			System.out.println("Enemy "+item.getID()  + " has " +item.GetHP()+ "  life points");
 		}
+		*/
 		round = 0;
 		
 		//             System.out.println("--- blocco 4 ---");
@@ -202,8 +212,7 @@ public class Global_Generator {
 	}
 
 	public void playerTurn() {
-		System.out.println("è il mio turno ora -------------------------------- ");
-		
+
 		if(player.getPlayer_action().getAvailableActions() > 0) {
 		
 		}
@@ -286,6 +295,8 @@ public class Global_Generator {
 
 
 	private void enemyTurn() {
+		
+		System.out.println("-- Now it is the enemy turn! --");
 			for(var item:enemyposwithID) {
 				
 			if(skipenemy.contains(item.getX())) {
