@@ -36,6 +36,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.player.Pair;
 import model.player.Player;
 import model.abilities.Ability;
@@ -79,7 +80,8 @@ public class GameLayoutController extends SharedMethodsImpl{
 	  Button up, left, right, down, stop;
 	  @FXML
 	  Button skillABtn, skillBBtn;
-	  
+	  @FXML
+	  DialogPane dialogPane;
 		
 	  @FXML
 	    private void initialize() {
@@ -100,21 +102,34 @@ public class GameLayoutController extends SharedMethodsImpl{
 		   */
 		  gameLayout.setOnKeyReleased(event -> {
 		      if(event.getCode() == KeyCode.ESCAPE) {
-		    	  Alert alert = new Alert(AlertType.CONFIRMATION);
+				    ButtonType surrend = new ButtonType("Yes I want to surrend.");
+				    ButtonType fight = new ButtonType("No, I will keep fighting!");  
 		    	  
+		
+		    	  Alert alert = new Alert(AlertType.CONFIRMATION,
+				            "Do you want to give up? ",
+				            surrend,
+				            fight);
+
 		    	  DialogPane dialogPane = alert.getDialogPane();
+
 		    	  dialogPane.getStylesheets().add(
 		    	  getClass().getResource("/assets/gameLayout.css").toExternalForm());
-		    	  dialogPane.getStyleClass().add("myDialog");
 		    	  
-		    		alert.setHeaderText(null);
-				    alert.setContentText("Vuoi arrenderti?");
+		    	  dialogPane.getStyleClass().add("myDialog");
+		    	  dialogPane.setGraphic(null);
+		   
+		    	  alert.initStyle(StageStyle.UNDECORATED);  
+		    	  alert.setHeaderText(null);
+
+  
 				    Optional<ButtonType> result = alert.showAndWait();
+
 				    if (result.isPresent()) {
-				        if (result.get() == ButtonType.OK) {
+				        if (result.get() == surrend) {
 				        	System.exit(0);
 				        }
-				        if (result.get() == ButtonType.CANCEL) {
+				        if (result.get() == fight) {
 				            alert.close();
 				        }
 				    }
