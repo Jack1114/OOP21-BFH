@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
@@ -16,13 +17,19 @@
          </children></Pane>
       <Pane id="skillA" fx:id="skillA" layoutX="14.0" layoutY="171.0" prefHeight="50.0" prefWidth="50.0">
          <children>
-            <Label id="skillAHolder" fx:id="skillAHolder" layoutX="5.0" layoutY="5.0" prefHeight="40.0" prefWidth="40.0" />
+            <Label id="skillAHolder" fx:id="skillAHolder" layoutX="5.0" layoutY="5.0" prefHeight="40.0" prefWidth="40.0">
+               <tooltip>
+                  <Tooltip id="skillATooltip" fx:id="skillATooltip" text="Heal yourself. Cost: 1 Action Point." />
+               </tooltip></Label>
          </children></Pane>
       <TextArea id="statsArea" fx:id="statsArea" editable="false" layoutX="14.0" layoutY="252.0" prefHeight="74.0" prefWidth="134.0" />
       <Label id="moneyHolder" fx:id="moneyHolder" layoutX="14.0" layoutY="354.0" prefHeight="26.0" prefWidth="134.0" />
       <Pane id="skillB" fx:id="skillB" layoutX="97.0" layoutY="171.0" prefHeight="50.0" prefWidth="50.0">
          <children>
-            <Label id="skillBHolder" fx:id="skillBHolder" layoutX="5.0" layoutY="5.0" prefHeight="40.0" prefWidth="40.0" />
+            <Label id="skillBHolder" fx:id="skillBHolder" layoutX="5.0" layoutY="5.0" prefHeight="40.0" prefWidth="40.0">
+               <tooltip>
+                  <Tooltip id="skillBTooltip" fx:id="skillBTooltip" text="Double attack an enemy. Cost: 1 Action Point." />
+               </tooltip></Label>
          </children></Pane>
       <Pane id="btnHolder" fx:id="btnHolder" layoutX="680.0" layoutY="252.0" prefHeight="204.0" prefWidth="204.0">
          <children>
