@@ -40,3 +40,17 @@
    -fx-background-repeat: no-repeat;
    -fx-background-position: center center;
 }
+
+.dialog-pane{
+   -fx-background-image: url("/images/howtoplay.png");
+   -fx-background-repeat: no-repeat;
+   -fx-background-size: cover;
+
+}
+.dialog-pane  .button {
+   -fx-background-size: cover;
+ -fx-font-size: 20px;
+    -fx-max-height: 15px;
+    -fx-max-width: 250px;
+
+}
