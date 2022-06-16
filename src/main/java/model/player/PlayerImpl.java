@@ -3,18 +3,9 @@
  */
 package model.player;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 import controller.actions.ActionImpl;
-import model.abilities.*;
+import controller.globalGenerator.Global_Generator;
 
-/**
- * @author Olivia
- *
- */
 public class PlayerImpl implements Player {
 
 	//punti da togliere al giocatore dopo ogni hit o che può guadagnare se crea il dano al nemico
@@ -24,6 +15,7 @@ public class PlayerImpl implements Player {
 	private final  ActionImpl player_action;
 	private final Gold gold;
 	private static final int ATTACK_POINTS = 5; 
+	Global_Generator gg = Global_Generator.getInstance();
 	
 	public PlayerImpl(Pair<Integer, Integer> pair) {
 		this.life=new Life();
@@ -47,16 +39,12 @@ public class PlayerImpl implements Player {
 	public int getAttackPoints() {
 		return ATTACK_POINTS;
 	}
-	/**
-	 * when the player move, this function update the new position
-	 */
+	
 	public void setPlayerPosition(Pair<Integer,Integer> newPos) {
 		playerPosition=newPos;
 	}
 	
-	/**
-	 * @return player current position
-	 */
+	
 	public Pair<Integer,Integer> getPlayerPosition() {
 		return playerPosition;
 	}
@@ -64,7 +52,9 @@ public class PlayerImpl implements Player {
 	// resetta i punti vita del palyer
 	public void recoverPlayer() {
 		System.out.println("Ti senti piu forte di prima e le tue ferite sono state curate !!");
+		life.setMaxLifePoints(life.getMaxLifePoints()+gg.getAddHp());
 		life.resetLife();
+		
 	}
 
 	public ActionImpl getPlayer_action() {

@@ -9,22 +9,25 @@ import model.player.PlayerImpl;
 public class Enemy {
 
 	// supponendo che lo schermo sia una griglia di 15 X 15
-	int GRID_SIZE = 15;
+	//int GRID_SIZE = 15;
+	
+	int GRID_SIZEX = 10;
+	int GRID_SIZEY = 12;
 	Player player;
 	Pair<Integer,Integer> pos;
 	Global_Generator gg = Global_Generator.getInstance();
 	
-	int ID;
+	private int ID;
 	
-	int x;
-	int y;
+	private int x;
+	private int y;
 	
-	int HP;
-	int def;
-	int atk;
-	int exp;
-	int HeroEXP =gg.player.getExperience().getExpPoints();
-	int Gold;
+	private int HP ;
+	private int def;
+	private int atk;
+	private int exp;
+	private int HeroEXP =gg.player.getExperience().getExpPoints();
+	private int Gold;
 	
 	Random rand = new Random();
 	
@@ -34,13 +37,22 @@ public class Enemy {
 		this.ID = id;
 		
 		// elemento di random per dare diversitï¿½ ai nemici
-		int value = rand.nextInt(10)+1; 
+		int value = rand.nextInt(3)+1; 
 		
 		// i valori sono arbitrari
-		HP =( 5+value + ( HeroEXP/(15*5) ));
+		
+		HP =10;
 		def=( 1+value/2 + ( HeroEXP/(20*8) ));
 		atk=( 1+value/3 + ( HeroEXP/(10*10) ));
-		exp=( 20+value*2 + ( HeroEXP/(15*6) ));
+		exp=( 10+value - ( HeroEXP/(15*6) ));
+		
+		/*
+		HP =( 5+value + ( HeroEXP/(2) ));
+		def=( 1+value/2 + ( HeroEXP/(2) ));
+		atk=( 1+value/3 + ( HeroEXP/(2) ));
+		exp=( 10+value*2 + ( HeroEXP/(2) ));
+		*/
+		
 		Gold=rand.nextInt(15)+10;
 		generate_pos();
 	}
@@ -49,15 +61,15 @@ public class Enemy {
 	
 	
 	@SuppressWarnings("unlikely-arg-type")
-	private void generate_pos() {
+	public void generate_pos() {
 		// TODO Auto-generated method stub
 		boolean ok=false;
 		while(!ok) {
-			x= rand.nextInt(GRID_SIZE);
-			y= rand.nextInt(GRID_SIZE);
+			x= rand.nextInt(GRID_SIZEX);
+			y= rand.nextInt(GRID_SIZEY);
 			pos=new Pair<>(x,y);
 			//TODO: da controllare le condizioni dell'if
-			if( (!gg.enemyposwithID.contains(pos) ) && (!gg.obstacles.contains(pos))  ) {
+			if( (!gg.enemyposwithID.contains(pos) ) && (!gg.obstacles.contains(pos)) && (!gg.player.getPlayerPosition().equals(pos))) {
 				gg.enemyposwithID.add(new Pair<Integer, Pair<Integer, Integer>>(this.ID,pos));
 				ok=true;
 			}
@@ -68,7 +80,7 @@ public class Enemy {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		String s = "HP = "+this.HP+" atk = "+this.atk+" def = "+this.def+" exp = "+this.exp ;
+		String s = "HP = "+GetHP()+" atk = "+this.atk+" def = "+this.def+" exp = "+this.exp ;
 		return s;
 	}
 
@@ -88,19 +100,27 @@ public class Enemy {
 	}
 
 	public void SetHP(int damage) {
-		this.HP = HP-damage;
+		setHPennemi(GetHP()-damage);
 		System.out.println("Enemy "+this.ID+" - Life = " + GetHP());
 		if(GetHP()<=0) {
 			gg.player.getExperience().gainExp(this.getEXP());
 			gg.player.getGold().gainGold_points(this.Gold);
-			if(gg.player.getGold().getGold_points()>=20 && gg.player.getLife().getLifePoints() < gg.player.getLife().getMaxLifePoints() - 10 ) {
-				gg.player.getLife().setLifePoints(gg.player.getLife().getLifePoints() + 10); // pago i punti cità con l'oro
-				gg.player.getGold().setGold_points(gg.player.getGold().getGold_points()-20); 
+			if(gg.player.getGold().getGold_points()>=50 && gg.player.getLife().getLifePoints() < gg.player.getLife().getMaxLifePoints() - 5 ) {
+				gg.player.getLife().setLifePoints(gg.player.getLife().getLifePoints() + 5); // pago i punti cità con l'oro
+				gg.player.getGold().setGold_points(gg.player.getGold().getGold_points()-50); 
 			}
 			Death();
 		}
 	}
 	
+	public void setHPennemi(int i) {
+		HP=i;
+		
+	}
+
+
+
+
 	private int getEXP() {
 		// TODO Auto-generated method stub
 		return this.exp;

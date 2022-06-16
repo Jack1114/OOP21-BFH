@@ -6,7 +6,11 @@
    	-fx-background-color: transparent;
    	-fx-background-position: center center;
 }
+#moneyHolder{
+	-fx-padding: 5px;
 
+
+}
 #charImage, #skillA, #skillB, #inventory{
 	-fx-background-image: url("/images/panel_beige.png");
   	-fx-background-repeat: no-repeat;
@@ -18,6 +22,14 @@
 
 }
 
+#charImageHolder{
+	-fx-background-image: url("/images/heroprofile.png");
+  	-fx-background-repeat: no-repeat;
+  	-fx-background-size: cover;
+   	-fx-border-color: transparent;
+   	-fx-background-color: transparent;
+   	-fx-background-position: center center;
+}
 
 #btnHolder{
 	-fx-background-image: url("/images/panel_beige_btnHolder.png");
@@ -38,6 +50,9 @@
    	-fx-background-position: center center;
 
 
+}
+#combatHistory{
+-fx-padding: 5px;
 }
 
 #mapHolder{
@@ -126,6 +141,37 @@
    -fx-background-position: center center;
 
 }
+#skillAHolder{
+	-fx-background-image: url("/images/health.png");
+  	-fx-background-repeat: no-repeat;
+  	-fx-background-size: cover;
+   	-fx-border-color: transparent;
+   	-fx-background-color: transparent;
+   	-fx-background-position: center center;
+
+}
+
+#skillBHolder{
+	-fx-background-image: url("/images/doubleAttack.png");
+  	-fx-background-repeat: no-repeat;
+  	-fx-background-size: cover;
+   	-fx-border-color: transparent;
+   	-fx-background-color: transparent;
+   	-fx-background-position: center center;
+
+}
+
+#skillABtn {
+	
+    -fx-graphic: url("/images/health.png");
+    -fx-content-display: graphic-only;
+}
+#skillBBtn{
+    -fx-graphic: url("/images/doubleAttack.png");
+    -fx-content-display: graphic-only;
+}
+
+
 
 .text-area .scroll-pane {
     -fx-background-color: transparent;
@@ -143,4 +189,9 @@
 .text-area .scroll-bar:vertical {
     -fx-pref-width: 1;
     -fx-opacity: 0;
+}
+#myDialog{
+
+-fx-graphic: null;
+
 }

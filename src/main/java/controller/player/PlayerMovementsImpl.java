@@ -4,32 +4,30 @@
 package controller.player;
 
 import java.util.Optional;
+import java.util.Random;
 
 import controller.globalGenerator.Global_Generator;
 import controller.obstacles.Obstacle;
-import controller.obstacles.ObstacleImpl;
 import model.enemies.Enemy;
 import model.player.Pair;
 import model.player.PlayerImpl;
+
 
 /**
  * @author Olivia
  *
  */
-public class PlayerMouvementsImpl implements PlayerMouvement {
+public class PlayerMovementsImpl implements PlayerMovement {
 
+	
 	private Pair<Integer,Integer> new_player_pos;
 	private final PlayerImpl player;
 	private Global_Generator gg = Global_Generator.getInstance();
-	
-	public PlayerMouvementsImpl(PlayerImpl newPlayer) {
+	public PlayerMovementsImpl(PlayerImpl newPlayer) {
 		this.player = newPlayer;
 	}
 	
-	
-	/**
-	 * the player move to the left
-	 */
+
 	public void left() {
 		new_player_pos=new Pair<>(player.getPlayerPosition().getX()-1,player.getPlayerPosition().getY());
 		if(check_advancement(new_player_pos)) {
@@ -37,9 +35,7 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 		}		
 	}
 
-	/**
-	 * the player move to the right
-	 */
+	
 	public void right() {
 		new_player_pos=new Pair<>(player.getPlayerPosition().getX()+1,player.getPlayerPosition().getY());
 		if(check_advancement(new_player_pos)) {
@@ -47,9 +43,7 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 		}
 	}
 
-	/**
-	 * the player move to down
-	 */
+	
 	public void down() {
 		new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY()+1);
 		if(check_advancement(new_player_pos)) {
@@ -57,9 +51,7 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 		}
 	}
 
-	/**
-	 * the player move to up
-	 */
+	
 	public void up() {
 		new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY()-1);
 		if(check_advancement(new_player_pos)) {
@@ -68,9 +60,7 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 	}
 
 	
-	/**
-	 * the player can not move because of an obstacle or something else
-	 */
+	
 	public void stop() {
 		new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY());	
 	}
@@ -81,12 +71,7 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 	}
 
 	
-	/**
-	 * 
-	 * @return true or false
-	 * before moving, the player check if there is an enemy and if there is an obstacle 
-	 * if there is an obstacle, he check if the obstacle's type is the one that can be cross
-	 */	
+	
 	public boolean check_advancement(Pair<Integer, Integer> new_player_pos) {
 		//check sugli ostacoli	
 		Optional<Obstacle> type = gg.obstacles
@@ -100,19 +85,20 @@ public class PlayerMouvementsImpl implements PlayerMouvement {
 						player.getPlayer_action().removeAction();
 						return true;
 					}else {
-						System.out.println("You don't have enough actions to cross the pool");
+						System.out.println("You need at least 2 action points to cross this mud pool.");
 						return false;
 					}
 					
 				case ROCK:
 					player.getLife().setLifePoints(player.getLife().getLifePoints()-2);
+					System.out.println("This rocks are sharp, don't hit them, it's going to hurt you!");
 					return false;
 			}
 		}
 
 		//check sui bordi dello schermo
-		if( (new_player_pos.getX()<0 || new_player_pos.getX()>gg.GRID_SIZE-1) || new_player_pos.getY()<0 || new_player_pos.getY()>gg.GRID_SIZE-1 ){
-			System.out.println("vado fuori dai bordi!");
+		if( (new_player_pos.getX()<0 || new_player_pos.getX()>gg.getGRID_SIZE_X()-1 ) || new_player_pos.getY()<0 || new_player_pos.getY()>gg.getGRID_SIZE_Y()-1 ){
+			System.out.println("You can't leave the arena, don't give up like that!");
 			return false;
 		}
 

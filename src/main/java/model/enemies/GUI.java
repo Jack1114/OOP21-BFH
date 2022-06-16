@@ -89,7 +89,7 @@ public class GUI extends JFrame {
         
         this.setVisible(true);
     }
-    
+   
     
 	public void update() {
 		//System.out.println("entro dentro update");
@@ -103,7 +103,7 @@ public class GUI extends JFrame {
 		obstacles = gg.getInstance().obstacles;	
 		mappostojb.forEach((pos,jb)->{
 	
-				jb.setText("X"+pos.getX()+"Y"+pos.getY());
+				jb.setText("");
 				// calcolo rapido per avere l' ID solo per visualizzarlo a schermo 
 				En_With_ID.forEach(pair->{
 					//System.out.println("ho trovato un nemico da aggiungere");
