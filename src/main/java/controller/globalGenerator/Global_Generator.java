@@ -42,9 +42,10 @@ public class Global_Generator {
 	//id dei nemici morti
 	public List<Integer> skipenemy; 
 	private int round;
-	private static final int ADD_HP=7;
+	private static final int ADD_HP=10;
+
 	private static final int GRID_SIZE_X = 10;
-	private static final int GRID_SIZE_Y= 12;
+	private static final int GRID_SIZE_Y= 12;;
 	GameLayoutController g;
 
 	private static Global_Generator instance = null;
@@ -99,6 +100,10 @@ public class Global_Generator {
 				//controllo i punti esperienza e nel caso aumento di livello --> sono piu forte e guadagno oro
 				if(player.getExperience().addLevel()) {
 					System.out.println("Complimenti! hai ucciso tutti i nemici e sei passato al livello successivo!");
+					for(var item:enemies) {
+						System.out.println("Enemy "+item.getID()  + " has " +item.GetHP() + "  life points");
+					}
+					
 					player.recoverPlayer();
 					strongEnemies();
 				}			
@@ -117,7 +122,7 @@ public class Global_Generator {
 
 	public void strongEnemies() {
 		for(var item:enemies) {
-			item.setHPennemi(item.GetHP()+ADD_HP);
+			item.setHPennemi(item.GetHP()+getAddHp());
 		}
 	}
 	
@@ -174,6 +179,7 @@ public class Global_Generator {
 		//da quì non avanza più 
 		//		System.out.println("ho finito generare arena");
 		
+		
 	}
 	
 	private void reset() {
@@ -184,10 +190,6 @@ public class Global_Generator {
 		skipenemy =new ArrayList<Integer>();
 		generateArena();
 		round = 0;
-		for(var item:enemies) {
-			System.out.println("Enemy "+item.getID()  + " has " +item.GetHP() + "  life points");
-		}
-		
 
 		
 	}
@@ -404,6 +406,11 @@ public class Global_Generator {
 		int y = r.nextInt(size_Y);
 		return new Pair<>(x,y);
 	}
-
+	/**
+	 * @return the addHp
+	 */
+	public int getAddHp() {
+		return ADD_HP;
+	}
 
 }
