@@ -20,13 +20,11 @@ public class ActionImpl implements Action{
 
 	@Override
 	public int getAvailableActions() {
-		// TODO Auto-generated method stub
 		return this.actions;
 	}
 
 	@Override
 	public void removeAction() {
-		// TODO Auto-generated method stub
 		if(isActionAvailable(this.actions)) {
 			this.actions--;
 		}

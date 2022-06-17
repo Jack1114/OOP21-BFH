@@ -24,6 +24,8 @@ public class Global_Generator {
 	
 	private static final int ADD_HP=10;
 	private static final int GRID_SIZE_X = 10;
+
+
 	private static final int GRID_SIZE_Y= 12;
 	private static final int MAX_ROUNDS = 50;
 	public int NUM_ENEMIES = 3;
@@ -54,6 +56,14 @@ public class Global_Generator {
 	
 	public static synchronized void setInstance(GameLayoutController gameL) {		
 		instance = new Global_Generator(gameL);		
+	}
+	
+	public static int getGridSizeX() {
+		return GRID_SIZE_X;
+	}
+
+	public static int getGridSizeY() {
+		return GRID_SIZE_Y;
 	}
 	
 	/**
