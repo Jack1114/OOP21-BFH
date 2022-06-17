@@ -1,7 +1,4 @@
 package controller.globalGenerator;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
 import java.util.*;
 
 import controller.enemies.Enemy_move_control;
@@ -14,7 +11,6 @@ import model.obstacles.*;
 import model.player.*;
 import model.abilities.*;
 import model.enemies.Enemy;
-import model.enemies.GUI;
 import view.GameLayoutController;
 
 

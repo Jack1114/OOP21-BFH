@@ -43,7 +43,6 @@ import javafx.stage.StageStyle;
 import model.player.Pair;
 import model.player.Player;
 import model.abilities.Ability;
-import model.enemies.GUI;
 
 public class GameLayoutController extends SharedMethodsImpl{
 	
