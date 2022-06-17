@@ -26,7 +26,6 @@ public class Global_Generator {
 	private static final int GRID_SIZE_X = 10;
 	private static final int GRID_SIZE_Y= 12;
 	private static final int MAX_ROUNDS = 50;
-	//NUM ENEMIES dovrebbe incrementare con il livello
 	public int NUM_ENEMIES = 3;
     				// ID           POS
 	public List<Pair<Integer,Pair<Integer,Integer>>> enemyposwithID = new ArrayList<>();
@@ -83,7 +82,6 @@ public class Global_Generator {
 				System.out.println("Congrats, your level has increased! Now enemies are stronger. ");
 
 				player.recoverPlayer();
-				strongEnemies();
 			}			
 		} 
 			
@@ -93,11 +91,6 @@ public class Global_Generator {
 	
 	}
 
-	public void strongEnemies() {
-		for(var item:enemies) {
-			item.setHPennemi(item.GetHP()+getAddHp());
-		}
-	}
 	
 	/**
 	 * generate for the first time all the controllers
@@ -157,74 +150,7 @@ public class Global_Generator {
 		
 			play();
 		}
-		
-		//if(actions == 0) { enemyTurn(); } else { playerTurn() }
-		
-		
-		
-		/*
-		while(player.getPlayer_action().getAvailableActions() > 0) {
-			player.getPlayer_action().removeAction();
-        	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	        try {
-	            String s = br.readLine();
-	            switch(s) {
-	            	case("w"):
-	            		playerMovement.up();
-	            		g.update();
-	            		System.out.println("Move UP");
-	            	break;
-	            	case("s"):
-	            		playerMovement.down();
-	            		g.update();
-	            		System.out.println("Move DOWN");
-	            	break;
-	            	case("a"):
-	            		playerMovement.left();
-	            		g.update();
-	            		System.out.println("Move LEFT");
-	            	break;
-	            	case("d"):
-	            		playerMovement.right();
-	            		g.update();
-	            		System.out.println("Move RIGHT");
-	            	break;
-					//al posto dei tasti ci saranno i bottoni
-					//nel caso non si possano usare più abilitò perchè finite non si deve fare la removeAction 
-					case("1"):
-						if (abilityManager.isAvailable(Ability.Type.ELIXIR_OF_LIFE)) {
-							abilityManager.getAbilityOfType(Ability.Type.ELIXIR_OF_LIFE).apply();
-	        				System.out.println("Using " + abilityManager.getAbilityOfType(Ability.Type.ELIXIR_OF_LIFE).getName());
-							abilityManager.remove(Ability.Type.ELIXIR_OF_LIFE);
-	        				System.out.println("Now you have " + abilityManager.getSize(Ability.Type.ELIXIR_OF_LIFE) + " left");   			
-						}else {
-							System.out.println("You don't have any Elixir Of Life left");
-						}
-						g.update();
-						break;
-					case("2"):
-						if (abilityManager.isAvailable(Ability.Type.DOUBLE_ATTACK)) {
-							abilityManager.getAbilityOfType(Ability.Type.DOUBLE_ATTACK).apply();
-	        				System.out.println("Using " + abilityManager.getAbilityOfType(Ability.Type.DOUBLE_ATTACK).getName());
-							abilityManager.remove(Ability.Type.DOUBLE_ATTACK);
-	        				System.out.println("Now you have " + abilityManager.getSize(Ability.Type.DOUBLE_ATTACK) + " left"); 
-						}else {
-							System.out.println("You don't have any Double Attack left");
 
-						}
-        				g.update();
-						break;
-	            	default:
-	            		playerMovement.stop();
-	            		g.update();
-	            	break;
-	            	}
-	         }catch(Exception e) {
-	            System.out.println(e);
-	        }
-		}
-		player.getPlayer_action().resetActions();
-		*/
 	}
 
 
@@ -233,12 +159,9 @@ public class Global_Generator {
 		System.out.println("-- Now it is the enemy turn! --");
 		for(var item:enemyposwithID) {		
 			if(skipenemy.contains(item.getX())) {
-				// ï¿½ bruttissimo ma quando muoiono vengono teletrasportati ad una posizione fuore schermo a (99,99)
-				// e vengono pure disattivati quindi non agiranno MAI PIU' !! 
 				enemyposwithID.set(item.getX(), new Pair<>(item.getX(),new Pair<Integer,Integer>(99,99)));
 			}else {
 				int id= item.getX();
-					 // stampa del turno (si ripete per ogni nemico )
 				int actionpt=0;
 				
 				while (actionpt<2) {
