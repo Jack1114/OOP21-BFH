@@ -22,6 +22,9 @@ import view.GameLayoutController;
 
 public class Global_Generator {
 	
+	private static final int ADD_HP=10;
+	private static final int GRID_SIZE_X = 10;
+	private static final int GRID_SIZE_Y= 12;
 	private static final int MAX_ROUNDS = 50;
 	//NUM ENEMIES dovrebbe incrementare con il livello
 	public int NUM_ENEMIES = 3;
@@ -43,25 +46,22 @@ public class Global_Generator {
 	//id dei nemici morti
 	public List<Integer> skipenemy; 
 	private int round;
-	private static final int ADD_HP=10;
 
-	private static final int GRID_SIZE_X = 10;
-	private static final int GRID_SIZE_Y= 12;;
 	GameLayoutController g;
 
 	private static Global_Generator instance = null;
 	
-	private Global_Generator(GameLayoutController gameL) {this.g=gameL;}
+	private Global_Generator(GameLayoutController gameL) {
+		this.g=gameL;
+	}
 	
 	
 	public static synchronized Global_Generator getInstance() {
 		return instance;
 	}
 	
-	public static synchronized void setInstance(GameLayoutController gameL) {
-		
-		instance = new Global_Generator(gameL);
-		
+	public static synchronized void setInstance(GameLayoutController gameL) {		
+		instance = new Global_Generator(gameL);		
 	}
 	
 	/**
@@ -78,47 +78,26 @@ public class Global_Generator {
 		return GRID_SIZE_Y;
 	}
 
-	
-	
-
 	public void play() {
-
-		//generation();
-
-
-		//game core
-		//while(true && round <= MAX_ROUNDS) {
-		
 	
+		System.out.println("---- Round "+ round + " ----");	
+		System.out.println("Killed enemies: " + skipenemy.size());
 		
-			System.out.println("---- Round "+ round + " ----");	
-			System.out.println("Killed enemies: " + skipenemy.size());
+		if(skipenemy.size() == NUM_ENEMIES) {
+			System.out.println("Congrats, you killed all the enemies! New arena generated.");
+			reset();
+			if(player.getExperience().addLevel()) {
+				System.out.println("Congrats, your level has increased! Now enemies are stronger. ");
+
+				player.recoverPlayer();
+				strongEnemies();
+			}			
+		} 
 			
-			if(skipenemy.size() == NUM_ENEMIES) {
-				System.out.println("Congrats, you killed all the enemies! New arena generated.");
-				//carico una nuova arena
-				reset();
-				//controllo i punti esperienza e nel caso aumento di livello --> sono piu forte e guadagno oro
-				if(player.getExperience().addLevel()) {
-					System.out.println("Congrats, your level has increased! Now enemies are stronger. ");
-					/*for(var item:enemies) {
-						System.out.println("Enemy "+item.getID()  + " has " +item.GetHP() + "  life points");
-					}
-					*/
-					player.recoverPlayer();
-					strongEnemies();
-				}			
-			} 
-			
-			playerTurn();
-			//enemyTurn();
-			
-			round++;
-			
-		
-			
-		//}
-		
+		playerTurn();
+	
+		round++;
+	
 	}
 
 	public void strongEnemies() {
@@ -128,7 +107,6 @@ public class Global_Generator {
 	}
 	
 	public void generation() {
-
 		//LIVELLO 1
 		//genero per la prima volta tutti i controller
 		this.obstacleGenerator = new ObstacleGenerator(obstacles);
@@ -137,71 +115,32 @@ public class Global_Generator {
 		this.playerMovement = new PlayerMovementsImpl(player);
 		this.enemies = new ArrayList<Enemy>();
 		this.skipenemy = new ArrayList<>(); 
-
-		//g = new GUI(15);
-		
-		
-		//        System.out.println("--- blocco 1 ---");
-
 	
 		//creo le abilita
 		abilities.put(Ability.Type.ELIXIR_OF_LIFE, 2);
 		abilities.put(Ability.Type.DOUBLE_ATTACK, 3);
 		this.abilityManager = new AbilityManager(abilities);
 		abilityManager.generateAbilities();
-		
-		//          System.out.println("--- blocco 2 ---");
-		
+
 		generateArena();
 
-		//          System.out.println("--- blocco 3 ---");
-		
-		
-
-		
-		
-		
-		
-		
-		
-		//System.out.println("Genarated obstacles, enemies and player");
-		//System.out.println("You can now move using: w=UP | s=DOWN | a=LEFT | d=RIGHT");
-		//System.out.println("You can use abilities with 1 and 2");
-		//per vedere se al livello successivo gli nemici sono più forti cioè con punti vità in più
-		/*for(var item:enemies) {
-			System.out.println("Enemy "+item.getID()  + " has " +item.GetHP()+ "  life points");
-		}
-		*/
 		round = 0;
-		
-		//             System.out.println("--- blocco 4 ---");
 	}
 	
 	
 	private void generateArena() {
 		obstacleGenerator.generateObstacles();
-		//		System.out.println("--- blocco 2.1 ---");
 		generate_enemies();
-		//		System.out.println("--- blocco 2.2 ---");
-		//		System.out.println(g);
-		g.update();
-		//		System.out.println("--- blocco 2.3 ---");
-		//da quì non avanza più 
-		//		System.out.println("ho finito generare arena");
-		
-		
+		g.update();		
 	}
 	
 	private void reset() {
-		obstacles.removeAll(obstacles);
-		
+		obstacles.removeAll(obstacles);	
 		enemyposwithID = new ArrayList<>();
 		enemies= new ArrayList<Enemy>();
 		skipenemy =new ArrayList<Integer>();
 		generateArena();
-		round = 0;
-
-		
+		round = 0;	
 	}
 
 	private void generate_enemies() {
@@ -297,8 +236,7 @@ public class Global_Generator {
 	private void enemyTurn() {
 		
 		System.out.println("-- Now it is the enemy turn! --");
-			for(var item:enemyposwithID) {
-				
+		for(var item:enemyposwithID) {		
 			if(skipenemy.contains(item.getX())) {
 				// ï¿½ bruttissimo ma quando muoiono vengono teletrasportati ad una posizione fuore schermo a (99,99)
 				// e vengono pure disattivati quindi non agiranno MAI PIU' !! 
@@ -311,8 +249,7 @@ public class Global_Generator {
 				while (actionpt<2) {
 					advance(item,actionpt);	
 					item=enemyposwithID.get(id);
-					actionpt++;
-					
+					actionpt++;			
 				}
 			}	
 		}

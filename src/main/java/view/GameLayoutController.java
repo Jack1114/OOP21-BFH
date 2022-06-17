@@ -150,6 +150,7 @@ public class GameLayoutController extends SharedMethodsImpl{
 				update();
 				System.out.println("Using " + gg.abilityManager.getAbilityOfType(Ability.Type.ELIXIR_OF_LIFE).getName());
 				gg.abilityManager.remove(Ability.Type.ELIXIR_OF_LIFE);
+	    		gg.player.getPlayer_action().removeAction();
 				System.out.println("Now you have " + gg.abilityManager.getSize(Ability.Type.ELIXIR_OF_LIFE) + " left");   			
 			}else {
 				System.out.println("You don't have any Elixir Of Life left");
@@ -164,6 +165,7 @@ public class GameLayoutController extends SharedMethodsImpl{
 				update();
 				System.out.println("Using " + gg.abilityManager.getAbilityOfType(Ability.Type.DOUBLE_ATTACK).getName());
 				gg.abilityManager.remove(Ability.Type.DOUBLE_ATTACK);
+	    		gg.player.getPlayer_action().removeAction();
 				System.out.println("Now you have " + gg.abilityManager.getSize(Ability.Type.DOUBLE_ATTACK) + " left"); 
 			}else {
 				System.out.println("You don't have any Double Attack left");
@@ -250,8 +252,8 @@ public class GameLayoutController extends SharedMethodsImpl{
 	    	int HeroY = player.getPlayerPosition().getY();
 	    	
 	    	statsArea.setText("Experience = " + player.getExperience().getExpPoints()+ "\n"+
-	    						"HP = " + player.getLife().getLifePoints() +" / "+ player.getLife().getMaxLifePoints() + "\n" +
-	    						" LV =" + player.getExperience().getLevel() + "\n" +
+	    						"Life Points = " + player.getLife().getLifePoints() +" / "+ player.getLife().getMaxLifePoints() + "\n" +
+	    						"Level =" + player.getExperience().getLevel() + "\n" +
 	    						"Action= " + player.getPlayer_action().getMaxActions());
 	    	
 	    	moneyHolder.setText("Gold = " + player.getGold().getGold_points());
@@ -381,8 +383,8 @@ public class GameLayoutController extends SharedMethodsImpl{
 
 		  
 	    	statsArea.setText("Experience = " + gg.player.getExperience().getExpPoints()+ "\n"+
-					"HP = " + gg.player.getLife().getLifePoints() +" / "+ gg.player.getLife().getMaxLifePoints() + "\n" +
-					" LV =" + gg.player.getExperience().getLevel() + "\n" +
+					"Life Points = " + gg.player.getLife().getLifePoints() +" / "+ gg.player.getLife().getMaxLifePoints() + "\n" +
+					"Level =" + gg.player.getExperience().getLevel() + "\n" +
 					"Action= " + gg.player.getPlayer_action().getAvailableActions());
 	    	
 	    	//		System.out.println("--- blocco 7788 ---");
