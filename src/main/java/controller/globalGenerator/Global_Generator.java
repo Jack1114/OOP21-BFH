@@ -88,15 +88,7 @@ public class Global_Generator {
 				reset();
 
 				//controllo i punti esperienza e nel caso aumento di livello --> sono piu forte e guadagno oro
-				if(player.getExperience().addLevel()) {
-					System.out.println("Congrats, your level has increased! Now enemies are stronger. ");
-					/*for(var item:enemies) {
-						System.out.println("Enemy "+item.getID()  + " has " +item.GetHP() + "  life points");
-					}
-					*/
-					player.recoverPlayer();
-			
-				}			
+						
 
 			} 			
 			playerTurn();
@@ -160,7 +152,17 @@ public class Global_Generator {
 	public void playerTurn() {
 
 		if(player.getPlayer_action().getAvailableActions() > 0) {
+			System.out.println("*************");
+			if(player.getExperience().addLevel()==true) {
+				System.out.println("Congrats, your level has increased! Now enemies are stronger. ");
+				/*for(var item:enemies) {
+					System.out.println("Enemy "+item.getID()  + " has " +item.GetHP() + "  life points");
+				}
+				*/
+				player.recoverPlayer();
 		
+			}	
+			
 		}
 		else {
 		
