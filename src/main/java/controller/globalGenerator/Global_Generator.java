@@ -92,21 +92,21 @@ public class Global_Generator {
 		
 			System.out.println("---- Round "+ round + " ----");	
 			System.out.println("Killed enemies: " + skipenemy.size());
-			
+			if(player.getExperience().addLevel()) {
+				System.out.println("Complimenti! hai ucciso tutti i nemici e sei passato al livello successivo!");
+				player.recoverPlayer();
+				strongEnemies();
+				reset();
+				for(var item:enemies) {
+					System.out.println("Enemy "+item.getID()  + " has " +item.GetHP() + "  life points");
+				}
+
+			}	
 			if(skipenemy.size() == NUM_ENEMIES) {
 				System.out.println("Complimenti, hai ucciso tutti i nemici!");
 				//carico una nuova arena
 				reset();
-				//controllo i punti esperienza e nel caso aumento di livello --> sono piu forte e guadagno oro
-				if(player.getExperience().addLevel()) {
-					System.out.println("Complimenti! hai ucciso tutti i nemici e sei passato al livello successivo!");
-					for(var item:enemies) {
-						System.out.println("Enemy "+item.getID()  + " has " +item.GetHP() + "  life points");
-					}
-					
-					player.recoverPlayer();
-					strongEnemies();
-				}			
+				//controllo i punti esperienza e nel caso aumento di livello --> sono piu forte e guadagno oro		
 			} 
 			
 			playerTurn();
