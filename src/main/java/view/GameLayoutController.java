@@ -43,7 +43,6 @@ import javafx.stage.StageStyle;
 import model.player.Pair;
 import model.player.Player;
 import model.abilities.Ability;
-import model.enemies.GUI;
 
 public class GameLayoutController extends SharedMethodsImpl{
 	
@@ -150,6 +149,7 @@ public class GameLayoutController extends SharedMethodsImpl{
 				update();
 				System.out.println("Using " + gg.abilityManager.getAbilityOfType(Ability.Type.ELIXIR_OF_LIFE).getName());
 				gg.abilityManager.remove(Ability.Type.ELIXIR_OF_LIFE);
+	    		gg.player.getPlayer_action().removeAction();
 				System.out.println("Now you have " + gg.abilityManager.getSize(Ability.Type.ELIXIR_OF_LIFE) + " left");   			
 			}else {
 				System.out.println("You don't have any Elixir Of Life left");
@@ -164,6 +164,7 @@ public class GameLayoutController extends SharedMethodsImpl{
 				update();
 				System.out.println("Using " + gg.abilityManager.getAbilityOfType(Ability.Type.DOUBLE_ATTACK).getName());
 				gg.abilityManager.remove(Ability.Type.DOUBLE_ATTACK);
+	    		gg.player.getPlayer_action().removeAction();
 				System.out.println("Now you have " + gg.abilityManager.getSize(Ability.Type.DOUBLE_ATTACK) + " left"); 
 			}else {
 				System.out.println("You don't have any Double Attack left");
@@ -174,6 +175,8 @@ public class GameLayoutController extends SharedMethodsImpl{
 	    
 	    @FXML
 		public void moveUP(ActionEvent event) {
+    		update();
+
 	    	gg.playerMovement.up();
 
     		gg.player.getPlayer_action().removeAction();
@@ -183,6 +186,8 @@ public class GameLayoutController extends SharedMethodsImpl{
 	  
 	    @FXML
 		public void moveLEFT(ActionEvent event) {
+    		update();
+
 	    	gg.playerMovement.left();
 
     		gg.player.getPlayer_action().removeAction();
@@ -191,6 +196,8 @@ public class GameLayoutController extends SharedMethodsImpl{
 	    }
 	    @FXML
 		public void moveRIGHT(ActionEvent event) {
+    		update();
+
 	    	gg.playerMovement.right();
 
     		gg.player.getPlayer_action().removeAction();
@@ -199,6 +206,8 @@ public class GameLayoutController extends SharedMethodsImpl{
 	    }
 	    @FXML
 		public void moveDOWN(ActionEvent event) {
+    		update();
+
 	    	gg.playerMovement.down();
 
     		gg.player.getPlayer_action().removeAction();
@@ -253,6 +262,7 @@ public class GameLayoutController extends SharedMethodsImpl{
 	    						"HP = " + gg.player.getLife().getLifePoints() +" / "+ player.getLife().getMaxLifePoints() + "\n" +
 	    						" LV =" + gg.player.getExperience().getLevel() + "\n" +
 	    						"Action= " + gg.player.getPlayer_action().getMaxActions());
+
 	    	
 	    	moneyHolder.setText("Gold = " + gg.player.getGold().getGold_points());
 		  
@@ -281,23 +291,20 @@ public class GameLayoutController extends SharedMethodsImpl{
 	        }
 	        
 	        update();
-	        //------------------  noi siamo qui -------//
 	        gg.play();
 	}
 
 	public void update() {
-			//		System.out.println("entro dentro update");
 
 			updateHeroStats();
 					
 			int HeroX = gg.player.getPlayerPosition().getX();
 			int HeroY = gg.player.getPlayerPosition().getY();
 
-			
 			int ID=0;
 			En_With_ID = gg.getInstance().enemyposwithID;
 			obstacles = gg.getInstance().obstacles;	
-			
+			List<Integer> skipenemy = gg.skipenemy;
 			
 			mappostojb.forEach((pos,jb)->{
 		
@@ -311,22 +318,24 @@ public class GameLayoutController extends SharedMethodsImpl{
 						//System.out.println("ho trovato un nemico da aggiungere");
 						if(pair.getY().getX()==pos.getX() && pair.getY().getY()==pos.getY()){
 							//System.out.println("setto il contenuto del pulsante");
-							//jb.setText(""+pair.getX());
-							if (pair.getX() == 0) {
+							
+							//TODO: controllare che il nemico sia morto e cancellarlo
+							if(skipenemy.contains(pair.getX())) {
+								jb.setStyle("-fx-background-image: url(/images/ground.png);-fx-background-size: 100% 100%;");
+								jb.setGraphic(null);
+                            }else if (pair.getX() == 0) {
 								Image enemy0 = new Image(getClass().getResourceAsStream("/images/enemy0.png"));
 								   jb.setGraphic(new ImageView((enemy0)));
 								   jb.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 								   jb.setAlignment(Pos.CENTER);
 								
-							}
-							if (pair.getX() == 1) {
+							}else if (pair.getX() == 1) {
 								Image enemy1 = new Image(getClass().getResourceAsStream("/images/enemy1.png"));
 								   jb.setGraphic(new ImageView((enemy1)));
 								   jb.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 								   jb.setAlignment(Pos.CENTER);
 								
-							}
-							if (pair.getX() == 2) {
+							} else if (pair.getX() == 2) {
 								Image enemy2 = new Image(getClass().getResourceAsStream("/images/enemy2.png"));
 								   jb.setGraphic(new ImageView((enemy2)));
 								   jb.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
@@ -381,8 +390,8 @@ public class GameLayoutController extends SharedMethodsImpl{
 
 		  
 	    	statsArea.setText("Experience = " + gg.player.getExperience().getExpPoints()+ "\n"+
-					"HP = " + gg.player.getLife().getLifePoints() +" / "+ gg.player.getLife().getMaxLifePoints() + "\n" +
-					" LV =" + gg.player.getExperience().getLevel() + "\n" +
+					"Life Points = " + gg.player.getLife().getLifePoints() +" / "+ gg.player.getLife().getMaxLifePoints() + "\n" +
+					"Level =" + gg.player.getExperience().getLevel() + "\n" +
 					"Action= " + gg.player.getPlayer_action().getAvailableActions());
 	    	
 	    	//		System.out.println("--- blocco 7788 ---");

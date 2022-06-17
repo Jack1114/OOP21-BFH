@@ -41,35 +41,23 @@ public class Enemy {
 		
 		// i valori sono arbitrari
 		
-		HP =10;
+		HP =( 5+value + ( HeroEXP/(15*5) ));
 		def=( 1+value/2 + ( HeroEXP/(20*8) ));
 		atk=( 1+value/3 + ( HeroEXP/(10*10) ));
 		exp=( 10+value - ( HeroEXP/(15*6) ));
-		
-		/*
-		HP =( 5+value + ( HeroEXP/(2) ));
-		def=( 1+value/2 + ( HeroEXP/(2) ));
-		atk=( 1+value/3 + ( HeroEXP/(2) ));
-		exp=( 10+value*2 + ( HeroEXP/(2) ));
-		*/
 		
 		Gold=rand.nextInt(15)+10;
 		generate_pos();
 	}
 	
-	
-	
-	
-	@SuppressWarnings("unlikely-arg-type")
-	public void generate_pos() {
+	private void generate_pos() {
 		// TODO Auto-generated method stub
 		boolean ok=false;
 		while(!ok) {
 			x= rand.nextInt(GRID_SIZEX);
 			y= rand.nextInt(GRID_SIZEY);
 			pos=new Pair<>(x,y);
-			//TODO: da controllare le condizioni dell'if
-			if( (!gg.enemyposwithID.contains(pos) ) && (!gg.obstacles.contains(pos)) && (!gg.player.getPlayerPosition().equals(pos))) {
+			if(gg.checkEnemyPos(pos) && gg.checkObstaclesPos(pos) && gg.checkPlayerPos(pos)) {
 				gg.enemyposwithID.add(new Pair<Integer, Pair<Integer, Integer>>(this.ID,pos));
 				ok=true;
 			}
@@ -129,22 +117,19 @@ public class Enemy {
 
 
 	public void GetHit(int hero_ATK) {
-		// TODO Auto-generated method stub
-		//al posto di damage hero_ATK-GetDEF ci mettiamo il valore dell'attacco del player
-		System.out.println("Enemy "+this.ID + " hit by hero - Damage of " +(hero_ATK));
-		SetHP(hero_ATK);
-		
+		System.out.println("Enemy "+this.ID + " hit by hero - Damage of " +(hero_ATK - GetDEF()));
+		SetHP(hero_ATK - GetDEF());	
 	}
 
 
 
 	private void Death() {
-		// TODO Auto-generated method stub
 		System.out.println("Enemy "+this.ID+" has died");
 		setEXP(0);
 		setGold(0);
 		if(!gg.skipenemy.contains(this.ID)) {
 			gg.skipenemy.add(this.ID);
+			gg.enemyposwithID.set(this.ID, new Pair<>(this.ID,new Pair<Integer,Integer>(99,99)));
 		}
 	}
 

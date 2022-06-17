@@ -20,7 +20,7 @@ public class DoubleAttack implements Ability{
 	}
 	
 	public String getName() {
-		return this.type.toString();
+		return "Double Attack";
 	}
 
 	public void apply() {

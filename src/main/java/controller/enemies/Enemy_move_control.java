@@ -41,17 +41,14 @@ public class Enemy_move_control {
 		// calcolo della differenza tra X e Y di nemico attuale ed eroe
 		diffX(elem.getY().getX());
 		diffY(elem.getY().getY());
-		//System.out.println("diffx = "+dx+" diffy= "+dy);
 		
 		// ID del nemico attuale 
 		enemyID = elem.getX();
 		
 		// non mi ricordo se serve ma lo lascio qui per ora 
 		var item = new Pair<>(elem.getX(),elem.getY());
-		//----------------//
 		
 		if(wait) {
-			//System.out.println("sono dentro wait");
 			wait=false;
 			moved_diagonally=false;
 			previously_acted=false;
@@ -67,15 +64,12 @@ public class Enemy_move_control {
 				previously_acted=true;
 			}
 		}
-
-		//System.out.println("enemy: ID["+enemyID+"], Pos["+newenemyPos.getX()+", "+newenemyPos.getY()+"]");
 	}
 
 	
 	private static void attckHero() {
 		var correct_enemy=gg.enemies.get(enemyID);
 		System.out.println("Enemy " + enemyID + " attacking hero - damage on hero of "+correct_enemy.GetATK());
-		//System.out.println("THAT'S A LOT OF DAMAGE !!");
 		playerAtt.getHit(enemyID,correct_enemy.GetATK());   //changed atk con getATK()		
 	}
 	
@@ -84,7 +78,7 @@ public class Enemy_move_control {
 		
 		var old_pos=elem;
 		int y=elem.getY();
-		if(elem.getY()<player.getPlayerPosition().getX()) {
+		if(elem.getY()<player.getPlayerPosition().getY()) {
 			y++;
 		}else {
 			y--;
@@ -102,11 +96,9 @@ public class Enemy_move_control {
 	
 	// new version // but wit some problems 
 	
-		@SuppressWarnings("unlikely-arg-type")
 		private static void checkwait(Pair<Integer, Integer> old_pos, Pair<Integer, Integer> newPos, boolean horizontal_movement) {
 			
 			if (checkenemypos(newPos)) {
-				System.out.println("NEMICO rimango fermo");
 				newenemyPos = new Pair<>(old_pos.getX(),old_pos.getY());
 			} else if(newPos.equals(player.getPlayerPosition())) {
 				attckHero();
@@ -124,15 +116,15 @@ public class Enemy_move_control {
 					    });
 					    
 				}else {
-		//				System.out.println("sono dentro la fine di check wait e setto wait a true");
-						//wait=true;
 						newenemyPos = new Pair<>(old_pos.getX(),old_pos.getY());
+
 				}
 			}
-			
+			if(newenemyPos.getX()>= gg.getGRID_SIZE_X() || newenemyPos.getY()>=gg.getGRID_SIZE_Y()) {
+				newenemyPos=old_pos;
+				}
 		}
 	
-	@SuppressWarnings("unlikely-arg-type")
 	private static void diagonalmovement(Pair<Integer, Integer> old_pos, Pair<Integer, Integer> newPos, boolean horizontal_movement) {
 	
 		Pair<Integer,Integer> p1 = new Pair<Integer,Integer>(old_pos.getX()-1,old_pos.getY()-1);
@@ -140,105 +132,82 @@ public class Enemy_move_control {
 		Pair<Integer,Integer> p3 = new Pair<Integer,Integer>(old_pos.getX()-1,old_pos.getY()+1);
 		Pair<Integer,Integer> p4 = new Pair<Integer,Integer>(old_pos.getX()+1,old_pos.getY()+1);
 		
-		if(horizontal_movement ) {
-			
-			//System.out.println("Ho incontrato un ostacolo");	
-			
+		if(horizontal_movement ) {			
 			// movimento in diagonale andando a dx o sx
-			
 				if(old_pos.getX()>newPos.getX()) {
-					//caso 1 e 3
-					//	System.out.println("caso 1 e 3 orizzontale ");
 					if(upfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()-1)) 
 							&&  !gg.obstacles
 							.stream()
 							.anyMatch(o -> o.getObstaclePos().equals(p1))){ //1
-						//System.out.println("caso 1");
 						newenemyPos = new Pair<>(old_pos.getX()-1,old_pos.getY()-1);
 						moved_diagonally=true;
 						wait=true;
-						//stop=true;
 						
 					} else if(downfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()+1))  
 							&& !gg.obstacles
 							.stream()
 							.anyMatch(o -> o.getObstaclePos().equals(p3))){ //3
-						//System.out.println("caso 3");
 						newenemyPos = new Pair<>(old_pos.getX()-1,old_pos.getY()+1);
 						moved_diagonally=true;
 						wait=true;
-						//stop=true;
 						
 					} else {
-						//	System.out.println("è rimasto fermo per davvero");
 						newenemyPos = new Pair<>(old_pos.getX(),old_pos.getY());
 					}
 				} else {
-					// caso 2 e 4
-					//System.out.println("caso 2 e 4 orizzontale ");
+
 					if(upfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()-1))  
 							&& !gg.obstacles
 							.stream()
 							.anyMatch(o -> o.getObstaclePos().equals(p2))){ //2
-						//	System.out.println("caso 2");
 						newenemyPos = new Pair<>(old_pos.getX()+1,old_pos.getY()-1);
 						moved_diagonally=true;
 						wait=true;
-						//stop=true;
 						
 					} else if(downfree(new Pair<Integer,Integer>(old_pos.getX(),old_pos.getY()+1)) 
 							&& !gg.obstacles
 							.stream()
 							.anyMatch(o -> o.getObstaclePos().equals(p4))){ //4
-						//	System.out.println("caso 4");
 						newenemyPos = new Pair<>(old_pos.getX()+1,old_pos.getY()+1);
 						moved_diagonally=true;
 						wait=true;
-						//stop=true;
 						
 					} else {
-						//	System.out.println("è rimasto fermo per davvero");
 						newenemyPos = new Pair<>(old_pos.getX(),old_pos.getY());
 					}
 				}
 			} else {
 			// movimento in diagonale andando sù o giù
 			if(old_pos.getY()>newPos.getY()) {
-						//caso 1 e 2
-				//	System.out.println("caso 1 e 2 verticale ");
-						if(leftfree(new Pair<Integer,Integer>(old_pos.getX()-1,old_pos.getY()))  && !gg.obstacles.contains(p1)){ //1
-							System.out.println("caso 1");
+						if(leftfree(new Pair<Integer,Integer>(old_pos.getX()-1,old_pos.getY()))  && !gg.obstacles
+								.stream()
+								.anyMatch(o -> o.getObstaclePos().equals(p1))){ //1
 							newenemyPos = new Pair<>(old_pos.getX()-1,old_pos.getY()-1);
 							moved_diagonally=true;
 							wait=true;
-							//stop=true;
-						} else if(rightfree(new Pair<Integer,Integer>(old_pos.getX()+1,old_pos.getY()))  && !gg.obstacles.contains(p2)){ //2
-							//		System.out.println("caso 2");
+						} else if(rightfree(new Pair<Integer,Integer>(old_pos.getX()+1,old_pos.getY())) && !gg.obstacles
+								.stream()
+								.anyMatch(o -> o.getObstaclePos().equals(p2))){ //2
 							newenemyPos = new Pair<>(old_pos.getX()+1,old_pos.getY()-1);
 							moved_diagonally=true;
 							wait=true;
-							//stop=true;
 						} else {
-							//		System.out.println("è rimasto fermo per davvero");
 							newenemyPos = new Pair<>(old_pos.getX(),old_pos.getY());
 						}
 					} else {
-						// caso 3 e 4
-						//	System.out.println("caso 3 e 4 verticale ");
-						if(leftfree(new Pair<Integer,Integer>(old_pos.getX()-1,old_pos.getY()))  && !gg.obstacles.contains(p3)){ //3
-							//		System.out.println("caso 3");
+						if(leftfree(new Pair<Integer,Integer>(old_pos.getX()-1,old_pos.getY())) && !gg.obstacles
+								.stream()
+								.anyMatch(o -> o.getObstaclePos().equals(p3))){ //3
 							newenemyPos = new Pair<>(old_pos.getX()-1,old_pos.getY()+1);
 							moved_diagonally=true;
 							wait=true;
-							//stop=true;
-						} else if(rightfree(new Pair<Integer,Integer>(old_pos.getX()+1,old_pos.getY()))  && !gg.obstacles.contains(p4)){ //4
-							//		System.out.println("caso 4");
+						} else if(rightfree(new Pair<Integer,Integer>(old_pos.getX()+1,old_pos.getY()))  && !gg.obstacles
+								.stream()
+								.anyMatch(o -> o.getObstaclePos().equals(p4))){ //4
 							newenemyPos = new Pair<>(old_pos.getX()+1,old_pos.getY()+1);
 							moved_diagonally=true;
 							wait=true;
-							//stop=true;
 						} else {
-							//System.out.println("è rimasto fermo per davvero");
 							newenemyPos = new Pair<>(old_pos.getX(),old_pos.getY());
 						}
 					}
@@ -249,46 +218,38 @@ public class Enemy_move_control {
 	
 	
 	private static boolean upfree(Pair<Integer,Integer> up) {
-		// TODO Auto-generated method stub
-		if(!checkenemypos(up) && !gg.obstacles.contains(up)) {
+		if(!checkenemypos(up) && gg.checkObstaclesPos(up)) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 	
-	@SuppressWarnings("unlikely-arg-type")
 	private static boolean downfree(Pair<Integer,Integer> down) {
 		// TODO Auto-generated method stub
-		if(!checkenemypos(down) && !gg.obstacles.contains(down)) {
+		if(!checkenemypos(down) && gg.checkObstaclesPos(down)) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 	
-	@SuppressWarnings("unlikely-arg-type")
 	private static boolean leftfree(Pair<Integer,Integer> left) {
 		// TODO Auto-generated method stub
-		if(!checkenemypos(left) && !gg.obstacles.contains(left)) {
+		if(!checkenemypos(left) && gg.checkObstaclesPos(left)) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 	
-	@SuppressWarnings("unlikely-arg-type")
 	private static boolean rightfree(Pair<Integer,Integer> right) {
-		// TODO Auto-generated method stub
-		if(!checkenemypos(right) && !gg.obstacles.contains(right)) {
+		if(!checkenemypos(right) && gg.checkObstaclesPos(right)) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-	
-
-
 	// è inefficiente lo so ma almeno controlla se tra tutte le posizioni dei nemici c'è già qualcuno 
 	private static boolean checkenemypos(Pair<Integer, Integer> newPos) {
 		// TODO Auto-generated method stub

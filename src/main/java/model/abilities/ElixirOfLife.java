@@ -19,14 +19,12 @@ public class ElixirOfLife implements Ability{
 	}
 
 	public void apply() {
-		// TODO Auto-generated method stub
 		player.getLife().setLifePoints(player.getLife().getLifePoints() + 10);
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return this.type.toString();
+		return "Elixir of Life";
 	}
 
 }

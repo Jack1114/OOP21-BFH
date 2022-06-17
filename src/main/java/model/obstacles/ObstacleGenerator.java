@@ -10,7 +10,7 @@ import model.player.Pair;
 
 public class ObstacleGenerator {
 
-	private static final int NUM_FENCE_OBST = 10;
+	private static final int NUM_POOL_OBST = 10;
 	private static final int NUM_ROCK_OBST = 10;
     private final List<Obstacle> obstacles;
     private Global_Generator gg = Global_Generator.getInstance(); 
@@ -26,7 +26,7 @@ public class ObstacleGenerator {
 		for (int i = 0; i < NUM_ROCK_OBST; i++){
 			addObstacle(createObstacle(gg.randPositionObstacles(gg.getGRID_SIZE_X(),gg.getGRID_SIZE_Y()), ObstacleImpl.Type.ROCK));
 		}
-		for (int i = 0; i < NUM_FENCE_OBST; i++){
+		for (int i = 0; i < NUM_POOL_OBST; i++){
 			addObstacle(createObstacle(gg.randPositionObstacles(gg.getGRID_SIZE_X(),gg.getGRID_SIZE_Y()), ObstacleImpl.Type.POOL));
 		}
 	}
