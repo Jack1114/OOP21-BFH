@@ -249,12 +249,12 @@ public class GameLayoutController extends SharedMethodsImpl{
 	    	int HeroX = player.getPlayerPosition().getX();
 	    	int HeroY = player.getPlayerPosition().getY();
 	    	
-	    	statsArea.setText("Experience = " + player.getExperience().getExpPoints()+ "\n"+
-	    						"HP = " + player.getLife().getLifePoints() +" / "+ player.getLife().getMaxLifePoints() + "\n" +
-	    						" LV =" + player.getExperience().getLevel() + "\n" +
-	    						"Action= " + player.getPlayer_action().getMaxActions());
+	    	statsArea.setText("Experience = " + gg.player.getExperience().getExpPoints()+ "\n"+
+	    						"HP = " + gg.player.getLife().getLifePoints() +" / "+ player.getLife().getMaxLifePoints() + "\n" +
+	    						" LV =" + gg.player.getExperience().getLevel() + "\n" +
+	    						"Action= " + gg.player.getPlayer_action().getMaxActions());
 	    	
-	    	moneyHolder.setText("Gold = " + player.getGold().getGold_points());
+	    	moneyHolder.setText("Gold = " + gg.player.getGold().getGold_points());
 		  
 		  
 		
