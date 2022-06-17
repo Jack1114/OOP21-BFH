@@ -57,10 +57,6 @@ public class Enemy {
 		generate_pos();
 	}
 	
-	
-	
-	
-	@SuppressWarnings("unlikely-arg-type")
 	public void generate_pos() {
 		// TODO Auto-generated method stub
 		boolean ok=false;
@@ -68,8 +64,7 @@ public class Enemy {
 			x= rand.nextInt(GRID_SIZEX);
 			y= rand.nextInt(GRID_SIZEY);
 			pos=new Pair<>(x,y);
-			//TODO: da controllare le condizioni dell'if
-			if( (!gg.enemyposwithID.contains(pos) ) && (!gg.obstacles.contains(pos)) && (!gg.player.getPlayerPosition().equals(pos))) {
+			if(gg.checkEnemyPos(pos) && gg.checkObstaclesPos(pos) && gg.checkPlayerPos(pos)) {
 				gg.enemyposwithID.add(new Pair<Integer, Pair<Integer, Integer>>(this.ID,pos));
 				ok=true;
 			}
