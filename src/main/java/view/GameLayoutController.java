@@ -52,6 +52,7 @@ public class GameLayoutController extends SharedMethodsImpl{
 	Global_Generator gg;
 	List<Pair<Integer, Pair<Integer, Integer>>> En_With_ID;
 	List<Obstacle> obstacles;
+	private final static int GOLD=25;
 	
 	
 	
@@ -144,15 +145,13 @@ public class GameLayoutController extends SharedMethodsImpl{
 	    @FXML
 		public void skillA(ActionEvent event) {
 	
-			if (gg.abilityManager.isAvailable(Ability.Type.ELIXIR_OF_LIFE)) {
+			if (gg.player.getGold().getGold_points()>=GOLD) {
 				gg.abilityManager.getAbilityOfType(Ability.Type.ELIXIR_OF_LIFE).apply();
 				update();
 				System.out.println("Using " + gg.abilityManager.getAbilityOfType(Ability.Type.ELIXIR_OF_LIFE).getName());
-				gg.abilityManager.remove(Ability.Type.ELIXIR_OF_LIFE);
-	    		gg.player.getPlayer_action().removeAction();
-				System.out.println("Now you have " + gg.abilityManager.getSize(Ability.Type.ELIXIR_OF_LIFE) + " left");   			
+	    		gg.player.getGold().setGold_points(gg.player.getGold().getGold_points()-GOLD);  			
 			}else {
-				System.out.println("You don't have any Elixir Of Life left");
+				System.out.println("You don't have enough Gold");
 			}
 			update();
 	    }

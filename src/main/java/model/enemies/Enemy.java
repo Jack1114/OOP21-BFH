@@ -93,10 +93,10 @@ public class Enemy {
 		if(GetHP()<=0) {
 			gg.player.getExperience().gainExp(this.getEXP());
 			gg.player.getGold().gainGold_points(this.Gold);
-			if(gg.player.getGold().getGold_points()>=50 && gg.player.getLife().getLifePoints() < gg.player.getLife().getMaxLifePoints() - 5 ) {
+			/*if(gg.player.getGold().getGold_points()>=50 && gg.player.getLife().getLifePoints() < gg.player.getLife().getMaxLifePoints() - 5 ) {
 				gg.player.getLife().setLifePoints(gg.player.getLife().getLifePoints() + 5); // pago i punti cità con l'oro
 				gg.player.getGold().setGold_points(gg.player.getGold().getGold_points()-50); 
-			}
+			}*/
 			Death();
 		}
 	}
