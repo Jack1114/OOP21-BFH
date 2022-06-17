@@ -36,32 +36,34 @@ public class Experience {
 	 */
 	public boolean addLevel() {
 		if(checkLevel()) {
-			level++; //level up
-			System.out.println(" add true");
-			return true;
-			
+			return true;		
 		}
 		else {
-			System.out.println(" add false");
 			return false;
 		}
 	}
+	/**
+	 * incrementa il livello
+	 */
+	
+	public void increaseLevel() {
+		this.level = this.getLevel() +1;
+		
+	}
+	
 	/**
 	 * check if the player has enough experience points to add level
 	 * @return boolean
 	 */
 	
 	private boolean checkLevel() {
-		if(expPoints >= MAX_EXP_POINTS * level) {
-			System.out.println(" check level true ");
+		if(expPoints >= MAX_EXP_POINTS * level) {		
 			return true;
 		}
 		else {
-			System.out.println(" check level false");
 			return false;
 		}
-	}
-	
+	} 
 
 	/**
 	 * @param exp

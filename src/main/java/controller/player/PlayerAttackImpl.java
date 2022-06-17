@@ -9,7 +9,7 @@ import model.player.PlayerImpl;
 
 public class PlayerAttackImpl implements PlayerAttack {
 
-	private static final int DEFAULT_ATTACK_POINTS =20; 
+	private static final int DEFAULT_ATTACK_POINTS =3; 
 	private int attackPoints = DEFAULT_ATTACK_POINTS;
 
 	private Global_Generator gg = Global_Generator.getInstance();

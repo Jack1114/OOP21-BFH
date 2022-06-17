@@ -18,7 +18,7 @@ import view.GameLayoutController;
 
 public class Global_Generator {
 	
-	private static final int ADD_HP=10;
+	private static final int ADD_HP=5;
 	private static final int GRID_SIZE_X = 10;
 
 
@@ -152,15 +152,12 @@ public class Global_Generator {
 	public void playerTurn() {
 
 		if(player.getPlayer_action().getAvailableActions() > 0) {
-			System.out.println("*************");
-			if(player.getExperience().addLevel()==true) {
-				System.out.println("Congrats, your level has increased! Now enemies are stronger. ");
-				/*for(var item:enemies) {
-					System.out.println("Enemy "+item.getID()  + " has " +item.GetHP() + "  life points");
-				}
-				*/
+			
+			if(player.getExperience().addLevel()) {
+				System.out.println("Congrats, your level has increased! Now you are stronger. ");
+				player.getExperience().increaseLevel();
 				player.recoverPlayer();
-		
+				g.update();
 			}	
 			
 		}
@@ -173,6 +170,7 @@ public class Global_Generator {
 		}
 
 	}
+
 
 
 	private void enemyTurn() {
