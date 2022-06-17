@@ -3,43 +3,44 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane id="gameLayout" fx:id="gameLayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameLayoutController">
+<AnchorPane id="gameLayout" fx:id="gameLayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameLayoutController">
    <children>
-      <Pane id="mapHolder" fx:id="mapHolder" layoutX="159.0" layoutY="14.0" prefHeight="623.0" prefWidth="510.0"  />
+      <Pane id="mapHolder" fx:id="mapHolder" layoutX="159.0" layoutY="14.0" prefHeight="623.0" prefWidth="510.0" />
       <TextArea id="combatHistory" fx:id="combatHistory" layoutX="680.0" layoutY="14.0" prefHeight="155.0" prefWidth="204.0" />
-      <Pane id="charImage" fx:id="charImage" layoutX="14.0" layoutY="14.0" prefHeight="135.0" prefWidth="134.0"  />
-      <Pane id="skillA" fx:id="skillA" layoutX="14.0" layoutY="171.0" prefHeight="50.0" prefWidth="50.0" />
-      <TextArea id="statsArea" fx:id="statsArea" editable="false" layoutX="14.0" layoutY="252.0" prefHeight="74.0" prefWidth="134.0" />
-      <GridPane id="inventory" fx:id="inventory" layoutX="14.0" layoutY="369.0" prefHeight="134.0" prefWidth="134.0">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="84.20001220703125" minWidth="10.0" prefWidth="44.8" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="90.20000839233398" minWidth="10.0" prefWidth="44.6000244140625" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="106.39996337890625" minWidth="10.0" prefWidth="43.7999755859375" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="65.6" minHeight="10.0" prefHeight="46.4000244140625" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="79.20000610351562" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="57.400000000000006" minHeight="10.0" prefHeight="45.19999999999999" vgrow="SOMETIMES" />
-        </rowConstraints>
-      </GridPane>
-      <Label id="moneyHolder" fx:id="moneyHolder" layoutX="14.0" layoutY="543.0" prefHeight="26.0" prefWidth="134.0" />
-      <Pane id="skillB" fx:id="skillB" layoutX="97.0" layoutY="171.0" prefHeight="50.0" prefWidth="50.0" />
-      <Pane id="btnHolder" fx:id="btnHolder" layoutX="680.0" layoutY="252.0" prefHeight="204.0" prefWidth="204.0" >
+      <Pane id="charImage" fx:id="charImage" layoutX="14.0" layoutY="14.0" prefHeight="135.0" prefWidth="134.0">
          <children>
-            <Button id="up" fx:id="up" onAction="#moveUP" layoutX="77.0" layoutY="14.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" />
-            <Button id="left" fx:id="left" onAction="#moveLEFT" layoutX="14.0" layoutY="77.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" snapToPixel="false" />
-            <Button id="right" fx:id="right" onAction="#moveRIGHT" layoutX="140.0" layoutY="77.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" />
-            <Button id="down" fx:id="down" onAction="#moveDOWN" layoutX="77.0" layoutY="140.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" />
-            <Button id="stop" fx:id="stop" onAction="#moveSTOP" layoutX="77.0" layoutY="77.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" />
+            <Label id="charImageHolder" fx:id="charImageHolder" alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="107.0" prefWidth="106.0" />
+         </children></Pane>
+      <Pane id="skillA" fx:id="skillA" layoutX="14.0" layoutY="171.0" prefHeight="50.0" prefWidth="50.0">
+         <children>
+            <Label id="skillAHolder" fx:id="skillAHolder" layoutX="5.0" layoutY="5.0" prefHeight="40.0" prefWidth="40.0">
+               <tooltip>
+                  <Tooltip id="skillATooltip" fx:id="skillATooltip" text="Heal yourself. Cost: 1 Action Point." />
+               </tooltip></Label>
+         </children></Pane>
+      <TextArea id="statsArea" fx:id="statsArea" editable="false" layoutX="14.0" layoutY="252.0" prefHeight="74.0" prefWidth="134.0" />
+      <Label id="moneyHolder" fx:id="moneyHolder" layoutX="14.0" layoutY="354.0" prefHeight="26.0" prefWidth="134.0" />
+      <Pane id="skillB" fx:id="skillB" layoutX="97.0" layoutY="171.0" prefHeight="50.0" prefWidth="50.0">
+         <children>
+            <Label id="skillBHolder" fx:id="skillBHolder" layoutX="5.0" layoutY="5.0" prefHeight="40.0" prefWidth="40.0">
+               <tooltip>
+                  <Tooltip id="skillBTooltip" fx:id="skillBTooltip" text="Double attack an enemy. Cost: 1 Action Point." />
+               </tooltip></Label>
+         </children></Pane>
+      <Pane id="btnHolder" fx:id="btnHolder" layoutX="680.0" layoutY="252.0" prefHeight="204.0" prefWidth="204.0">
+         <children>
+            <Button id="up" fx:id="up" layoutX="77.0" layoutY="14.0" mnemonicParsing="false" onAction="#moveUP" prefHeight="50.0" prefWidth="50.0" />
+            <Button id="left" fx:id="left" layoutX="14.0" layoutY="77.0" mnemonicParsing="false" onAction="#moveLEFT" prefHeight="50.0" prefWidth="50.0" snapToPixel="false" />
+            <Button id="right" fx:id="right" layoutX="140.0" layoutY="77.0" mnemonicParsing="false" onAction="#moveRIGHT" prefHeight="50.0" prefWidth="50.0" />
+            <Button id="down" fx:id="down" layoutX="77.0" layoutY="140.0" mnemonicParsing="false" onAction="#moveDOWN" prefHeight="50.0" prefWidth="50.0" />
+            <Button id="stop" fx:id="stop" layoutX="77.0" layoutY="77.0" mnemonicParsing="false" onAction="#moveSTOP" prefHeight="50.0" prefWidth="50.0" />
          </children>
       </Pane>
-      <Button id="skillABtn" fx:id="skillABtn" onAction="#skillA" layoutX="680.0" layoutY="478.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" />
-      <Button id="skillBBtn" fx:id="skillBBtn" onAction="#skillB" layoutX="833.0" layoutY="478.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0"  />
+      <Button id="skillABtn" fx:id="skillABtn" layoutX="680.0" layoutY="478.0" mnemonicParsing="false" onAction="#skillA" prefHeight="50.0" prefWidth="50.0" />
+      <Button id="skillBBtn" fx:id="skillBBtn" layoutX="833.0" layoutY="478.0" mnemonicParsing="false" onAction="#skillB" prefHeight="50.0" prefWidth="50.0" />
    </children>
 </AnchorPane>

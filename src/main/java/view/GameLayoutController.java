@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,8 @@ import javax.swing.JPanel;
 import controller.globalGenerator.Global_Generator;
 import controller.obstacles.Obstacle;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -36,6 +39,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.player.Pair;
 import model.player.Player;
 import model.abilities.Ability;
@@ -58,6 +62,8 @@ public class GameLayoutController extends SharedMethodsImpl{
 	  @FXML
 	  Pane charImage;
 	  @FXML
+	  Label charImageHolder, skillAHolder, skillBHolder;
+	  @FXML
 	  TextArea combatHistory;
 	  @FXML
 	  Pane skillA;
@@ -65,8 +71,6 @@ public class GameLayoutController extends SharedMethodsImpl{
 	  Pane skillB;
 	  @FXML
 	  TextArea statsArea;
-	  @FXML
-	  GridPane inventory;
 	  @FXML
 	  Label moneyHolder;
 	  @FXML
@@ -77,17 +81,18 @@ public class GameLayoutController extends SharedMethodsImpl{
 	  Button up, left, right, down, stop;
 	  @FXML
 	  Button skillABtn, skillBBtn;
-	  
+	  @FXML
+	  DialogPane dialogPane;
 		
 	  @FXML
 	    private void initialize() {
 		  
+		 
+
+		  
 		  myfunction();
 
-
-		  
-		  
-		combatHistory.setMouseTransparent(true);
+		combatHistory.setWrapText(true);
 		combatHistory.setFocusTraversable(false);
 	    statsArea.setMouseTransparent(true);
 		statsArea.setFocusTraversable(false);
@@ -98,21 +103,34 @@ public class GameLayoutController extends SharedMethodsImpl{
 		   */
 		  gameLayout.setOnKeyReleased(event -> {
 		      if(event.getCode() == KeyCode.ESCAPE) {
-		    	  Alert alert = new Alert(AlertType.CONFIRMATION);
+				    ButtonType surrend = new ButtonType("Yes I want to surrend.");
+				    ButtonType fight = new ButtonType("No, I will keep fighting!");  
 		    	  
+		
+		    	  Alert alert = new Alert(AlertType.CONFIRMATION,
+				            "Do you want to give up? ",
+				            surrend,
+				            fight);
+
 		    	  DialogPane dialogPane = alert.getDialogPane();
+
 		    	  dialogPane.getStylesheets().add(
 		    	  getClass().getResource("/assets/gameLayout.css").toExternalForm());
-		    	  dialogPane.getStyleClass().add("myDialog");
 		    	  
-		    		alert.setHeaderText(null);
-				    alert.setContentText("Vuoi arrenderti?");
+		    	  dialogPane.getStyleClass().add("myDialog");
+		    	  dialogPane.setGraphic(null);
+		   
+		    	  alert.initStyle(StageStyle.UNDECORATED);  
+		    	  alert.setHeaderText(null);
+
+  
 				    Optional<ButtonType> result = alert.showAndWait();
+
 				    if (result.isPresent()) {
-				        if (result.get() == ButtonType.OK) {
+				        if (result.get() == surrend) {
 				        	System.exit(0);
 				        }
-				        if (result.get() == ButtonType.CANCEL) {
+				        if (result.get() == fight) {
 				            alert.close();
 				        }
 				    }
@@ -123,6 +141,7 @@ public class GameLayoutController extends SharedMethodsImpl{
 	    	
 	    }
 	  
+
 	    @FXML
 		public void skillA(ActionEvent event) {
 	
@@ -152,6 +171,7 @@ public class GameLayoutController extends SharedMethodsImpl{
 			}
 			update();}
 	  
+	    
 	    @FXML
 		public void moveUP(ActionEvent event) {
 	    	gg.playerMovement.up();
@@ -202,7 +222,26 @@ public class GameLayoutController extends SharedMethodsImpl{
 		  
 		  gg.generation();
 		  
-		  
+	        System.setOut(new PrintStream(System.out) {
+	            @Override
+	            public void write(byte[] buf, int off, int len) {
+	                super.write(buf, off, len);
+
+	                String msg = new String(buf, off, len);
+
+	                combatHistory.setText(combatHistory.getText() + msg);
+
+			            	combatHistory.selectPositionCaret(combatHistory.getLength()); 
+			            	combatHistory.deselect(); 
+			        		combatHistory.setWrapText(true);
+			        		combatHistory.setFocusTraversable(false);
+			        		combatHistory.setEditable(false);
+					    	
+		
+	            }
+	        });
+	        
+	        
 		  this.player = gg.player;
 		   
 		  
@@ -253,9 +292,7 @@ public class GameLayoutController extends SharedMethodsImpl{
 					
 			int HeroX = gg.player.getPlayerPosition().getX();
 			int HeroY = gg.player.getPlayerPosition().getY();
-			
-			System.out.println(HeroX);
-			System.out.println(HeroY);
+
 			
 			int ID=0;
 			En_With_ID = gg.getInstance().enemyposwithID;
