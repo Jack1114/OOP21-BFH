@@ -31,6 +31,8 @@ public class Life {
 	public void setLifePoints(int newlifePoints) {
 		if(checkLifePoints(newlifePoints)) {
 			 lifePoints = newlifePoints;
+		}else {
+			 lifePoints = MAX_LIFE_POINTS;
 		}
 	}
 	

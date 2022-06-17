@@ -30,20 +30,14 @@ public class Global_Generator {
 	public int NUM_ENEMIES = 3;
     				// ID           POS
 	public List<Pair<Integer,Pair<Integer,Integer>>> enemyposwithID = new ArrayList<>();
-	//ostacoli
 	public List<Obstacle> obstacles = new ArrayList<>();
-	//mappa di abilita: tipo -> numero di abilità che voglio
 	public Map<Ability.Type, Integer> abilities = new HashMap<>();
-	//ability manager
 	public AbilityManager abilityManager;
 	public ObstacleGenerator obstacleGenerator;
-	//player
 	public PlayerImpl player;
 	public PlayerAttack playerAttack;
 	public PlayerMovement playerMovement;
-	//nemici
 	public List<Enemy> enemies;
-	//id dei nemici morti
 	public List<Integer> skipenemy; 
 	private int round;
 
@@ -54,7 +48,6 @@ public class Global_Generator {
 	private Global_Generator(GameLayoutController gameL) {
 		this.g=gameL;
 	}
-	
 	
 	public static synchronized Global_Generator getInstance() {
 		return instance;
@@ -106,17 +99,17 @@ public class Global_Generator {
 		}
 	}
 	
+	/**
+	 * generate for the first time all the controllers
+	 */
 	public void generation() {
-		//LIVELLO 1
-		//genero per la prima volta tutti i controller
 		this.obstacleGenerator = new ObstacleGenerator(obstacles);
 		this.player = new PlayerImpl(rand_pos_player(GRID_SIZE_X,GRID_SIZE_Y));
 		this.playerAttack = new PlayerAttackImpl(player);
 		this.playerMovement = new PlayerMovementsImpl(player);
 		this.enemies = new ArrayList<Enemy>();
 		this.skipenemy = new ArrayList<>(); 
-	
-		//creo le abilita
+
 		abilities.put(Ability.Type.ELIXIR_OF_LIFE, 2);
 		abilities.put(Ability.Type.DOUBLE_ATTACK, 3);
 		this.abilityManager = new AbilityManager(abilities);
@@ -127,7 +120,9 @@ public class Global_Generator {
 		round = 0;
 	}
 	
-	
+	/*
+	 * generate the arena
+	 */
 	private void generateArena() {
 		obstacleGenerator.generateObstacles();
 		generate_enemies();
@@ -282,7 +277,7 @@ public class Global_Generator {
 	 * 
 	 * @param position to check
 	 * @return true: if position is empty
-	 * false: if position has an enemy
+	 * false: if position contains an enemy
 	 */  
 	public boolean checkEnemyPos(Pair<Integer, Integer> position) {
 		if(enemyposwithID
