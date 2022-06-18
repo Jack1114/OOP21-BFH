@@ -42,6 +42,7 @@ public class Experience {
 			return false;
 		}
 	}
+	
 	/**
 	 * incrementa il livello
 	 */

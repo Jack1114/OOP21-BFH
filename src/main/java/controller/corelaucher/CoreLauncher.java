@@ -1,5 +1,5 @@
 package controller.corelaucher;
-import controller.globalGenerator.Global_Generator;
+import controller.globalGenerator.GlobalGenerator;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;

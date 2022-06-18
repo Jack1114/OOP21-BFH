@@ -3,8 +3,9 @@
  */
 package controller.player;
 
-import controller.globalGenerator.Global_Generator;
+import controller.globalGenerator.GlobalGenerator;
 import model.enemies.Enemy;
+import model.player.Player;
 import model.player.PlayerImpl;
 
 public class PlayerAttackImpl implements PlayerAttack {
@@ -12,11 +13,11 @@ public class PlayerAttackImpl implements PlayerAttack {
 	private static final int DEFAULT_ATTACK_POINTS =3; 
 	private int attackPoints = DEFAULT_ATTACK_POINTS;
 
-	private Global_Generator gg = Global_Generator.getInstance();
-	PlayerImpl player;
+	private GlobalGenerator gg = GlobalGenerator.getInstance();
+	Player player;
 
-	public PlayerAttackImpl( PlayerImpl new_player) {
-		this.player=new_player;
+	public PlayerAttackImpl( Player player) {
+		this.player=player;
 	}
 
 	public int getAttackPoints() {
@@ -31,7 +32,6 @@ public class PlayerAttackImpl implements PlayerAttack {
 	}
 
 	public void setAttackPoints(int newAttackPoints) {
-		// TODO Auto-generated method stub
 		this.attackPoints = newAttackPoints;
 	}
 

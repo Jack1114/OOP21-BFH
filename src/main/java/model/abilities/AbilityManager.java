@@ -6,13 +6,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import controller.globalGenerator.Global_Generator;
+import controller.globalGenerator.GlobalGenerator;
 import model.abilities.Ability.Type;
 
 public class AbilityManager {
 
 	//prende la mappa dal global generator
-	private Global_Generator gg = Global_Generator.getInstance();
+	private GlobalGenerator gg = GlobalGenerator.getInstance();
 	
 	private Map<Ability.Type, Integer> listOfAbilities;
 	private Map<Ability.Type, List<Ability>> abilities;

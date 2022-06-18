@@ -1,14 +1,11 @@
 package model.player;
-import controller.actions.ActionImpl;
+import controller.actions.Action;
 public interface Player {
 	/**
 	 * @return player current position
 	 */
 	public Pair<Integer,Integer> getPlayerPosition();
-	/**
-	 * @return player attackPoints
-	 */
-	public int getAttackPoints();
+
 	/**
 	 * when the player move, this function update the new position
 	 */
@@ -28,6 +25,9 @@ public interface Player {
 	/**
 	 * @return player's action points
 	 */
-	public ActionImpl getPlayer_action();
+	public Action getPlayer_action();
+	
+	
+	public void recoverPlayer();
 
 }

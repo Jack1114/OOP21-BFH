@@ -1,11 +1,11 @@
 package controller.enemies;
 
-import controller.globalGenerator.Global_Generator;
+import controller.globalGenerator.GlobalGenerator;
 import controller.player.PlayerAttack;
 import controller.player.PlayerAttackImpl;
 import model.enemies.Enemy;
 import model.player.Pair;
-import model.player.PlayerImpl;
+import model.player.Player;
 
 public class Enemy_move_control {
 
@@ -31,8 +31,8 @@ public class Enemy_move_control {
 	private static boolean previously_acted=false;
 
 
-	private static Global_Generator gg = Global_Generator.getInstance();
-	private static PlayerImpl player = gg.player;
+	private static GlobalGenerator gg = GlobalGenerator.getInstance();
+	private static Player player = gg.player;
 	private static PlayerAttack playerAtt = gg.playerAttack;
 	
 	public static void nextMove(Pair<Integer, Pair<Integer, Integer>> elem, int actionpt) {
@@ -44,9 +44,6 @@ public class Enemy_move_control {
 		
 		// ID del nemico attuale 
 		enemyID = elem.getX();
-		
-		// non mi ricordo se serve ma lo lascio qui per ora 
-		var item = new Pair<>(elem.getX(),elem.getY());
 		
 		if(wait) {
 			wait=false;
@@ -70,7 +67,7 @@ public class Enemy_move_control {
 	private static void attckHero() {
 		var correct_enemy=gg.enemies.get(enemyID);
 		System.out.println("Enemy " + enemyID + " attacking hero - damage on hero of "+correct_enemy.GetATK());
-		playerAtt.getHit(enemyID,correct_enemy.GetATK());   //changed atk con getATK()		
+		playerAtt.getHit(enemyID,correct_enemy.GetATK());  	
 	}
 	
 	// movimento in verticale la X rimane la stessa ma la Y cambia 
@@ -92,9 +89,6 @@ public class Enemy_move_control {
 	// 1   2         |				  |
 	//   H 			Y|				  |  schema della griglia
 	// 3   4		 |________________|
-	
-	
-	// new version // but wit some problems 
 	
 		private static void checkwait(Pair<Integer, Integer> old_pos, Pair<Integer, Integer> newPos, boolean horizontal_movement) {
 			
@@ -120,7 +114,7 @@ public class Enemy_move_control {
 
 				}
 			}
-			if(newenemyPos.getX()>= gg.getGRID_SIZE_X() || newenemyPos.getY()>=gg.getGRID_SIZE_Y()) {
+			if(newenemyPos.getX()>= gg.getGridSizeX() || newenemyPos.getY()>=gg.getGridSizeY()) {
 				newenemyPos=old_pos;
 				}
 		}
@@ -214,9 +208,7 @@ public class Enemy_move_control {
 				}
 		
 	}
-	
-	
-	
+
 	private static boolean upfree(Pair<Integer,Integer> up) {
 		if(!checkenemypos(up) && gg.checkObstaclesPos(up)) {
 			return true;
@@ -226,7 +218,6 @@ public class Enemy_move_control {
 	}
 	
 	private static boolean downfree(Pair<Integer,Integer> down) {
-		// TODO Auto-generated method stub
 		if(!checkenemypos(down) && gg.checkObstaclesPos(down)) {
 			return true;
 		} else {
@@ -235,7 +226,6 @@ public class Enemy_move_control {
 	}
 	
 	private static boolean leftfree(Pair<Integer,Integer> left) {
-		// TODO Auto-generated method stub
 		if(!checkenemypos(left) && gg.checkObstaclesPos(left)) {
 			return true;
 		} else {
@@ -250,9 +240,8 @@ public class Enemy_move_control {
 			return false;
 		}
 	}
-	// è inefficiente lo so ma almeno controlla se tra tutte le posizioni dei nemici c'è già qualcuno 
+
 	private static boolean checkenemypos(Pair<Integer, Integer> newPos) {
-		// TODO Auto-generated method stub
 		collide = false;
 		gg.enemyposwithID.forEach(item->{
 			if(item.getY().getX()==newPos.getX() && item.getY().getY()==newPos.getY()) {

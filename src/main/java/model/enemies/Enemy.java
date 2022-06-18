@@ -1,7 +1,7 @@
 package model.enemies;
 import java.util.*;
 
-import controller.globalGenerator.Global_Generator;
+import controller.globalGenerator.GlobalGenerator;
 import model.player.Pair;
 import model.player.Player;
 import model.player.PlayerImpl;
@@ -15,7 +15,7 @@ public class Enemy {
 	int GRID_SIZEY = 12;
 	Player player;
 	Pair<Integer,Integer> pos;
-	Global_Generator gg = Global_Generator.getInstance();
+	GlobalGenerator gg = GlobalGenerator.getInstance();
 	
 	private int ID;
 	

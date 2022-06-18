@@ -2,18 +2,20 @@
 
 public class ActionImpl implements Action{
 
-	private final static int DEFAULT_N_OF_ACTIONS =3;
+	
+	private final static int DEFAULT_N_OF_ACTIONS = 3;
 	private int actions;
 	
 	public ActionImpl() {
 		this.actions = DEFAULT_N_OF_ACTIONS;
 	}
 	
-	
 	@Override
 	public void setActions(int actions) {
 		this.actions = actions;
 	}
+	
+	@Override
 	public int getMaxActions() {
 		return DEFAULT_N_OF_ACTIONS;
 	}
@@ -36,7 +38,6 @@ public class ActionImpl implements Action{
 		}
 		return false;
 	}
-
 
 	@Override
 	public void addAction() {

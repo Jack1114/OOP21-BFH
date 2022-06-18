@@ -13,7 +13,7 @@ import java.util.Optional;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import controller.globalGenerator.Global_Generator;
+import controller.globalGenerator.GlobalGenerator;
 import controller.obstacles.Obstacle;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -49,7 +49,7 @@ public class GameLayoutController extends SharedMethodsImpl{
 	Map<Label,Pair<Integer,Integer>> mapjbtopos = new HashMap<>();
 	Map<Pair<Integer,Integer>,Label> mappostojb = new HashMap<>();
 	Player player;
-	Global_Generator gg;
+	GlobalGenerator gg;
 	List<Pair<Integer, Pair<Integer, Integer>>> En_With_ID;
 	List<Obstacle> obstacles;
 	private final static int GOLD=25;
@@ -224,9 +224,9 @@ public class GameLayoutController extends SharedMethodsImpl{
 
 	  private void myfunction() {
 		  
-		  Global_Generator.setInstance(this);
+		  GlobalGenerator.setInstance(this);
 		  
-		  gg = Global_Generator.getInstance();
+		  gg = GlobalGenerator.getInstance();
 		  
 		  gg.generation();
 		  

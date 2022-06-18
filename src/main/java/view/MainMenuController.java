@@ -3,7 +3,7 @@ package view;
 import java.io.IOException;
 import java.util.Optional;
 
-import controller.globalGenerator.Global_Generator;
+import controller.globalGenerator.GlobalGenerator;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,7 +23,7 @@ import javafx.stage.StageStyle;
 public class MainMenuController extends SharedMethodsImpl{
 	
 	
-	Global_Generator gg = Global_Generator.getInstance();
+	GlobalGenerator gg = GlobalGenerator.getInstance();
 
     @FXML
     private AnchorPane mainMenuPane;

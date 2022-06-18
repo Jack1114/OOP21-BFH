@@ -3,8 +3,9 @@
  */
 package model.player;
 
+import controller.actions.Action;
 import controller.actions.ActionImpl;
-import controller.globalGenerator.Global_Generator;
+import controller.globalGenerator.GlobalGenerator;
 
 public class PlayerImpl implements Player {
 
@@ -12,10 +13,10 @@ public class PlayerImpl implements Player {
 	private final Life life;
 	private final Experience experience;
 	private Pair<Integer,Integer> playerPosition;
-	private final  ActionImpl player_action;
+	private final  Action player_action;
 	private final Gold gold;
 	private static final int ATTACK_POINTS = 5; 
-	Global_Generator gg = Global_Generator.getInstance();
+	GlobalGenerator gg = GlobalGenerator.getInstance();
 	
 	public PlayerImpl(Pair<Integer, Integer> pair) {
 		this.life=new Life();
@@ -35,11 +36,7 @@ public class PlayerImpl implements Player {
 	public Experience getExperience() {
 		return  this.experience;
 	}
-	
-	public int getAttackPoints() {
-		return ATTACK_POINTS;
-	}
-	
+
 	public void setPlayerPosition(Pair<Integer,Integer> newPos) {
 		playerPosition=newPos;
 	}
@@ -57,7 +54,7 @@ public class PlayerImpl implements Player {
 		
 	}
 
-	public ActionImpl getPlayer_action() {
+	public Action getPlayer_action() {
 		return player_action;
 	}
 	

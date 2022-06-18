@@ -3,7 +3,7 @@ package model.obstacles;
 import java.util.List;
 import java.util.Random;
 
-import controller.globalGenerator.Global_Generator;
+import controller.globalGenerator.GlobalGenerator;
 import controller.obstacles.Obstacle;
 import controller.obstacles.ObstacleImpl;
 import model.player.Pair;
@@ -13,7 +13,7 @@ public class ObstacleGenerator {
 	private static final int NUM_POOL_OBST = 10;
 	private static final int NUM_ROCK_OBST = 10;
     private final List<Obstacle> obstacles;
-    private Global_Generator gg = Global_Generator.getInstance(); 
+    private GlobalGenerator gg = GlobalGenerator.getInstance(); 
 
     public ObstacleGenerator(List<Obstacle> obstacles){
     	this.obstacles = obstacles;
@@ -24,10 +24,10 @@ public class ObstacleGenerator {
 	 */
 	public void generateObstacles(){
 		for (int i = 0; i < NUM_ROCK_OBST; i++){
-			addObstacle(createObstacle(gg.randPositionObstacles(gg.getGRID_SIZE_X(),gg.getGRID_SIZE_Y()), ObstacleImpl.Type.ROCK));
+			addObstacle(createObstacle(gg.randPositionObstacles(gg.getGridSizeX(),gg.getGridSizeY()), ObstacleImpl.Type.ROCK));
 		}
 		for (int i = 0; i < NUM_POOL_OBST; i++){
-			addObstacle(createObstacle(gg.randPositionObstacles(gg.getGRID_SIZE_X(),gg.getGRID_SIZE_Y()), ObstacleImpl.Type.POOL));
+			addObstacle(createObstacle(gg.randPositionObstacles(gg.getGridSizeX(),gg.getGridSizeY()), ObstacleImpl.Type.POOL));
 		}
 	}
 	

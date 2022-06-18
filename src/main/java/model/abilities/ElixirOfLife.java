@@ -1,14 +1,15 @@
 package model.abilities;
 
+import model.player.Player;
 import model.player.PlayerImpl;
 
 public class ElixirOfLife implements Ability{
 
-	private final PlayerImpl player;
+	private final Player player;
 	private final String descr;
 	private final Type type;
 	
-	public ElixirOfLife(PlayerImpl player) {
+	public ElixirOfLife(Player player) {
 		this.player = player;
 		this.descr = "Drink the Elixir of Life to get more life";
 		this.type = Ability.Type.ELIXIR_OF_LIFE;
