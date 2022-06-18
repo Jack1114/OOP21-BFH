@@ -1,5 +1,6 @@
 package model.player;
-import controller.actions.Action;
+import controller.playerAttack.PlayerAttackImpl;
+import model.actions.Action;
 public interface Player {
 	/**
 	 * @return player current position
@@ -29,5 +30,6 @@ public interface Player {
 	
 	
 	public void recoverPlayer();
-
+	
+	PlayerAttackImpl getPlayerAtt();
 }

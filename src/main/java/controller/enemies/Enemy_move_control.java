@@ -1,8 +1,8 @@
 package controller.enemies;
 
 import controller.globalGenerator.GlobalGenerator;
-import controller.player.PlayerAttack;
-import controller.player.PlayerAttackImpl;
+import controller.playerAttack.PlayerAttack;
+import controller.playerAttack.PlayerAttackImpl;
 import model.enemies.Enemy;
 import model.player.Pair;
 import model.player.Player;

@@ -1,4 +1,4 @@
-package model.abilities;
+package controller.abilities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import controller.globalGenerator.GlobalGenerator;
+import model.abilities.Ability;
+import model.abilities.DoubleAttack;
+import model.abilities.ElixirOfLife;
 import model.abilities.Ability.Type;
 
 public class AbilityManager {

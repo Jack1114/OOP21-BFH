@@ -41,7 +41,7 @@ public class Enemy {
 		
 		// i valori sono arbitrari
 		
-		HP =( 5+value + ( HeroEXP/(15*5) ));
+		HP =( 5+value + ( HeroEXP*500/(15*5) ));
 		def=( 1+value/2 + ( HeroEXP/(20*8) ));
 		atk=( 1+value/3 + ( HeroEXP/(10*10) ));
 		exp=( 10+value - ( HeroEXP/(15*6) ));
@@ -93,10 +93,6 @@ public class Enemy {
 		if(GetHP()<=0) {
 			gg.player.getExperience().gainExp(this.getEXP());
 			gg.player.getGold().gainGold_points(this.Gold);
-			/*if(gg.player.getGold().getGold_points()>=50 && gg.player.getLife().getLifePoints() < gg.player.getLife().getMaxLifePoints() - 5 ) {
-				gg.player.getLife().setLifePoints(gg.player.getLife().getLifePoints() + 5); // pago i punti cità con l'oro
-				gg.player.getGold().setGold_points(gg.player.getGold().getGold_points()-50); 
-			}*/
 			Death();
 		}
 	}

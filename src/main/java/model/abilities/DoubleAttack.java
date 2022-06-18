@@ -1,6 +1,6 @@
 package model.abilities;
 
-import controller.player.PlayerAttack;
+import controller.playerAttack.PlayerAttack;
 import model.player.*;
 
 public class DoubleAttack implements Ability{

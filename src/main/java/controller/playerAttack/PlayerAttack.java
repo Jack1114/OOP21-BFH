@@ -1,4 +1,4 @@
-package controller.player;
+package controller.playerAttack;
 
 import model.enemies.Enemy;
 import model.player.Pair;
@@ -25,4 +25,5 @@ public interface PlayerAttack {
 	 *the player get the hit from a enemy and receive damage
 	 */
 	 void getHit(int enemyID,int enemyResponseHit);
+	 void increaseAtt();
 }

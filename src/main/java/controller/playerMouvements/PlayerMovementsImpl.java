@@ -1,7 +1,7 @@
 /**
  * 
  */
-package controller.player;
+package controller.playerMouvements;
 
 import java.util.Optional;
 import java.util.Random;

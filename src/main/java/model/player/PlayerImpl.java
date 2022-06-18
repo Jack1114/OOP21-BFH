@@ -3,9 +3,11 @@
  */
 package model.player;
 
-import controller.actions.Action;
-import controller.actions.ActionImpl;
 import controller.globalGenerator.GlobalGenerator;
+import controller.playerAttack.PlayerAttack;
+import controller.playerAttack.PlayerAttackImpl;
+import model.actions.Action;
+import model.actions.ActionImpl;
 
 public class PlayerImpl implements Player {
 
@@ -15,7 +17,8 @@ public class PlayerImpl implements Player {
 	private Pair<Integer,Integer> playerPosition;
 	private final  Action player_action;
 	private final Gold gold;
-	private static final int ATTACK_POINTS = 5; 
+	private final PlayerAttackImpl attack;
+	private static final int ADD_HP = 5;
 	GlobalGenerator gg = GlobalGenerator.getInstance();
 	
 	public PlayerImpl(Pair<Integer, Integer> pair) {
@@ -24,9 +27,13 @@ public class PlayerImpl implements Player {
 		this.experience=new Experience();
 		this.player_action=new ActionImpl();
 		this.gold=new Gold();
-		
+		this.attack=new PlayerAttackImpl(gg.player);
+
 	}
 	
+	public PlayerAttackImpl getPlayerAtt() {
+		return this.attack;
+	}
 	public Gold getGold() {
 		return this.gold;
 	}
@@ -49,7 +56,7 @@ public class PlayerImpl implements Player {
 	// resetta i punti vita del palyer
 	public void recoverPlayer() {
 		System.out.println("Ti senti piu forte di prima e le tue ferite sono state curate !!");
-		life.setMaxLifePoints(life.getMaxLifePoints()+gg.getAddHp());
+		life.setMaxLifePoints(life.getMaxLifePoints()+ADD_HP);
 		life.resetLife();
 		
 	}

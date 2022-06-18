@@ -2,12 +2,13 @@ package controller.globalGenerator;
 
 import java.util.*;
 
+import controller.abilities.AbilityManager;
 import controller.enemies.Enemy_move_control;
 import controller.obstacles.Obstacle;
-import controller.player.PlayerAttack;
-import controller.player.PlayerAttackImpl;
-import controller.player.PlayerMovement;
-import controller.player.PlayerMovementsImpl;
+import controller.playerAttack.PlayerAttack;
+import controller.playerAttack.PlayerAttackImpl;
+import controller.playerMouvements.PlayerMovement;
+import controller.playerMouvements.PlayerMovementsImpl;
 import model.obstacles.*;
 import model.player.*;
 import model.abilities.*;
@@ -18,7 +19,6 @@ import view.GameLayoutController;
 
 public class GlobalGenerator {
 
-	private static final int ADD_HP = 5;
 	private static final int GRID_SIZE_X = 10;
 	private static final int GRID_SIZE_Y = 12;
 	private static final int MAX_ROUNDS = 50;
@@ -127,6 +127,7 @@ public class GlobalGenerator {
 			if (player.getExperience().addLevel()) {
 				System.out.println("Congrats, your level has increased! Now you are stronger. ");
 				player.getExperience().increaseLevel();
+				player.getPlayerAtt().increaseAtt();
 				player.recoverPlayer();
 				g.update();
 			}
@@ -252,8 +253,6 @@ public class GlobalGenerator {
 	/**
 	 * @return the addHp
 	 */
-	public int getAddHp() {
-		return ADD_HP;
-	}
+
 
 }

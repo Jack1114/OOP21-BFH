@@ -1,7 +1,7 @@
 /**
  * 
  */
-package controller.player;
+package controller.playerMouvements;
 
 import model.player.Pair;
 
