@@ -23,23 +23,21 @@ public class PlayerAttackImpl implements PlayerAttack {
 	public int getAttackPoints() {
 		return attackPoints;
 	}
+	
+	private void resetAttackPoints() {
+		this.attackPoints = DEFAULT_ATTACK_POINTS;
+	}
 
 	public void attack(Enemy enemy) {
 		System.out.println("Hero is attacking");
 		enemy.GetHit(getAttackPoints());
-		//mi serve nel caso un'abilita' abbia cambiato il valore di attackPoints
-
+		resetAttackPoints();	
 	}
 
 	public void setAttackPoints(int newAttackPoints) {
 		this.attackPoints = newAttackPoints;
 	}
 
-	/**
-	 * 
-	 * after an attack from the enemie, the playerlost some health points
-	 */
-	
 	public void getHit(int enemyID,int enemyResponseHit) {
 		gg.player.getLife().setLifePoints(gg.player.getLife().getLifePoints()-enemyResponseHit);
 		//counter(enemyID, gg.player.getAttackPoints());

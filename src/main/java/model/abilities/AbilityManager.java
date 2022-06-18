@@ -11,7 +11,6 @@ import model.abilities.Ability.Type;
 
 public class AbilityManager {
 
-	//prende la mappa dal global generator
 	private GlobalGenerator gg = GlobalGenerator.getInstance();
 	
 	private Map<Ability.Type, Integer> listOfAbilities;

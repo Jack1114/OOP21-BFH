@@ -33,10 +33,10 @@ public interface PlayerMovement {
 	 */
 	void stop();
 	/**
-	 * 
-	 * @return true or false
 	 * before moving, the player check if there is an enemy and if there is an obstacle 
 	 * if there is an obstacle, he check if the obstacle's type is the one that can be cross
+	 * @return 
+	 * 			true or false
 	 */	
 	boolean check_advancement(Pair<Integer, Integer> player_pos);
 }

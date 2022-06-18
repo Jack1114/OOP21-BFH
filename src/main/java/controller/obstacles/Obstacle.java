@@ -9,6 +9,7 @@ public interface Obstacle {
 		ROCK,
 		POOL;
 	}
+	
     /**
      *
      * @return obstacle's position

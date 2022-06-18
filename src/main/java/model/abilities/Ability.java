@@ -7,7 +7,14 @@ public interface Ability {
 		ELIXIR_OF_LIFE;
 	}
 	
+	/**
+	 * apply the effect of the ability on the player
+	 */
 	void apply();
 	
+	/**
+	 * 
+	 * @return name of the ability
+	 */
 	String getName();
 }

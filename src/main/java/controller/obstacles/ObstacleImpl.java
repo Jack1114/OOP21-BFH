@@ -14,14 +14,13 @@ public class ObstacleImpl implements Obstacle {
 		this.obstacleType = type;
 	}
 
+	@Override
 	public Pair<Integer, Integer> getObstaclePos(){
 		return this.obstaclePos;
 	}
 	
-
 	@Override
 	public Obstacle.Type getObstacleType() {
-		// TODO Auto-generated method stub
 		return this.obstacleType;
 	}
 

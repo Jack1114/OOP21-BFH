@@ -6,18 +6,15 @@ import model.player.PlayerImpl;
 public class ElixirOfLife implements Ability{
 
 	private final Player player;
-	private final String descr;
+	private final String name;
 	private final Type type;
 	
 	public ElixirOfLife(Player player) {
 		this.player = player;
-		this.descr = "Drink the Elixir of Life to get more life";
+		this.name = "Elixir of Life";
 		this.type = Ability.Type.ELIXIR_OF_LIFE;
 	}
-	
-	public String getDescription() {
-		return this.descr;
-	}
+
 
 	public void apply() {
 		player.getLife().setLifePoints(player.getLife().getLifePoints() + 10);
@@ -25,7 +22,7 @@ public class ElixirOfLife implements Ability{
 
 	@Override
 	public String getName() {
-		return "Elixir of Life";
+		return this.name;
 	}
 
 }

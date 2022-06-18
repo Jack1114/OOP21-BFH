@@ -8,19 +8,21 @@ public interface PlayerAttack {
 	/**
 	 * attack beetwen the player and the enemie
 	 */
-	 public void attack(Enemy enemy);
+	 void attack(Enemy enemy);
 	 
-	/** @return player's attack_points
+	/**
 	 * 
+	 *  @return player's attack_points
 	 */
-	 public int getAttackPoints();
+	 int getAttackPoints();
 
 	 /** 
 	 * update player's attack_points
 	 */
-	 public void setAttackPoints(int newAttackPoints);
+	 void setAttackPoints(int newAttackPoints);
+	 
 	 /** 
-	 *the player create a dammage to an anemy
+	 *the player get the hit from a enemy and receive damage
 	 */
-	 public void getHit(int enemyID,int enemyResponseHit);
+	 void getHit(int enemyID,int enemyResponseHit);
 }
