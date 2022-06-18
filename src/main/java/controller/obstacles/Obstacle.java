@@ -11,13 +11,11 @@ public interface Obstacle {
 	}
 	
     /**
-     *
      * @return obstacle's position
      */
     public Pair<Integer, Integer> getObstaclePos();
     
     /**
-     * 
      * @return obstacle's type
      */
     public Type getObstacleType();

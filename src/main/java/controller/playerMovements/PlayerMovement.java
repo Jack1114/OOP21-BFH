@@ -13,28 +13,34 @@ import model.player.Pair;
 public interface PlayerMovement {
 
 	/**
-	 * the player move to the left
+	 * The Player move to the left.
 	 */
 	void left();
+	
 	/**
-	 * the player move to the right
+	 * The Player move to the right.
 	 */
 	void right();
+	
 	/**
-	 * the player move to down
+	 * The Player move to down.
 	 */
+	
 	void down();
+	
 	/**
-	 * the player move to up
+	 * The Player move to up.
 	 */
 	void up();
+	
 	/**
-	 * the player can not move because of an obstacle or something else
+	 * The Player does not move or cannot move.
 	 */
 	void stop();
+	
 	/**
-	 * before moving, the player check if there is an enemy and if there is an obstacle 
-	 * if there is an obstacle, he check if the obstacle's type is the one that can be cross
+	 * Checks if there is an Enemy or an Obstacle.
+	 * If there is an obstacle, checks which type and if it can be crossed.
 	 * @return 
 	 * 			true or false
 	 */	

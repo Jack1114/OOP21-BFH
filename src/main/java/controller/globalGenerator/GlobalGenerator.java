@@ -8,22 +8,30 @@ import controller.obstacles.Obstacle;
 import controller.playerAttack.PlayerAttack;
 import controller.playerAttack.PlayerAttackImpl;
 import controller.playerMovements.PlayerMovement;
-import controller.playerMovements.PlayerMovementsImpl;
+import controller.playerMovements.PlayerMovementImpl;
 import model.obstacles.*;
 import model.player.*;
 import model.abilities.*;
 import model.enemies.Enemy;
 import view.GameLayoutController;
 
-// si occupa tutto lui di generare i nemici e le loro statistiche, L' eroe � statico per ora con una sola posizione fissa 
-
+/**
+ * Generates all the entities of the game:
+ * - Arena
+ * - Obstacles
+ * - Abilities
+ * - Player
+ * - Enemies
+ * Manages the rounds and the turns.
+ *
+ */
 public class GlobalGenerator {
 
 	private static final int GRID_SIZE_X = 10;
 	private static final int GRID_SIZE_Y = 12;
 	private static final int MAX_ROUNDS = 50;
 	private static final int NUM_ENEMIES = 3;
-	// ID POS
+
 	public List<Pair<Integer, Pair<Integer, Integer>>> enemyposwithID = new ArrayList<>();
 	public List<Obstacle> obstacles = new ArrayList<>();
 	public Map<Ability.Type, Integer> abilities = new HashMap<>();
@@ -71,17 +79,16 @@ public class GlobalGenerator {
 		}
 		playerTurn();
 		round++;
-
 	}
 
-	/**
-	 * generate for the first time all the controllers
+	/*
+	 * First generation of Entities.
 	 */
 	public void generation() {
 		this.obstacleGenerator = new ObstacleGenerator(obstacles);
 		this.player = new PlayerImpl(rand_pos_player(GRID_SIZE_X, GRID_SIZE_Y));
 		this.playerAttack = new PlayerAttackImpl(player);
-		this.playerMovement = new PlayerMovementsImpl(player);
+		this.playerMovement = new PlayerMovementImpl(player);
 		this.enemies = new ArrayList<Enemy>();
 		this.skipenemy = new ArrayList<>();
 
@@ -96,7 +103,7 @@ public class GlobalGenerator {
 	}
 
 	/*
-	 * generate the arena
+	 * Generate the Arena.
 	 */
 	private void generateArena() {
 		obstacleGenerator.generateObstacles();
@@ -104,6 +111,10 @@ public class GlobalGenerator {
 		g.update();
 	}
 
+	/*
+	 * Once all the enemies are killed, this method clear all the current obstacles
+	 * and generate new Enemies and a new Arena, resetting the Round counter as well.
+	 */
 	private void reset() {
 		obstacles.removeAll(obstacles);
 		enemyposwithID = new ArrayList<>();
@@ -123,7 +134,6 @@ public class GlobalGenerator {
 	public void playerTurn() {
 
 		if (player.getPlayer_action().getAvailableActions() > 0) {
-
 			if (player.getExperience().addLevel()) {
 				System.out.println("Congrats, your level has increased! Now you are stronger. ");
 				player.getExperience().increaseLevel();
@@ -131,14 +141,12 @@ public class GlobalGenerator {
 				player.recoverPlayer();
 				g.update();
 			}
-
 		} else {
 			player.getPlayer_action().resetActions();
 			enemyTurn();
 
 			play();
 		}
-
 	}
 
 	private void enemyTurn() {
@@ -146,6 +154,7 @@ public class GlobalGenerator {
 		System.out.println("-- Now it is the enemy turn! --");
 		for (var item : enemyposwithID) {
 			if (skipenemy.contains(item.getX())) {
+				//If the enemy dies, it gets teleported off screen to be later deleted once a new Arena gets generated.
 				enemyposwithID.set(item.getX(), new Pair<>(item.getX(), new Pair<Integer, Integer>(99, 99)));
 			} else {
 				int id = item.getX();
@@ -162,9 +171,9 @@ public class GlobalGenerator {
 	}
 
 	/**
-	 * 
-	 * @param position to check
-	 * @return true: if position is empty false: if position has and obstacle
+	 * Checks the Obstacle position for collision events.
+	 * @param position Param to check.
+	 * @return true -> if position is empty; false -> if position has an obstacle.
 	 */
 	public boolean checkObstaclesPos(Pair<Integer, Integer> position) {
 		boolean success = true;
@@ -178,13 +187,12 @@ public class GlobalGenerator {
 			success = success && true;
 		}
 		return success;
-
 	}
 
 	/**
-	 * 
-	 * @param position to check
-	 * @return true: if position is empty false: if position contains an enemy
+	 * Checks the Enemy position for collision events.
+	 * @param position Param to check.
+	 * @return true -> if position is empty; false -> if position has an enemy.
 	 */
 	public boolean checkEnemyPos(Pair<Integer, Integer> position) {
 		if (enemyposwithID.stream().map(e -> e.getY()).anyMatch(p -> p.equals(position))) {
@@ -194,10 +202,9 @@ public class GlobalGenerator {
 	}
 
 	/**
-	 * 
-	 * @param position to check
-	 * @return true: if position is empty false: if position is occupied by the
-	 *         player
+	 * Check the player position for collision events.
+	 * @param position Param to check.
+	 * @return true -> if position is empty; false -> if position has a player.
 	 */
 	public boolean checkPlayerPos(Pair<Integer, Integer> position) {
 		if (player.getPlayerPosition().equals(position)) {
@@ -212,20 +219,19 @@ public class GlobalGenerator {
 		// ---- wait in between actions ---
 		long end = System.currentTimeMillis() + 300;
 		while (end > System.currentTimeMillis()) {
-			// System.out.println("Waiting ...");
 			if (System.currentTimeMillis() > end) {
 				g.update();
 				break;
 			}
 		}
 		g.update();
-
 	}
 
 	/**
-	 * 
-	 * @param the grid size
-	 * @return a new random position in an empty cell in the grid
+	 * Used to randomize Obstacles position with the help of {@link #checkEnemyPos(Pair)}, {@link #checkPlayerPos(Pair) 
+	 * and {{@link #checkObstaclesPos(Pair)}.
+	 * @param The grid size.
+	 * @return An empty position to place the Obstacle.
 	 */
 	public Pair<Integer, Integer> randPositionObstacles(final int size_X, final int size_Y) {
 		Pair<Integer, Integer> pos = new Pair<>(0, 0);
@@ -249,10 +255,4 @@ public class GlobalGenerator {
 		int y = r.nextInt(size_Y);
 		return new Pair<>(x, y);
 	}
-
-	/**
-	 * @return the addHp
-	 */
-
-
 }

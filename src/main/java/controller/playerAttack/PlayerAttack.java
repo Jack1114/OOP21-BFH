@@ -5,25 +5,29 @@ import model.player.Pair;
 
 public interface PlayerAttack {
 
+
 	/**
-	 * attack beetwen the player and the enemie
+	 * Handles Player attacks to an Enemy.
+	 * @param enemy Enemy attacked.
 	 */
 	 void attack(Enemy enemy);
 	 
 	/**
-	 * 
-	 *  @return player's attack_points
+	 *  @return player's attackPoints.
 	 */
 	 int getAttackPoints();
 
-	 /** 
-	 * update player's attack_points
-	 */
+	 /**
+	  * @param newAttackPoints.
+	  */
 	 void setAttackPoints(int newAttackPoints);
 	 
-	 /** 
-	 *the player get the hit from a enemy and receive damage
-	 */
-	 void getHit(int enemyID,int enemyResponseHit);
+	 /**
+	  * Handles Enemy attacks to the Player;
+	  * @param enemyID
+	  * @param enemyResponseHit
+	  */
+	 void getHit(int enemyID, int enemyResponseHit);
+	 
 	 void increaseAtt();
 }

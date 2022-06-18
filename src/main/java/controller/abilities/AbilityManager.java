@@ -12,6 +12,10 @@ import model.abilities.DoubleAttack;
 import model.abilities.ElixirOfLife;
 import model.abilities.Ability.Type;
 
+/** Used for the management of the hero's skills, from generation to check 
+ * their availability during the game.
+*/
+
 public class AbilityManager {
 
 	private GlobalGenerator gg = GlobalGenerator.getInstance();
@@ -48,8 +52,7 @@ public class AbilityManager {
 	
 	public void remove(Ability.Type abilityType) {
 		if(isAvailable(abilityType)) {
-			abilities.get(abilityType).remove(0);
-			
+			abilities.get(abilityType).remove(0);		
 		}
 	}
 	
@@ -59,7 +62,6 @@ public class AbilityManager {
 
 	public Integer getSize(Ability.Type abilityType) {
 		return abilities.get(abilityType).size();
-	}
-	
+	}	
 	
 }

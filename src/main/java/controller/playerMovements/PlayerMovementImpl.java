@@ -18,52 +18,62 @@ import model.player.PlayerImpl;
  * @author Olivia
  *
  */
-public class PlayerMovementsImpl implements PlayerMovement {
+public class PlayerMovementImpl implements PlayerMovement {
 
 	
 	private Pair<Integer,Integer> new_player_pos;
 	private final Player player;
 	private GlobalGenerator gg = GlobalGenerator.getInstance();
-	public PlayerMovementsImpl(Player player) {
+	public PlayerMovementImpl(Player player) {
 		this.player = player;
 	}
 	
-
+	/**
+     * {@inheritDoc}
+     */
 	public void left() {
-		new_player_pos=new Pair<>(player.getPlayerPosition().getX()-1,player.getPlayerPosition().getY());
+		new_player_pos = new Pair<>(player.getPlayerPosition().getX()-1, player.getPlayerPosition().getY());
 		if(check_advancement(new_player_pos)) {
 			move(new_player_pos);
 		}		
 	}
 
-	
+	/**
+     * {@inheritDoc}
+     */
 	public void right() {
-		new_player_pos=new Pair<>(player.getPlayerPosition().getX()+1,player.getPlayerPosition().getY());
+		new_player_pos = new Pair<>(player.getPlayerPosition().getX()+1, player.getPlayerPosition().getY());
 		if(check_advancement(new_player_pos)) {
 			move(new_player_pos);
 		}
 	}
 
-	
+	/**
+     * {@inheritDoc}
+     */
 	public void down() {
-		new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY()+1);
+		new_player_pos = new Pair<>(player.getPlayerPosition().getX(), player.getPlayerPosition().getY()+1);
 		if(check_advancement(new_player_pos)) {
 			move(new_player_pos);		
 		}
 	}
 
-	
+	/**
+     * {@inheritDoc}
+     */
 	public void up() {
-		new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY()-1);
+		new_player_pos = new Pair<>(player.getPlayerPosition().getX(), player.getPlayerPosition().getY()-1);
 		if(check_advancement(new_player_pos)) {
 			move(new_player_pos);
 		}
 	}
 
 	
-	
+	/**
+     * {@inheritDoc}
+     */
 	public void stop() {
-		new_player_pos=new Pair<>(player.getPlayerPosition().getX(),player.getPlayerPosition().getY());	
+		new_player_pos = new Pair<>(player.getPlayerPosition().getX(), player.getPlayerPosition().getY());	
 	}
 	
 	
@@ -72,9 +82,11 @@ public class PlayerMovementsImpl implements PlayerMovement {
 	}
 
 	
-	
+	/**
+     * {@inheritDoc}
+     */
 	public boolean check_advancement(Pair<Integer, Integer> new_player_pos) {
-		//check sugli ostacoli	
+		//Checks for Obstacles
 		Optional<Obstacle> type = gg.obstacles
 				.stream()
 				.filter(o -> o.getObstaclePos().equals(new_player_pos))
@@ -92,18 +104,18 @@ public class PlayerMovementsImpl implements PlayerMovement {
 					
 				case ROCK:
 					player.getLife().setLifePoints(player.getLife().getLifePoints()-2);
-					System.out.println("This rocks are sharp, don't hit them, it's going to hurt you!");
+					System.out.println("These rocks are sharp, don't hit them, it's going to hurt you!");
 					return false;
 			}
 		}
 
-		//check sui bordi dello schermo
+		//Checks for Player fleeing
 		if( (new_player_pos.getX()<0 || new_player_pos.getX()>gg.getGridSizeX()-1 ) || new_player_pos.getY()<0 || new_player_pos.getY()>gg.getGridSizeY()-1 ){
 			System.out.println("You can't leave the arena, don't give up like that!");
 			return false;
 		}
 
-		//check sui nemici
+		//Checks for Enemies. If there is an Enemy, it triggers an attack.
 		for(var item : gg.enemyposwithID) {
 		     if(item.getY().equals(new_player_pos)){
 		    	int enemyID = item.getX();
