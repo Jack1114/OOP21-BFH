@@ -4,20 +4,12 @@
 package controller.playerMovements;
 
 import java.util.Optional;
-import java.util.Random;
-
 import controller.globalGenerator.GlobalGenerator;
 import model.enemies.Enemy;
 import model.obstacles.Obstacle;
 import model.player.Pair;
 import model.player.Player;
-import model.player.PlayerImpl;
 
-
-/**
- * @author Olivia
- *
- */
 public class PlayerMovementImpl implements PlayerMovement {
 
 	

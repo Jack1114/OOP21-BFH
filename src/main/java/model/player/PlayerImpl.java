@@ -1,6 +1,3 @@
-/**
- * 
- */
 package model.player;
 
 import controller.globalGenerator.GlobalGenerator;

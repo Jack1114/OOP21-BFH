@@ -2,11 +2,9 @@
  * 
  */
 package controller.playerAttack;
-
 import controller.globalGenerator.GlobalGenerator;
 import model.enemies.Enemy;
 import model.player.Player;
-import model.player.PlayerImpl;
 
 public class PlayerAttackImpl implements PlayerAttack {
 

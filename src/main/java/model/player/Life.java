@@ -1,7 +1,7 @@
 package model.player;
 
 public class Life {
-	private int MAX_LIFE_POINTS=50; //punti che il personaggio ha dalla partenza del gioco
+	private int MAX_LIFE_POINTS=50; //punti che il personaggio ha alla partenza del gioco
 	private int lifePoints;
 	
 	public Life() {
@@ -14,12 +14,17 @@ public class Life {
 	public int getLifePoints() {
 		return lifePoints;
 	}
+	
 	/**
 	 * @return MAX_LIFE_POINTS
 	 */
 	public int getMaxLifePoints() {
 		return MAX_LIFE_POINTS;
 	}
+	
+	/**
+	 * @param lifeP
+	 */
 	public void setMaxLifePoints(int lifeP) {
 		MAX_LIFE_POINTS=lifeP;
 	}
@@ -40,7 +45,6 @@ public class Life {
 	 * @param lifePoints
 	 * @return true if the player's lifePoints è massimi or false if not
 	 */
-
 	private boolean checkLifePoints(final int lifePoints) {
 		return lifePoints < MAX_LIFE_POINTS;
 	}
@@ -48,10 +52,10 @@ public class Life {
 	/**
 	 * update lifePoints to MAX_LIFE_POINTS
 	 */
-	
 	public void resetLife() {
 		lifePoints=getMaxLifePoints();
 	}
+	
 	/**
 	 * check if the player is alive
 	 * @return true if the player is alife or false if not

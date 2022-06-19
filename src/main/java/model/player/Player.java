@@ -1,6 +1,7 @@
 package model.player;
 import controller.playerAttack.PlayerAttackImpl;
 import model.actions.Action;
+
 public interface Player {
 	/**
 	 * @return player current position

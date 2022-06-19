@@ -42,7 +42,7 @@ public interface PlayerMovement {
 	 * Checks if there is an Enemy or an Obstacle.
 	 * If there is an obstacle, checks which type and if it can be crossed.
 	 * @return 
-	 * 			true or false
+	 * 	true or false
 	 */	
 	boolean check_advancement(Pair<Integer, Integer> player_pos);
 }

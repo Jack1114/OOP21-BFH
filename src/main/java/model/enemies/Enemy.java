@@ -11,11 +11,11 @@ public class Enemy {
 	// supponendo che lo schermo sia una griglia di 15 X 15
 	//int GRID_SIZE = 15;
 	
-	int GRID_SIZEX = 10;
-	int GRID_SIZEY = 12;
-	Player player;
-	Pair<Integer,Integer> pos;
-	GlobalGenerator gg = GlobalGenerator.getInstance();
+	private final static int GRID_SIZEX = 10;
+	private final static int GRID_SIZEY = 12;
+	private  Player player;
+	private Pair<Integer,Integer> pos;
+	private GlobalGenerator gg = GlobalGenerator.getInstance();
 	
 	private int ID;
 	

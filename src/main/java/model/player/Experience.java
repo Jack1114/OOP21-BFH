@@ -68,7 +68,7 @@ public class Experience {
 
 	/**
 	 * @param exp
-	 * add the player's experience points when the enemy dies
+	 * add the player's experience points when the enemy die
 	 */
 	public void gainExp(int exp) { 
 		expPoints+=exp;

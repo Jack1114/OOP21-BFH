@@ -1,11 +1,9 @@
 package controller.playerAttack;
 
 import model.enemies.Enemy;
-import model.player.Pair;
 
 public interface PlayerAttack {
-
-
+	
 	/**
 	 * Handles Player attacks to an Enemy.
 	 * @param enemy Enemy attacked.
@@ -16,18 +14,21 @@ public interface PlayerAttack {
 	 *  @return player's attackPoints.
 	 */
 	 int getAttackPoints();
-
+	 
 	 /**
 	  * @param newAttackPoints.
 	  */
 	 void setAttackPoints(int newAttackPoints);
 	 
 	 /**
-	  * Handles Enemy attacks to the Player;
+	  * the power of the player attack
 	  * @param enemyID
 	  * @param enemyResponseHit
 	  */
 	 void getHit(int enemyID, int enemyResponseHit);
 	 
+	 /**
+	 * add player attack points
+	 */
 	 void increaseAtt();
 }
