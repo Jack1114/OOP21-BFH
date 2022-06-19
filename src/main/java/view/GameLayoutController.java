@@ -14,7 +14,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import controller.globalGenerator.GlobalGenerator;
-import controller.obstacles.Obstacle;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -43,6 +42,7 @@ import javafx.stage.StageStyle;
 import model.player.Pair;
 import model.player.Player;
 import model.abilities.Ability;
+import model.obstacles.Obstacle;
 
 public class GameLayoutController extends SharedMethodsImpl{
 	

@@ -1,4 +1,4 @@
-package controller.obstacles;
+package model.obstacles;
 import java.util.Random;
 
 import model.player.Pair;

@@ -7,8 +7,8 @@ import java.util.Optional;
 import java.util.Random;
 
 import controller.globalGenerator.GlobalGenerator;
-import controller.obstacles.Obstacle;
 import model.enemies.Enemy;
+import model.obstacles.Obstacle;
 import model.player.Pair;
 import model.player.Player;
 import model.player.PlayerImpl;

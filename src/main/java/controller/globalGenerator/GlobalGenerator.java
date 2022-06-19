@@ -4,15 +4,15 @@ import java.util.*;
 
 import controller.abilities.AbilityManager;
 import controller.enemies.Enemy_move_control;
-import controller.obstacles.Obstacle;
+import controller.obstacles.*;
 import controller.playerAttack.PlayerAttack;
 import controller.playerAttack.PlayerAttackImpl;
 import controller.playerMouvements.PlayerMovement;
 import controller.playerMouvements.PlayerMovementsImpl;
-import model.obstacles.*;
 import model.player.*;
 import model.abilities.*;
 import model.enemies.Enemy;
+import model.obstacles.Obstacle;
 import view.GameLayoutController;
 
 // si occupa tutto lui di generare i nemici e le loro statistiche, L' eroe � statico per ora con una sola posizione fissa 

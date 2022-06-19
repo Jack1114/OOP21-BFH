@@ -1,4 +1,4 @@
-package controller.obstacles;
+package model.obstacles;
 
 import model.player.Pair;
 

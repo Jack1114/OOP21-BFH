@@ -1,11 +1,11 @@
-package model.obstacles;
+package controller.obstacles;
 
 import java.util.List;
 import java.util.Random;
 
 import controller.globalGenerator.GlobalGenerator;
-import controller.obstacles.Obstacle;
-import controller.obstacles.ObstacleImpl;
+import model.obstacles.Obstacle;
+import model.obstacles.ObstacleImpl;
 import model.player.Pair;
 
 public class ObstacleGenerator {
