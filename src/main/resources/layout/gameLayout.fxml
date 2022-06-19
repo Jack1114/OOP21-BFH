@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane id="gameLayout" fx:id="gameLayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameLayoutController">
+<AnchorPane id="gameLayout" fx:id="gameLayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameLayoutController">
    <children>
       <Pane id="mapHolder" fx:id="mapHolder" layoutX="159.0" layoutY="14.0" prefHeight="623.0" prefWidth="510.0" />
       <TextArea id="combatHistory" fx:id="combatHistory" layoutX="680.0" layoutY="14.0" prefHeight="155.0" prefWidth="204.0" />

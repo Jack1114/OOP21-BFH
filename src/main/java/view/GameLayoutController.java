@@ -378,9 +378,33 @@ public class GameLayoutController extends SharedMethodsImpl{
 					
 					
 			});
+			
 			if(gg.player.getLife().getLifePoints()<=0) {   
-				System.exit(0);
-			}
+			    ButtonType defeat = new ButtonType("I will try harder next time!");
+	    	  
+	
+	    	  Alert alert = new Alert(AlertType.CONFIRMATION,
+			            "Oh no, you died!",
+			            defeat);
+
+	    	  DialogPane dialogPane = alert.getDialogPane();
+
+	    	  dialogPane.getStylesheets().add(
+	    	  getClass().getResource("/assets/gameLayout.css").toExternalForm());
+	    	  
+	    	  dialogPane.getStyleClass().add("myDialog");
+	    	  dialogPane.setGraphic(null);
+	   
+	    	  alert.initStyle(StageStyle.UNDECORATED);  
+	    	  alert.setHeaderText(null);
+
+
+			    Optional<ButtonType> result = alert.showAndWait();
+			     if (result.get() == defeat) {
+			        	System.exit(0);
+			        
+			        }
+			     }
 		}
 
 	  private void updateHeroStats() {
