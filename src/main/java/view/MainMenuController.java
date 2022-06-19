@@ -70,7 +70,7 @@ public class MainMenuController extends SharedMethodsImpl{
         */
           DialogPane dialogPane = alert.getDialogPane();
     	  dialogPane.getStylesheets().add(
-    	  getClass().getResource("/assets/general_graphic.css").toExternalForm());
+    	  getClass().getResource("/assets/menuLayout.css").toExternalForm());
     	  
     	  dialogPane.getStyleClass().add("dialogPane");
           

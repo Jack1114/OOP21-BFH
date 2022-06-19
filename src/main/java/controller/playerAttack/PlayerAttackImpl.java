@@ -17,9 +17,12 @@ public class PlayerAttackImpl implements PlayerAttack {
 	Player player;
 
 	public PlayerAttackImpl( Player player) {
-		this.player=player;
+		this.player = player;
 	}
-
+	
+	 /**
+     * {@inheritDoc}
+     */
 	public int getAttackPoints() {
 		return attackPoints;
 	}
@@ -27,25 +30,35 @@ public class PlayerAttackImpl implements PlayerAttack {
 	private void resetAttackPoints() {
 		this.attackPoints = DEFAULT_ATTACK_POINTS;
 	}
+	
+	 /**
+     * {@inheritDoc}
+     */
 	public void attack(Enemy enemy) {
-		System.out.println("Hero is attacking");
+		System.out.println("Hero is attacking!");
 		enemy.GetHit(getAttackPoints());
 		resetAttackPoints();	
 	}
 
+	 /**
+     * {@inheritDoc}
+     */
 	public void setAttackPoints(int newAttackPoints) {
 		this.attackPoints = newAttackPoints;
 	}
+	
+	 /**
+     * {@inheritDoc}
+     */
 	 public void increaseAtt() {
 		 setAttackPoints(this.DEFAULT_ATTACK_POINTS+=3);
 		 
 	 }
 
-	public void getHit(int enemyID,int enemyResponseHit) {
-		gg.player.getLife().setLifePoints(gg.player.getLife().getLifePoints()-enemyResponseHit);
-		if(gg.player.getLife().getLifePoints()<=0) {   //se il player non ha più vita,il gplayer muore e il turno è finito
-			System.out.println("L'eroe è morto!");
-			System.exit(0);
-		}
+	 /**
+	 * {@inheritDoc}
+	 */
+	public void getHit(int enemyID, int enemyResponseHit) {
+		gg.player.getLife().setLifePoints(gg.player.getLife().getLifePoints() - enemyResponseHit);
 	}
 }

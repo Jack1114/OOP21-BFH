@@ -291,6 +291,8 @@ public class GameLayoutController extends SharedMethodsImpl{
 	        
 	        update();
 	        gg.play();
+	        
+	      
 	}
 
 	public void update() {
@@ -376,7 +378,9 @@ public class GameLayoutController extends SharedMethodsImpl{
 					
 					
 			});
-			//		System.out.println("sono alla fine di update");
+			if(gg.player.getLife().getLifePoints()<=0) {   
+				System.exit(0);
+			}
 		}
 
 	  private void updateHeroStats() {
