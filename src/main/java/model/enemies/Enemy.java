@@ -42,9 +42,9 @@ public class Enemy {
 		
 		//Enemy ID
 		this.ID = id;
-		int value = rand.nextInt(3)+1; 
+		int value = rand.nextInt(5)+1; 
 		
-		HP =( 5+value + ( HeroEXP*500/(15*5) ));
+		HP =( 5+value + ( HeroEXP/(10*2) ));
 		def=( 1+value/2 + ( HeroEXP/(20*8) ));
 		atk=( 1+value/3 + ( HeroEXP/(10*10) ));
 		exp=( 10+value - ( HeroEXP/(15*6) ));
