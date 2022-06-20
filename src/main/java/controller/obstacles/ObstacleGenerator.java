@@ -20,7 +20,7 @@ public class ObstacleGenerator {
     }
 
 	/**
-	 * Generate n Obstacles in random position
+	 * Generate n Obstacles in random positions
 	 */
 	public void generateObstacles(){
 		for (int i = 0; i < NUM_ROCK_OBST; i++){

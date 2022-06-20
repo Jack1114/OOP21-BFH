@@ -1,35 +1,38 @@
 package model.actions;
 
+/**
+ * Manages the Action Points. 
+ */
 public interface Action {
 	
 	/**
-	 * set the number of available actions for an entity
+	 * Set the number of available actions for an Entity.
 	 */
 	void setActions(int actions);
 	
 	/**
-	 * @return the default number of actions for each turn
+	 * @return The default number of actions for each turn.
 	 */
 	public int getMaxActions();
 	
 	/**
 	 * 
-	 * @return number of available actions
+	 * @return Number of available actions.
 	 */
 	int getAvailableActions();
 	
 	/**
-	 * remove one action from the available actions
+	 * Remove one action from the available actions.
 	 */
 	void removeAction();
 
 	/**
-	 * add one action from the available actions
+	 * Add one action from the available actions.
 	 */
 	void addAction();
 	
 	/**
-	 * reset actions to default number of actions
+	 * Reset actions to default number of actions.
 	 */
 	void resetActions();
 

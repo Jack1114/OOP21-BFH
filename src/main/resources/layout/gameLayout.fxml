@@ -19,7 +19,7 @@
          <children>
             <Label id="skillAHolder" fx:id="skillAHolder" layoutX="5.0" layoutY="5.0" prefHeight="40.0" prefWidth="40.0">
                <tooltip>
-                  <Tooltip id="skillATooltip" fx:id="skillATooltip" text="Heal yourself. Cost: 1 Action Point." />
+                  <Tooltip id="skillATooltip" fx:id="skillATooltip" text="Heal yourself. Cost: 25g." />
                </tooltip></Label>
          </children></Pane>
       <TextArea id="statsArea" fx:id="statsArea" editable="false" layoutX="14.0" layoutY="252.0" prefHeight="74.0" prefWidth="134.0" />

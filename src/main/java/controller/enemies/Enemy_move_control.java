@@ -139,7 +139,7 @@ public class Enemy_move_control {
 	 * Handles all the diagonal movements the enemy might need to perform.
 	 * @param old_pos Is previous position.
 	 * @param newPos Is the new position after the Enemy turn.
-	 * @param orientationMovement Checks if it is an horizontal movement.
+	 * @param orientationMovement Check the boolean return from {@link #move_vert(Pair)} and {@link #move_horizon(Pair)}.
 	 */
 	private static void diagonalMovement(Pair<Integer, Integer> old_pos, Pair<Integer, Integer> newPos, boolean orientationMovement) {
 	

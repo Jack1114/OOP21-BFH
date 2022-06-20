@@ -11,7 +11,7 @@
       <Pane id="title" fx:id="titlePane" layoutX="184.0" layoutY="100.0" prefHeight="280.0" prefWidth="530.0">
       </Pane>
       <Button id="playBtn" fx:id="playBtn" layoutX="300.0" layoutY="380.0" onAction="#move" mnemonicParsing="false" prefHeight="47.0" prefWidth="300.0"  />
-      <Button id="optionsBtn" fx:id="optionsBtn" layoutX="300.0" layoutY="450.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="300.0"  />
+      <Button id="howtoplayBtn" fx:id="howtoplayBtn" layoutX="300.0" layoutY="450.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="300.0"  />
       <Button id="exitBtn" fx:id="exitBtn" layoutX="300.0" layoutY="520.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="300.0"  />
    </children>
 </AnchorPane>

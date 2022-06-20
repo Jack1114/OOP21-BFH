@@ -5,11 +5,16 @@ package controller.playerMovements;
 
 import java.util.Optional;
 import controller.globalGenerator.GlobalGenerator;
+import controller.playerAttack.PlayerAttack;
 import model.enemies.Enemy;
 import model.obstacles.Obstacle;
 import model.player.Pair;
 import model.player.Player;
 
+/**
+ * The implementation of the {@link PlayerMovement}.
+ *
+ */
 public class PlayerMovementImpl implements PlayerMovement {
 
 	

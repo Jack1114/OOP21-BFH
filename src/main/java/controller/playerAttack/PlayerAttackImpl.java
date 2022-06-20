@@ -6,6 +6,10 @@ import controller.globalGenerator.GlobalGenerator;
 import model.enemies.Enemy;
 import model.player.Player;
 
+/**
+ * The implementation of the {@link PlayerAttack}.
+ *
+ */
 public class PlayerAttackImpl implements PlayerAttack {
 
 	private int DEFAULT_ATTACK_POINTS =3; 

@@ -1,33 +1,35 @@
 package model.player;
 
+/**
+ * When killing an Enemy, the Player gets Gold that can be spent.
+ */
 public class Gold {
 
-	private int gold=0;// oro che guardagna l'ero dopo ogni turno di gioco
+	//Starting gold value.
+	private int gold = 0;
 
 	public Gold() {
 
 	}
 	
-	/**
-	 * @return gold
-	 */
+
 	public int getGold_points() {
 		return gold;
 	}
 
 	/**
-	 * update player's gold
+	 * Update player's gold
 	 */
 	public void setGold_points(int g) {
-		this.gold=g;
+		this.gold = g;
 	}
 
 	
 	/**
-	 *when the palyer kill an enemie, he win gold
+	 *Gold gained by slaining Enemies
 	 */
 	public void gainGold_points(int newGold) {
-		this.gold+=newGold;
+		this.gold += newGold;
 		
 	}
 

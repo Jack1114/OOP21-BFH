@@ -47,38 +47,39 @@ public class GlobalGenerator {
 		this.g = gameL;
 	}
 
-	/**
+	/**Method to keep the internal generation of the engine private.
 	 * @return instance
 	 */
 	public static synchronized GlobalGenerator getInstance() {
 		return instance;
 	}
 
-	/**
+	/**Method to set the variable for the internal generation.
 	 * @param gameL
 	 */
 	public static synchronized void setInstance(GameLayoutController gameL) {
 		instance = new GlobalGenerator(gameL);
 	}
 
-	/**
+	/**Used to calculate Entities pos generation, matches with the Arena dimensions.
 	 * @return GRID_SIZE_X
-	 * la dimensione x of the play area 
+	 * 
 	 */
 	public static int getGridSizeX() {
 		return GRID_SIZE_X;
 	}
 
-	/**
+	/**Used to calculate Entities pos generation, matches with the Arena dimensions.
 	 * @return GRID_SIZE_Y
-	 * la dimensione y of the play area
+	 * 
 	 */
 	public static int getGridSizeY() {
 		return GRID_SIZE_Y;
 	}
 
 	/**
-	 * 
+	 * Manages the Player turn, checking each time if all enemies are dead.
+	 * If all the enemies are killed, it calls {@link #reset()} to generate a new Arena.
 	 */
 	public void play() {
 
@@ -97,7 +98,7 @@ public class GlobalGenerator {
 	 * First generation of Entities.
 	 */
 	/**
-	 * generate the pay area whit all the components :player, obstacles, enemies
+	 * Generate the play area and all its components: Player, Enemies, Obstacles.
 	 */
 	public void generation() {
 		this.obstacleGenerator = new ObstacleGenerator(obstacles);
@@ -127,7 +128,7 @@ public class GlobalGenerator {
 	}
 
 	/**
-	 * Once all the enemies are killed, this method clear all the current obstacles
+	 * Once all the enemies are killed, this method clears all the current obstacles
 	 * and generate new Enemies and a new Arena, resetting the Round counter as
 	 * well.
 	 */
@@ -140,9 +141,7 @@ public class GlobalGenerator {
 		round = 0;
 	}
 
-	/**
-	 * generate enemies
-	 */
+
 	private void generate_enemies() {
 		for (int i = 0; i < NUM_ENEMIES; i++) {
 			Enemy e = new Enemy(i);
@@ -150,9 +149,7 @@ public class GlobalGenerator {
 		}
 	}
 
-	/**
-	 * when it is player's
-	 */
+
 	public void playerTurn() {
 		if (player.getPlayer_action().getAvailableActions() > 0) {
 			if (player.getExperience().addLevel()) {
@@ -169,9 +166,7 @@ public class GlobalGenerator {
 			play();
 		}
 	}
-	/**
-	 * when it is enemies's
-	 */
+
 	private void enemyTurn() {
 
 		System.out.println("-- Now it is the enemy turn! --");
@@ -241,9 +236,9 @@ public class GlobalGenerator {
 	}
 
 	/**
-	 * the enemies move
+	 * Used to manage the Enemies actions delay.
 	 * @param item
-	 * @param actionpt
+	 * @param actionpt 
 	 */
 	private void advance(Pair<Integer, Pair<Integer, Integer>> item, int actionpt) {
 		Enemy_move_control.nextMove(item, actionpt);
@@ -285,10 +280,10 @@ public class GlobalGenerator {
 
 	
 	/**
-	 * put the player at the ramdomized position at the begining of the game
-	 * @param size_X
-	 * @param size_Y
-	 * @return pair(<x,y) 
+	 * Used to randomize Player position.
+	 * @param size_X This is {@link #GRID_SIZE_X}
+	 * @param size_Y This is {@link #GRID_SIZE_Y}
+	 * @return pair(<x,y) Returns PlayerPos.
 	 */
 	public Pair<Integer, Integer> rand_pos_player(final int size_X, final int size_Y) {
 		Random r = new Random();

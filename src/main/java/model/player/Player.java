@@ -2,33 +2,29 @@ package model.player;
 import controller.playerAttack.PlayerAttackImpl;
 import model.actions.Action;
 
+/**
+ * Interface for the Player.
+ */
 public interface Player {
+	
 	/**
-	 * @return player current position
+	 * @return Player current position.
 	 */
 	public Pair<Integer,Integer> getPlayerPosition();
 
 	/**
-	 * when the player move, this function update the new position
+	 * Update Player's Pos after moving.
+	 * @param newPos
 	 */
 	void setPlayerPosition(Pair<Integer,Integer> newPos);
-	/**
-	 * @return player's life points
-	 */
-	public Life getLife();
-	/**
-	 * @return player's gold points
-	 */
-	public Gold getGold();
-	/**
-	 * @return player's experience points
-	 */
-	public Experience getExperience();
-	/**
-	 * @return player's action points
-	 */
-	public Action getPlayer_action();
 	
+	public Life getLife();
+
+	public Gold getGold();
+	
+	public Experience getExperience();
+
+	public Action getPlayer_action();
 	
 	public void recoverPlayer();
 	

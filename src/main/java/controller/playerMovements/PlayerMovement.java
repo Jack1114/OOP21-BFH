@@ -7,7 +7,7 @@ import model.player.Pair;
 
 
 /**
- * @author Olivia
+ * Manages the Player movement during the game.
  *
  */
 public interface PlayerMovement {

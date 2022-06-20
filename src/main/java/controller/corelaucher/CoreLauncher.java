@@ -34,7 +34,7 @@ public class CoreLauncher extends Application {
         stage.show();
         
         /*
-         * Quick function to enable drag event on an undecorated Scene.
+         * Quick function to enable drag events on an undecorated Scene.
          */
         
         root.setOnMousePressed(pressEvent -> {

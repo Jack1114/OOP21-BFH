@@ -20,7 +20,9 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-
+/**
+ * Intro View of the Application, for aesthetic purposes.
+ */
 public class MainMenuController extends SharedMethodsImpl{
 	
 	
@@ -28,13 +30,12 @@ public class MainMenuController extends SharedMethodsImpl{
 
     @FXML
     private AnchorPane mainMenuPane;
-
     @FXML
     private Pane titlePane;
     @FXML
     private Button playBtn;
     @FXML
-    private Button optionsBtn;
+    private Button howtoplayBtn;
     @FXML
     private Button exitBtn;
 
@@ -46,67 +47,52 @@ public class MainMenuController extends SharedMethodsImpl{
         final BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, null);
 
-        
         mainMenuPane.setBackground(new Background(background));
 
         
         playBtn.setText("Play");
-        optionsBtn.setText("How to play");
+        howtoplayBtn.setText("How to play");
         exitBtn.setText("Exit");
-    
         
-        optionsBtn.setOnAction(new EventHandler<ActionEvent>(){
-        	
-      public void handle(ActionEvent event) {
-    	  
-    	  
-    	  Alert alert = new Alert(AlertType.CONFIRMATION);
-    	  alert.setGraphic(null);
-    	  alert.setHeaderText(null);
-    	  alert.initStyle(StageStyle.UNDECORATED); 
+        //How To Play Dialog handler
+        howtoplayBtn.setOnAction(new EventHandler<ActionEvent>(){
+        	public void handle(ActionEvent event) {
+        		Alert alert = new Alert(AlertType.CONFIRMATION);
+        		alert.setGraphic(null);
+        		alert.setHeaderText(null);
+        		alert.initStyle(StageStyle.UNDECORATED); 
 
-       /*   final Image tutorial = new Image(getClass().getResourceAsStream("/images/howtoplay.png"));
-          final BackgroundImage tutorialb = new BackgroundImage(tutorial, BackgroundRepeat.NO_REPEAT,
-                  BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, null);
-        */
-          DialogPane dialogPane = alert.getDialogPane();
-    	  dialogPane.getStylesheets().add(
-    	  getClass().getResource("/assets/menuLayout.css").toExternalForm());
+        		DialogPane dialogPane = alert.getDialogPane();
+        		dialogPane.getStylesheets().add(
+        				getClass().getResource("/assets/menuLayout.css").toExternalForm());
     	  
-    	  dialogPane.getStyleClass().add("dialogPane");
+        		dialogPane.getStyleClass().add("dialogPane");
           
-        //  dialogPane.setBackground(new Background(tutorialb));
-         
-          alert.getDialogPane().setPrefSize(1250, 650);
-    	  ButtonType buttonTypeOne = new ButtonType("Okay, I understood!");
+        		alert.getDialogPane().setPrefSize(1250, 650);
+        		ButtonType accept = new ButtonType("Okay, I understood!");
 
-    	  alert.getButtonTypes().setAll(buttonTypeOne);
+        		alert.getButtonTypes().setAll(accept);
 
-    	  Optional<ButtonType> result = alert.showAndWait();
-    	  if (result.get() == buttonTypeOne){
-    	      alert.close();
-    	  } 
-    	  
-    	  
-      	}
+        		Optional<ButtonType> result = alert.showAndWait();
+        		if (result.get() == accept){
+        			alert.close();
+        		} 
+        	}
         });
         
-        
-        
-        
-        
+        //Exit button handler
         exitBtn.setOnAction(new EventHandler<ActionEvent>() {
         	@Override
         	public void handle(ActionEvent event) {
         		System.exit(0);
         	}
         });
-    	
     }
 
-
-    
-    
+    /**
+     * Moves to the next Scene
+     * @param event
+     */
 	@FXML
 	public void move(ActionEvent event) {       
 
@@ -123,15 +109,9 @@ public class MainMenuController extends SharedMethodsImpl{
 			secondaryStage.show();
 			dragScene(root, secondaryStage);
 
-	    	
-
-	
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-			 System.out.println("Errore");
 		}
 	}
-	
 }
 

@@ -6,11 +6,13 @@ import model.player.Pair;
 import model.player.Player;
 import model.player.PlayerImpl;
 
+/**
+ * Class used to manage the enemies and their stats.
+ *
+ */
 public class Enemy {
 
-	// supponendo che lo schermo sia una griglia di 15 X 15
-	//int GRID_SIZE = 15;
-	
+	// Giving the Arena size to avoid misplacing during generation.
 	private final static int GRID_SIZEX = 10;
 	private final static int GRID_SIZEY = 12;
 	private  Player player;
@@ -26,20 +28,21 @@ public class Enemy {
 	private int def;
 	private int atk;
 	private int exp;
-	private int HeroEXP =gg.player.getExperience().getExpPoints();
+	private int HeroEXP = gg.player.getExperience().getExpPoints();
 	private int Gold;
 	
 	Random rand = new Random();
 	
+	/**
+	 * Constructor for the Enemy. 
+	 * By using {@value #rand} we can generate different stats for the enemies.
+	 * @param id
+	 */
 	public Enemy(int id) {
 		
-		// IMPORTANTE !!
+		//Enemy ID
 		this.ID = id;
-		
-		// elemento di random per dare diversit� ai nemici
 		int value = rand.nextInt(3)+1; 
-		
-		// i valori sono arbitrari
 		
 		HP =( 5+value + ( HeroEXP*500/(15*5) ));
 		def=( 1+value/2 + ( HeroEXP/(20*8) ));
@@ -47,11 +50,15 @@ public class Enemy {
 		exp=( 10+value - ( HeroEXP/(15*6) ));
 		
 		Gold=rand.nextInt(15)+10;
+		
 		generate_pos();
 	}
 	
+	/**
+	 * Generate the position of the Enemies upon checking other Entities pos,
+	 * avoiding overlapping issues.
+	 */
 	private void generate_pos() {
-		// TODO Auto-generated method stub
 		boolean ok=false;
 		while(!ok) {
 			x= rand.nextInt(GRID_SIZEX);
@@ -67,7 +74,6 @@ public class Enemy {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		String s = "HP = "+GetHP()+" atk = "+this.atk+" def = "+this.def+" exp = "+this.exp ;
 		return s;
 	}
@@ -87,57 +93,50 @@ public class Enemy {
 		return def;
 	}
 
+	/**
+	 * After getting damaged, the Enemy life is set at its new value,
+	 * obtained by decreasing the damage taken.
+	 * @param damage
+	 */
 	public void SetHP(int damage) {
-		setHPennemi(GetHP()-damage);
-		System.out.println("Enemy "+this.ID+" - Life = " + GetHP());
-		if(GetHP()<=0) {
+		setHPEnemy(GetHP() - damage);
+		System.out.println("Enemy " + this.ID + " - Life = " + GetHP());
+		//Enemy death.
+		if(GetHP() <= 0) {
 			gg.player.getExperience().gainExp(this.getEXP());
 			gg.player.getGold().gainGold_points(this.Gold);
 			Death();
 		}
 	}
 	
-	public void setHPennemi(int i) {
-		HP=i;
-		
+	public void setHPEnemy(int i) {
+		HP = i;	
 	}
 
-
-
-
 	private int getEXP() {
-		// TODO Auto-generated method stub
 		return this.exp;
 	}
 
-
-
 	public void GetHit(int hero_ATK) {
-		System.out.println("Enemy "+this.ID + " hit by hero - Damage of " +(hero_ATK - GetDEF()));
+		System.out.println("Enemy " + this.ID + " hit by hero - Damage of " + (hero_ATK - GetDEF()));
 		SetHP(hero_ATK - GetDEF());	
 	}
 
-
-
 	private void Death() {
-		System.out.println("Enemy "+this.ID+" has died");
+		System.out.println("Enemy " + this.ID + " has died.");
 		setEXP(0);
 		setGold(0);
 		if(!gg.skipenemy.contains(this.ID)) {
 			gg.skipenemy.add(this.ID);
-			gg.enemyposwithID.set(this.ID, new Pair<>(this.ID,new Pair<Integer,Integer>(99,99)));
+			gg.enemyposwithID.set(this.ID, new Pair<>(this.ID, new Pair<Integer, Integer> (99, 99)));
 		}
 	}
 
 	private void setGold(int i) {
-		// TODO Auto-generated method stub
-		this.Gold=i;
+		this.Gold = i;
 	}
 
 	private void setEXP(int i) {
-		// TODO Auto-generated method stub
-		this.exp=i;
+		this.exp = i;
 	}
-
-	
 }
