@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -85,6 +86,7 @@ public class MainMenuController extends SharedMethodsImpl{
     	  if (result.get() == buttonTypeOne){
     	      alert.close();
     	  } 
+    	  
     	  
       	}
         });
