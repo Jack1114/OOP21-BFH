@@ -170,18 +170,18 @@ public class GlobalGenerator {
 	private void enemyTurn() {
 
 		System.out.println("-- Now it is the enemy turn! --");
-		for (var item : enemyposwithID) {
-			if (skipenemy.contains(item.getX())) {
+		for (var enemyList : enemyposwithID) {
+			if (skipenemy.contains(enemyList.getX())) {
 				// If the enemy dies, it gets teleported off screen to be later deleted once a
 				// new Arena gets generated.
-				enemyposwithID.set(item.getX(), new Pair<>(item.getX(), new Pair<Integer, Integer>(99, 99)));
+				enemyposwithID.set(enemyList.getX(), new Pair<>(enemyList.getX(), new Pair<Integer, Integer>(99, 99)));
 			} else {
-				int id = item.getX();
+				int id = enemyList.getX();
 				int actionpt = 0;
 
 				while (actionpt < 2) {
-					advance(item, actionpt);
-					item = enemyposwithID.get(id);
+					advance(enemyList, actionpt);
+					enemyList = enemyposwithID.get(id);
 					actionpt++;
 				}
 			}
@@ -237,11 +237,11 @@ public class GlobalGenerator {
 
 	/**
 	 * Used to manage the Enemies actions delay.
-	 * @param item
-	 * @param actionpt 
+	 * @param enemyList Enemies list with Pos infos.
+	 * @param actionpt Enemy action points.
 	 */
-	private void advance(Pair<Integer, Pair<Integer, Integer>> item, int actionpt) {
-		Enemy_move_control.nextMove(item, actionpt);
+	private void advance(Pair<Integer, Pair<Integer, Integer>> enemyList, int actionpt) {
+		Enemy_move_control.nextMove(enemyList, actionpt);
 
 		// ---- wait in between actions ---
 		long end = System.currentTimeMillis() + 300;
