@@ -358,7 +358,7 @@ public class GameLayoutController extends SharedMethodsImpl{
 	}
 
 	/**
-	 * Update the Stats fields in the View whenever their are changed.
+	 * Update the Stats fields in the View whenever they are changed.
 	 */
 	private void updateHeroStats() {
 
