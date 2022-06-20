@@ -1,8 +1,11 @@
 package model.obstacles;
-import java.util.Random;
 
 import model.player.Pair;
 
+/**
+ * The implementation of the {@link Obstacle}.
+ *
+ */
 public class ObstacleImpl implements Obstacle {
 
 	private final Pair<Integer, Integer> obstaclePos;

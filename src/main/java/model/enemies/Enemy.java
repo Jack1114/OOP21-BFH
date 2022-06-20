@@ -4,7 +4,6 @@ import java.util.*;
 import controller.globalGenerator.GlobalGenerator;
 import model.player.Pair;
 import model.player.Player;
-import model.player.PlayerImpl;
 
 /**
  * Class used to manage the enemies and their stats.

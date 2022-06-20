@@ -8,7 +8,6 @@ import controller.playerAttack.PlayerAttack;
 import controller.playerAttack.PlayerAttackImpl;
 import controller.playerMovements.PlayerMovement;
 import controller.playerMovements.PlayerMovementImpl;
-import model.obstacles.*;
 import model.player.*;
 import model.abilities.*;
 import model.enemies.Enemy;
@@ -24,7 +23,6 @@ public class GlobalGenerator {
 
 	private static final int GRID_SIZE_X = 10;
 	private static final int GRID_SIZE_Y = 12;
-	private static final int MAX_ROUNDS = 50;
 	private static final int NUM_ENEMIES = 3;
 
 	public List<Pair<Integer, Pair<Integer, Integer>>> enemyposwithID = new ArrayList<>();

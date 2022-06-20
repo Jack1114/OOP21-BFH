@@ -6,15 +6,25 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+/**
+ * The implementation of the {@link SharedMethods}.
+ *
+ */
 public class SharedMethodsImpl implements SharedMethods {
 
+	 /**
+     * {@inheritDoc}
+     */
 	@Override
 	public void setCursor(Scene scene) {
-		Image image = new Image("images/cursorHand_grey.png");  //pass in the image path
+		Image image = new Image("images/cursorHand_grey.png"); 
 		scene.setCursor(new ImageCursor(image));
 		scene.getStylesheets().add(getClass().getResource("/assets/gameLayout.css").toExternalForm());
 	}
 
+	 /**
+     * {@inheritDoc}
+     */
 	@Override
 	public void dragScene(Parent root, Stage stage) {
 	    root.setOnMousePressed(pressEvent -> {

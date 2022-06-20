@@ -1,6 +1,5 @@
 package controller.abilities;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -10,7 +9,6 @@ import controller.globalGenerator.GlobalGenerator;
 import model.abilities.Ability;
 import model.abilities.DoubleAttack;
 import model.abilities.ElixirOfLife;
-import model.abilities.Ability.Type;
 
 /** Used for the management of the hero's skills, from generation to check 
  * their availability during the game.

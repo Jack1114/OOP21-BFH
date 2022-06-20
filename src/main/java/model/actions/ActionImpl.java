@@ -1,7 +1,5 @@
  package model.actions;
 
-import controller.playerAttack.PlayerAttack;
-
 /**
   * The implementation of the {@link Action}.
   *

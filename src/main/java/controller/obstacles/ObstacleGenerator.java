@@ -1,7 +1,6 @@
 package controller.obstacles;
 
 import java.util.List;
-import java.util.Random;
 
 import controller.globalGenerator.GlobalGenerator;
 import model.obstacles.Obstacle;

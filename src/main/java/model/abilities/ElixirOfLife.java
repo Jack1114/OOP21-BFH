@@ -1,7 +1,7 @@
 package model.abilities;
 
 import model.player.Player;
-import model.player.PlayerImpl;
+
 
 public class ElixirOfLife implements Ability{
 

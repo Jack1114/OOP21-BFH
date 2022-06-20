@@ -1,7 +1,6 @@
 package model.player;
 
 import controller.globalGenerator.GlobalGenerator;
-import controller.playerAttack.PlayerAttack;
 import controller.playerAttack.PlayerAttackImpl;
 import model.actions.Action;
 import model.actions.ActionImpl;

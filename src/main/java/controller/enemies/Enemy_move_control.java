@@ -2,8 +2,6 @@ package controller.enemies;
 
 import controller.globalGenerator.GlobalGenerator;
 import controller.playerAttack.PlayerAttack;
-import controller.playerAttack.PlayerAttackImpl;
-import model.enemies.Enemy;
 import model.player.Pair;
 import model.player.Player;
 
@@ -20,9 +18,9 @@ public class Enemy_move_control {
 	private static int enemyID;
 	private static int act_pt;
 	private static boolean collide;
-	private static boolean moved_diagonally=false;
+	private static boolean moved_diagonally = false;
 	private static boolean wait= false;
-	private static boolean previously_acted=false;
+	private static boolean previously_acted = false;
 
 	private static GlobalGenerator gg = GlobalGenerator.getInstance();
 	private static Player player = gg.player;
@@ -44,11 +42,11 @@ public class Enemy_move_control {
 			if(dx<dy) {
 				move_horizon(elem.getY());
 				gg.enemyposwithID.set(elem.getX(), new Pair<>(elem.getX(), newenemyPos));
-				previously_acted=true;
+				previously_acted = true;
 			}else {
 				move_vert(elem.getY());	
 				gg.enemyposwithID.set(elem.getX(), new Pair<>(elem.getX(), newenemyPos));
-				previously_acted=true;
+				previously_acted = true;
 			}
 		}
 	}
