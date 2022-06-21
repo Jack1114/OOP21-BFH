@@ -147,7 +147,12 @@ public class GlobalGenerator {
 		}
 	}
 
-
+	/**
+	 * As long as a Player has action points left, it is going to be active and check if 
+	 * the Player is gaining any experience to increase the level.
+	 * Once all the action points are expired, resets the value and call the {@link #enemyTurn()}.
+	 * After that, {@link #play()} is launched again.
+	 */
 	public void playerTurn() {
 		if (player.getPlayer_action().getAvailableActions() > 0) {
 			if (player.getExperience().addLevel()) {
