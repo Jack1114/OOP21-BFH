@@ -21,7 +21,7 @@ public interface PlayerAttack {
 	 void setAttackPoints(int newAttackPoints);
 	 
 	 /**
-	  * the power of the player attack
+	  * the power of the enemy attack on the player
 	  * @param enemyID
 	  * @param enemyResponseHit
 	  */
