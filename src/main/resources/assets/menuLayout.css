@@ -1,8 +1,18 @@
-.button{
-   -fx-background-image: url("/images/buttonLong_brown_Pressed.png");
+
+
+.button:hover {
+   -fx-background-image: url("/images/buttonLong_brown.png");
    -fx-background-repeat: no-repeat;
    -fx-background-size: contain;
-   -fx-border-color: transparent;
+   -fx-background-position: center center;
+   -fx-border-width: 0;
+   -fx-background-radius: 0;
+   -fx-background-color: transparent;
+}
+.button{
+   -fx-background-image: url("/images/buttonLong_brownP.png");
+   -fx-background-repeat: no-repeat;
+   -fx-background-size: contain;
    -fx-border-width: 0;
    -fx-background-radius: 0;
    -fx-background-color: transparent;
@@ -12,23 +22,11 @@
    -fx-text-alignment: left;
 }
 
-.button:hover {
-   -fx-background-image: url("/images/buttonLong_brown.png");
-   -fx-background-repeat: no-repeat;
-   -fx-background-size: contain;
-   -fx-background-position: center center;
-   -fx-border-color: transparent;
-   -fx-border-width: 0;
-   -fx-background-radius: 0;
-   -fx-background-color: transparent;
-}
-
 .button:pressed {
    -fx-background-image: url("/images/buttonLong_brown.png"); 
    -fx-background-repeat: no-repeat;
    -fx-background-size: contain;
    -fx-background-position: center center;
-   -fx-border-color: transparent;
    -fx-border-width: 0;
    -fx-background-radius: 0;
    -fx-background-color: transparent;  
