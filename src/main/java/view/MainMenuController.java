@@ -23,7 +23,7 @@ import javafx.stage.StageStyle;
 public class MainMenuController extends SharedMethodsImpl{
 	
 	
-	GlobalGenerator gg = GlobalGenerator.getInstance();
+	//GlobalGenerator gg = GlobalGenerator.getInstance();
 
     @FXML
     private AnchorPane mainMenuPane;
@@ -39,6 +39,7 @@ public class MainMenuController extends SharedMethodsImpl{
 
     @FXML
     private void initialize() {
+    	
 
         final Image backgroundImage = new Image(getClass().getResourceAsStream("/images/background.png"));
         final BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT,

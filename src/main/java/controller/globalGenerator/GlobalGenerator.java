@@ -170,6 +170,10 @@ public class GlobalGenerator {
 		}
 	}
 
+	/**
+	 * Performs all the turns of the enemies following the order of apparition by ID.
+	 * Once all the enemies finish their actions, {@link #playerTurn()} is called again.
+	 */
 	private void enemyTurn() {
 
 		System.out.println("-- Now it is the enemy turn! --");

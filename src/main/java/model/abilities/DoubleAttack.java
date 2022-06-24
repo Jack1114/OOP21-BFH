@@ -19,6 +19,9 @@ public class DoubleAttack implements Ability{
 		return this.name;
 	}
 
+	 /**
+     * {@inheritDoc}
+     */
 	@Override
 	public void apply() {
 		playerAttack.setAttackPoints(playerAttack.getAttackPoints() * 2);

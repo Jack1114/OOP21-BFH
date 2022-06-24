@@ -15,7 +15,9 @@ public class ElixirOfLife implements Ability{
 		this.type = Ability.Type.ELIXIR_OF_LIFE;
 	}
 
-
+	 /**
+     * {@inheritDoc}
+     */
 	public void apply() {
 		player.getLife().setLifePoints(player.getLife().getLifePoints() + 10);
 	}

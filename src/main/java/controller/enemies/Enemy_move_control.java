@@ -228,6 +228,12 @@ public class Enemy_move_control {
 		
 	}
 
+	/**
+	 * checks if the param is free.
+	 * @param up
+	 * @return true if the position is free and the Entity can move.
+	 * 				false otherwise. 
+	 */
 	private static boolean upfree(Pair<Integer, Integer> up) {
 		if(!checkenemypos(up) && gg.checkObstaclesPos(up)) {
 			return true;
@@ -236,6 +242,12 @@ public class Enemy_move_control {
 		}
 	}
 	
+	/**
+	 * checks if the param is free.
+	 * @param down
+	 * @return true if the position is free and the Entity can move.
+	 * 				false otherwise. 
+	 */
 	private static boolean downfree(Pair<Integer, Integer> down) {
 		if(!checkenemypos(down) && gg.checkObstaclesPos(down)) {
 			return true;
@@ -244,6 +256,12 @@ public class Enemy_move_control {
 		}
 	}
 	
+	/**
+	 * checks if the param is free.
+	 * @param left
+	 * @return true if the position is free and the Entity can move.
+	 * 				false otherwise. 
+	 */
 	private static boolean leftfree(Pair<Integer, Integer> left) {
 		if(!checkenemypos(left) && gg.checkObstaclesPos(left)) {
 			return true;
@@ -252,6 +270,12 @@ public class Enemy_move_control {
 		}
 	}
 	
+	/**
+	 * checks if the param is free.
+	 * @param right
+	 * @return true if the position is free and the Entity can move.
+	 * 				false otherwise. 
+	 */
 	private static boolean rightfree(Pair<Integer, Integer> right) {
 		if(!checkenemypos(right) && gg.checkObstaclesPos(right)) {
 			return true;
@@ -260,6 +284,12 @@ public class Enemy_move_control {
 		}
 	}
 
+	/**
+	 * Checks if the param contains an Enemy.
+	 * @param newPos position to be checked
+	 * @return	true if newPos contains an Entity.
+	 * 				false if newPos is empty and the Enemy can move.
+	 */
 	private static boolean checkenemypos(Pair<Integer, Integer> newPos) {
 		collide = false;
 		gg.enemyposwithID.forEach(item -> {
@@ -269,7 +299,11 @@ public class Enemy_move_control {
 		});
 		return collide;
 	}
-
+	
+	/**
+	 * Calculates the difference of X between Player and Enemy position.
+	 * @param enX
+	 */
 	private static void diffX(Integer enX) {
 		int diff = Math.abs(enX-player.getPlayerPosition().getX());
 		setdx(diff);
@@ -279,6 +313,10 @@ public class Enemy_move_control {
 		dx = diff;
 	}
 
+	/**
+	 * Calculates the difference of Y between Player and Enemy position.
+	 * @param enY
+	 */
 	private static void diffY(Integer enY) {
 		int diff = Math.abs(enY-player.getPlayerPosition().getY());
 		setdy(diff);

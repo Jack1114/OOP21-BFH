@@ -7,9 +7,10 @@ public interface Ability {
 		ELIXIR_OF_LIFE;
 	}
 	
-
+	/**
+	 * Executes the selected ability on the player.
+	 */
 	void apply();
 	
-
 	String getName();
 }

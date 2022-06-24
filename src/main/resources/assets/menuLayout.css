@@ -1,11 +1,12 @@
 .button{
-   -fx-background-image: url("/images/buttonLong_brown_Pressed.png");
+   -fx-background-image: url("/images/buttonLong_brownp.png");
    -fx-background-repeat: no-repeat;
    -fx-background-size: contain;
    -fx-border-color: transparent;
    -fx-border-width: 0;
+
+   -fx-background-color: transparent;  
    -fx-background-radius: 0;
-   -fx-background-color: transparent;
    -fx-background-position: center center;
    -fx-font-family: munro;
    -fx-font-size: 35px;
@@ -17,10 +18,11 @@
    -fx-background-repeat: no-repeat;
    -fx-background-size: contain;
    -fx-background-position: center center;
+
+   -fx-background-color: transparent;  
    -fx-border-color: transparent;
    -fx-border-width: 0;
    -fx-background-radius: 0;
-   -fx-background-color: transparent;
 }
 
 .button:pressed {

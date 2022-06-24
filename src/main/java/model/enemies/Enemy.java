@@ -121,6 +121,10 @@ public class Enemy {
 		SetHP(hero_ATK - GetDEF());	
 	}
 
+	/**
+	 * After the Enemy HP drops to 0 or lower, resets its values to 0
+	 * and gets teleported outside the Arena.
+	 */
 	private void Death() {
 		System.out.println("Enemy " + this.ID + " has died.");
 		setEXP(0);
