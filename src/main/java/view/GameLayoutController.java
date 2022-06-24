@@ -223,8 +223,8 @@ public class GameLayoutController extends SharedMethodsImpl{
 	    	
 	    statsArea.setText("Experience = " + gg.player.getExperience().getExpPoints()+ "\n"+
 	    				  "HP = " + gg.player.getLife().getLifePoints() +" / "+ player.getLife().getMaxLifePoints() + "\n" +
-	    				  " LV =" + gg.player.getExperience().getLevel() + "\n" +
-	    				  "Action= " + gg.player.getPlayer_action().getMaxActions());
+	    				  " LV = " + gg.player.getExperience().getLevel() + "\n" +
+	    				  "Action = " + gg.player.getPlayer_action().getMaxActions());
 	    moneyHolder.setText("Gold = " + gg.player.getGold().getGold_points());
 		  
 	    //The graphical part of the Arena is drawn here.
@@ -348,8 +348,8 @@ public class GameLayoutController extends SharedMethodsImpl{
 
 	    	statsArea.setText("Experience = " + gg.player.getExperience().getExpPoints()+ "\n"+
 					"Life Points = " + gg.player.getLife().getLifePoints() +" / "+ gg.player.getLife().getMaxLifePoints() + "\n" +
-					"Level =" + gg.player.getExperience().getLevel() + "\n" +
-					"Action= " + gg.player.getPlayer_action().getAvailableActions());
+					"Level = " + gg.player.getExperience().getLevel() + "\n" +
+					"Action = " + gg.player.getPlayer_action().getAvailableActions());
 	    	
 	    	moneyHolder.setText("Gold = " + gg.player.getGold().getGold_points());	    	
 	}
