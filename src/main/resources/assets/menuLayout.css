@@ -1,10 +1,17 @@
+.button:hover {
+   -fx-background-image: url("/images/buttonLong_brown.png");
+   -fx-background-repeat: no-repeat;
+   -fx-background-size: contain;
+   -fx-background-position: center center;
+   -fx-border-width: 0;
+   -fx-background-radius: 0;
+   -fx-background-color: transparent;
+}
 .button{
    -fx-background-image: url("/images/buttonLong_brownp.png");
    -fx-background-repeat: no-repeat;
    -fx-background-size: contain;
-   -fx-border-color: transparent;
    -fx-border-width: 0;
-
    -fx-background-color: transparent;  
    -fx-background-radius: 0;
    -fx-background-position: center center;
@@ -18,7 +25,6 @@
    -fx-background-repeat: no-repeat;
    -fx-background-size: contain;
    -fx-background-position: center center;
-
    -fx-background-color: transparent;  
    -fx-border-color: transparent;
    -fx-border-width: 0;
@@ -30,7 +36,6 @@
    -fx-background-repeat: no-repeat;
    -fx-background-size: contain;
    -fx-background-position: center center;
-   -fx-border-color: transparent;
    -fx-border-width: 0;
    -fx-background-radius: 0;
    -fx-background-color: transparent;  
@@ -51,8 +56,8 @@
 }
 .dialog-pane  .button {
    -fx-background-size: cover;
- -fx-font-size: 20px;
-    -fx-max-height: 15px;
-    -fx-max-width: 250px;
+   -fx-font-size: 20px;
+   -fx-max-height: 15px;
+   -fx-max-width: 250px;
 
 }
