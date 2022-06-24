@@ -132,7 +132,11 @@ public class Enemy_move_control {
 			if(newenemyPos.getX() >= gg.getGridSizeX() || newenemyPos.getY() >= gg.getGridSizeY()) {
 				newenemyPos = old_pos;
 			}
+			if(newenemyPos.getX()<0 || newenemyPos.getY()<0) {
+                newenemyPos=old_pos;
+            }
 		}
+		
 	/**
 	 * Handles all the diagonal movements the enemy might need to perform.
 	 * @param old_pos Is previous position.
